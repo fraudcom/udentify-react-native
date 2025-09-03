@@ -1,0 +1,927 @@
+---
+description: Udentify Android SDK OCR Face Recognition & Liveness
+---
+
+# Face Recognition & Liveness
+
+This document outlines the necessary steps and methods to implement an Android API FACE detection.
+
+## Development Environment Setup
+
+* Development Environment: Android Studio
+* Development Language: Java
+
+#### Step 1: Add the AAR files
+
+**a. Manual Integration**
+
+1. ([Download Here](../android-sdk-resources#face-sdk)) Copy the following `aar` files and add it to your project's `libs` folder (dependency names might differ)
+
+* [<mark style="color:blue;">**commons.aar**</mark>](../android-sdk-resources#face-sdk)
+* [<mark style="color:blue;">**face.aar**</mark>](../android-sdk-resources#face-sdk)
+
+2. Include these `.aar` files by adding the following line to your app-level `build.gradle`:
+
+```groovy
+implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+```
+
+**b. Dependency Integration**
+
+To gain access to the Udentify library, please contact our support team. If you already have access, include following lines in your app-level `build.gradle` file:
+
+```groovy
+implementation 'com.fraud.udentify.android.sdk:commons:25.2.0'
+implementation 'com.fraud.udentify.android.sdk:face:25.2.0'
+```
+
+Additionally, to configure the integration, add the following block to your project-level `build.gradle` file:
+
+```groovy
+allprojects {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/FraudcomMobile/mobile")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+```
+
+The `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables are required to access the Udentify libraries:
+
+* `GITHUB_ACTOR`: The username of the GitHub account that will access the Udentify libraries.
+* `GITHUB_TOKEN`: A personal access token (PAT) used to authenticate GitHub API requests. You can generate this token by navigating to `GitHub > Settings > Developer Settings > Personal access tokens` and creating a new token with the appropriate permissions.
+
+After obtaining these credentials, set them as environment variables according to your operating system.
+
+#### Step 2: Add dependencies
+
+Add the following FACE dependencies to your app-level `build.gradle` file:
+
+```groovy
+// FACE dependencies
+implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+implementation 'com.squareup.okhttp3:okhttp-tls:4.12.0'
+implementation 'com.otaliastudios:cameraview:2.7.2'
+implementation 'com.google.android.material:material:1.4.0'
+implementation 'com.google.code.gson:gson:2.8.7'
+implementation 'com.google.mlkit:face-detection:16.1.2'
+implementation 'org.tensorflow:tensorflow-lite:2.9.0'
+implementation 'org.tensorflow:tensorflow-lite-gpu:2.9.0'
+implementation 'org.tensorflow:tensorflow-lite-support:0.4.0'
+implementation 'com.airbnb.android:lottie:5.2.0'
+```
+
+#### Step 3: Set aaptOptions
+
+Add the following config to your app-level `build.gradle` file:
+
+```groovy
+aaptOptions {
+    noCompress "tflite"
+}
+```
+
+#### Step 4: Add permissions
+
+Add the following permissions to your `AndroidManifest.xml` file:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.CAMERA"/>
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+```
+
+**It is essential for the app to have access to the device's phone state in order to fully utilize Udentify. Therefore, requesting the `READ_PHONE_STATE` permission in the Android app is advised:**
+
+```groovy
+requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
+```
+
+Override the `onRequestPermissionsResult()` method to ensure that your app behaves as expected if the permission is granted or denied.
+
+Optional permissions:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+```
+
+#### Step 5: Update the 'application' tag in AndroidManifest.xml
+
+Add the following entry under the `application` tag in `AndroidManifest.xml`:
+
+```xml
+<application
+        ...
+        android:usesCleartextTraffic="true">
+```
+
+#### Step 6: Configure Activity
+
+Add the following entries to the `Activity` that will use `FaceCameraFragment` (only supports Portrait mode) in `AndroidManifest.xml`:
+
+```xml
+<activity
+        ...
+        android:screenOrientation="portrait"
+        android:configChanges="orientation|keyboardHidden">
+```
+
+With these configurations in place, your development environment is now set up to use the Face Recognition API for Android.
+
+## With Embedded Camera
+
+This approach uses the CameraView API to take the user's photo for face recognition. To integrate this approach, follow the steps below:
+
+#### Step 1: Request Camera Permission
+
+You should ask for the camera's permission before using it. The permission must be granted, or the `onFailure()` method will be called.
+
+#### Step 2: Create a Fragment and Implement <mark style="color:blue;">FaceRecognizer</mark>
+
+Create a new fragment in your project and implement the `FaceRecognizer` interface.
+
+#### Step 3: Add Unimplemented Methods
+
+Add the unimplemented methods for <mark style="color:blue;">`FaceRecognizer`</mark> and <mark style="color:blue;">`Parcelable`</mark> since `FaceRecognizer` extends from `Parcelable`.
+
+#### Step 4: Create a <mark style="color:blue;">FaceRecognizerCredentials</mark> Object
+
+Ideally, create a <mark style="color:blue;">`FaceRecognizerCredentials`</mark> object in the `onResume()` method and make it global. Then, return it from the `getCredentials()` method:
+
+```java
+@Override
+public FaceRecognizerCredentials getCredentials() {
+    // Create a new FaceRecognizerCredentials builder
+    FaceRecognizerCredentials credentials = new FaceRecognizerCredentials.Builder()
+        .serverURL("https://...") // Enter server URL
+        .transactionID("TRX...") // Enter transaction ID received from the server
+        .userID(new Date().getTime() + "") // Enter a user ID to define your customer
+
+        // [OPTIONAL] When the face is in a good position, the photo is taken and
+        // sent to the server automatically
+        .autoTake(true)
+
+        // [OPTIONAL] This delay (in seconds) determines how much time must be passed
+        // to change the error type. This allows us to avoid instant changes.
+        // Default value is 0.10
+        .errorDelay(0.10f)
+
+        // [OPTIONAL] This delay (in seconds) determines how much time needs to be
+        // passed after an error to mark it as a success. Default value is 0.75
+        .successDelay(0.75f)
+
+        // [OPTIONAL] After taking the photo, the camera view will be closed before
+        // the server response arrives. The onPhotoTaken() method will be called,
+        // and you can display a progress bar until the response arrives
+        .runInBackground(false)
+
+        // [OPTIONAL] Detects if the eyes are closed or not. When active, if the
+        // eyes are closed, the photo will not be taken
+        .blinkDetectionEnabled(false)
+
+        // [OPTIONAL] A timeout (in seconds) for the server response. If this timeout
+        // is exceeded, it throws an error. Default value is 10 seconds
+        .requestTimeout(10)
+
+        // [OPTIONAL] You can change the threshold for determining if an eye is open
+        // or not. The value must be between 0 and 1. Default value is 0.75
+        .eyesOpenThreshold(0.75f)
+
+        // [OPTIONAL] The confidence to determine if mask is presented. Default value 
+        // is 0.95
+        .maskConfidence(0.95)
+
+        // [OPTIONAL] Default value is false. Enable this to interchange near and far 
+        // animations with each other.
+        .invertedAnimation(false)
+
+        // [OPTIONAL] Default value is true. If true, the Active Liveness process will
+        // automatically proceed to the next step. If false, it will wait for user
+        // interaction to proceed.    
+        .activeLivenessAutoNextEnabled(true)
+
+        .build();
+
+    return credentials;
+}
+```
+
+#### Step 5: Open the Camera View
+
+To open the camera view, create an instance of <mark style="color:blue;">`FaceCameraFragment`</mark>, which returns a `FaceCameraFragment` and replaces your fragment with it or adds it on top.
+
+For example, the following code block creates the fragment for registration. If you need to create it for authentication, pass `Method.Authentication` as the first parameter:
+
+```java
+FaceCameraFragment faceFragment = new FaceCameraFragment()
+    .newInstance(
+        Method.Register,
+        MainFragment.this
+    );
+```
+
+The second parameter is the `FaceRecognizer` interface, which you have already implemented in your current fragment/activity.
+
+#### Step 6: Check the Result
+
+You can check the result from the overridden methods: either from `onResult(FaceIDMessage faceIDMessage)` or from `onFailure(String description)` method. If an error occurs during progress, the `onFailure` method will be called. Otherwise, the `onResult` method will be called; you can check the `FaceIDMessage` object to determine whether the user passes inspection or not.
+
+## With Provided Photos
+
+This section describes the process of integrating face recognition in an Android application using a provided photo. The photo is provided to the SDK externally, and the recognition is carried out using the <mark style="color:blue;">FaceRecognizer</mark> interface.
+
+#### Instructions
+
+#### Step 1: Implement the <mark style="color:blue;">FaceRecognizer</mark> interface
+
+In your Android project, create a new class or interface that implements the `FaceRecognizer` interface.
+
+```java
+public class YourClass implements FaceRecognizer {
+    // ...
+}
+```
+
+#### Step 2: Add the unimplemented methods
+
+Implement the required methods for the `FaceRecognizer` interface.
+
+```java
+
+@Override
+public void onResult(FaceIDMessage faceIDMessage) {
+    // ...
+}
+
+@Override
+public void onFailure(String description) {
+    // ...
+}
+
+@Override
+public void onPhotoTaken() {
+    // ...
+}
+
+@Override
+public void onSelfieTaken(String imageInBase64) {
+    // ...
+}
+
+@Override
+public FaceRecognizerCredentials getCredentials() {
+    // ...
+}
+```
+
+#### Step 3: Create a <mark style="color:blue;">FaceRecognizerObject</mark>
+
+Instantiate a `FaceRecognizerObject` object, which takes two parameters: the `FaceRecognizer` interface and the user's photo in base64 format.
+
+```java
+faceRecognizerObject = new FaceRecognizerObject(this, activity, base64Image);
+```
+
+#### Step 4: Create a <mark style="color:blue;">FaceRecognizerCredentials</mark> object
+
+Create a `FaceRecognizerCredentials` object . Ideally, create it in <mark style="color:blue;">`onResume()`</mark> and make it global, then return it in the <mark style="color:blue;">`getCredentials()`</mark> method.
+
+```java
+@Override
+public FaceRecognizerCredentials getCredentials() {
+        // Create a FaceRecognizerCredentials object with the Builder pattern
+        FaceRecognizerCredentials credentials = new FaceRecognizerCredentials.Builder()
+        .serverURL("https://...") // Enter server URL
+        .transactionID("TRX...") // Enter transaction ID received from server
+
+        // Enter a user ID to define your customer,
+        // you can then authenticate the user with this ID
+        .userID(new Date().getTime() + "")
+
+        // OPTIONAL - When the face is in a good position,
+        // the photo is taken and sent to the server automatically
+        .autoTake(true)
+
+        // OPTIONAL - This delay (in seconds) determines how much time must be passed
+        // in order to change the error type. This allows us to avoid instant changes
+        // Default value is 0.10
+        .errorDelay(0.10f)
+
+        // OPTIONAL - This delay (in seconds) determines how much time it needs
+        // to be passed after an error in order to mark it as a success
+        // Default value is 0.75
+        .successDelay(0.75f)
+
+        // OPTIONAL - After taking the photo, the camera view will be closed
+        // before the server response arrives. The onPhotoTaken() method will be called,
+        // and you can display a progress bar until the response arrives
+        .runInBackground(false)
+
+        // OPTIONAL - Detects if the eyes are closed or not. When active,
+        // if the eyes are closed, it does not allow the photo to be taken
+        .blinkDetectionEnabled(false)
+
+        // OPTIONAL - A timeout (in seconds) for the server response
+        // If this timeout is exceeded, it throws an error. Default value is 10 seconds
+        .requestTimeout(10)
+
+        // OPTIONAL - You can change the threshold for determining if an eye is open or not
+        // The value must be between 0 and 1. Default value is 0.75
+        .eyesOpenThreshold(0.75f)
+
+        // [OPTIONAL] The confidence to determine if mask is presented. Default value 
+        // is 0.95
+        .maskConfidence(0.95)
+
+        // [OPTIONAL] Default value is false. Enable this to interchange near and far 
+        // animations with each other.
+        .invertedAnimation(false)
+
+
+        // Build the FaceRecognizerCredentials object
+        .build();
+
+        // Return the created credentials
+        return credentials;
+        }
+```
+
+#### Step 5: Call the <mark style="color:blue;">FaceRecognizerObject methods</mark>
+
+You can call the following methods to register and authenticate the user:
+
+```java
+faceRecognizerObject.registerUser();        // Registers the user
+faceRecognizerObject.authenticateUser();    // Authenticates already registered user
+```
+
+#### Step 6: Check the result from the overridden methods
+
+You can check the result from the overridden methods: either from <mark style="color:blue;">`onResult(FaceIDMessage faceIDMessage)`</mark> or from <mark style="color:blue;">`onFailure(String description)`</mark> method. If an error occurs during progress, the `onFailure` method will be called. Otherwise, the `onResult` method will be called; you can check the `FaceIDMessage` object to see whether the user passes the inspection or not.
+
+## Active Liveness
+
+This approach uses the CameraView API to record the user's gestures for Active Liveness face recognition. To integrate this approach, follow the steps below:
+
+#### Step 1: Request Camera Permission
+
+You should ask for the camera's permission before using it. The permission must be granted, or the `onFailure()` method will be called.
+
+#### Step 2: Create a Fragment and Implement <mark style="color:blue;">FaceRecognizer</mark> and <mark style="color:blue;">ActiveLivenessOperator</mark>
+
+Create a new fragment in your project and implement the `FaceRecognizer` and `ActiveLivenessOperator` interfaces.
+
+#### Step 3: Add Unimplemented Methods
+
+Add the unimplemented methods for <mark style="color:blue;">`FaceRecognizer`</mark>, <mark style="color:blue;">`ActiveLivenessOperator`</mark> and <mark style="color:blue;">`Parcelable`</mark> since `FaceRecognizer` and `ActiveLivenessOperator` extend from `Parcelable`.
+
+#### Step 4: Create a <mark style="color:blue;">FaceRecognizerCredentials</mark> Object
+
+Ideally, create a <mark style="color:blue;">`FaceRecognizerCredentials`</mark> object in the `onResume()` method and make it global. Then, return it from the `getCredentials()` method:
+
+```java
+@Override
+public FaceRecognizerCredentials getCredentials() {
+    // Create a new FaceRecognizerCredentials builder
+    FaceRecognizerCredentials credentials = new FaceRecognizerCredentials.Builder()
+        .serverURL("https://...") // Enter server URL
+        .transactionID("TRX...") // Enter transaction ID received from the server
+        .userID(new Date().getTime() + "") // Enter a user ID to define your customer
+
+        // [OPTIONAL] When the face is in a good position, the photo is taken and
+        // sent to the server automatically
+        .autoTake(true)
+
+        // [OPTIONAL] This delay (in seconds) determines how much time must be passed
+        // to change the error type. This allows us to avoid instant changes.
+        // Default value is 0.10
+        .errorDelay(0.10f)
+
+        // [OPTIONAL] This delay (in seconds) determines how much time needs to be
+        // passed after an error to mark it as a success. Default value is 0.75
+        .successDelay(0.75f)
+
+        // [OPTIONAL] After taking the photo, the camera view will be closed before
+        // the server response arrives. The onPhotoTaken() method will be called,
+        // and you can display a progress bar until the response arrives
+        .runInBackground(false)
+
+        // [OPTIONAL] Detects if the eyes are closed or not. When active, if the
+        // eyes are closed, the photo will not be taken
+        .blinkDetectionEnabled(false)
+
+        // [OPTIONAL] A timeout (in seconds) for the server response. If this timeout
+        // is exceeded, it throws an error. Default value is 10 seconds
+        .requestTimeout(10)
+
+        // [OPTIONAL] You can change the threshold for determining if an eye is open
+        // or not. The value must be between 0 and 1. Default value is 0.75
+        .eyesOpenThreshold(0.75f)
+
+        // [OPTIONAL] The confidence to determine if mask is presented. Default value 
+        // is 0.95
+        .maskConfidence(0.95)
+
+        // [OPTIONAL] Default value is false. Enable this to interchange near and far 
+        // animations with each other.
+        . invertedAnimation(false)
+
+        .build();
+
+    return credentials;
+}
+```
+
+#### Step 5: Open the Camera View
+
+To open the camera view, create an instance of <mark style="color:blue;">`ActiveLivenessFragment`</mark>, which returns an `ActiveLivenessFragment` and replaces your fragment with it or adds it on top.
+
+For example, the following code block creates the fragment for registration. If you need to create it for authentication, pass `true` as the second parameter:
+
+```java
+ActiveLivenessFragment activeLivenessFragment = new ActiveLivenessFragment()
+    .newInstance(
+        Method.ActiveLiveness,
+        false,
+        MainFragment.this,
+        MainFragment.this
+    );
+```
+
+First parameter is the method the face registration will be done in. It must be set to `Method.ActiveLiveness` in order to continue with Active Liveness process.
+
+Second parameter is the parameter for the registration type. Set `registrationType` parameter to `false` for registration, `true` for authentication.
+
+Third parameter is the `FaceRecognizer` interface, which you have already implemented in your current fragment/activity.
+
+Fourth parameter is the `ActiveLivenessOperator` interface, which you have already implemented in your current fragment/activity.
+
+#### Step 6: Check the Result
+
+You can check the result from the overridden methods: either from `activeLivenessResult(FaceIDMessage faceIDMessage)` or from `activeLivenessFailure(String description)` method. If an error occurs during progress, the `activeLivenessFailure` method will be called. Otherwise, the `activeLivenessResult` method will be called. You can check the `FaceIDMessage` object to determine whether the user passes inspection or not.
+
+## Hybrid Liveness
+
+This approach uses the CameraView API to record the user's gestures for Active and Passive Liveness face recognition methods. To integrate this approach, follow the steps below:
+
+#### Step 1: Request Camera Permission
+
+You should ask for the camera's permission before using it. The permission must be granted, or the `onFailure()` method will be called.
+
+#### Step 2: Create a Fragment and Implement <mark style="color:blue;">FaceRecognizer</mark> and <mark style="color:blue;">ActiveLivenessOperator</mark>
+
+Create a new fragment in your project and implement the `FaceRecognizer` and `ActiveLivenessOperator` interfaces.
+
+#### Step 3: Add Unimplemented Methods
+
+Add the unimplemented methods for <mark style="color:blue;">`FaceRecognizer`</mark>, <mark style="color:blue;">`ActiveLivenessOperator`</mark> and <mark style="color:blue;">`Parcelable`</mark> since `FaceRecognizer` and `ActiveLivenessOperator` extend from `Parcelable`.
+
+#### Step 4: Create a <mark style="color:blue;">FaceRecognizerCredentials</mark> Object
+
+Ideally, create a <mark style="color:blue;">`FaceRecognizerCredentials`</mark> object in the `onResume()` method and make it global. Then, return it from the `getCredentials()` method:
+
+```java
+@Override
+public FaceRecognizerCredentials getCredentials() {
+    // Create a new FaceRecognizerCredentials builder
+    FaceRecognizerCredentials credentials = new FaceRecognizerCredentials.Builder()
+        .serverURL("https://...") // Enter server URL
+        .transactionID("TRX...") // Enter transaction ID received from the server
+        .userID(new Date().getTime() + "") // Enter a user ID to define your customer
+
+        // [OPTIONAL] When the face is in a good position, the photo is taken and
+        // sent to the server automatically
+        .autoTake(true)
+
+        // [OPTIONAL] This delay (in seconds) determines how much time must be passed
+        // to change the error type. This allows us to avoid instant changes.
+        // Default value is 0.10
+        .errorDelay(0.10f)
+
+        // [OPTIONAL] This delay (in seconds) determines how much time needs to be
+        // passed after an error to mark it as a success. Default value is 0.75
+        .successDelay(0.75f)
+
+        // [OPTIONAL] After taking the photo, the camera view will be closed before
+        // the server response arrives. The onPhotoTaken() method will be called,
+        // and you can display a progress bar until the response arrives
+        .runInBackground(false)
+
+        // [OPTIONAL] Detects if the eyes are closed or not. When active, if the
+        // eyes are closed, the photo will not be taken
+        .blinkDetectionEnabled(false)
+
+        // [OPTIONAL] A timeout (in seconds) for the server response. If this timeout
+        // is exceeded, it throws an error. Default value is 10 seconds
+        .requestTimeout(10)
+
+        // [OPTIONAL] You can change the threshold for determining if an eye is open
+        // or not. The value must be between 0 and 1. Default value is 0.75
+        .eyesOpenThreshold(0.75f)
+
+        // [OPTIONAL] The confidence to determine if mask is presented. Default value 
+        // is 0.95
+        .maskConfidence(0.95)
+
+        // [OPTIONAL] Default value is false. Enable this to interchange near and far 
+        // animations with each other.
+        . invertedAnimation(false)
+
+        .build();
+
+    return credentials;
+}
+```
+
+#### Step 5: Open the Camera View
+
+To open the camera view, create an instance of <mark style="color:blue;">`ActiveLivenessFragment`</mark>, which returns an `ActiveLivenessFragment` and replaces your fragment with it or adds it on top.
+
+For example, the following code block creates the fragment for authentication. If you need to create it for registration, pass `false` as the second parameter:
+
+```java
+ActiveLivenessFragment activeLivenessFragment = new ActiveLivenessFragment()
+    .newInstance(
+        Method.HybridLiveness,
+        true,
+        MainFragment.this,
+        MainFragment.this
+    );
+```
+
+First parameter is the method the face registration will be done in. It must be set to `Method.HybridLiveness` in order to continue with Hybrid Liveness process.
+
+Second parameter is the parameter for the registration type. Set `registrationType` parameter to `false` for registration, `true` for authentication.
+
+Third parameter is the `FaceRecognizer` interface, which you have already implemented in your current fragment/activity.
+
+Fourth parameter is the `ActiveLivenessOperator` interface, which you have already implemented in your current fragment/activity.
+
+#### Step 6: Check the Result
+
+You can check the result from the overridden methods: either from `activeLivenessResult(FaceIDMessage faceIDMessage)` or from `activeLivenessFailure(String description)` method. If an error occurs during progress, the `activeLivenessFailure` method will be called. Otherwise, the `activeLivenessResult` method will be called. You can check the `FaceIDMessage` object to determine whether the user passes inspection or not.
+
+## Identification with Lists
+
+The UdentifyFACE SDK offers an Identification feature that adds a person to a user list.
+
+#### Step 1: Create a <mark style="color:blue;">FaceService</mark> object
+
+Instantiate a `FaceService` object. It does not require parameters but will be used to call the `addUserToList()` method.
+
+```java
+FaceService faceService = new FaceService();
+```
+
+#### Step 2: Create a map for <mark style="color:blue;">Metadata</mark> (Optional)
+
+Create a `requestMetadata` object and put values in it. This object is optional and can be used to add metadata to the user.
+
+```java
+Map<String, Object> requestMetadata = new HashMap<>();
+requestMetadata.put("key", "value");
+requestMetadata.put("key", "value");
+```
+
+#### Step 3: Call the <mark style="color:blue;">faceService</mark> method
+
+You can call the following method and add required Override methods to add a user to the list:
+
+```java
+faceService.addUserToList(
+        serverURL,
+        transactionId,
+        "Registered",
+        requestMetadata,
+        new FaceAddUserToListListener() {
+            
+        @Override
+        public void onAddUserToListSuccess(ListResponseData listResponseData) {
+            Log.i(TAG, "User is added to customer list.");
+            Log.i(TAG, "ListResponseData: " + listResponseData);
+        }
+    
+        @Override
+        public void onAddUserToListError(FaceError error) {
+            Log.e(TAG, "Failed to add user to customer list!");
+            Log.e(TAG, "FaceError: " + error);
+        }
+    }
+);
+```
+
+## Models
+
+This section provides a detailed overview of the key classes, namely `FaceIDMessage`, `FaceIDResult`, `LivenessResult` and `ActiveLivenessResult`, that are essential for managing and processing the results of these biometric authentication methods.
+
+#### FaceIDMessage
+
+The `FaceIDMessage` class contains Face Recognition (FR) results (Register or Authentication) and Liveness results.
+
+```java
+public class FaceIDMessage {
+    private Boolean isFailed; // If this is true, then it means either FR or Liveness fails
+    private Method method; // The type of current transaction: Register, Authentication
+    private String transactionID; // Current transaction's id
+    private FaceIDResult faceIDResult; // FR Result
+    private LivenessResult livenessResult; // Liveness Result
+    private ActiveLivenessResult activeLivenessResult; // Active or Hybrid Liveness Result
+}
+```
+
+#### FaceIDResult
+
+The `FaceIDResult` class contains FR's results.
+
+```java
+public class FaceIDResult {
+    private String header;
+    private String description;
+    private Boolean verified; // If user passes from FR, this will be set to true
+    private Double matchScore; // Main response of the face match. Value is between -1 and 1. The closer the score is to 1, the more similar the images are, and the closer the score is to -1, the more dissimilar the vectors are.
+    private String errorMessage; // If FR fails, the reason will be described
+    private String userID; // Returns the userid that has been queried
+    private String listNames; // Returns the names of the lists the user is in
+    private String listIds; // Returns the ids of the lists the user is in
+}
+```
+
+#### LivenessResult
+
+The `LivenessResult` class contains Liveness results.
+
+```java
+public class LivenessResult {
+    private Double probability; // Probability of liveness is the main response of the system. The image is accepted as "live" when probability is greater than 0.5
+    private Double quality; // Quality value. Quality value is a probability of "appropriate image".
+    private Double livenessScore; // This can be used for BPCER/APCER tuning.
+    private Double assessmentValue; // The value of the result. It is between 0 and 100. The image is accepted as "live" when probability is greater than or equal to 50. You can take this value into account when deciding.
+    private String errorMessage; // If FR fails, the reason will be described
+    private boolean isPassed; // If the user passes from Liveness, this will be set to true
+}
+```
+
+#### ActiveLivenessResult
+
+The `ActiveLivenessResult` class contains Active or Hybrid Liveness results.
+
+```java
+public class ActiveLivenessResult {
+    private String errorMessage; // If Active or Hybrid Liveness fails, the reason will be described
+    private String transactionID; // Current transaction's ID
+    private Map<Integer, String> gestureResult; // Returns the result of each gesture. Key is the number of the gesture and value is the result of the gesture.
+}
+```
+
+#### ListResponseData
+
+The `ListResponseData` class contains response data for Identification list operations.
+
+```java
+public class ListResponseData {
+    private Integer id;
+    private CustomerList customerList;
+    private Integer userId;
+}
+```
+
+#### CustomerList
+
+The `CustomerList` class contains customer information for Identification.
+
+```java
+public class CustomerList {
+    private Integer id;
+    private String name;
+    private String listRole;
+    private String description;
+    private String creationDate;
+}
+```
+
+#### **Obfuscation** <a href="#obfuscation" id="obfuscation"></a>
+
+Add the following rule to your proguard file.
+
+```java
+-keep public class io.udentify.** { *; }
+```
+
+## UI Customization
+
+This section provides guidelines on how to customise various elements of the user interface
+
+#### Language Pack
+
+To change the default language, add the following strings to your `strings.xml` file:
+
+```xml
+<!--    UdentifyFACE Strings    -->
+<string name="udentifyface_footer_button_text_default">Take Selfie</string>
+<string name="udentifyface_footer_button_text_progressing">Liveness Check</string>
+<string name="udentifyface_footer_button_text_result">Liveness</string>
+<string name="udentifyface_message_face_too_big">Move Back</string>
+<string name="udentifyface_message_face_too_small">Move Closer</string>
+<string name="udentifyface_message_face_not_found">Face not found</string>
+<string name="udentifyface_message_too_many_faces">Too many faces</string>
+<string name="udentifyface_message_face_angled">Face to Camera</string>
+<string name="udentifyface_message_head_angled">Face to Camera</string>
+<string name="udentifyface_message_face_off_center">Center your face</string>
+<string name="udentifyface_message_eyes_closed">Open your eyes</string>
+<string name="udentifyface_message_mask_detected">Remove Mask</string>
+```
+
+Specific to Active/Hybrid Liveness (additionally to the above keys):
+
+```xml
+<!--    UdentifyFACE - Active Liveness Strings    -->
+<string name="udentifyface_gesture_text_move_head_to_left">Turn Left</string>
+<string name="udentifyface_gesture_text_move_head_to_right">Turn Right</string>
+<string name="udentifyface_gesture_text_move_head_to_up">Tilt Up</string>
+<string name="udentifyface_gesture_text_move_head_to_down">Tilt Down</string>
+<string name="udentifyface_gesture_text_blink_once">Blink once</string>
+<string name="udentifyface_gesture_text_blink_twice">Blink twice</string>
+<string name="udentifyface_gesture_text_blink_thrice">Blink 3 times</string>
+<string name="udentifyface_gesture_text_smile">Smile</string>
+
+<string name="udentifyface_active_liveness_footer_button_text_recording">Recording...</string>
+<string name="udentifyface_active_liveness_footer_button_text_processing">Processing...</string>
+<string name="udentifyface_active_liveness_footer_button_text_default">Center your face</string>
+<string name="udentifyface_active_liveness_footer_button_text_result">Next step</string>
+<string name="udentifyface_active_liveness_footer_label_text_processing">Performing active liveness.\nPlease wait...</string>
+```
+
+#### Dimensions
+
+To customise dimensions, add the following values to your `dimens.xml` file:
+
+```xml
+<!--    Button Dimensions    -->
+<dimen name="udentify_selfie_button_height">70dp</dimen>
+<dimen name="udentify_selfie_button_horizontal_margin">16dp</dimen>
+<dimen name="udentify_selfie_button_bottom_margin">40dp</dimen>
+
+<dimen name="udentifyface_gesture_font_size">30sp</dimen>
+<dimen name="udentify_face_selfie_button_corner_radius">8dp</dimen>
+```
+
+#### Colors
+
+To customise colors, add the following values to your `colors.xml` file:
+
+```xml
+<!--    Button Background Colors    -->
+<color name="udentifyface_btn_color">#844EE3</color>
+<color name="udentifyface_btn_color_success">#4CD964</color>
+<color name="udentifyface_btn_color_error">#FF3B30</color>
+<color name="udentifyface_progress_background_color">#808080</color>
+
+
+<!--    Button Text Colors    -->
+<color name="udentifyface_btn_text_color">#FFFFFF</color>
+<color name="udentifyface_btn_text_color_success">#FFFFFF</color>
+<color name="udentifyface_btn_text_color_error">#FFFFFF</color>
+
+<!--    Background Color     -->
+<color name="udentifyface_bg_color">#FF844EE3</color>
+<color name="udentifyface_gesture_text_bg_color">#66808080</color>
+```
+
+#### Styles
+
+To customise styles, add the following values to your `styles.xml` file:
+
+```xml
+<!--    Button Styles    -->
+<style name="UdentifySelfieButton" parent="Platform.MaterialComponents">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:textAllCaps">false</item>
+</style>
+
+<!--    Background Styles    -->
+<style name="UdentifyBackground">
+    <item name="android:color">@color/udentifyface_bg_color</item>
+    <item name="android:src">@drawable/bg_svg</item>
+</style>
+```
+
+## Error Messages
+
+**General Errors**
+
+| **Message**                                              | **Type** | **Description**                                                                                  |
+| -------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------ |
+| ERR\_CAMERA\_PERMISSION\_REQUIRED                        | Error    | <p>Calls onFailure() method.</p><p>Requires the camera permission.</p>                           |
+| <p>ERR_READ_EXTERNAL_STORAGE_<br>PERMISSION_REQUIRED</p> | Error    | Calls onFailure() method.                                                                        |
+| <p>ERR_READ_EXTERNAL_STORAGE_<br>PERMISSION_REQUIRED</p> | Error    | Calls onFailure() method.                                                                        |
+| ERR\_UNKNOWN                                             | Error    | <p>Calls onFailure() method.</p><p>Check logs for details.</p>                                   |
+| ERR\_FACE\_CREDENTIALS\_MISSING                          | Error    | <p>Calls onFailure() method.</p><p>Required parameters for Face Recognition missing.</p>         |
+| ERR\_FACE\_PHOTO\_MISSING                                | Error    | Calls onFailure() method.                                                                        |
+| ERR\_SERVER\_TIMEOUT\_EXCEPTION                          | Error    | Calls onFailure() method. You can increase the timeout value within getCredentials() method.     |
+| ERR\_INVALID\_SERVER\_RESPONSE                           | Error    | Might be shown if the response is not received in a valid format.                                |
+| ERR\_SERVER\_RESPONSE\_EMPTY                             | Error    | Might be shown in onResult() method. Occurs if some relevant API response data is null or empty. |
+| ERR\_SERVER\_RESPONSE\_PARAMS\_EMPTY                     | Error    | Might be shown in onResult() method. Occurs if some relevant api response data is null or empty. |
+| ERR\_FACEKEY\_MATCH\_SCORE\_NOT\_CALCULATED              | Error    | Might be shown in onResult() method. Occurs if some match score is null.                         |
+| ERR\_FAILED\_DUE\_TO\_THRESHOLD                          | Error    | If the Match Score or Liveness Score is under the threshold, then this message will be set.      |
+| ERR\_TRANSACTION\_NOT\_FOUND                             | Error    | The transaction with the given transactionId was not found.                                      |
+| ERR\_TRANSACTION\_FAILED                                 | Error    | Transaction status was set to “FAILED” and thus cannot continue with this transaction.           |
+| ERR\_TRANSACTION\_EXPIRED                                | Error    | The transaction is expired thus cannot continue with this transaction.                           |
+| ERR\_TRANSACTION\_ALREADY\_COMPLETED                     | Error    | The transaction has already been completed thus cannot continue with this transaction.           |
+
+**Camera Errors**
+
+| **Message**                                     | **Type** | **Description**                                                                           |
+| ----------------------------------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| ERR\_CAMERA\_REASON\_UNKNOWN                    | Error    | <p>Calls onFailure() method.</p><p>Unknown error. No other info is available.</p>         |
+| ERR\_CAMERA\_REASON\_FAILED\_TO\_CONNECT        | Error    | <p>Calls onFailure() method.</p><p>Failed to connect to the camera service.</p>           |
+| ERR\_CAMERA\_REASON\_FAILED\_TO\_START\_PREVIEW | Error    | <p>Calls onFailure() method.</p><p>Failed to start the camera preview.</p>                |
+| ERR\_CAMERA\_REASON\_DISCONNECTED               | Error    | <p>Calls onFailure() method.</p><p>The camera was forced to disconnect by the system.</p> |
+| ERR\_CAMERA\_REASON\_PICTURE\_FAILED            | Error    | <p>Calls onFailure() method.<br>Could not take a picture or picture snapshot.</p>         |
+| ERR\_CAMERA\_REASON\_VIDEO\_FAILED              | Error    | <p>Calls onFailure() method.</p><p>Could not take a video or video snapshot.</p>          |
+| ERR\_CAMERA\_REASON\_NO\_CAMERA                 | Error    | <p>Calls onFailure() method.<br>Could not take photos for an unknown reason.</p>          |
+| ERR\_FAILED\_TO\_TAKE\_SELFIE                   | Error    | <p>Calls onFailure() method.</p><p>Could not take photos for an unknown reason.</p>       |
+
+**Face Recognition Related Errors**
+
+| **Message**                              | **Type** | **Description**                                                                 |
+| ---------------------------------------- | -------- | ------------------------------------------------------------------------------- |
+| ERR\_FACE\_USER\_ID\_MISSING             | Error    | UserID wasn’t among the request parameters.                                     |
+| ERR\_FACE\_USER\_ID\_NOT\_REGISTERED     | Error    | UserID hasn’t been registered before.                                           |
+| ERR\_FACE\_IMAGE\_NOT\_FOUND             | Error    | Reference Image or Registration image not found.                                |
+| ERR\_FACE\_FAILED\_TO\_UPLOAD\_IMAGE     | Error    | Uploading the image is failed.                                                  |
+| ERR\_FACE\_NO\_DETECTION                 | Error    | Couldn’t detect a face in either the reference image or the registration image. |
+| ERR\_FACE\_LARGEST\_DETECTION            | Error    | Multiple faces are detected.                                                    |
+| ERR\_FACE\_INCORRECT\_IMAGE\_SIZE        | Error    | The given image size is not appropriate for face recognition.                   |
+| ERR\_FACE\_ERROR\_IMAGE\_DECODE          | Error    | The given image/s cannot be decoded. Check file type.                           |
+| ERR\_FACE\_UNRECOGNIZED                  | Error    | Couldn’t recognize the face.                                                    |
+| ERR\_FACE\_FAILED\_TO\_EXTRACT\_FEATURES | Error    | Couldn’t get the face vectors.                                                  |
+| ERR\_FACE\_FACEKEY\_NO\_MATCH            | Error    | The face does not match the reference image.                                    |
+| ERR\_FACE\_REGISTRATION\_FAILED          | Error    | The registration process has failed. Check server logs for details.             |
+| ERR\_FACE\_AUTHENTICATION\_FAILED        | Error    | The authentication process has failed. Check server logs for details.           |
+| ERR\_FACE\_REGISTRATION\_RECORD\_INVALID | Error    | Authentication process is failed since it hasn’t been registered before.        |
+| ERR\_FACE\_FAILED\_DUE\_TO\_THRESHOLD    | Error    | If the Match Score is under the threshold, then this error will be thrown.      |
+| ERR\_INTERNAL\_SERVER                    | Error    | Internal Server error occurred; check server logs.                              |
+| MSG\_FACE\_REGISTRATION\_SUCCEED         | Success  | Registration is successful.                                                     |
+| MSG\_FACE\AUTHENTICATION\_SUCCEED        | Success  | Authentication is successful.                                                   |
+
+**Liveness Errors**
+
+| **Code** | **Type**                 | **Description**                                                                                                                      |
+| -------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 406      | Not Acceptable           | <p>This error appears when a user sends an inappropriate data format, including meta-parameters.<br><br></p>                         |
+| 408      | Internal Service Timeout | <p>This error appears when the engine is overloaded and doesn’t respond to API.<br><br></p>                                          |
+| 500      | Internal Server Error    | <p>This error appears when a critical issue is handled: memory overflow, decoder error or pipeline unexpected exception.<br><br></p> |
+
+#### Other Liveness Errors
+
+{% hint style="info" %}
+If you receive a 200 status code, it means your data has been accepted. However, there might still be some errors (refer to the table below). The error messages for a specific error code might not be the same as those presented in the table.
+{% endhint %}
+
+↓
+
+| **Error**                                              | **Error Message**                                                                   | **Description**                                                                                                                                 |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| FACE\_TOO\_CLOSE                                       | The face is too close to the camera.                                                | The distance between the face and image border is too small for pre-processing issues.                                                          |
+| FACE\_CLOSE\_TO\_BORDER                                | The face is too close to one or more borders.                                       | The face is too close to one or more borders. This may reduce the accuracy of spoofing detection because the edges of the face may not be seen. |
+| FACE\_CROPPED                                          | Face is cropped                                                                     | The face is cropped. This may reduce the accuracy of spoofing detection because the edges of the face may not be seen.                          |
+| FACE\_NOT\_FOUND                                       | Failed to detect face                                                               | The face detector can't find a face on the image.                                                                                               |
+| TOO\_MANY\_FACES                                       | Too many faces were detected.                                                       | The face detector found more than one face on the image.                                                                                        |
+| FACE\_TOO\_SMALL                                       | <p>The Interpupillary distance is too small.</p><p><br></p>                         | The facial area is not big enough for analysis. Interpupillary distance in pixels is below the configured value.                                |
+| FACE\_TOO\_SMALL                                       | The face image is too small.                                                        | The facial area is not big enough for analysis. The absolute face size in pixels is below the configured value.                                 |
+| FACE\_TOO\_SMALL                                       | The presented face is too small.                                                    | The facial area is not big enough for analysis. The relative proportion of face size in the image is below the configured value.                |
+| FACE\_ANGLE\_TOO\_LARGE                                | The facial out-of-plane rotation angle is extremely large.                          | The facial out-of-plane rotation angle is extremely large.                                                                                      |
+| FAILED\_TO\_READ\_IMAGE                                | File decoding error                                                                 | <p><br></p>                                                                                                                                     |
+| FAILED\_TO\_WRITE\_IMAGE                               | File encoding error                                                                 | <p><br></p>                                                                                                                                     |
+| FAILED\_TO\_READ\_MODEL                                | Failed to read model                                                                | Model deserializing error                                                                                                                       |
+| FAILED\_TO\_ALLOCATE                                   | The current 'vm.max\_map\_count' limit is too low.                                  | Memory allocation error                                                                                                                         |
+| INVALID\_CONFIG                                        | Field\*\*\* not found in the config                                                 | Configuration file deserializing error                                                                                                          |
+| NO\_SUCH\_OBJECT\_IN\_BUILD                            | Object\*\*\* not found                                                              | The build does not support engine or backend                                                                                                    |
+| <p>FAILED_TO_PREPROCESS</p><p>_IMAGE_WHILE_PREDICT</p> | Failed to preprocess image for\*\*\*                                                | Liveness prediction error                                                                                                                       |
+| <p>FAILED_TO_PREPROCESS</p><p>_IMAGE_WHILE_DETECT</p>  | Face detection error                                                                | Face detection error                                                                                                                            |
+| <p>FAILED_TO_PREDICT</p><p>_LANDMARKS</p>              | Failed to predict landmarks                                                         | Landmarks prediction error                                                                                                                      |
+| INVALID\_FUSE\_MODE                                    | Invalid fuse mode provided                                                          | Invalid fuse mode provided                                                                                                                      |
+| NULLPTR                                                | Empty image                                                                         | Nullptr provided                                                                                                                                |
+| LICENSE\_ERROR                                         | Some errors occurred during license check.                                          | Some errors occurred during the license check.                                                                                                  |
+| INVALID\_META                                          | Invalid OS value provided in meta, should be one of: UNKNOWN, DESKTOP, ANDROID, iOS | Invalid facesdk::Meta value                                                                                                                     |
+| UNKNOWN                                                | JNI: unknown exception                                                              | Unhandled exception in the code                                                                                                                 |
+| <p>ERR_FACE_FAILED_TO</p><p>_PERFORM_LIVENESS</p>      | Error                                                                               | Liveness is failed. Check server logs for details.                                                                                              |
+| <p>ERR_FACE_IMAGE</p><p>_NOT_FOUND</p>                 | <p>Error<br><br></p>                                                                | Reference Image or Registration image not found.                                                                                                |
+| <p>ERR_FACE_FAILED</p><p>_TO_UPLOAD_IMAGE</p>          | <p>Error<br><br></p>                                                                | Uploading the image is failed.                                                                                                                  |
+| <p>ERR_FACE_FAILED</p><p>_DUE_TO_THRESHOLD</p>         | <p>Error<br><br></p>                                                                | If the Liveness Probability Score is under the threshold, this error will be thrown.                                                            |
+
+**Active Liveness Errors**
+
+| **Message**                              | **Type** | **Description**                                             |
+| ---------------------------------------- | -------- | ----------------------------------------------------------- |
+| ERR\_ACTIVE\_LIVENESS\_FAILED            | Error    | Active Liveness wasn’t completed successfully.              |
+| ERR\_ACTIVE\_LIVENESS\_GESTURE\_FAILED   | Error    | Active Liveness failed due to gesture(s) failure.           |
+| ERR\_ACTIVE\_LIVENESS\_TRANSACTION\_NULL | Error    | The transaction ID for the Active Liveness process is null. |

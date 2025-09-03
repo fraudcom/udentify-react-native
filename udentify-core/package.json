@@ -1,0 +1,19 @@
+{
+  "name": "udentify-core",
+  "version": "1.0.0",
+  "description": "Core shared components for Udentify libraries",
+  "main": "index.js",
+  "keywords": ["react-native", "udentify", "core", "identity"],
+  "author": "Udentify",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-native": ">=0.60.0"
+  },
+  "files": [
+    "index.js",
+    "ios/",
+    "android/",
+    "udentify-core.podspec"
+  ]
+}

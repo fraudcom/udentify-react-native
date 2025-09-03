@@ -1,0 +1,836 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ---\
+description: Udentify Android SDK OCR ID Verification\
+---\
+\
+# OCR ID Verification\
+\
+This document outlines the necessary steps and methods to implement an Android API OCR Reader for reading and verifying ID cards, Passports and Driver's Licenses.\
+\
+## Development Environment Setup\
+\
+* Development Environment: Android Studio\
+* Development Language: Java\
+\
+#### Step 1: Add the AAR files\
+\
+**a. Manual Integration**\
+\
+1. ([Download Here](../android-sdk-resources#ocr-sdk)) Copy the following `aar` files and add it to your project's `libs` folder (dependency names might differ)\
+\
+* [<mark style="color:blue;">**commons.aar**</mark>](../android-sdk-resources#ocr-sdk)\
+* [<mark style="color:blue;">**ocr.aar**</mark>](../android-sdk-resources#ocr-sdk)\
+\
+2. Include these `.aar` files by adding the following line to your app-level `build.gradle`:\
+\
+```groovy\
+implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])\
+```\
+\
+**b. Dependency Integration**\
+\
+To gain access to the Udentify library, please contact our support team. If you already have access, include following lines in your app-level `build.gradle` file:\
+\
+```groovy\
+implementation 'com.fraud.udentify.android.sdk:commons:25.2.0'\
+implementation 'com.fraud.udentify.android.sdk:ocr:25.2.0'\
+```\
+\
+Additionally, to configure the integration, add the following block to your project-level `build.gradle` file:\
+\
+```groovy\
+allprojects \{\
+    repositories \{\
+        maven \{\
+            name = "GitHubPackages"\
+            url = uri("https://maven.pkg.github.com/FraudcomMobile/mobile")\
+            credentials \{\
+                username = System.getenv("GITHUB_ACTOR")\
+                password = System.getenv("GITHUB_TOKEN")\
+            \}\
+        \}\
+    \}\
+\}\
+```\
+\
+The `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables are required to access the Udentify libraries:\
+\
+* `GITHUB_ACTOR`: The username of the GitHub account that will access the Udentify libraries.\
+* `GITHUB_TOKEN`: A personal access token (PAT) used to authenticate GitHub API requests. You can generate this token by navigating to `GitHub > Settings > Developer Settings > Personal access tokens` and creating a new token with the appropriate permissions.\
+\
+After obtaining these credentials, set them as environment variables according to your operating system.\
+\
+#### Step 2: Add dependencies\
+\
+Add the following OCR dependencies to your app-level `build.gradle`:\
+\
+```groovy\
+// OCR dependencies\
+implementation 'com.squareup.okhttp3:okhttp:4.12.0'\
+implementation 'com.squareup.okhttp3:okhttp-tls:4.12.0'\
+implementation 'com.otaliastudios:cameraview:2.7.2'\
+implementation 'com.google.android.material:material:1.4.0'\
+implementation 'com.google.code.gson:gson:2.8.7'\
+implementation 'com.google.mlkit:face-detection:16.1.5'\
+implementation 'com.google.mlkit:object-detection:17.0.0'\
+```\
+\
+#### Step 3: Add permissions\
+\
+Add the following permissions to `AndroidManifest.xml`:\
+\
+```xml\
+<uses-permission android:name="android.permission.CAMERA"/>\
+<uses-permission android:name="android.permission.INTERNET"/>\
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />\
+```\
+\
+**It is essential for the app to have access to the device's phone state in order to fully utilize Udentify. Therefore, requesting the `READ_PHONE_STATE` permission in the Android app is advised:**\
+\
+```groovy\
+requestPermissions(new String[]\{Manifest.permission.READ_PHONE_STATE\}, 1);\
+```\
+\
+Override the `onRequestPermissionsResult()` method to ensure that your app behaves as expected if the permission is granted or denied.\
+\
+#### Step 4: Configure Activity\
+\
+Add the following entry to the Activity that will use `CardFragment` and `HologramFragment` (only supports Portrait mode) in `AndroidManifest.xml`:\
+\
+```xml\
+android:screenOrientation="portrait"\
+android:configChanges="orientation|keyboardHidden"\
+```\
+\
+#### Usage\
+\
+After completing the setup, you can use the OCR ID Verification API in your Android application. The API provides `CardFragment` and `HologramFragment` for scanning and verifying ID cards and holograms, respectively. Please note that these fragments only support the Portrait mode.\
+\
+## With Embedded Camera\
+\
+This document explains the integration of OCR ID Verification using the CameraView API in an Android application.\
+\
+#### Requirements\
+\
+1. Android Studio\
+2. Android device or emulator with camera support\
+\
+#### Integration Steps\
+\
+#### 1. Request Camera Permission\
+\
+Ask for the Camera permission before using the CameraView API. The permission must be granted, or the `onFailure()` method will be called.\
+\
+#### 2. Create a Fragment and Implement CardRecognizer\
+\
+Create a new fragment in your Android project and implement the `CardRecognizer` interface.\
+\
+#### 3. Add Unimplemented Methods and Parcelable\
+\
+Add the unimplemented methods for `CardRecognizer` as well as `Parcelable`'s methods since `CardRecognizer` extends from `Parcelable`.\
+\
+#### 4. Create CardRecognizerCredentials Object\
+\
+Create a `CardRecognizerCredentials` object and return it in the `getCredentials()` method. Ideally, create it in the `onResume()` method, make it global, and then return it from `getCredentials()`.\
+\
+```java\
+@Override\
+public CardRecognizerCredentials getCredentials() \{\
+    CardRecognizerCredentials credentials = new CardRecognizerCredentials.Builder()\
+        .serverURL("http://...") // Enter server url\
+        .transactionID("TRX...") // Enter transaction id received from server\
+        .userID(new Date().getTime() + "") // Enter a user id to define your customer.\
+        .docType(DocumentType.OCR_ID_UPLOAD) // Enter documentType --- If the docType is driver's licence, call this parameter with `OCR_DRIVER_LICENCE_UPLOAD`\
+        .countryCode("TUR") // Enter country --- If the docType is set to OCR_PASSPORT_UPLOAD, this parameter does not need to be called\
+        .successDelay(0.2f) // [OPTIONAL] This delay (in seconds) determines how much time it needs to be passed in order to mark it as success. Default value is 0.2\
+        .hardwareSupport(7) // [OPTIONAL] Duration required to activate hardware support. Default value is 10 seconds\
+        .faceDetection(false) // [OPTIONAL] Determines whether face detection is enabled or not. If set to true, it indicates that the face detection will be done along with the OCR. If set to false, it suggests that the OCR process will continue without the face detection. Default value is false\
+        .blurCoefficient(0) // [OPTIONAL] The blurCoefficient is a threshold value ranging from -1 to 1. If the captured image's blurriness ratio is above this threshold value, the image is considered non-blurry. If the blurriness ratio of the image is below this value, it is considered blurry and not processed. With 0 being the default value, as it approaches -1, the system becomes less selective in accepting images. As it approaches 1, it becomes more selective and only accepts sharper images. When it is -1, blurriness detection is turned off.\
+        .manualCapture(false) // [OPTIONAL] Determines whether manual capture mode is enabled or not. If set to true, it indicates that the user will manually capture images. If set to false, it suggests that automatic capture mode is enabled, where the camera automatically captures images. Default value is false\
+        .isDocumentLivenessActive(false) // [OPTIONAL] Determines whether document liveness check is enabled or not. If set to true, it indicates that the Document Liveness Check will be done along with the OCR. If set to false, it suggests that the OCR process will continue without the Document Liveness Check. Default value is false\
+        .reviewScreenEnabled(true) // [OPTIONAL] Determines whether the review screen is enabled or not. If set to true, it indicates that the review screen will be shown to the user after the OCR process is completed. If set to false, it suggests that the review screen will not be shown to the user. Default value is true\
+        .footerViewHidden(false) // [OPTIONAL] Determines whether the footer view is hidden or not. If set to true, it indicates that the footer view will be hidden. If set to false, it suggests that the footer view will be shown. Default value is false\
+        .placeholderTemplate(PlaceholderTemplate.defaultStyle) // [OPTIONAL] This parameter is used to set the placeholder template for the OCR process. If not set, the default placeholder template will be used. Default value is defaultStyle. Other options are: hidden and countrySpecificStyle. If specific country templates are found in our system, they will be used with the countrySpecificStyle.\
+        .build();\
+    return credentials;\
+\}\
+```\
+\
+#### 5. Open Camera View\
+\
+In order to open the Camera view, you need to create an instance of `CardFragment` which returns a `CardFragment` and replace your fragment with it or add it on top of it. For example, the following code block creates the fragment.\
+\
+```java\
+CardFragment cardFragment = new CardFagment().newInstance(Process.frontSide, cardOrientation, MainFragment.this);\
+```\
+\
+* First parameter is the side you want to scan (`Process.frontSide` or `Process.backSide`).\
+* Second parameter is a boolean for the card orientation which you want to capture the card in:\
+  * `false` \uc0\u8594  Horizontal\
+  * `true` \uc0\u8594  Vertical\
+* Third parameter is the `CardRecognizer` interface which you have already implemented in your current fragment/activity.\
+\
+#### 6. Pass frontSideImage for Scanning Backside\
+\
+After receiving the `frontSideImage` with the overridden method `frontSideImage(String frontsideImage)`, you should pass `frontSideImage` while creating the new instance of `CardFragment` for scanning the backside.\
+\
+#### 7. Check the Result\
+\
+You can check the result from overridden methods: either from `onResult(CardOCRMessage cardOCRMessage)` or from `onFailure(String description)` method. If an error occurs during progress, then the `onFailure` method will be called. Otherwise, `onResult` will be called, and you can check the `CardOCRMessage` object for the OCR result.\
+\
+## With Provided Photos\
+\
+With this approach, we assume that the photo is provided to our SDK externally. The steps to integrate this approach are as follows:\
+\
+1. Implement or provide the `CardRecognizer` interface\
+2. Add the unimplemented methods\
+3. Create and instantiate a `CardRecognizerObject` object which takes four parameters: `CardRecognizer` interface, `activity` and Photos in base64 format (front side, back side)\
+4. Create a `CardRecognizerCredentials` object and return it in the `getCredentials()` method\
+5. To perform OCR operation, call `processOCR()` method for the previously created `CardRecognizerObject` object\
+6. Check the result from overridden methods: either from `onResult(CardOCRMessage cardOCRMessage)` or from `onFailure(String description)` method\
+\
+#### Instructions\
+\
+#### 1. Implement CardRecognizerInterface\
+\
+First, you should implement the <mark style="color:blue;">`CardRecognizer`</mark> interface. This interface is required for communication between your application and the OCR ID Verification API.\
+\
+```java\
+public class YourActivity extends AppCompatActivity implements CardRecognizer \{\
+    // Your code here\
+\}\
+```\
+\
+#### 2. Add Unimplemented Methods\
+\
+Add the required unimplemented methods from the <mark style="color:blue;">`CardRecognizer`</mark> interface:\
+\
+```java\
+@Override\
+public void frontSideImage(String s) \{\
+    // Your code here\
+\}\
+\
+@Override\
+public void backSideImage(String s) \{\
+    // Your code here\
+\}\
+\
+@Override\
+public void cardScanFinished() \{\
+    // Your code here\
+\}\
+\
+@Override\
+public void onResult(CardOCRMessage cardOCRMessage) \{\
+    // Your code here\
+\}\
+\
+@Override\
+public void onFailure(String s) \{\
+    // Your code here\
+\}\
+\
+@Override\
+public void onPhotoTaken() \{\
+    // Your code here\
+\}\
+\
+@Override\
+public void didFinishOcrAndDocumentLivenessCheck(OCRAndDocumentLivenessResponse response) \{\
+    // Your code here\
+\}\
+\
+@Override\
+public CardRecognizerCredentials getCredentials() \{\
+    // Your code here\
+\}\
+```\
+\
+#### 3. Create and Instantiate <mark style="color:blue;">CardRecognizerObject</mark>\
+\
+Create and instantiate a <mark style="color:blue;">`CardRecognizerObject`</mark> object which takes four parameters: <mark style="color:blue;">`CardRecognizer`</mark> interface, <mark style="color:blue;">`activity`</mark> and Photos in base64 format (front side, back side):\
+\
+```java\
+CardRecognizerObject cardRecognizerObject = new CardRecognizerObject(\
+    this,\
+    getActivity(),\
+    frontSidePhotoInBase64,\
+    backSidePhotoInBase64\
+);\
+```\
+\
+#### 4. Create <mark style="color:blue;">CardRecognizerCredentials</mark> Object\
+\
+Create a `CardRecognizerCredentials` object (ideally create it in `onResume()` and make it global then return it from `getCredentials()`) and return it in the `getCredentials()` method:\
+\
+```java\
+@Override\
+public CardRecognizerCredentials getCredentials() \{\
+    CardRecognizerCredentials credentials = new CardRecognizerCredentials.Builder()\
+        .serverURL("http://...") // Enter server url\
+        .transactionID("TRX...") // Enter transaction id received from server\
+        .userID(new Date().getTime() + "") // Enter a user id to define your customer.\
+        .docType(DocumentType.OCR_ID_UPLOAD) // Enter documentType --- If the docType is driver's licence, call this parameter with `OCR_DRIVER_LICENCE_UPLOAD`\
+        .countryCode("UK") // Enter country --- If the docType is set to OCR_PASSPORT_UPLOAD, this parameter does not need to be called\
+        .successDelay(0.2f) // [OPTIONAL] This delay (in seconds) determines how much time it needs to be passed in order to mark it as success. Default value is 0.2\
+        .hardwareSupport(7) // [OPTIONAL] Duration required to activate hardware support. Default value is 10 seconds\
+        .faceDetection(false) // [OPTIONAL] Determines whether face detection is enabled or not. If set to true, it indicates that the face detection will be done along with the OCR. If set to false, it suggests that the OCR process will continue without the face detection. Default value is false\
+        .blurCoefficient(0) // [OPTIONAL] The blurCoefficient is a threshold value ranging from -1 to 1. If the captured image's blurriness ratio is above this threshold value, the image is considered non-blurry. If the blurriness ratio of the image is below this value, it is considered blurry and not processed. With 0 being the default value, as it approaches -1, the system becomes less selective in accepting images. As it approaches 1, it becomes more selective and only accepts sharper images. When it is -1, blurriness detection is turned off.\
+        .manualCapture(false) // [OPTIONAL] Determines whether manual capture mode is enabled or not. If set to true, it indicates that the user will manually capture images. If set to false, it suggests that automatic capture mode is enabled, where the camera automatically captures images. Default value is false\
+        .isDocumentLivenessActive(false) // [OPTIONAL] Determines whether document liveness check is enabled or not. If set to true, it indicates that the Document Liveness Check will be done along with the OCR. If set to false, it suggests that the OCR process will continue without the Document Liveness Check. Default value is false\
+        .reviewScreenEnabled(true) // [OPTIONAL] Determines whether the review screen is enabled or not. If set to true, it indicates that the review screen will be shown to the user after the OCR process is completed. If set to false, it suggests that the review screen will not be shown to the user. Default value is true\
+        .footerViewHidden(false) // [OPTIONAL] Determines whether the footer view is hidden or not. If set to true, it indicates that the footer view will be hidden. If set to false, it suggests that the footer view will be shown. Default value is false\
+        .placeholderTemplate(PlaceholderTemplate.defaultStyle) // [OPTIONAL] This parameter is used to set the placeholder template for the OCR process. If not set, the default placeholder template will be used. Default value is defaultStyle. Other options are: hidden and countrySpecificStyle. If specific country templates are found in our system, they will be used with the countrySpecificStyle.\
+        .build();\
+    return credentials;\
+\}\
+```\
+\
+#### 5. Perform OCR Operation\
+\
+Call <mark style="color:blue;">`processOCR()`</mark> method of the previously created <mark style="color:blue;">`CardRecognizerObject`</mark> object in order to perform OCR operation:\
+\
+```java\
+cardRecognizerObject.processOCR();\
+```\
+\
+#### 6. Check the Result\
+\
+You can check the result from overridden methods: either from <mark style="color:blue;">`onResult(CardOCRMessage cardOCRMessage)`</mark> or from <mark style="color:blue;">`onFailure(String description)`</mark> method. If an error occurs during progress, then the `onFailure` method will be called. Otherwise, the `onResult` will be called, and you can check the <mark style="color:blue;">`CardOCRMessage`</mark> object for the OCR result.\
+\
+## CardOCRMessage\
+\
+The `CardOCRMessage` struct represents a response object that contains information extracted from an OCR (Optical Character Recognition) operation which also uses MRZ (Machine-Readable Zone) technique on a document.\
+\
+* `isFailed: Boolean`: Fail status of the response.\
+* `fcaseImg: String`: Image in base64 of document holder's face.\
+* `name: String`: First name of the document holder.\
+* `surname: String`: Last name of the document holder.\
+* `identityNo: String`: Identity number of the document holder.\
+* `birthDate: String`: Date of birth of the document holder.\
+* `gender: String`: Gender of the document holder.\
+* `nationality: String`: Nationality of the document holder.\
+* `userId: String`: Generated User ID of the response.\
+* `expireDate: String`: Expire date of the document.\
+* `imgPath: String`: Image path of document holder's face on the server.\
+* `mrzString: String`: The full MRZ string from the document.\
+* `documentType: String`: Document type of the document.\
+* `documentCountry: String`: Document country of the document.\
+* `documentID: String`: Document number of the document.\
+* `documentIssuer: String`: Issuer of the document.\
+* `motherName: String`: Mother's name.\
+* `fatherName: String`: Father's name.\
+* `dateOfIssue: String`: Issued date of the document.\
+* `ocrPhotoExists: String`: Flag indicating whether an OCR photo is present or not.\
+* `ocrSignatureExists: String`: Flag indicating whether an OCR signature is present or not.\
+* `ocrHiddenPhotoExists: String`: Flag indicating whether a hidden photo is present or not.\
+* `ocrPhotoCheat: String`: Flag indicating whether photo cheating is detected or not.\
+* `ocrDocumentExpired: String`: Flag indicating whether the document is expired or not.\
+* `ocrIdValid: String`: Flag indicating whether the ID is valid or not.\
+* `ocrValidationString: String`: Validation string for the OCR operation.\
+* `barcodeDataExists: String`: Flag indicating whether barcode data exists or not.\
+* `idCardOCRResponse: IDCardOCRResponse`: Detailed information about the ID card OCR response.\
+* `mrzCheckResponse: MRZCheckResponse`: Detailed information about the MRZ check response.\
+* `driverLicenceOCRResponse: DriverLicenceOCRResponse`: Detailed information about the driver's licence OCR response.\
+\
+## IDCardOCRResponse\
+\
+The `IDCardOCRResponse` struct represents a response object that contains information specific to an ID card OCR operation.\
+\
+This serves as a placeholder for the ID card OCR response. The response object will be revised if additional fields are introduced in the future.\
+\
+## MRZCheckResponse\
+\
+The `MRZCheckResponse` struct represents a response object that contains information specific to an MRZ (Machine-Readable Zone) check operation.\
+\
+* `mrzBirthDate: String`: Birth date extracted from MRZ.\
+* `mrzBirthDateHash: String`: Checksum for the MRZ birthdate.\
+* `mrzCountry: String`: Country code extracted from MRZ.\
+* `mrzDocumentNumber: String`: Document number extracted from MRZ.\
+* `mrzDocumentNumberHash: String`: Checksum for the MRZ document number.\
+* `mrzDocumentType: String`: Document type extracted from MRZ.\
+* `mrzExpiryDate: String`: Expiry date extracted from MRZ.\
+* `mrzExpiryDateHash: String`: Checksum for the MRZ expiry date.\
+* `mrzFinalHash: String`: Final hash checksum for MRZ data.\
+* `mrzName: String`: Name extracted from MRZ on the document.\
+* `mrzNationality: String`: Nationality extracted from MRZ.\
+* `mrzOptionalData: String`: Optional data extracted from MRZ.\
+* `mrzSex: String`: Gender extracted from MRZ.\
+* `mrzSurname: String`: Surname extracted from MRZ.\
+* `barcodeData: String`: Data from the document's barcode.\
+* `mrzDigitCheckSum: String`: Checksum calculated from MRZ digits.\
+* `mrzOcrDataMatch: String`: Flag indicating whether MRZ and OCR data match or not.\
+* `chipExists: String`: Flag indicating whether a chip exists on the document or not.\
+* `mrzDataExists: String`: Flag indicating whether MRZ data exists or not.\
+* `mrzDocumentNoChecksumVerified: String`: Present only when the OCR-read document number and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+* `mrzBirthDateChecksumVerified: String`: Present only when the OCR-read birthdate and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+* `mrzExpiryDateChecksumVerified: String`: Present only when the OCR-read expiry date and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+* `mrzFinalChecksumVerified: String`: Present only when the OCR-read final checksum and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+\
+## DriverLicenceOCRResponse\
+\
+The `DriverLicenceOCRResponse` struct represents a response object that contains information specific to a driver's licence OCR operation.\
+\
+* `ocrQrApproval: String`: Flag indicating whether the document is approved or not.\
+* `ocrQrLicenceId: String`: Licence ID extracted from OCR.\
+* `ocrQrIdentityNo: String`: Identity number extracted from OCR.\
+* `ocrQrIdentityNoCheck: String`: Flag indicating whether the identity number matches or not.\
+* `ocrQrLicenceIdCheck: String`: Flag indicating whether the licence ID matches or not.\
+* `ocrLicenceType: String`: Licence eligibility type extracted from OCR.\
+* `city: String`: City of the licence holder.\
+* `state: String`: State of the licence holder.\
+* `district: String`: District of the licence holder.\
+\
+## Document Liveness Check\
+\
+With this approach, we assume that the Document Liveness photo/photos are provided to our SDK externally. The steps to integrate this approach are as follows:\
+\
+1. Create and instantiate a `CardRecognizerObject` object which can also be instantiated with a single `activity` parameter if the OCR process will not be included.\
+2. To perform Document Liveness operation, call `performDocumentLiveness(String serverURL, String transactionId, String frontSidePhoto, String backSidePhoto, DocumentLivenessListener listener)` method for the previously created `CardRecognizerObject` object\
+3. Check the result from overridden methods: either from `successResponse(OCRAndDocumentLivenessResponse response` or from `errorResponse(String error)` method\
+\
+#### Instructions\
+\
+To integrate the Document Liveness Check functionality into your Android application, follow these steps:\
+\
+#### 1. Create and Instantiate <mark style="color:blue;">CardRecognizerObject</mark>\
+\
+Create and instantiate a <mark style="color:blue;">`CardRecognizerObject`</mark> object which can also be instantiated with a single <mark style="color:blue;">`activity`</mark> parameter if the OCR process will not be included.\
+\
+```java\
+CardRecognizerObject cardRecognizerObject = new CardRecognizerObject(\
+    getActivity()\
+);\
+```\
+\
+#### 2. Perform Document Liveness Operation\
+\
+Call <mark style="color:blue;">`performDocumentLiveness()`</mark> method of the previously created <mark style="color:blue;">`CardRecognizerObject`</mark> object in order to perform Document Liveness operation:\
+\
+```java\
+cardRecognizerObject.performDocumentLiveness(serverURL, transactionId, frontSideImage, backSideImage, new DocumentLivenessListener() \{\
+    @Override\
+    public void successResponse(OCRAndDocumentLivenessResponse response) \{\
+        Log.i(TAG, "Successful! " + response);\
+    \}\
+\
+    @Override\
+    public void errorResponse(String error) \{\
+        Log.i(TAG, "Error: " + error);\
+    \}\
+\});\
+```\
+\
+#### 3. Check the Result\
+\
+You can check the result from overridden methods: either from <mark style="color:blue;">`successResponse(OCRAndDocumentLivenessResponse response)`</mark> or from <mark style="color:blue;">`errorResponse(String error)`</mark> method.\
+\
+## OCRAndDocumentLivenessResponse\
+\
+The `OCRAndDocumentLivenessResponse` struct represents a response object that contains information extracted from an OCR (Optical Character Recognition) operation on a document along with the Liveness Check of that document.\
+\
+* `isFailed: Boolean`: Fail status of the response. Returns false if the operation is successful.\
+* `ocrData: CardOCRMessage`: OCR information. Returns null if OCR is not included in Document Liveness Check\
+* `documentLivenessDataFront: DocumentLivenessResponse`: Document Liveness information of the front side of the document.\
+* `documentLivenessDataBack: DocumentLivenessResponse`: Document Liveness information of the back side of the document.\
+* `errorCode: String`: Error message of the response. Returns null if the operation is successful.\
+\
+## Hologram Check\
+\
+#### Instructions\
+\
+To integrate the Hologram Check functionality into your Android application, follow these steps:\
+\
+#### 1. Request Camera Permission\
+\
+Request camera permission from the user. The permission must be granted, or the `onFailure()` method will be called.\
+\
+#### 2. Implement HologramStages\
+\
+Create a new fragment or use an existing one and implement the `HologramStages` interface.\
+\
+#### 3. Add Unimplemented Methods\
+\
+Add the unimplemented methods for `HologramStages` as well as `Parcelable's` methods since `HologramStages` extends from `Parcelable`.\
+\
+#### 4. Create an Instance of HologramFragment\
+\
+To open the camera view, create an instance of `HologramFragment` which returns a `HologramFragment` and replace your current fragment with it or add it on top of it. For example:\
+\
+```java\
+HologramFragment hologramFragment = new HologramFragment().newInstance(txid, serverURL, cardOrientation, MainFragment.this);\
+```\
+\
+* `cardOrientation`: A boolean for the card orientation you want to capture the card in:\
+  * `false` \uc0\u8594  Horizontal\
+  * `true` \uc0\u8594  Vertical\
+* `MainFragment.this`: The `HologramStages` interface implemented in your current fragment/activity\
+\
+#### 5. Utilise HologramStarted() and HologramFinished() Methods\
+\
+After the user starts recording the hologram video, the `hologramStarted()` method will be called. When the recording ends, the `hologramFinished()` method will be called. These methods can be used to manage loading screens.\
+\
+#### 6. Check the Result from Overridden Methods\
+\
+You can check the result from the overridden methods: either from `hologramResult(HologramResponse result)` or from `hologramFail(HologramResponse result)` method. If an error occurs during progress, the `hologramFail` method will be called. Otherwise, the `hologramResult` method will be called. You can check the `HologramResponse` object to determine whether the user passes inspection or not.\
+\
+#### Example Usage\
+\
+The following example demonstrates how to implement the Hologram Check functionality in an Android application:\
+\
+```java\
+public class MainFragment extends Fragment implements HologramStages \{\
+\
+    // ...\
+\
+    private void startHologramCheck() \{\
+        // Request camera permission\
+        // ...\
+\
+        // Create HologramFragment instance\
+        HologramFragment hologramFragment = new HologramFragment().newInstance(cardOrientation, MainFragment.this);\
+   \
+        // Replace current fragment with HologramFragment\
+        // ...\
+    \}\
+\
+    @Override\
+    public void hologramStarted() \{\
+        // Show loading screen\
+    \}\
+\
+    @Override\
+    public void hologramFinished() \{\
+        // Hide loading screen\
+    \}\
+\
+    @Override\
+    public void hologramResult(HologramResponse result) \{\
+        // Process successful hologram check result\
+    \}\
+\
+    @Override\
+    public void hologramFail(HologramResponse result) \{\
+        // Handle hologram check failure or error\
+    \}\
+\
+    @Override\
+    public CardRecognizerCredentials getCredentials() \{\
+        // Your code here\
+    \}\
+\
+    // Parcelable methods\
+    // ...\
+\}\
+```\
+\
+## HologramResponse\
+\
+The `HologramResponse` struct represents a response object that contains information about a hologram transaction.\
+\
+* `message: String`: An object containing the information about the hologram transaction.\
+* `hologramFace: Bitmap`: An image of the hologram face.\
+* `hologramDocumentId: String`: The identification number associated with the hologram.\
+* `ocrHologramCheck: Boolean`: A flag indicating whether the hologram exists or not.\
+* `ocrHoloIdMatch: Boolean`: A flag indicating whether the OCR (Optical Character Recognition) identification and hologram identification match or not.\
+* `ocrHoloFaceMatch: Boolean`: A flag indicating whether the OCR face recognition and hologram face recognition match or not.\
+\
+#### **Obfuscation** <a href="#obfuscation" id="obfuscation"></a>\
+\
+Add the following rule to your proguard file.\
+\
+```java\
+-keep public class io.udentify.** \{ *; \}\
+```\
+\
+## UI Customisation\
+\
+This technical documentation covers the UI Customisation section for the Android API OCR ID Verification. You can customise the user interface (UI) using the following elements:\
+\
+#### Strings\
+\
+To provide custom text for various UI elements, modify these string values:\
+\
+```xml\
+<!--    OCR and Hologram Strings    -->\
+<string name="udentify_ocr_status_view_title_default">Scan OCR</string>\
+<string name="udentify_ocr_status_view_title_front_side">Scan Front Side</string>\
+<string name="udentify_ocr_status_view_title_back_side">Scan Back Side</string>\
+\
+<string name="udentify_ocr_button_retake_title">Retake</string>\
+<string name="udentify_ocr_button_use_title">Use</string>\
+<string name="udentify_ocr_button_capture_title">Capture</string>\
+\
+<string name="udentify_ocr_instruction_text_front_side">Align your ID\'92s front within the on-screen frame.</string>\
+<string name="udentify_ocr_instruction_text_back_side">Align your ID\'92s back within the on-screen frame.</string>\
+\
+<string name="udentify_ocr_review_title_front_side">Front side captured</string>\
+<string name="udentify_ocr_review_title_back_side">Back side captured</string>\
+\
+<string name="udentify_ocr_review_instruction_text_front_side">Make sure the photo is not blurred.</string>\
+<string name="udentify_ocr_review_instruction_text_back_side">Make sure the photo is not blurred.</string>\
+\
+<string name="udentify_hologram_status_view_title_default">Check hologram</string>\
+<string name="udentifyocr_hologram_recording">Recording...</string>\
+```\
+\
+#### Dimens\
+\
+To adjust the dimensions of UI elements, modify these dimen values:\
+\
+```xml\
+<!--    Udentify Footer Button Style Dimens     -->\
+<dimen name="udentify_ocr_footer_btn_border_stroke_width">3dp</dimen>\
+<dimen name="udentify_ocr_footer_btn_border_corner_radius">8dp</dimen>\
+<dimen name="udentify_ocr_footer_btn_height">70dp</dimen>\
+<dimen name="udentify_ocr_footer_btn_leading">16dp</dimen>\
+<dimen name="udentify_ocr_footer_btn_trailing">16dp</dimen>\
+\
+<!--    Udentify Use Button Style Dimens     -->\
+<dimen name="udentify_ocr_use_btn_border_stroke_width">0dp</dimen>\
+<dimen name="udentify_ocr_use_btn_border_corner_radius">8dp</dimen>\
+<dimen name="udentify_ocr_use_btn_height">70dp</dimen>\
+<dimen name="udentify_ocr_use_btn_leading">16dp</dimen>\
+<dimen name="udentify_ocr_use_btn_trailing">10dp</dimen>\
+\
+<!--    Udentify Retake Button Style Dimens     -->\
+<dimen name="udentify_ocr_retake_btn_border_stroke_width">2dp</dimen>\
+<dimen name="udentify_ocr_retake_btn_border_corner_radius">8dp</dimen>\
+<dimen name="udentify_ocr_retake_btn_height">70dp</dimen>\
+<dimen name="udentify_ocr_retake_btn_leading">10dp</dimen>\
+<dimen name="udentify_ocr_retake_btn_trailing">16dp</dimen>\
+\
+\
+<!--    MaskView Dimens     -->\
+<dimen name="udentify_ocr_mask_border_stroke_width">0dp</dimen>\
+<dimen name="udentify_ocr_mask_border_corner_radius">9dp</dimen>\
+<dimen name="udentify_ocr_mask_horizontal_offset">0dp</dimen>\
+```\
+\
+#### Colors\
+\
+To customize the colors of UI elements, modify these color values:\
+\
+```xml\
+<!--    CardMaskView Colors     -->\
+<color name="udentify_ocr_card_mask_view_stroke_color">#CCFFFFFF</color>\
+<color name="udentify_ocr_card_mask_view_background_color">#844EE3</color>\
+\
+<!--    MaskView Colors     -->\
+<color name="udentify_ocr_mask_layer_background_color">#CC000000</color>\
+<color name="udentify_ocr_mask_card_color">#00000000</color>\
+<color name="udentify_ocr_mask_border_stroke_color">#00FFFFFF</color>\
+\
+<!--    OCR Card Preview Colors     -->\
+<color name="udentify_ocr_id_tur_background_color">#D1D4DA</color>\
+\
+\
+<!--    Udentify Button Text Colors     -->\
+<color name="udentify_ocr_btn_text_color">#FFFFFF</color>\
+\
+<!--    Udentify Footer Button Style Colors     -->\
+<color name="udentify_ocr_footer_btn_background_color">#844EE3</color>\
+<color name="udentify_ocr_footer_btn_border_stroke_color">@android:color/transparent</color>\
+<color name="udentify_ocr_footer_btn_text_color">#FFFFFF</color>\
+<color name="udentify_ocr_footer_btn_color_success">#4CD964</color>\
+<color name="udentify_ocr_footer_btn_color_error">#FF3B30</color>\
+\
+<!--    Udentify Use Button Style Colors     -->\
+<color name="udentify_ocr_use_btn_background_color">#844EE3</color>\
+<color name="udentify_ocr_use_btn_border_stroke_color">@android:color/transparent</color>\
+<color name="udentify_ocr_use_btn_text_color">#FFFFFF</color>\
+\
+<!--    Udentify Retake Button Style Colors     -->\
+<color name="udentify_ocr_retake_btn_background_color">@android:color/transparent</color>\
+<color name="udentify_ocr_retake_btn_border_stroke_color">#844EE3</color>\
+<color name="udentify_ocr_retake_btn_text_color">#FFFFFF</color>\
+```\
+\
+#### Styles\
+\
+To apply custom styles to UI elements, modify these style values:\
+\
+```xml\
+<style name="UdentifyCardMaskView">\
+    <item name="android:alpha">0.5</item>\
+</style>\
+\
+<style name="TitleAndInstructionLabelsLayoutStyle">\
+    <item name="layout_constraintVertical_bias">0.15</item>\
+</style>\
+\
+<style name="TitleLabelStyle">\
+    <item name="android:fontFamily">@font/gilroy_bold</item>\
+    <item name="android:textColor">@color/udentify_ocr_btn_text_color</item>\
+    <item name="android:textSize">20sp</item>\
+    <item name="android:textAlignment">center</item>\
+    <item name="android:breakStrategy">balanced</item>\
+    <item name="android:lines">1</item>\
+    <item name="android:paddingLeft">20dp</item>\
+    <item name="android:paddingRight">20dp</item>\
+</style>\
+\
+<style name="InstructionLabelStyle">\
+    <item name="android:fontFamily"></item>\
+    <item name="android:textColor">@color/udentify_ocr_btn_text_color</item>\
+    <item name="android:textSize">14sp</item>\
+    <item name="android:textAlignment">center</item>\
+    <item name="android:breakStrategy">balanced</item>\
+    <item name="android:lines">1</item>\
+    <item name="android:paddingLeft">20dp</item>\
+    <item name="android:paddingRight">20dp</item>\
+</style>\
+\
+<style name="ReviewScreenCardRoundedCorners">\
+    <item name="cornerFamilyTopLeft">rounded</item>\
+    <item name="cornerFamilyTopRight">rounded</item>\
+    <item name="cornerFamilyBottomLeft">rounded</item>\
+    <item name="cornerFamilyBottomRight">rounded</item>\
+    <item name="cornerSizeTopLeft">16dp</item>\
+    <item name="cornerSizeTopRight">16dp</item>\
+    <item name="cornerSizeBottomLeft">16dp</item>\
+    <item name="cornerSizeBottomRight">16dp</item>\
+</style>\
+\
+<style name="ReviewScreenCard">\
+    <item name="strokeColor">#00ACACAC</item>\
+    <item name="strokeWidth">3dp</item>\
+</style>\
+\
+<style name="ReviewTitleAndInstructionLabelsLayoutStyle">\
+    <item name="layout_constraintVertical_bias">0.15</item>\
+</style>\
+\
+<style name="ReviewTitleLabelStyle">\
+    <item name="android:fontFamily">@font/gilroy_bold</item>\
+    <item name="android:textColor">@color/udentify_ocr_btn_text_color</item>\
+    <item name="android:textSize">18sp</item>\
+    <item name="android:textAlignment">viewStart</item>\
+    <item name="android:breakStrategy">balanced</item>\
+    <item name="android:lines">1</item>\
+    <item name="android:paddingLeft">20dp</item>\
+    <item name="android:paddingRight">20dp</item>\
+</style>\
+\
+<style name="ReviewInstructionLabelStyle">\
+    <item name="android:fontFamily"></item>\
+    <item name="android:textColor">@color/udentify_ocr_btn_text_color</item>\
+    <item name="android:textSize">14sp</item>\
+    <item name="android:textAlignment">viewStart</item>\
+    <item name="android:breakStrategy">balanced</item>\
+    <item name="android:lines">1</item>\
+    <item name="android:paddingLeft">20dp</item>\
+    <item name="android:paddingRight">20dp</item>\
+</style>\
+\
+<style name="UdentifyFooterButtonStyle">\
+    <item name="android:backgroundTint">@color/udentify_ocr_footer_btn_background_color</item>\
+    <item name="strokeColor">@color/udentify_ocr_footer_btn_border_stroke_color</item>\
+    <item name="strokeWidth">@dimen/udentify_ocr_footer_btn_border_stroke_width</item>\
+    <item name="cornerRadius">@dimen/udentify_ocr_footer_btn_border_corner_radius</item>\
+    <item name="android:layout_height">@dimen/udentify_ocr_footer_btn_height</item>\
+    <item name="android:layout_marginStart">@dimen/udentify_ocr_footer_btn_leading</item>\
+    <item name="android:layout_marginEnd">@dimen/udentify_ocr_footer_btn_trailing</item>\
+    <item name="android:fontFamily">@font/gilroy_bold</item>\
+    <item name="android:textAllCaps">false</item>\
+    <item name="android:textColor">@color/udentify_ocr_footer_btn_text_color</item>\
+    <item name="android:textAlignment">center</item>\
+    <item name="android:textSize">18sp</item>\
+    <item name="android:breakStrategy">balanced</item>\
+    <item name="android:lines">1</item>\
+</style>\
+\
+<style name="UdentifyUseButtonStyle">\
+    <item name="android:backgroundTint">@color/udentify_ocr_use_btn_background_color</item>\
+    <item name="strokeColor">@color/udentify_ocr_use_btn_border_stroke_color</item>\
+    <item name="strokeWidth">@dimen/udentify_ocr_use_btn_border_stroke_width</item>\
+    <item name="cornerRadius">@dimen/udentify_ocr_use_btn_border_corner_radius</item>\
+    <item name="android:layout_height">@dimen/udentify_ocr_use_btn_height</item>\
+    <item name="android:layout_marginStart">@dimen/udentify_ocr_use_btn_leading</item>\
+    <item name="android:layout_marginEnd">@dimen/udentify_ocr_use_btn_trailing</item>\
+    <item name="android:fontFamily">@font/gilroy_bold</item>\
+    <item name="android:textAllCaps">false</item>\
+    <item name="android:textColor">@color/udentify_ocr_use_btn_text_color</item>\
+    <item name="android:gravity">center</item>\
+    <item name="android:textSize">18sp</item>\
+    <item name="android:breakStrategy">balanced</item>\
+    <item name="android:lines">1</item>\
+</style>\
+\
+<style name="UdentifyRetakeButtonStyle">\
+    <item name="android:backgroundTint">@color/udentify_ocr_retake_btn_background_color</item>\
+    <item name="strokeColor">@color/udentify_ocr_retake_btn_border_stroke_color</item>\
+    <item name="strokeWidth">@dimen/udentify_ocr_retake_btn_border_stroke_width</item>\
+    <item name="cornerRadius">@dimen/udentify_ocr_retake_btn_border_corner_radius</item>\
+    <item name="android:layout_height">@dimen/udentify_ocr_retake_btn_height</item>\
+    <item name="android:layout_marginStart">@dimen/udentify_ocr_retake_btn_leading</item>\
+    <item name="android:layout_marginEnd">@dimen/udentify_ocr_retake_btn_trailing</item>\
+    <item name="android:fontFamily">@font/gilroy_bold</item>\
+    <item name="android:textAllCaps">false</item>\
+    <item name="android:textColor">@color/udentify_ocr_retake_btn_text_color</item>\
+    <item name="android:gravity">center</item>\
+    <item name="android:textSize">18sp</item>\
+    <item name="android:breakStrategy">balanced</item>\
+    <item name="android:lines">1</item>\
+</style>\
+```\
+\
+## Error Messages\
+\
+**General**\
+\
+| **Message**                                         | **Type** | **Description**                                                                                  |\
+| --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------ |\
+| ERR\\_CAMERA\\_PERMISSION\\_REQUIRED                   | Error    | <p>Calls onFailure() method.</p><p>Requires the camera permission.</p>                           |\
+| ERR\\_READ\\_EXTERNAL\\_STORAGE\\_PERMISSION\\_REQUIRED  | Error    | Calls onFailure() method.                                                                        |\
+| ERR\\_WRITE\\_EXTERNAL\\_STORAGE\\_PERMISSION\\_REQUIRED | Error    | Calls onFailure() method.                                                                        |\
+| ERR\\_UNKNOWN                                        | Error    | <p>Calls onFailure() method.</p><p>Check logs for details.</p>                                   |\
+| ERR\\_FACE\\_CREDENTIALS\\_MISSING                     | Error    | <p>Calls onFailure() method.</p><p>Required parameters for Face Recognition missing.</p>         |\
+| ERR\\_SERVER\\_TIMEOUT\\_EXCEPTION                     | Error    | Calls onFailure() method. You can increase timeout value within getCredentials() method.         |\
+| ERR\\_INVALID\\_SERVER\\_RESPONSE                      | Error    | Might be shown if the response is not received in a valid format.                                |\
+| ERR\\_SERVER\\_RESPONSE\\_EMPTY                        | Error    | Might be shown in onResult() method. Occurs if some relevant api response data is null or empty. |\
+| ERR\\_SERVER\\_RESPONSE\\_PARAMS\\_EMPTY                | Error    | Might be shown in onResult() method. Occurs if some relevant api response data is null or empty. |\
+| ERR\\_TRANSACTION\\_NOT\\_FOUND                        | Error    | Transaction with the given transactionIdnot found.                                               |\
+| ERR\\_TRANSACTION\\_FAILED                            | Error    | Transaction status was set to \'93FAILED\'94 thus cannot continue with this transaction.               |\
+| ERR\\_TRANSACTION\\_EXPIRED                           | Error    | Transaction is expired thus cannot continue with this transaction.                               |\
+| ERR\\_TRANSACTION\\_ALREADY\\_COMPLETED                | Error    | Transaction has been already completed thus cannot continue with this transaction.               |\
+\
+#### Camera\
+\
+| **Message**                                     | **Type** | **Description**                                                                               |\
+| ----------------------------------------------- | -------- | --------------------------------------------------------------------------------------------- |\
+| ERR\\_CAMERA\\_REASON\\_UNKNOWN                    | Error    | <p>Calls onFailure() method.</p><p>Unknown error. No other info available.</p>                |\
+| ERR\\_CAMERA\\_REASON\\_FAILED\\_TO\\_CONNECT        | Error    | Calls onFailure() method. Failed to connect to the camera service.                            |\
+| ERR\\_CAMERA\\_REASON\\_FAILED\\_TO\\_START\\_PREVIEW | Error    | Calls onFailure() method. Failed to start the camera preview.                                 |\
+| ERR\\_CAMERA\\_REASON\\_DISCONNECTED               | Error    | <p>Calls onFailure() method.</p><p>Camera was forced to disconnect by the system.</p>         |\
+| ERR\\_CAMERA\\_REASON\\_PICTURE\\_FAILED            | Error    | <p>Calls onFailure() method.</p><p>Could not take a picture or picture snapshot.</p>          |\
+| ERR\\_CAMERA\\_REASON\\_VIDEO\\_FAILED              | Error    | Calls onFailure() method. Could not take a video or video snapshot.                           |\
+| ERR\\_CAMERA\\_REASON\\_NO\\_CAMERA                 | Error    | Calls onFailure() method. Could not find a camera for this Facing value. You can try another. |\
+\
+#### OCR Related\
+\
+| **Message**                          | **Type** | **Description**                                       |\
+| ------------------------------------ | -------- | ----------------------------------------------------- |\
+| ERR\\_FACE\\_USER\\_ID\\_MISSING         | Error    | UserID wasn\'92t among the request parameters.           |\
+| ERR\\_FACE\\_USER\\_ID\\_NOT\\_REGISTERED | Error    | UserID hasn\'92t been registered before.                 |\
+| ERR\\_FACE\\_IMAGE\\_NOT\\_FOUND         | Error    | Reference Image not found.                            |\
+| ERR\\_FACE\\_FAILED\\_TO\\_UPLOAD\\_IMAGE | Error    | Uploading image is failed.                            |\
+| ERR\\_FACE\\_INCORRECT\\_IMAGE\\_SIZE    | Error    | The given image size is not appropriate for ocr.      |\
+| ERR\\_FACE\\_ERROR\\_IMAGE\\_DECODE      | Error    | The given image/s cannot be decoded. Check file type. |\
+| ERR\\_INTERNAL\\_SERVER                | Error    | Internal server error occurred, check server logs.    |\
+\
+#### Document Liveness Related\
+\
+| **Message**                                          | **Type** | **Description**                            |\
+| ---------------------------------------------------- | -------- | ------------------------------------------ |\
+| ERR\\_DOCUMENT\\_LIVENESS\\_DOCUMENT\\_PHOTO\\_NOT\\_FOUND | Error    | Service could not access photo.            |\
+| ERR\\_DOCUMENT\\_LIVENESS\\_THRESHOLD\\_ERROR            | Error    | Document Liveness failed due to threshold. |\
+| ERR\\_NO\\_LIVENESS\\_PROVIDED                          | Error    | Reference photos are not found.            |\
+}

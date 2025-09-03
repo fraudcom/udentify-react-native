@@ -1,0 +1,461 @@
+import Foundation
+import UIKit
+import AVFoundation
+
+// Udentify MRZ SDK imports (conditionally compiled)
+#if canImport(UdentifyMRZ)
+import UdentifyMRZ
+#endif
+#if canImport(UdentifyCommons)
+import UdentifyCommons
+#endif
+
+@objc public class MRZManager: NSObject {
+    @objc public weak var delegate: MRZManagerDelegate?
+    
+    private var currentCompletion: ((NSDictionary) -> Void)?
+    private var previewView: UIView?
+    private var mrzPreviewView: UIView?
+    
+#if canImport(UdentifyMRZ) && canImport(UdentifyCommons)
+    private var mrzCameraController: MRZCameraController?
+    private var mrzReader: MRZReader?
+#endif
+    
+    @objc public func checkPermissions(_ completion: @escaping (Bool) -> Void) {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        let hasPermission = status == .authorized
+        completion(hasPermission)
+    }
+    
+    @objc public func requestPermissions(_ completion: @escaping (String) -> Void) {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch status {
+        case .authorized:
+            completion("granted")
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                DispatchQueue.main.async {
+                    completion(granted ? "granted" : "denied")
+                }
+            }
+        case .denied, .restricted:
+            completion("denied")
+        @unknown default:
+            completion("denied")
+        }
+    }
+    
+    @objc public func startMrzCamera(_ mode: String, completion: @escaping (NSDictionary) -> Void) {
+#if canImport(UdentifyMRZ) && canImport(UdentifyCommons)
+        // Check camera permission
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        guard status == .authorized else {
+            let errorResult: [String: Any] = [
+                "success": false,
+                "errorMessage": "PERMISSION_DENIED - Camera permission is required for MRZ scanning"
+            ]
+            completion(errorResult as NSDictionary)
+            return
+        }
+        
+        // Get the root view controller
+        guard let viewController = UIApplication.shared.windows.first?.rootViewController else {
+            let errorResult: [String: Any] = [
+                "success": false,
+                "errorMessage": "NO_VIEW_CONTROLLER - Could not find root view controller"
+            ]
+            completion(errorResult as NSDictionary)
+            return
+        }
+        
+        print("MRZManager - Starting MRZ camera with mode: \(mode)")
+        
+        // Store completion for later use
+        currentCompletion = completion
+        
+        // Create preview views for MRZ camera
+        setupPreviewViews(in: viewController.view)
+        
+        // Start real MRZ camera implementation
+        startRealMrzCamera(mode: mode)
+#else
+        // SDK not available - return error
+        let errorResult: [String: Any] = [
+            "success": false,
+            "errorMessage": "SDK_NOT_AVAILABLE - Please add the Udentify MRZ frameworks to ios/Frameworks/"
+        ]
+        completion(errorResult as NSDictionary)
+#endif
+    }
+    
+    @objc public func processMrzImage(_ imageBase64: String, mode: String, completion: @escaping (NSDictionary) -> Void) {
+#if canImport(UdentifyMRZ) && canImport(UdentifyCommons)
+        print("MRZManager - Processing MRZ image with mode: \(mode)")
+        
+        // Decode Base64 image
+        guard let imageData = Data(base64Encoded: imageBase64),
+              let image = UIImage(data: imageData) else {
+            let errorResult: [String: Any] = [
+                "success": false,
+                "errorMessage": "INVALID_IMAGE - Failed to decode Base64 image"
+            ]
+            completion(errorResult as NSDictionary)
+            return
+        }
+        
+        // Store completion for later use
+        currentCompletion = completion
+        
+        // Process the image using real Udentify SDK
+        processRealMrzImage(image: image, mode: mode)
+#else
+        // SDK not available - return error
+        let errorResult: [String: Any] = [
+            "success": false,
+            "errorMessage": "SDK_NOT_AVAILABLE - Please add the Udentify MRZ frameworks to ios/Frameworks/"
+        ]
+        completion(errorResult as NSDictionary)
+#endif
+    }
+    
+    @objc public func cancelMrzScanning(_ completion: @escaping () -> Void) {
+        print("MRZManager - Cancelling MRZ scanning and cleaning up resources")
+        
+#if canImport(UdentifyMRZ) && canImport(UdentifyCommons)
+        // Properly stop MRZ processing first
+        mrzCameraController?.pauseMRZ()
+        mrzCameraController = nil
+        mrzReader = nil
+#endif
+        
+        // Clean up preview views
+        cleanupPreviewViews()
+        
+        // Clear current completion reference
+        if let completion = currentCompletion {
+            let cancelResult: [String: Any] = [
+                "success": false,
+                "errorMessage": "USER_CANCELLED",
+                "cancelled": true
+            ]
+            completion(cancelResult as NSDictionary)
+        }
+        currentCompletion = nil
+        
+        completion()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupPreviewViews(in parentView: UIView) {
+        // Create preview view for camera
+        previewView = UIView(frame: parentView.bounds)
+        previewView?.backgroundColor = UIColor.black
+        parentView.addSubview(previewView!)
+        
+        // Create MRZ preview view (focus area)
+        let mrzFrame = CGRect(
+            x: 20,
+            y: parentView.bounds.height * 0.6,
+            width: parentView.bounds.width - 40,
+            height: 100
+        )
+        mrzPreviewView = UIView(frame: mrzFrame)
+        mrzPreviewView?.backgroundColor = UIColor.clear
+        parentView.addSubview(mrzPreviewView!)
+        
+        // Add instruction label
+        let instructionLabel = UILabel(frame: CGRect(
+            x: 20,
+            y: mrzFrame.origin.y - 60,
+            width: parentView.bounds.width - 40,
+            height: 50
+        ))
+        instructionLabel.text = NSLocalizedString("mrz_scan_instruction", comment: "MRZ scan instruction")
+        instructionLabel.textColor = UIColor.white
+        instructionLabel.textAlignment = .center
+        instructionLabel.font = UIFont.systemFont(ofSize: 16)
+        parentView.addSubview(instructionLabel)
+        
+        // Add cancel button
+        let cancelButton = UIButton(frame: CGRect(
+            x: parentView.bounds.width - 80,
+            y: 50,
+            width: 60,
+            height: 40
+        ))
+        cancelButton.setTitle(NSLocalizedString("cancel", comment: "Cancel button"), for: .normal)
+        cancelButton.setTitleColor(UIColor.white, for: .normal)
+        cancelButton.backgroundColor = UIColor.red.withAlphaComponent(0.7)
+        cancelButton.layer.cornerRadius = 8
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        parentView.addSubview(cancelButton)
+    }
+    
+    @objc private func cancelButtonTapped() {
+        print("MRZManager - Cancel button tapped - dismissing MRZ screen")
+        
+        // Return cancellation result to React Native
+        if let completion = currentCompletion {
+            let cancelResult: [String: Any] = [
+                "success": false,
+                "errorMessage": "USER_CANCELLED",
+                "cancelled": true
+            ]
+            completion(cancelResult as NSDictionary)
+            currentCompletion = nil
+        }
+        
+        // Clean up camera and views
+        let dummyCompletion: () -> Void = {}
+        cancelMrzScanning(dummyCompletion)
+    }
+    
+    private func startRealMrzCamera(mode: String) {
+#if canImport(UdentifyMRZ) && canImport(UdentifyCommons)
+        // Real SDK implementation when frameworks are available
+        print("MRZManager - Starting real MRZ camera with Udentify SDK, mode: \(mode)")
+        
+        // Initialize MRZCameraController with optimized settings
+        mrzCameraController = MRZCameraController(
+            on: previewView!,
+            mrzPreviewView: mrzPreviewView!,
+            focusViewBorderColor: .systemBlue,
+            focusViewStrokeWidth: 3,
+            delegate: self
+        )
+        
+        // Give camera time to initialize properly
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.mrzCameraController?.resumeMRZ()
+            print("MRZManager - MRZ camera initialized successfully")
+        }
+#else
+        // SDK not available - return error immediately
+        let errorResult: [String: Any] = [
+            "success": false,
+            "errorMessage": "SDK_NOT_AVAILABLE - Please add UdentifyMRZ.xcframework to enable MRZ scanning"
+        ]
+        currentCompletion?(errorResult as NSDictionary)
+        currentCompletion = nil
+        cleanupPreviewViews()
+#endif
+    }
+    
+    private func processRealMrzImage(image: UIImage, mode: String) {
+#if canImport(UdentifyMRZ) && canImport(UdentifyCommons)
+        // Real SDK implementation for image processing
+        print("MRZManager - Processing image with real Udentify MRZ SDK, mode: \(mode)")
+        
+        // Create MRZReader instance
+        mrzReader = MRZReader()
+        
+        // Process the image using real Udentify SDK
+        var sourceImage = image
+        mrzReader?.processImage(sourceImage: &sourceImage) { [weak self] (parser, progress) in
+            DispatchQueue.main.async {
+                if let parser = parser {
+                    // Extract MRZ data from parser
+                    let mrzData = self?.extractMrzData(from: parser) ?? [:]
+                    
+                    let mrzResult: [String: Any] = [
+                        "success": true,
+                        "mrzData": mrzData,
+                        // Legacy fields for backward compatibility
+                        "documentNumber": mrzData["documentNumber"] ?? "",
+                        "dateOfBirth": mrzData["dateOfBirth"] ?? "",
+                        "dateOfExpiration": mrzData["dateOfExpiration"] ?? ""
+                    ]
+                    
+                    self?.currentCompletion?(mrzResult as NSDictionary)
+                    self?.currentCompletion = nil
+                } else {
+                    // Report progress
+                    self?.delegate?.mrzManager(self!, didUpdateProgress: Int(progress))
+                }
+            }
+        }
+#else
+        // SDK not available - return error immediately
+        let errorResult: [String: Any] = [
+            "success": false,
+            "errorMessage": "SDK_NOT_AVAILABLE - Please add UdentifyMRZ.xcframework to enable MRZ image processing"
+        ]
+        currentCompletion?(errorResult as NSDictionary)
+        currentCompletion = nil
+#endif
+    }
+    
+    private func extractMrzData(from parser: Any) -> [String: Any] {
+#if canImport(UdentifyMRZ)
+        guard let mrzParser = parser as? MRZParser else {
+            return [:]
+        }
+        
+        let data = mrzParser.data()
+        
+        return [
+            "documentType": data[MRZField.DocumentType] as? String ?? "",
+            "issuingCountry": data[MRZField.IssuingCountry] as? String ?? "",
+            "documentNumber": data[MRZField.DocumentNumber] as? String ?? "",
+            "optionalData1": data[MRZField.OptionalData1] as? String ?? "",
+            "dateOfBirth": data[MRZField.DateOfBirth] as? String ?? "",
+            "gender": data[MRZField.Gender] as? String ?? "",
+            "dateOfExpiration": data[MRZField.ExpirationDate] as? String ?? "",
+            "nationality": data[MRZField.Nationality] as? String ?? "",
+            "optionalData2": data[MRZField.OptionalData2] as? String ?? "",
+            "surname": data[MRZField.Surname] as? String ?? "",
+            "givenNames": data[MRZField.GivenNames] as? String ?? ""
+        ]
+#else
+        return [:]
+#endif
+    }
+    
+    private func cleanupPreviewViews() {
+        print("MRZManager - Cleaning up MRZ preview views and UI elements")
+        
+        // Ensure all UI operations happen on the main thread
+        DispatchQueue.main.async { [weak self] in
+            // Pause MRZ processing before cleanup
+            self?.mrzCameraController?.pauseMRZ()
+            
+            // Remove preview views
+            self?.previewView?.removeFromSuperview()
+            self?.mrzPreviewView?.removeFromSuperview()
+            self?.previewView = nil
+            self?.mrzPreviewView = nil
+            
+            // Remove all MRZ-related subviews from the root view
+            if let window = UIApplication.shared.windows.first {
+                let rootView = window.rootViewController?.view
+                rootView?.subviews.forEach { subview in
+                    // Remove MRZ camera views, instruction labels, and cancel button
+                    if subview.backgroundColor == UIColor.black ||
+                       subview.layer.borderColor == UIColor.white.cgColor ||
+                       subview.layer.borderColor == UIColor.systemBlue.cgColor ||
+                       (subview as? UILabel)?.text?.contains("MRZ") == true ||
+                       (subview as? UILabel)?.text?.contains("document") == true ||
+                       (subview as? UIButton)?.titleLabel?.text == NSLocalizedString("cancel", comment: "Cancel") {
+                        print("MRZManager - Removing MRZ UI element: \(type(of: subview))")
+                        subview.removeFromSuperview()
+                    }
+                }
+            }
+            
+            print("MRZManager - MRZ cleanup completed - screen should be dismissed")
+        }
+    }
+}
+
+// MARK: - MRZ Camera Controller Delegate (Real Implementation)
+#if canImport(UdentifyMRZ) && canImport(UdentifyCommons)
+extension MRZManager: MRZCameraControllerDelegate {
+    
+    public func onStart() {
+        print("MRZManager - MRZ process started")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.mrzCameraController?.resumeMRZ()
+        }
+    }
+    
+    public func onStop() {
+        print("MRZManager - MRZ process stopped")
+    }
+    
+    public func onPause() {
+        print("MRZManager - MRZ process paused")
+    }
+    
+    public func onResume() {
+        print("MRZManager - MRZ process resumed")
+    }
+    
+    public func onDestroy() {
+        print("MRZManager - MRZ controller destroyed")
+        currentCompletion = nil
+        cleanupPreviewViews()
+    }
+    
+    public func onSuccess(documentNumber: String?, dateOfBirth: String?, dateOfExpiration: String?) {
+        // Legacy callback signature - convert to modern format
+        let mrzData: [String: Any] = [
+            "documentType": "",
+            "issuingCountry": "",
+            "documentNumber": documentNumber ?? "",
+            "optionalData1": "",
+            "dateOfBirth": dateOfBirth ?? "",
+            "gender": "",
+            "dateOfExpiration": dateOfExpiration ?? "",
+            "nationality": "",
+            "optionalData2": "",
+            "surname": "",
+            "givenNames": ""
+        ]
+        
+        let mrzResult: [String: Any] = [
+            "success": true,
+            "mrzData": mrzData,
+            // Legacy fields for backward compatibility
+            "documentNumber": documentNumber ?? "",
+            "dateOfBirth": dateOfBirth ?? "",
+            "dateOfExpiration": dateOfExpiration ?? ""
+        ]
+        
+        currentCompletion?(mrzResult as NSDictionary)
+        currentCompletion = nil
+        
+        // Clean up
+        mrzCameraController = nil
+        cleanupPreviewViews()
+    }
+    
+    public func onProgress(progress: Float) {
+        // Send progress updates
+        delegate?.mrzManager(self, didUpdateProgress: Int(progress))
+        if progress > 50 {
+            print("MRZManager - MRZ scan progress: \(Int(progress))%")
+        }
+    }
+    
+    public func onFailure(error: Error) {
+        let errorMessage: String
+        
+        if let cameraError = error as? CameraError {
+            switch cameraError {
+            case .CameraNotFound:
+                errorMessage = "CAMERA_NOT_FOUND - Couldn't find the camera"
+            case .CameraPermissionRequired:
+                errorMessage = "CAMERA_PERMISSION_REQUIRED - Camera permission is required"
+            case .FocusViewInvalidSize(let message):
+                errorMessage = "FOCUS_VIEW_INVALID_SIZE - MrzPreviewView's size is invalid: \(message)"
+            case .SessionPresetNotAvailable:
+                errorMessage = "SESSION_PRESET_NOT_AVAILABLE - Min. 720p rear camera is required"
+            case .Unknown:
+                errorMessage = "UNKNOWN_ERROR - Unknown camera error occurred"
+            case .MinIOSRequirementNotSatisfied:
+                errorMessage = "MIN_IOS_REQUIREMENT_NOT_SATISFIED - Required iOS version is not supported"
+            default:
+                errorMessage = "UNKNOWN_CAMERA_ERROR - An unknown camera error occurred"
+            }
+        } else {
+            errorMessage = error.localizedDescription
+        }
+        
+        print("MRZManager - MRZ error: \(errorMessage)")
+        
+        // Return error result and ensure screen dismisses
+        if let completion = currentCompletion {
+            let mrzResult: [String: Any] = [
+                "success": false,
+                "errorMessage": errorMessage
+            ]
+            completion(mrzResult as NSDictionary)
+        }
+        currentCompletion = nil
+        cleanupPreviewViews()
+    }
+}
+#endif

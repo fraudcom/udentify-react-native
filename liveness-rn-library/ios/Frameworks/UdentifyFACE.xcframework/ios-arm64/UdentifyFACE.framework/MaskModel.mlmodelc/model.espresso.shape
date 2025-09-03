@@ -1,0 +1,578 @@
+{
+  "layer_shapes" : {
+    "max_pool_1" : {
+      "k" : 64,
+      "w" : 65,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 65
+    },
+    "model_2\/cls_1_conv\/Conv2D" : {
+      "k" : 17,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/cls_1_conv\/BiasAdd" : {
+      "k" : 17,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/cls_2_conv\/BiasAdd" : {
+      "k" : 9,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/cls_0_conv\/Conv2Dx" : {
+      "k" : 8,
+      "w" : 33,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/cls_4_conv\/Conv2D" : {
+      "k" : 3,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "model_2\/conv2d_4_activation\/Relu" : {
+      "k" : 128,
+      "w" : 17,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/loc_0_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 4,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 4356
+    },
+    "max_pool_2" : {
+      "k" : 64,
+      "w" : 33,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/cls_2_conv\/Conv2Dx" : {
+      "k" : 8,
+      "w" : 9,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/cls_1_conv\/Conv2Dx" : {
+      "k" : 8,
+      "w" : 17,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/cls_3_conv\/BiasAdd" : {
+      "k" : 5,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/cls_4_conv\/BiasAdd" : {
+      "k" : 3,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "model_2\/cls_3_conv\/Conv2Dx" : {
+      "k" : 8,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/cls_4_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 36
+    },
+    "model_2\/cls_0_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 33,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/cls_4_activation\/Sigmoid" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 36
+    },
+    "model_2\/loc_3_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "max_pool_3" : {
+      "k" : 64,
+      "w" : 17,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/cls_4_conv\/Conv2Dx" : {
+      "k" : 8,
+      "w" : 3,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "output_bounds" : {
+      "k" : 1,
+      "w" : 4,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 5972
+    },
+    "model_2\/loc_2_conv\/Conv2D" : {
+      "k" : 9,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "max_pool_4" : {
+      "k" : 128,
+      "w" : 9,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/loc_0_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/cls_3_activation\/Sigmoid" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 100
+    },
+    "model_2\/conv2d_5_activation\/Relu" : {
+      "k" : 128,
+      "w" : 9,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/cls_4_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 3,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "model_2\/loc_0_conv\/BiasAdd" : {
+      "k" : 33,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/loc_2_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 4,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 324
+    },
+    "output_scores" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 5972
+    },
+    "model_2\/loc_1_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/loc_1_conv\/BiasAdd" : {
+      "k" : 17,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "max_pool_5" : {
+      "k" : 128,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/loc_0_conv\/Conv2Dx" : {
+      "k" : 16,
+      "w" : 33,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/cls_1_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 1156
+    },
+    "model_2\/loc_2_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/conv2d_0_activation\/Relu" : {
+      "k" : 32,
+      "w" : 260,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 260
+    },
+    "model_2\/loc_1_conv\/Conv2Dx" : {
+      "k" : 16,
+      "w" : 17,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/loc_2_conv\/BiasAdd" : {
+      "k" : 9,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/loc_0_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 33,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/cls_2_conv\/Conv2D" : {
+      "k" : 9,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/loc_2_conv\/Conv2Dx" : {
+      "k" : 16,
+      "w" : 9,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/loc_3_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/loc_3_conv\/BiasAdd" : {
+      "k" : 5,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/loc_4_conv\/BiasAdd" : {
+      "k" : 3,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "model_2\/loc_3_conv\/Conv2Dx" : {
+      "k" : 16,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/cls_2_activation\/Sigmoid" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 324
+    },
+    "model_2\/cls_1_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 17,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/loc_4_conv\/Conv2Dx" : {
+      "k" : 16,
+      "w" : 3,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "model_2\/loc_4_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 3,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "model_2\/conv2d_6_activation\/Relu" : {
+      "k" : 64,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/loc_4_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/loc_4_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 4,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 36
+    },
+    "model_2\/loc_0_conv\/Conv2D" : {
+      "k" : 33,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/conv2d_1_activation\/Relu" : {
+      "k" : 64,
+      "w" : 130,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 130
+    },
+    "model_2\/cls_3_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 100
+    },
+    "model_2\/loc_3_conv\/Conv2D" : {
+      "k" : 5,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/cls_1_activation\/Sigmoid" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 1156
+    },
+    "model_2\/loc_1_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 17,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/conv2d_7_activation\/Relu" : {
+      "k" : 64,
+      "w" : 3,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "data" : {
+      "k" : 3,
+      "w" : 260,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 260
+    },
+    "model_2\/cls_0_conv\/Conv2D" : {
+      "k" : 33,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/loc_1_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 4,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 1156
+    },
+    "model_2\/conv2d_2_activation\/Relu" : {
+      "k" : 64,
+      "w" : 65,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 65
+    },
+    "model_2\/cls_2_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 9,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/cls_0_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 4356
+    },
+    "model_2\/cls_3_conv\/Conv2D" : {
+      "k" : 5,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/cls_0_activation\/Sigmoid" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 4356
+    },
+    "model_2\/cls_0_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/cls_1_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/loc_1_conv\/Conv2D" : {
+      "k" : 17,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 17
+    },
+    "model_2\/loc_3_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 4,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 100
+    },
+    "model_2\/conv2d_3_activation\/Relu" : {
+      "k" : 64,
+      "w" : 33,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    },
+    "model_2\/cls_2_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/loc_2_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 9,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 9
+    },
+    "model_2\/cls_2_reshape\/Reshape" : {
+      "k" : 1,
+      "w" : 2,
+      "n" : 1,
+      "_rank" : 3,
+      "h" : 324
+    },
+    "model_2\/loc_4_conv\/Conv2D" : {
+      "k" : 3,
+      "w" : 16,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 3
+    },
+    "model_2\/cls_3_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "max_pool_0" : {
+      "k" : 32,
+      "w" : 130,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 130
+    },
+    "model_2\/cls_4_conv\/BiasAdd\/ReadVariableOp" : {
+      "k" : 1,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 1,
+      "h" : 1
+    },
+    "model_2\/cls_3_insert_conv2d_activation\/Relu" : {
+      "k" : 64,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 5
+    },
+    "model_2\/cls_0_conv\/BiasAdd" : {
+      "k" : 33,
+      "w" : 8,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 33
+    }
+  }
+}

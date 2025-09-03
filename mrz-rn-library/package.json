@@ -1,0 +1,108 @@
+{
+  "name": "mrz-rn-library",
+  "version": "1.0.0",
+  "description": "React Native TurboModule for MRZ (Machine Readable Zone) scanning using Udentify SDK",
+  "main": "index.js",
+  "types": "src/index.ts",
+  "react-native": "src/index.ts",
+  "files": [
+    "src",
+    "lib",
+    "android",
+    "ios",
+    "cpp",
+    "*.podspec",
+    "!lib/typescript/example",
+    "!ios/build",
+    "!android/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "!**/.*"
+  ],
+  "scripts": {
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "clean": "del-cli lib"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "android",
+    "turbo-module",
+    "mrz",
+    "machine-readable-zone",
+    "document-scanning",
+    "passport-scanner",
+    "id-card-scanner"
+  ],
+  "repository": "https://github.com/example/mrz-rn-library",
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/example/mrz-rn-library/issues"
+  },
+  "homepage": "https://github.com/example/mrz-rn-library#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@react-native/eslint-config": "^0.73.1",
+    "@types/jest": "^29.5.2",
+    "@types/react": "^18.2.6",
+    "@types/react-native": "0.73.0",
+    "del-cli": "^5.0.0",
+    "eslint": "^8.19.0",
+    "jest": "^29.2.1",
+    "react": "18.2.0",
+    "react-native": "0.73.0",
+    "react-native-builder-bob": "^0.23.2",
+    "typescript": "5.0.4"
+  },
+  "peerDependencies": {
+    "udentify-core": "^1.0.0", 
+    "react": "*",
+    "react-native": "*"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  },
+  "packageManager": "npm@9.6.7",
+  "jest": {
+    "preset": "react-native",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example/node_modules",
+      "<rootDir>/lib/"
+    ]
+  },
+  "codegenConfig": {
+    "name": "RNMRZLibrarySpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.mrzrnlibrary"
+    },
+    "ios": {
+      "moduleName": "RNMRZLibrarySpec"
+    }
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  }
+}

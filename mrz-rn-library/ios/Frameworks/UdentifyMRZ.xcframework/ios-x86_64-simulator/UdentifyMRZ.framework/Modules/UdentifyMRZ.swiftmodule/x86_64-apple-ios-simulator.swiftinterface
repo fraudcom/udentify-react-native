@@ -1,0 +1,89 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name UdentifyMRZ
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
+import AVFoundation
+import AudioToolbox
+import Foundation
+import GPUImage
+import Swift
+import TesseractOCRSDKiOS
+import UIKit
+import UdentifyCommons
+@_exported import UdentifyMRZ
+import Vision
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+public enum MRZField : Swift.String {
+  case DocumentType, DocumentSubType, CountryCode, DocumentNumber, DateOfBirth, Sex, ExpirationDate, Nationality, LastName, FirstName, IdentityNumber, PersonalNumber
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension UdentifyMRZ.MRZField : Swift.CaseIterable {
+  public typealias AllCases = [UdentifyMRZ.MRZField]
+  nonisolated public static var allCases: [UdentifyMRZ.MRZField] {
+    get
+  }
+}
+@objc(MRZParser) open class MRZParser : ObjectiveC.NSObject {
+  @objc public var parsedMRZ: Swift.String
+  @objc public init(mrzLines: [Swift.String], completed: @escaping (UdentifyMRZ.MRZParser?, Swift.Float) -> ())
+  public func data() -> Swift.Dictionary<UdentifyMRZ.MRZField, Any>
+  @objc deinit
+}
+@objc public enum MRZType : Swift.Int {
+  case auto
+  case td1
+  case td3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class MRZReader : ObjectiveC.NSObject, TesseractOCRSDKiOS.MGTesseractDelegate {
+  @objc public var accuracy: Swift.Float
+  @objc public var scannerDidCompleteWith: ((UdentifyMRZ.MRZParser?) -> ())?
+  @objc override dynamic public init()
+  open func processImage(sourceImage: inout UIKit.UIImage, completed: @escaping (UdentifyMRZ.MRZParser?, Swift.Float) -> ())
+  @objc deinit
+}
+public protocol MRZCameraControllerDelegate : AnyObject {
+  func onStart()
+  func onStop()
+  func onPause()
+  func onResume()
+  func onSuccess(documentNumber: Swift.String?, dateOfBirth: Swift.String?, dateOfExpiration: Swift.String?)
+  func onFailure(error: any Swift.Error)
+  func onProgress(progress: Swift.Float)
+  func onDestroy()
+}
+@objc @_hasMissingDesignatedInitializers public class MRZCameraController : ObjectiveC.NSObject {
+  convenience public init(on previewView: UIKit.UIView, focusViewHeight: CoreFoundation.CGFloat, focusViewWidth: CoreFoundation.CGFloat, focusViewBorderColor: UIKit.UIColor = .blue, focusViewStrokeWidth: CoreFoundation.CGFloat = 6, delegate: (any UdentifyMRZ.MRZCameraControllerDelegate)?)
+  convenience public init(on previewView: UIKit.UIView, horizontalMargin: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat, focusViewBorderColor: UIKit.UIColor = .blue, focusViewStrokeWidth: CoreFoundation.CGFloat = 6, delegate: (any UdentifyMRZ.MRZCameraControllerDelegate)?)
+  convenience public init(on previewView: UIKit.UIView, mrzPreviewView: UIKit.UIView, focusViewBorderColor: UIKit.UIColor = .blue, focusViewStrokeWidth: CoreFoundation.CGFloat = 6, delegate: (any UdentifyMRZ.MRZCameraControllerDelegate)?)
+  @objc deinit
+}
+extension UdentifyMRZ.MRZCameraController {
+  open func resumeMRZ()
+  open func pauseMRZ()
+  open func isMRZPaused() -> Swift.Bool
+}
+extension UdentifyMRZ.MRZCameraController : UdentifyCommons.UdentifyCameraControllerDelegate {
+  public func onFailure(error: any Swift.Error)
+  public func onPhotoTaken(photo: UIKit.UIImage?)
+  public func onPhotoTaken(frame: CoreVideo.CVPixelBuffer?)
+  public func onCameraControllerStarted()
+}
+extension UdentifyMRZ.MRZField : Swift.Equatable {}
+extension UdentifyMRZ.MRZField : Swift.Hashable {}
+extension UdentifyMRZ.MRZField : Swift.RawRepresentable {}
+extension UdentifyMRZ.MRZType : Swift.Equatable {}
+extension UdentifyMRZ.MRZType : Swift.Hashable {}
+extension UdentifyMRZ.MRZType : Swift.RawRepresentable {}

@@ -1,0 +1,140 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name UdentifyNFC
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
+import CommonCrypto
+import CoreNFC
+import CryptoKit
+import Foundation
+import Swift
+import UIKit
+import UdentifyCommons
+@_exported import UdentifyNFC
+import _Concurrency
+import _CoreNFC_UIKit
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum NFCLocation : Swift.Int {
+  case unknown
+  case frontTop
+  case frontCenter
+  case frontBottom
+  case rearTop
+  case rearCenter
+  case rearBottom
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum NFCLocationError : Swift.Error {
+  case ServerError(Swift.String)
+}
+extension UdentifyNFC.NFCLocationError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public class NFCLocator {
+  public init(serverURL: Swift.String, requestTimeout: Swift.Double = 15)
+  public func locateNFC(completed: @escaping (UdentifyNFC.NFCLocation?, (any Swift.Error)?) -> ())
+  @objc deinit
+}
+public enum DGResponse : Swift.String {
+  case False
+  case True
+  case Disabled
+  case NotSupported
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum DocTypeEnum : Swift.String {
+  case TD1
+  case TD2
+  case OTHER
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@available(iOS 13.0, *)
+public protocol NFCReaderSessionDelegate : AnyObject {
+  func nfcReaderSessionDidBegin()
+  func nfcReaderSessionDidEnd(with message: Swift.String?)
+}
+@objc @available(iOS 13.0, *)
+public class NFCReader : ObjectiveC.NSObject {
+  weak public var sessionDelegate: (any UdentifyNFC.NFCReaderSessionDelegate)?
+  public init(documentNumber: Swift.String, dateOfBirth: Swift.String, expiryDate: Swift.String, transactionID: Swift.String, serverURL: Swift.String, requestTimeout: Swift.Double = 15, isActiveAuthenticationEnabled: Swift.Bool = true, isPassiveAuthenticationEnabled: Swift.Bool = false, bundle: Foundation.Bundle = .main, tableName: Swift.String? = nil, isFastModeEnabled: Swift.Bool = true, logLevel: UdentifyCommons.LogLevel = .warning)
+  @objc deinit
+  public func cleanUp()
+  public func read(completed: @escaping (UdentifyNFC.Passport?, (any Swift.Error)?, Swift.Int?) -> ())
+  public func cancelReading(completed: @escaping () -> Swift.Void)
+}
+public enum TagError : Swift.Error {
+  case ResponseError(Swift.String)
+  case InvalidResponse
+  case UnexpectedError(any Swift.Error)
+  case NFCNotSupported
+  case NoConnectedTag
+  case D087Malformed
+  case InvalidResponseChecksum
+  case MissingMandatoryFields(Swift.String)
+  case CannotDecodeASN1Length
+  case InvalidASN1Value
+  case UnableToProtectAPDU
+  case UnableToUnprotectAPDU
+  case UnsupportedDataGroup
+  case DataGroupNotRead
+  case UnknownTag
+  case UnknownImageFormat
+  case NotImplemented
+  case PassiveAuthError(Swift.String)
+  case ActiveAuthenticationFailed(any Swift.Error)
+  case UserCancelledNFCSession
+  case AppCancelledNFCSession
+  case NFCDataNotAvailable
+}
+extension UdentifyNFC.TagError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var causeDescription: Swift.String? {
+    get
+  }
+}
+@available(iOS 13.0, *)
+public struct Passport {
+  public var documentType: Swift.String?
+  public var personalNumber: Swift.String?
+  public var documentNumber: Swift.String?
+  public var documentCode: Swift.String?
+  public var documentExpiryDate: Swift.String?
+  public var firstName: Swift.String?
+  public var lastName: Swift.String?
+  public var dateOfBirth: Swift.String?
+  public var gender: Swift.String?
+  public var state: Swift.String?
+  public var nationality: Swift.String?
+  public var address: Swift.String
+  public var phoneNumber: Swift.String
+  public var birthPlace: Swift.String
+  public var image: UIKit.UIImage?
+  public var userID: Swift.String
+  public var passedAA: UdentifyNFC.DGResponse
+  public var passedPA: UdentifyNFC.DGResponse
+}
+extension UdentifyNFC.NFCLocation : Swift.Equatable {}
+extension UdentifyNFC.NFCLocation : Swift.Hashable {}
+extension UdentifyNFC.NFCLocation : Swift.RawRepresentable {}
+extension UdentifyNFC.DGResponse : Swift.Equatable {}
+extension UdentifyNFC.DGResponse : Swift.Hashable {}
+extension UdentifyNFC.DGResponse : Swift.RawRepresentable {}
+extension UdentifyNFC.DocTypeEnum : Swift.Equatable {}
+extension UdentifyNFC.DocTypeEnum : Swift.Hashable {}
+extension UdentifyNFC.DocTypeEnum : Swift.RawRepresentable {}

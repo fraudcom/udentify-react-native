@@ -1,0 +1,39 @@
+/* 
+   Localizable.strings
+   liveness-rn-library
+
+   English localization for UdentifyFACE SDK strings
+*/
+
+// General strings
+"udentifyface_header_text" = "Take Selfie";
+"udentifyface_footer_button_text_default" = "Take Selfie";
+"udentifyface_footer_button_text_progressing" = "Liveness Check";
+"udentifyface_footer_button_text_result" = "Liveness";
+
+// Face detection messages
+"udentifyface_message_face_too_big" = "Move Back";
+"udentifyface_message_face_too_small" = "Move Closer";
+"udentifyface_message_face_not_found" = "Face not found";
+"udentifyface_message_too_many_faces" = "Too many faces";
+"udentifyface_message_face_angled" = "Face to Camera";
+"udentifyface_message_head_angled" = "Face to Camera";
+"udentifyface_message_face_off_center" = "Center your face";
+"udentifyface_message_mask_detected" = "Remove Mask";
+
+// Active/Hybrid Liveness specific strings
+"udentifyface_active_liveness_footer_button_text_recording" = "Recording...";
+"udentifyface_active_liveness_footer_button_text_processing" = "Processing...";
+"udentifyface_active_liveness_footer_button_text_default" = "Center your face";
+"udentifyface_active_liveness_footer_button_text_result" = "Next Step";
+"udentifyface_active_liveness_footer_label_text_processing" = "Performing active liveness.\nPlease wait...";
+
+// Gesture instructions
+"udentifyface_gesture_text_move_head_to_left" = "Turn Left";
+"udentifyface_gesture_text_move_head_to_right" = "Turn Right";
+"udentifyface_gesture_text_move_head_to_up" = "Tilt Up";
+"udentifyface_gesture_text_move_head_to_down" = "Tilt Down";
+"udentifyface_gesture_text_blink_once" = "Blink once";
+"udentifyface_gesture_text_blink_twice" = "Blink twice";
+"udentifyface_gesture_text_blink_thrice" = "Blink 3 times";
+"udentifyface_gesture_text_smile" = "Smile";

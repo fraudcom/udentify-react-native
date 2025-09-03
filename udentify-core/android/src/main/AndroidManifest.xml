@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- This is a core shared module that provides UdentifyCommons -->
+    <!-- No permissions needed - they are declared by consuming libraries -->
+    
+</manifest>
