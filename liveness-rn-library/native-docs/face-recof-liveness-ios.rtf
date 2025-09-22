@@ -1,0 +1,1001 @@
+---
+description: Udentify iOS SDK Face Recognition & Liveness
+---
+
+# Face Recognition & Liveness
+
+## Development Environment Setup
+
+**Step 1: Create a folder** Create a folder named `Frameworks` under your project in Xcode.
+
+**Step 2: Add frameworks** ([Download Here](../ios-sdk-resources#face-sdk))Add the following frameworks to the newly created `Frameworks` folder. The framework extension might differ.
+
+* [<mark style="color:blue;">**UdentifyCommons.xcframework**</mark>](../ios-sdk-resources#face-sdk)
+* [<mark style="color:blue;">**UdentifyFACE.xcframework**</mark>](../ios-sdk-resources#face-sdk)
+* [<mark style="color:blue;">**Lottie.xcframework**</mark>](../ios-sdk-resources#face-sdk)
+
+```
+<Project>
+└───Frameworks
+        ├───UdentifyCommons.xcframework
+        ├───UdentifyFACE.xcframework
+        └───Lottie.xcframework
+```
+
+{% hint style="info" %}
+You can use the following link to integrate our SDKs into your iOS project via [Swift Package Manager (SPM)](https://docs.fraud.com/udentify/udentify-api-and-sdk/ios-sdk/ios-sdk-resources#swift-package-manager)
+{% endhint %}
+
+**Step 3: Update project settings** In Xcode, go to Project -> Targets -> General.
+
+**Step 4: Embed and sign frameworks** Select `Embed & Sign` option for the added frameworks under the _Frameworks, Libraries, and Embedded content_ tab.
+
+**Step 5: Update build settings** In the _Targets_ section, go to the _Build Settings_ and select `No` for options _Enable Bitcode_ and _Skip Install_.
+
+**Step 6: Update Info.plist**
+
+Add the following XML code to the `Info.plist` file.
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>For scanning your passport</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>Please allow access to save photo in your photo library</string>
+```
+
+After completing these steps, your project should be set up and ready to use the SDK.
+
+## UdentifyFACE Framework
+
+Following are steps to integrate the UdentifyFACE SDK into your iOS project and use it for face recognition and liveness detection.
+
+There are 3 options for liveness detection:
+
+* **Passive Liveness**: The user takes a selfie and the image is sent to the backend for liveness detection and face recognition.
+* **Active Liveness**: The user is prompted to perform specific actions (such as blinking or smiling), and liveness detection and face recognition are executed on video recordings of these actions.
+* **Hybrid Liveness**: The user is instructed to perform specific actions similar to Active Liveness. However, Hybrid Liveness combines both Active Liveness and Passive Liveness checks, providing a more comprehensive assessment of user authentication.
+
+#### Step 1: Import the required frameworks
+
+Start by importing the UdentifyFACE and UdentifyCommons frameworks in your project:
+
+```swift
+import UdentifyFACE
+import UdentifyCommons
+```
+
+#### Step 2: Create an instance variable for Camera Controller
+
+a. For **Passive Liveness**, add the following code to create an instance variable of <mark style="color:blue;">IDCameraController</mark>:
+
+```swift
+var cameraController: IDCameraController?
+```
+
+b. For **Active and Hybrid Liveness**, add the following code to create an instance variable of <mark style="color:blue;">ActiveCameraController</mark>:
+
+```swift
+var activeCameraController: ActiveCameraController?
+```
+
+#### Step 3: Instantiate the Camera Controller
+
+a. **Passive Liveness**, in order to open the camera, first we need to instantiate the <mark style="color:blue;">IDCameraController</mark>:
+
+```swift
+IDCameraController.instantiate(serverURL: self.serverURL, method: method, transactionID: self.transactionID, userID: self.userID!){ vc, error in
+            guard let vc = vc  else {
+                self.addMessage(message: "Error: can't instantiate camera viewcontroller")
+                return
+            }
+  
+            DispatchQueue.main.async {
+      
+                // Change the settings or comment this out to use default settings
+                ApiSettingsProvider.getInstance().currentSettings = CustomSettings()
+      
+                self.cameraController = vc
+      
+                // set options before showing
+                vc.delegate = self
+                vc.modalPresentationStyle = .fullScreen
+      
+                NSLog("Opening Camera...")
+      
+                // show the controller
+                // presenting the camera viewcontroller
+                vc.presentationController?.delegate = self
+                self.navigationController?.present(vc, animated: true)
+      
+                // results are handled in IDCameraControllerDelegate extension
+            }
+  
+        }
+
+```
+
+b. **Active/Hybrid Liveness**, in order to open the camera, first we need to instantiate the <mark style="color:blue;">ActiveCameraController</mark>:
+
+```swift
+ActiveCameraController.instantiate(serverURL: AppData.serverURL, 
+                                    method: self.method, 
+                                    transactionID: txid, 
+                                    userID: self.userID!, 
+                                    hybridLivenessEnabled: false, 
+                                    autoNextEnabled: true)
+                     {
+                        vc, error in
+                        
+                        guard let vc = vc  else {
+                            self.addMessage(message: "Error: can't instantiate ActiveCameraController")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            // Change the settings or comment this out to use default settings
+                            ApiSettingsProvider.getInstance().currentSettings = CustomSettings()
+                            
+                            self.activeCameraController = vc
+                            
+                            // set options before showing
+                            vc.delegate = self
+                            vc.modalPresentationStyle = .fullScreen
+                            
+                            NSLog("Opening Camera...")
+                            
+                            // show the controller
+                            // presenting the camera viewcontroller
+                            vc.presentationController?.delegate = self
+                            self.navigationController?.present(vc, animated: true)
+                            
+                            // results are handled in ActiveCameraControllerDelegate extension
+                        }
+                        
+                    }
+
+```
+
+#### Parameters
+
+* `serverURL`: A parameter of type `String` representing the URL of the Udentify server. It specifies the location where the requests will be sent. It should be a valid URL. Ensure that this value is properly configured.
+* `transactionID`: A parameter of type `String` representing a Udentify transactionID. It helps in tracking and managing the requests. Make sure that a valid transaction ID is provided.
+* `method`: A parameter of type `MethodType` representing the type of the method to be used. The valid choices for `method` are:
+  * `.registration`: Use this choice for user registration processes.
+  * `.authentication`: Use this choice for user authentication processes.
+* `userID`: A parameter of type `String` representing the user ID, which is used to identify the user within your application. You must supply this ID to establish a connection between your internal user and the transaction.
+* `hybridLivenessEnabled: Bool`: A boolean parameter that determines whether hybrid liveness detection is enabled. If set to `true`, both active and passive liveness checks will be performed. If set to `false`, only active liveness detection will be used. `Default value` is `false`
+* `autoNextEnabled: Bool`: A boolean parameter that controls whether to advance to the next step automatically or manually. When set to `true` (default), the transition occurs automatically once the face is correctly positioned. When set to `false`, the user must manually tap a button after aligning their face properly.
+
+#### Step 4: Conform to delegate protocol
+
+a. For **Passive Liveness**, make your class (e.g., FaceRecognitionViewController) conform to the <mark style="color:blue;">IDCameraControllerDelegate</mark> protocol and implement the required delegate methods:
+
+```swift
+// implement the IDCameraController delegate methods
+@available(iOS 12.0, *)
+extension FaceRecognitionViewController: IDCameraControllerDelegate {
+
+    func cameraControllerWillDismiss() {
+        print("IDCameraController will be dismissed.")
+    }
+
+    func cameraControllerDidDismiss() {
+        print("IDCameraController has been dismissed.")
+    }
+
+    // This method invoked if .selfie is selected as method type. Returns the taken photo, and then you can send it to backend in order to start liveness check and face recognition process.
+    func cameraController(image: UIImage) {}
+  
+    func cameraController(didEncounterError error: FaceError) {
+        // handle camera errors here
+        print(“Error: camera error: \(error)”)
+    }
+
+    // This method invoked if .registration, .identification or .authentication is selected as method type. Returns the result of both Liveness and Face Recognition.
+    func cameraControllerDidFinishWithResult(viewMode: IDCameraController.ViewMode, result: FaceIDMessage) {
+
+            guard let result = result else{
+                // error occurred
+                return
+            }
+
+            // if the operation is not failed
+            if result.isFailed != true {
+      
+                // Indicates the score of the Face Recognition process that means how well the images match
+                let score = result.faceIDResult!.matchScore
+      
+                // Indicates if the person is live or not
+                let liveness = (result.livenessResult?.assessmentValue)!
+
+
+                // Do other stuff after getting result
+      
+            }
+            else{
+      
+                if let error = message.faceIDResult?.error{
+                    // Face Recognition related errors
+                }
+                else if let error = message.livenessResult?.error{
+                    // Liveness related errors
+                }
+
+                else{
+                    // Unknown errors
+                }
+            }
+    }
+
+  
+  /**
+     Called when user pressed back button.
+     */
+    func cameraControllerUserPressedBackButton(){
+        print("Back button pressed")
+    }
+
+  
+}
+```
+
+b. For **Active/Hybrid Liveness**, make your class (e.g., FaceRecognitionViewController) conform to the <mark style="color:blue;">ActiveCameraControllerDelegate</mark> protocol and implement the required delegate methods:
+
+```swift
+// implement the ActiveCameraController delegate methods
+@available(iOS 12.0, *)
+extension FaceRecognitionViewController: ActiveCameraControllerDelegate {
+    
+    func willDismiss() {
+        print("ActiveCameraController will be dismissed.")
+    }
+
+    func didDismiss() {
+        print("ActiveCameraController has been dismissed.")
+    }
+
+    func onVideoTaken() {    
+        // This method gets invoked for every video captured.
+        print("Video is taken")
+    }
+    
+    func onResult(result: FaceIDMessage) {
+        guard let result = result else{
+                // error occurred
+                return
+            }
+
+        // Face match result
+        if let faceIDResult = response.faceIDResult{
+                if faceIDResult.error != nil {
+                    // error occurred
+                }
+                else{
+                    // Indicates the score of the Face Recognition process that means how well the images match
+                    let score = faceIDResult.matchScore
+                }
+            }
+            
+            // Passive Liveness result. When hybridLivenessEnabled is set to true, the Passive Liveness response is also included.
+            if let passiveLivenessResult = response.livenessResult {
+                if passiveLivenessResult.error != nil {
+                    // error occurred
+                }
+                else{
+                    // Indicates if the person in the input video is live or not
+                    let passiveLiveness = (passiveLivenessResult.assessmentValue)!
+                }
+            }
+            
+            // Active Liveness result.
+            if let activeLivenessResult = response.activeLivenessResult {
+                
+                if activeLivenessResult.error != nil {
+                    // error occurred
+                }
+                else{
+                    // Passed from Active Liveness
+                }
+
+            }
+
+    }
+    
+    func onFailure(error: Error) {
+        
+        switch error {
+            case let generalError as GeneralError:
+                switch generalError {
+                case .ParsingError(let reason):
+                    print("Parsing error: \(reason)")
+                case .UnexpectedError(let underlyingError):
+                    print("Unexpected error: \(underlyingError.localizedDescription)")
+                case .MissingParameter(let parameterName):
+                    print("Missing parameter: \(parameterName)")
+                case .InvalidURL:
+                    print("Invalid URL")
+                case .JsonEncodingError(let message):
+                    print(message)
+                case .JsonDecodingError(let message):
+                    self.addMessage(message: message)
+                @unknown default:
+                    self.addMessage(message: "Unknown error occurred")
+                }
+            case let cameraError as CameraError:
+                switch cameraError {
+                case .CameraNotFound:
+                    print("Camera not found.")
+                case .MinIOSRequirementNotSatisfied:
+                    print("Minimum iOS requirement not satisfied.")
+                case .CameraPermissionRequired:
+                    print("Camera permission required.")
+                case .FocusViewInvalidSize(let size):
+                    print("Focus view size is invalid: \(size)")
+                case .SessionPresetNotAvailable:
+                    print("Session preset not available.")
+                case .SessionNotRunning:
+                    print("Session is not running.")
+                case .VideoPathMissing:
+                    print("Video path is missing.")
+                case .UnableToGenerateVideoData(let reason):
+                    print("Unable to generate video data: \(reason)")
+                case .VideoExportingFailed(let reason):
+                    print("Video exporting failed: \(reason)")
+                case .VideoExportingCancelled:
+                    print("Video exporting was cancelled.")
+                case .Unknown:
+                    print("Unknown error occurred.")
+                }
+            default:
+                print("An unknown error occurred: \(error.localizedDescription)")
+            }
+            
+    }
+    
+    func backButtonPressed() {
+        print("backButtonPressed")
+    }
+    
+}
+```
+
+#### Step 5: Handle the result
+
+a. For **Passive Liveness**, the result will be taken from the <mark style="color:blue;">`cameraControllerDidFinishWithResult`</mark> function as a <mark style="color:blue;">`FaceIDMessage`</mark> object, which consists of <mark style="color:blue;">`FaceIDResult`</mark> and <mark style="color:blue;">`LivenessResult`</mark>.\
+Or you can get the result from <mark style="color:blue;">`cameraController(image: UIImage)`</mark> function as a <mark style="color:blue;">`UIImage`</mark> object, which you can send to the backend for liveness detection and face recognition.
+
+b. For **Active/Hybrid Liveness**, the result will be taken from the <mark style="color:blue;">`onResult`</mark> function as a <mark style="color:blue;">`FaceIDMessage`</mark> object, which consists of <mark style="color:blue;">`FaceIDResult`</mark>, and <mark style="color:blue;">`ActiveLivenessResult`</mark>. If hybridLivenessEnabled is set to true, the result will also include <mark style="color:blue;">`LivenessResult`</mark>.
+
+```swift
+public struct FaceIDMessage{
+    public var isFailed: Bool = true // Set to true if error occurs. In default, it is true. It should pass from both FaceIDResult and LivenessResult in order to set this value to false.
+    public var faceIDResult: FaceIDResult? // Contains Face recognition related info
+    public var livenessResult: LivenessResult? // Contains liveness related info
+    public var activeLivenessResult: ActiveLivenessResult? // Contains active liveness related info
+}
+
+public struct FaceIDResult{
+  
+    public var method: MethodType
+    public var header: String
+    public var description: String = ""
+    public var error: FaceError?
+    public var verified: Bool = false
+    public var matchScore: Double = 0 // Main response of the face match.
+    public var transactionID: String
+    public var userID: String?
+    public var listNames: String?
+    public var listIds: String?
+  
+}
+
+public struct LivenessResult {
+  
+    public var probability: Double? // Probability of liveness is main response of the system. The image is accepted as “live” when probability is greater than 0.5 
+    public var quality: Double? // Quality value. Quality value is a probability of “appropriate image”.
+    public var livenessScore: Double? // This can be used BPCER/APCER tuning.
+    public var error: Error?
+    public var transactionID: String
+    public var assessmentDescription: String? // Description of the result
+    public var assessmentValue: Double? // The value of result
+
+}
+
+public struct ActiveLivenessResult {
+    
+    public var error: FaceError?
+    public var transactionID: String?
+    public var gestureResult: [String: Bool]? // returns the result of each gesture. Key is the name of the gesture and value is the result of the gesture.
+    
+}
+```
+
+Once you have followed these steps, your project should be able to use the UdentifyFACE SDK for face recognition and liveness detection.
+
+You can dismiss/pop the camera view controller by calling the following method:
+
+```swift
+
+self.cameraController?.dismissOrPopViewController()
+
+```
+
+> **Important**: To ensure proper resource cleanup, make sure to set both `cameraController` and `activeCameraController` to `nil` once you’re done using them. Also, make sure that any relevant delegate methods are invoked before setting these controllers to nil.
+
+````swift
+
+## Error Messages
+
+Description of the error codes
+
+The `FaceError` enum is a list of possible errors that can occur . These errors are related to various aspects such as image processing, user information, server connection, etc.
+
+```swift
+public enum FaceError: Error {
+    case faceImageMissing
+    case userIDMissing
+    case methodTypeMissing
+    case transactionIDMissing
+    case serverURLMissing
+    case cameraPermissionRequired
+    case notConsistent
+    case notAlive
+    case notMatch
+    case api(String)
+    case other(Error)
+    case cameraPermissionDenied
+    case initializationError(String)
+    case photoCaptureError
+    case invalidAssestmentResult
+    case unknownGesture
+    case listNameMissing
+}
+````
+
+#### Error Code Descriptions
+
+* `faceImageMissing`: This error occurs when the face image is missing or not provided.
+* `userIDMissing`: This error occurs when the user ID is missing or not provided.
+* `methodTypeMissing`: This error occurs when the method type is missing or not provided.
+* `transactionIDMissing`: This error occurs when the transaction ID is missing or not provided.
+* `serverURLMissing`: This error occurs when the server URL is missing or not provided.
+* `cameraPermissionRequired`: This error occurs when the camera permission is required but not granted.
+* `notConsistent`: This error occurs when the data provided is not consistent.
+* `notAlive`: This error occurs when the face image is detected as not being of a live person.
+* `notMatch`: This error occurs when the face images do not match.
+* `api(String)`: This error occurs when there is an issue with the API call.
+* `other(Error)`: This error occurs when an error is encountered that does not fall under any of the other categories.
+* `cameraPermissionDenied`: This error occurs when the camera permission is denied.
+* `initializationError(String)`: This error occurs when there is an issue with the initialization process.
+* `photoCaptureError`: This error occurs when there is an issue with capturing the photo.
+* `invalidAssestmentResult`: This error occurs when the assessment result is invalid.
+* `unknownGesture`: This error occurs when an unknown gesture is detected.
+* `listNameMissing`: This error occurs when the list name is missing or not provided.
+
+#### Frameworks Configuration
+
+In case the frameworks cannot be found, follow the steps below:
+
+1. Create a folder named "Frameworks" and place the missing frameworks inside.
+2. Go to the Target Settings and perform the following:
+   * Add `@executable_path/Frameworks` to the "Runpath Search Paths".
+   * Add `$(PROJECT_DIR)/Frameworks` to the "Framework Search Paths".
+
+## UI Customisation
+
+You can create a struct that implements ApiSettings and change the properties as needed. This allows you to customize the appearance and behavior of the IDCameraController UI elements.
+
+<figure><img src="https://4079253175-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FZ7XsLn2oY4auFrbHIEk4%2Fuploads%2Fgit-blob-f17a3e86fe6127b81ebd9ca461c1da4f59c5bf56%2F08PETJt7ftu9ilM3UaV9DkUvxOHe_c4zFw.png?alt=media" alt=""><figcaption></figcaption></figure>
+
+```swift
+struct CustomSettings: ApiSettings {
+  
+    // Defining colors of UI elements
+    var colors: ApiColors = ApiColors(
+        titleColor: .purple, // Title’s font color
+        titleBG: UIColor.blue.withAlphaComponent(0.2), // Title’s background color
+        buttonErrorColor: .red, // The color of the process when the operation fails
+        buttonSuccessColor: .green, // The color of the process when the operation success
+        buttonColor: .darkGray, // Background color of the button
+        buttonTextColor: .white, // Font color of the button text 
+        buttonErrorTextColor: .white, // Font color of the button text when the operation fails
+        buttonSuccessTextColor: .white // Font color of the button text when the operation success
+        buttonBackColor: .black // The color of back button
+        footerTextColor: .white, // Footer label's font color
+        checkmarkTintColor: .white, // The color of the checkmark
+        backgroundColor: .purple // Background color of the view, currently used for the background of Active Liveness
+   )
+  
+    // Defining fonts of UI elements
+    var fonts: ApiFonts = ApiFonts(
+        titleFont: UIFont(name: "AmericanTypewriter-Bold", size: 30)!, // Title’s font
+        buttonFont: UIFont(name: "Gilroy-Bold", size: 30)!,  // Button’s font
+        footerFont: UIFont = UIFont.boldSystemFont(ofSize: 24) // Footer label's font
+    )
+
+    // Defining configs
+    var configs: ApiConfigs = ApiConfigs(
+        cameraPosition: .front, // Select the camera to take selfie
+        requestTimeout: 15, // sets timeout for http request in seconds
+        autoTake: true, // sets timeout for http request in seconds
+        errorDelay: 0.25, // This delay (in seconds) determines that how much time must be passed in order to change error type.                                    This allows us to avoid from instant changes. Default value is 0.10
+        successDelay: 0.75, // This delay (in seconds) determines the how much time it needs to be passed after an error in order                                        to mark it as success. Default value is 0.75
+        bundle: .main, // Bundle used for localization
+        tableName: nil , // Table name used for localization
+        maskDetection: false , // Default value is false. You can enable it if you want to detect masks. Requires iOS 13+
+        maskConfidence: 0.95, // The confidence to determine if mask is presented. Default value is 0.95 
+        invertedAnimation: false,  // Default value is false. Enable this to interchange near and far animations with each other.
+        backButtonEnabled: true, // Default value is true. Enable this to show back button.
+        multipleFacesRejected:  true, // Default is true. Set to false to allow face capture even when multiple faces are detected.
+        buttonHeight: 48, // Default value is 70. The height of the button
+        buttonMarginLeft: 50, // Default value is 20. The left margin of the button
+        buttonMarginRight: 50, // Default value is 20. The right margin of the button
+        buttonCornerRadius: 24, // Default value is 8. The corner radius of the button
+        progressBarStyle: UdentifyProgressBarStyle(
+                                 backgroundColor: .lightGray.withAlphaComponent(0.5),
+                                 progressColor: .gray,
+                                 completionColor: .green,
+                                 textStyle: UdentifyTextStyle(
+                                     font: .boldSystemFont(ofSize: 19),
+                                     textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                     textAlignment: .center
+                                 ),
+                                 cornerRadius: 24
+                             )
+   )
+}
+```
+
+To use this struct, apply it before presenting the IDCameraController/ActiveCameraController, as shown below:
+
+```swift
+ApiSettingsProvider.getInstance().currentSettings = CustomSettings()
+```
+
+To add custom fonts to your project, update the Info.plist file by including the fonts under the "Fonts provided by the application" key:
+
+```xml
+<key>UIAppFonts</key>
+<array>
+    <string>AmericanTypewriter-Bold.ttf</string>
+    <string>Gilroy-Bold.ttf</string>
+</array>
+```
+
+Make sure to add the actual font files to your project and ensure they are included in the "Copy Bundle Resources" build phase.
+
+If you get an error on this line like “There must be a window file” or when targeting previous iOS versions older than iOS 13, do the following
+
+* Remove `Application Scene Manifest` entry from Info.plist.
+* If `SceneDelegate` class exists, then remove it.
+* If there are methods in `AppDelegate` class related to `scene`, delete them.
+* If it is missing in AppDelegate class, then add `var window: UIWindow?` to the `AppDelegate` class
+
+### `UdentifyProgressBarStyle`
+
+`UdentifyProgressBarStyle` is a configuration struct used to customize the appearance of a progress bar in the Udentify SDK.
+
+#### Properties
+
+| **Property**      | **Type**            | **Description**                                               | **Default**                                |
+| ----------------- | ------------------- | ------------------------------------------------------------- | ------------------------------------------ |
+| `backgroundColor` | `UIColor`           | The background color of the progress bar.                     | `.purple.withAlphaComponent(0.7)`          |
+| `progressColor`   | `UIColor`           | The color indicating the current progress level.              | `.green`                                   |
+| `completionColor` | `UIColor`           | The color displayed when progress reaches 100%.               | `.green`                                   |
+| `textStyle`       | `UdentifyTextStyle` | The style of the text shown on the progress bar.              | `bold white text, size 24, center-aligned` |
+| `cornerRadius`    | `CGFloat`           | The corner radius for rounding the edges of the progress bar. | `8`                                        |
+
+#### Usage Example
+
+```swift
+let progressBarStyle: UdentifyProgressBarStyle(
+                backgroundColor: .lightGray.withAlphaComponent(0.5),
+                progressColor: .lightGray,
+                completionColor: .green,
+                textStyle: UdentifyTextStyle(
+                    font: .boldSystemFont(ofSize: 19),
+                    textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                    textAlignment: .center
+                ),
+                cornerRadius: 24
+            )
+```
+
+### `UdentifyTextStyle`
+
+A struct that defines the text formatting style for use within the Udentify framework.
+
+#### Properties
+
+| **Property**      | **Type**          | **Description**                                                                                                                                                                  | **Default**       |
+| ----------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| **font**          | `UIFont`          | The font used for the text. Must be an instance of `UIFont`.                                                                                                                     | Required          |
+| **textColor**     | `UIColor`         | The color of the text. Must be an instance of `UIColor`.                                                                                                                         | Required          |
+| **textAlignment** | `NSTextAlignment` | The alignment of the text within its container. Can be `.left`, `.right`, `.center`, `.justified`, or `.natural`.                                                                | `.center`         |
+| **lineBreakMode** | `NSLineBreakMode` | Determines how the text is truncated when it exceeds its container's size. Options include `.byWordWrapping`, `.byTruncatingTail`, `.byTruncatingHead`, `.byClipping`, and more. | `.byWordWrapping` |
+| **numberOfLines** | `Int`             | The maximum number of lines for the text. Set to `0` for no limit.                                                                                                               | `0`               |
+| **leading**       | `CGFloat`         | The leading padding of the text.                                                                                                                                                 | `20`              |
+| **trailing**      | `CGFloat`         | The trailing padding of the text.                                                                                                                                                | `20`              |
+
+***
+
+#### Usage Example
+
+```swift
+// Define a reusable text style
+let textStyle = UdentifyTextStyle(
+    font: UIFont.systemFont(ofSize: 16),
+    textColor: .black,
+    textAlignment: .left,
+    lineBreakMode: .byTruncatingTail,
+    numberOfLines: 2,
+    leading: 10,
+    trailing: 10
+)
+```
+
+#### Parameters
+
+* `font:` The font used for the text. Must be an instance of UIFont.
+* `textColor:` The color of the text. Must be an instance of UIColor.
+* `textAlignment:` The alignment of the text. Defaults to .center.
+* `lineBreakMode:` Determines how the text is truncated when it exceeds its container’s size. Defaults to .byWordWrapping.
+* `numberOfLines:` The maximum number of text lines. Defaults to 0 (no limit).
+* `leading:` The leading padding of the text. Defaults to 20.
+* `trailing:` The trailing padding of the text. Defaults to 20.
+
+## Identification
+
+The UdentifyFACE SDK offers an Identification feature that searches for a person within a user list and returns their data if they exist.
+
+#### Step 1: Add user to the list
+
+In order to search a person in a list, the person needs to be added to the list first.
+
+```swift
+public static func addUserToList(
+    serverUrl: String,
+    transactionId: String,
+    listName: String,
+    metadata: [String: Any]?,
+    completionHandler: @escaping (ListResponseData?, FaceError?) -> Void
+)
+```
+
+**Parameters**
+
+* `serverUrl`: `String`\
+  The base URL of the server where the request will be sent.
+* `transactionId`: `String`\
+  A unique identifier for representing a Udentify transactionID which the `registration` of the user is successfully done.
+* `listName`: `String`\
+  The name of the list to which the user will be added.
+* `metadata`: `[String: Any]?`\
+  Optional metadata associated with the user being added. This can include additional information relevant to the user or the context of the addition.
+* `completionHandler`: `(ListResponseData?, FaceError?) -> Void`\
+  A closure executed upon completion of the request. It contains either a `ListResponseData` object if the operation is successful or a `FaceError` if an error occurs.
+
+**Usage**
+
+After the user is registered, the user can be added to a list by using the same transactionId. `metadata` is optional, it is for storing additional data of the user.
+
+```swift
+addUserToList(
+    serverUrl: "https://api.example.com",
+    transactionId: "TRXCDE5531E-E0C4-4453-BAC1-177C7884A9D7",
+    listName: "RegisteredList",
+    metadata: ["name": "Demir", "lastname": "Bulut", "age": 42, "gender": "Male"]
+) { listResponseData, error in
+    if let error = error {
+        // Handle error
+        print("Failed to add user: \(error)")
+    } else if let listResponseData = listResponseData {
+        // Success
+        print("User added successfully with ID: \(listResponseData.userID ?? "Unknown ID")")
+    }
+}
+```
+
+**Error Handling**
+
+The method may return errors through the `FaceError` parameter of the `completionHandler`. Some possible errors include:
+
+* `.api(String)`: An API error occurred with an accompanying message from the server.
+* `.other(Error)`: A general error occurred, such as network issues or JSON decoding errors.
+
+**Related Types**
+
+* A `ListResponseData?` object if the user is successfully added to the list.
+* A `FaceError?` object if any error occurs.
+
+```swift
+
+public struct ListResponseData: Codable {
+    let customerList: CustomerList?
+    let userId: Int?
+}
+
+// CustomerList structure
+public struct CustomerList: Codable {
+    let id: Int?
+    let name: String?
+    let listRole: String?
+    let description: String?
+    let creationDate: String?
+}
+```
+
+#### Step 2: Identify the user
+
+To identify a user, the system searches for the user within a list. Identification is a method similar to registration and authentication. The workflow is the same as in **Step 3: Instantiate the Camera Controller**, with the only differences being that you pass `.identification` as the parameter method and use `listName` instead of `userID`.
+
+There are two ways to perform identification:
+
+1. **Using the `.identification` Method**
+2. **Using the `.selfie` Method**
+
+#### 1. Using the `.identification` Method
+
+This method involves passing `.identification` as the `method` parameter and using `listName` to specify the list in which the user will be searched.
+
+**Initiate the camera**
+
+```swift
+    IDCameraController.instantiate(
+    serverURL: AppData.serverURL,
+    method: .identification,
+    transactionID: txid,
+    listName: AppData.listName
+    ) { vc, error in
+                        
+        guard let vc = vc  else {
+            self.addMessage(message: "Error: can't instantiate camera viewcontroller")
+            return
+        }
+                        
+        DispatchQueue.main.async {
+                            
+            // Change the settings or comment this out to use default settings
+            ApiSettingsProvider.getInstance().currentSettings = CustomSettings()
+                            
+            self.cameraController = vc
+                            
+            // set options before showing
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+                            
+            NSLog("Opening Camera...")
+            
+            // show the controller
+            // presenting the camera viewcontroller
+            vc.presentationController?.delegate = self
+            self.navigationController?.present(vc, animated: true)
+            
+            // results are handled in IDCameraControllerDelegate extension
+        }
+                        
+    }
+```
+
+**Parameters**
+
+* `serverUrl`: A parameter of type `String` representing the URL of the Udentify server. It should be a valid URL. Ensure that this value is properly configured.
+* `method`: A parameter of type `MethodType` representing the method to be performed.
+*
+* `transactionId`: A parameter of type `String` representing a Udentify transactionID.
+* `listName`: A `String` parameter specifying the name of the list in which the user will be searched.
+
+**Response:**
+
+The response is similar to that of Registration and Authentication in `Step 4: Conform to delegate protocol`.
+
+```swift
+func cameraControllerDidFinishWithResult(viewMode: IDCameraController.ViewMode, result: FaceIDMessage)
+```
+
+The following fields are added to `FaceIDResult`:
+
+```swift
+    var referencePhoto: UIImage?            // Reference photo of the user
+    var registrationTransactionID: String?  // Transaction ID of the registration
+    var metadata: [String: UdentifyAny?]?   // Metadata of the user
+```
+
+The metadata can be parsed as follows:
+
+```swift
+// let response is the FaceIDMessage object
+if let metadata = response.faceIDResult?.metadata {
+    print("\tMetadata:")
+    for (key, anyValue) in metadata {
+                            
+        let value = anyValue?.value
+        switch value {
+            case let stringValue as String:
+                print("\t\t\(key): \(stringValue) (String)")
+            case let intValue as Int:
+                print("\t\t\(key): \(intValue) (Int)")
+            case let doubleValue as Double:
+                print("\t\t\(key): \(doubleValue) (Double)")
+            case let boolValue as Bool:
+                print("\t\t\(key): \(boolValue) (Bool)")
+            case let arrayValue as [Any]:
+                print("\t\t\(key): \(arrayValue) (Array)")
+            case let dictValue as [String: Any]:
+                print("\t\t\(key): \(dictValue) (Dictionary)")
+            default:
+                print("\t\t\(key): Unsupported type")
+        }
+                            
+    }
+}
+```
+
+#### 2. Using the `.selfie` Method
+
+Alternatively, identification can be performed by passing `.selfie` as the `method` parameter. In this approach, setting `listName` is optional at the instantiation step but must be configured before performing the API call.
+
+**Initiate the Camera with `.selfie` Method**
+
+```swift
+IDCameraController.instantiate(
+    serverURL: AppData.serverURL,
+    method: .selfie,
+    transactionID: txid,
+    listName: "RegisteredList" // Can be set later if preferred
+) { vc, error in
+    guard let vc = vc else {
+        self.addMessage(message: "Error: can't instantiate camera viewcontroller")
+        return
+    }
+
+    // present the camera view controller as described before
+}
+```
+
+**Parameters**
+
+* **`serverUrl`**: `String`\
+  The URL of the Udentify server. Ensure it is a valid and correctly configured URL.
+* **`method`**: `MethodType`\
+  Specifies the method to be performed. Use `.selfie` for this approach.
+* **`transactionId`**: `String`\
+  A unique Udentify `transactionID` for tracking the transaction.
+* **`listName`**: `String`\
+  The name of the list in which the user will be searched. This can be set during instantiation or later before performing the API call.
+
+**Delegate Method**
+
+After capturing the selfie photo, set the `listName` (if not already set) and perform identification:
+
+```swift
+func cameraController(image: UIImage) {
+    guard let cameraController = self.cameraController else {
+        return
+    }
+
+    // Set the listName if not provided during instantiation
+    cameraController.listName = "RegisteredList"
+
+    // Perform face ID and liveness check with .identification method
+    cameraController.performFaceIDandLiveness(image: image, methodType: .identification) { faceIDResult, livenessResult in
+        // Handle the result
+    }
+}
+```
+
+#### Step 3: Remove user from the list \[OPTIONAL]
+
+Deletes a user from a specified list using facial recognition based on a provided selfie photo.
+
+```swift
+public static func deleteUserFromList(
+    serverUrl: String,
+    transactionId: String,
+    listName: String,
+    photo: UIImage,
+    completionHandler: @escaping (ListUser?, FaceError?) -> Void
+)
+```
+
+**Parameters**
+
+* `serverUrl`: `String`\
+  The base URL of the server where the request will be sent.
+* `transactionId`: `String`\
+  A unique identifier for the transaction, used for tracking and logging purposes.
+* `listName`: `String`\
+  The name of the list from which the user will be deleted.
+* `photo`: `UIImage`\
+  A selfie photo of the user to identify them within the list.
+* `completionHandler`: `(ListUser?, FaceError?) -> Void`\
+  A closure executed upon completion of the request. It contains either a `ListUser` object if the operation is successful or a `FaceError` if an error occurs.
+
+**Usage**
+
+```swift
+deleteUserFromList(
+    serverUrl: "https://api.example.com",
+    transactionId: "TRX0B3100AC-F900-443F-A3F6-77EF3D168A6B",
+    listName: "RegisteredList",
+    photo: userSelfieImage
+) { listUser, error in
+    if let error = error {
+        // Handle error
+        print("Failed to delete user: \(error)")
+    } else if let listUser = listUser {
+        // Success
+        print("User deleted successfully: \(listUser.userID ?? "Unknown User")")
+    }
+}
+```
+
+**Error Handling**
+
+The method may return errors through the `FaceError` parameter of the `completionHandler`. Some of the possible errors include:
+
+* `.notMatch`: No matching user was found in the list.
+* `.api(String)`: An API error occurred with an accompanying message from the server.
+* `.other(Error)`: A general error occurred, such as network issues or JSON decoding errors.
+
+**Related Types**
+
+* `ListUser`: A struct containing details about the user, such as `userID`, `listName`, `matchScore`, etc. The `UdentifyAny` type, provided by the UdentifyCommons SDK, is used to store metadata values of any data type.
+* `FaceError`: An enum representing possible errors that can occur during the operation.
+
+```swift
+public struct ListUser {
+    
+    var transactionID: String?
+    var listName: String?
+    var listID: String?
+    var referencePhoto: UIImage?
+    var matchScore: Double?
+    var metadata: [String: UdentifyAny?]?
+    var userID: String?
+    var registrationTransactionID: String?
+    
+}
+```
+
+## Localization
+
+You can customize the localization of your app by appending the following keys to your <mark style="color:blue;">`Localizable.strings`</mark> file.
+
+#### Swift Code
+
+```swift
+"udentifyface_header_text"="Take Selfie";
+"udentifyface_footer_button_text_default"="Take Selfie";
+"udentifyface_footer_button_text_progressing"="Liveness Check";
+"udentifyface_footer_button_text_result"="Liveness ";
+"udentifyface_message_face_too_big"="Move Back";
+"udentifyface_message_face_too_small"="Move Closer";
+"udentifyface_message_face_not_found"="Face not found";
+"udentifyface_message_too_many_faces"="Too many faces";
+"udentifyface_message_face_angled"="Face to Camera";
+"udentifyface_message_head_angled"="Face to Camera";
+"udentifyface_message_face_off_center"="Center your face";
+"udentifyface_message_mask_detected"="Remove Mask";
+```
+
+Specific to Active/Hybrid Liveness (additionally to the above keys):
+
+```swift
+"udentifyface_active_liveness_footer_button_text_recording"="Recording...";
+"udentifyface_active_liveness_footer_button_text_processing"="Processing...";
+"udentifyface_active_liveness_footer_button_text_default" = "Center your face";
+"udentifyface_active_liveness_footer_button_text_result" = "Next Step";
+"udentifyface_active_liveness_footer_label_text_processing" = "Performing active liveness.\nPlease wait...";
+"udentifyface_gesture_text_move_head_to_left" = "Turn Left";
+"udentifyface_gesture_text_move_head_to_right" = "Turn Right";
+"udentifyface_gesture_text_move_head_to_up" = "Tilt Up";
+"udentifyface_gesture_text_move_head_to_down" = "Tilt Down";
+"udentifyface_gesture_text_blink_once" = "Blink once";
+"udentifyface_gesture_text_blink_twice" = "Blink twice";
+"udentifyface_gesture_text_blink_thrice" = "Blink 3 times";
+"udentifyface_gesture_text_smile" = "Smile";
+```
+
+Add these strings to your `Localizable.strings` file (Swift) to customize the localization of your app. Make sure to replace the values on the right side of the equal sign with your desired translations.

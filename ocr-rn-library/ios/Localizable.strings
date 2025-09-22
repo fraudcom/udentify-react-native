@@ -1,0 +1,40 @@
+/* 
+   Localizable.strings
+   OCR Library
+   
+   Created for Udentify OCR SDK localization
+*/
+
+// OCR camera screen strings
+"udentify_ocr_status_view_title_default" = "Scan OCR";
+"udentify_ocr_status_view_title_front_side" = "Scan Front Side";
+"udentify_ocr_status_view_title_back_side" = "Scan Back Side";
+"udentify_ocr_status_view_title_wait" = "Please wait...";
+"udentify_ocr_button_retake_title" = "Retake";
+"udentify_ocr_button_use_title" = "Use";
+"udentify_ocr_button_capture_title" = "Capture";
+"udentify_ocr_instruction_text_front_side" = "Align your ID's front within the on-screen frame.";
+"udentify_ocr_instruction_text_back_side" = "Align your ID's back within the on-screen frame.";
+"udentify_ocr_review_title_front_side" = "Front side Captured";
+"udentify_ocr_review_title_back_side" = "Back side Captured";
+"udentify_ocr_review_instruction_text_front_side" = "Make sure the photo is not blurred.";
+"udentify_ocr_review_instruction_text_back_side" = "Make sure the photo is not blurred.";
+
+// OCR document types
+"udentify_ocr_document_type_id_card" = "ID";
+"udentify_ocr_document_type_passport" = "Passport";
+"udentify_ocr_document_type_drive_licence" = "Driver Licence";
+
+// Countries
+"udentify_commons_country_usa" = "USA";
+"udentify_commons_country_gbr" = "United Kingdom";
+"udentify_commons_country_col" = "Colombia";
+"udentify_commons_country_tur" = "Turkey";
+"udentify_commons_country_esp" = "Spain";
+"udentify_commons_country_bra" = "Brazil";
+"udentify_commons_country_per" = "Peru";
+"udentify_commons_country_ecu" = "Ecuador";
+
+// Hologram check strings
+"udentify_hologram_status_view_title_default" = "Check hologram";
+"udentifyocr_hologram_recording" = "Recording...";

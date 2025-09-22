@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    UdentifyFACE Button Dimensions    -->
+    <dimen name="udentify_selfie_button_height">70dp</dimen>
+    <dimen name="udentify_selfie_button_horizontal_margin">16dp</dimen>
+    <dimen name="udentify_selfie_button_bottom_margin">40dp</dimen>
+    <dimen name="udentify_face_selfie_button_corner_radius">8dp</dimen>
+    
+    <!--    UdentifyFACE Font Sizes    -->
+    <dimen name="udentifyface_gesture_font_size">30sp</dimen>
+</resources>

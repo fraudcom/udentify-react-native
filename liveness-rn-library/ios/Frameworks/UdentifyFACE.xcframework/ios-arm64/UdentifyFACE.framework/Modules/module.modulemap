@@ -1,0 +1,11 @@
+framework module UdentifyFACE {
+  umbrella header "UdentifyFACE.h"
+  export *
+
+  module * { export * }
+}
+
+module UdentifyFACE.Swift {
+  header "UdentifyFACE-Swift.h"
+  requires objc
+}

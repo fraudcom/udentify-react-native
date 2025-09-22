@@ -1,0 +1,685 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-module-flags: -target arm64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name UdentifyCommons
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
+import AVFoundation
+import Accelerate
+import CoreTelephony
+import Foundation
+import Network
+import Swift
+import SystemConfiguration
+import UIKit
+@_exported import UdentifyCommons
+import Vision
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+public enum UdentifyHorizontalPosition {
+  case center
+  case left(offset: CoreFoundation.CGFloat)
+  case right(offset: CoreFoundation.CGFloat)
+  case custom(x: CoreFoundation.CGFloat)
+}
+public enum LocalizationLanguage : Swift.String {
+  case EN
+  case ES
+  case FR
+  case DE
+  case IT
+  case PT
+  case RU
+  case ZH
+  case JA
+  case KO
+  case AR
+  case HI
+  case BN
+  case PA
+  case UR
+  case ID
+  case MS
+  case SW
+  case TA
+  case TR
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension Foundation.Date {
+  public var udtfy: Foundation.Date.DateExtensionNamespace {
+    get
+  }
+  public struct DateExtensionNamespace {
+    public func toUTCFormattedString() -> Swift.String
+  }
+}
+public protocol UdentifyBaseViewStyle {
+  var backgroundColor: UIKit.UIColor { get }
+  var borderColor: UIKit.UIColor { get }
+  var cornerRadius: CoreFoundation.CGFloat { get }
+  var borderWidth: CoreFoundation.CGFloat { get }
+}
+public enum LogLevel : Swift.Int {
+  case verbose
+  case debug
+  case info
+  case warning
+  case error
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public class DocumentDetector {
+  weak public var delegate: (any UdentifyCommons.DocumentDetectionDelegate)?
+  public init(delegate: (any UdentifyCommons.DocumentDetectionDelegate)? = nil, previewView: UIKit.UIView?, documentDetectionConfig: UdentifyCommons.DocumentDetectionConfig = DocumentDetectionConfig())
+  @available(iOS 11.0, *)
+  public func detectDocument(image: UIKit.UIImage)
+  @objc deinit
+}
+public struct UdentifyButtonStyle : UdentifyCommons.UdentifyBaseViewStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var borderColor: UIKit.UIColor
+  public var cornerRadius: CoreFoundation.CGFloat
+  public var borderWidth: CoreFoundation.CGFloat {
+    get
+  }
+  public var contentAlignment: UIKit.UIControl.ContentHorizontalAlignment
+  public var height: CoreFoundation.CGFloat
+  public var leading: CoreFoundation.CGFloat
+  public var trailing: CoreFoundation.CGFloat
+  public var font: UIKit.UIFont
+  public var textColor: UIKit.UIColor
+  public var textAlignment: UIKit.NSTextAlignment
+  public var lineBreakMode: UIKit.NSLineBreakMode
+  public var numberOfLines: Swift.Int
+  public init(backgroundColor: UIKit.UIColor, borderColor: UIKit.UIColor = .clear, cornerRadius: CoreFoundation.CGFloat = 8, borderWidth: CoreFoundation.CGFloat = 0, contentAlignment: UIKit.UIControl.ContentHorizontalAlignment = .center, height: CoreFoundation.CGFloat = 70, leading: CoreFoundation.CGFloat = 20, trailing: CoreFoundation.CGFloat = 20, font: UIKit.UIFont, textColor: UIKit.UIColor, textAlignment: UIKit.NSTextAlignment = .center, lineBreakMode: UIKit.NSLineBreakMode = .byTruncatingTail, numberOfLines: Swift.Int = 1)
+}
+@_hasMissingDesignatedInitializers final public class UdentifySettingsProvider {
+  public static func getInstance() -> UdentifyCommons.UdentifySettingsProvider
+  public static func setSSLCertificate(with sslCertificate: Foundation.Data)
+  public static func removeSSLCertificate()
+  public static func getSSLCertificate() -> Foundation.Data?
+  public static var isSSLPinningEnabled: Swift.Bool {
+    get
+  }
+  public static func loadDERCertificateData(from bundle: Foundation.Bundle, certificateName: Swift.String, certificateExtension: Swift.String) -> Foundation.Data?
+  public static var localizationMap: [Swift.String : Swift.String]? {
+    get
+  }
+  public static func instantiateServerBasedLocalization(for language: UdentifyCommons.LocalizationLanguage, serverUrl: Swift.String, transactionId: Swift.String, requestTimeout: Swift.Double = 30, completion: @escaping ((any Swift.Error)?) -> Swift.Void)
+  public static func clearLocalizationCache(for language: UdentifyCommons.LocalizationLanguage)
+  public static func mapSystemLanguageToEnum() -> UdentifyCommons.LocalizationLanguage?
+  public static func getRequestedDeviceInfoFields() -> [UdentifyCommons.DeviceInfoFields]
+  public static func setRequestedDeviceInfoFields(deviceInfoFields: [UdentifyCommons.DeviceInfoFields])
+  public static func isDeviceInfoEnabled() -> Swift.Bool
+  public static func disableDeviceInfo()
+  public static func getDeviceInfoSubPath() -> Swift.String?
+  public static func setDeviceInfoSubPath(_ subpath: Swift.String?)
+  @objc deinit
+}
+public protocol UdentifySettings {
+  var localizationMap: [Swift.String : Swift.String]? { get set }
+  var sslCertificate: Foundation.Data? { get set }
+  var requestedDeviceInfoFields: [UdentifyCommons.DeviceInfoFields] { get set }
+  var deviceInfoEnabled: Swift.Bool { get set }
+  var deviceInfoSubPath: Swift.String? { get set }
+}
+public enum DeviceInfoFields : Swift.CaseIterable {
+  case WifiConnectivity
+  case UserAgent
+  case CellularNetworkTechnology
+  case BatteryInfo
+  case LocalIpAddresses
+  case LowPowerMode
+  public static func == (a: UdentifyCommons.DeviceInfoFields, b: UdentifyCommons.DeviceInfoFields) -> Swift.Bool
+  public typealias AllCases = [UdentifyCommons.DeviceInfoFields]
+  nonisolated public static var allCases: [UdentifyCommons.DeviceInfoFields] {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var udtfy: UIKit.UIView.ViewExtensionNamespace {
+    get
+  }
+  public struct ViewExtensionNamespace {
+    public func addOverlay(overlayedArea: CoreFoundation.CGRect, voidOffset: CoreFoundation.CGFloat, voidArea: CoreFoundation.CGRect)
+  }
+}
+public struct UdentifyViewStyle : UdentifyCommons.UdentifyBaseViewStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var borderColor: UIKit.UIColor
+  public var cornerRadius: CoreFoundation.CGFloat
+  public var borderWidth: CoreFoundation.CGFloat {
+    get
+  }
+  public var horizontalSizing: UdentifyCommons.UdentifyHorizontalSizing?
+  public var verticalSizing: UdentifyCommons.UdentifyVerticalSizing?
+  public init(backgroundColor: UIKit.UIColor, borderColor: UIKit.UIColor = .clear, cornerRadius: CoreFoundation.CGFloat = 8, borderWidth: CoreFoundation.CGFloat = 0, horizontalSizing: UdentifyCommons.UdentifyHorizontalSizing? = nil, verticalSizing: UdentifyCommons.UdentifyVerticalSizing? = nil)
+}
+public struct TransactionResponse : Swift.Decodable {
+  public var id: Swift.String
+  public var data: [Swift.Int : Swift.String?]?
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum GeneralError : Swift.Error {
+  case ParsingError(Swift.String)
+  case UnexpectedError(any Swift.Error)
+  case MissingParameter(Swift.String)
+  case InvalidURL
+  case JsonEncodingError(Swift.String)
+  case JsonDecodingError(Swift.String)
+}
+extension UdentifyCommons.GeneralError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public enum FaceDetectionError : Swift.Error {
+  case NoDetection
+  case AlreadyInProgress
+  case SourceImageMissing
+  case TooManyFaces
+  case HeadAngled
+  case FaceAngled
+  case FaceOffBorders
+  case FaceTooSmall
+  case FaceTooBig
+  case Unknown((any Swift.Error)?)
+}
+public class WebService {
+  public var timeout: Swift.Double
+  public init(requestTimeout: Swift.Double = 30)
+  @objc deinit
+}
+extension UdentifyCommons.WebService {
+  public static var shared: UdentifyCommons.WebService
+}
+extension UdentifyCommons.WebService {
+  public func postSynchronously(payload: Swift.String, serverURL: Swift.String, handler: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+  public func postAsync(payload: Swift.String, serverURL: Swift.String, handler: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+  public func postData(serverURL: Swift.String, requestBody: [Swift.String : Any], handler: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+  public func postFormData(serverURL: Swift.String, formData: [Swift.String : Any], handler: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+  public func getAsync(serverURL: Swift.String, handler: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+  public func getAsync(serverURL: Swift.String, queryParams: [Swift.String : Any]? = nil, handler: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+  public func post(payload: Swift.String, serverURL: Swift.String, completion: @escaping (Swift.Bool) -> ())
+  public func uploadVideo(serverURL: Swift.String, transactionID: Swift.String, path: Foundation.URL, mimetype: Swift.String = "video/quicktime", completion: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+  public func uploadVideo(serverURL: Swift.String, textFields: [Swift.String : Swift.String], videoInfos: [[Swift.String : Any]], completion: @escaping (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void)
+}
+public class TransactionRequest : Swift.Codable {
+  public var transactionId: Swift.String?
+  public var customId: Swift.String?
+  public var qrGenerate: Swift.Bool
+  public var qrSize: Swift.Int?
+  public var params: [Swift.String : Swift.String?]?
+  public var moduleList: [UdentifyCommons.Module]?
+  public var registerAuthenticateOrLiveness: Swift.Int?
+  public var channelId: Swift.Int?
+  public var parentTransactionId: Swift.String?
+  public init(transactionId: Swift.String? = nil, customId: Swift.String? = nil, qrGenerate: Swift.Bool = false, qrSize: Swift.Int? = nil, params: [Swift.String : Swift.String?]? = nil, moduleList: [UdentifyCommons.Module]? = nil, registerAuthenticateOrLiveness: Swift.Int? = nil, channelId: Swift.Int? = nil, parentTransactionId: Swift.String? = nil)
+  public init(json: [Swift.String : Any])
+  public static func fromJson(payload: Swift.String) throws -> UdentifyCommons.TransactionRequest
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+extension Swift.String {
+  public var udtfy: Swift.String.StringExtensionNamespace {
+    get
+  }
+  public struct StringExtensionNamespace {
+    public func localized(in tableName: Swift.String? = nil, bundle: Foundation.Bundle = .main, value: Swift.String? = nil, comment: Swift.String? = nil) -> Swift.String
+    public subscript(i: Swift.Int) -> Swift.String {
+      get
+    }
+    public subscript(bounds: Swift.CountableRange<Swift.Int>) -> Swift.String {
+      get
+    }
+    public subscript(bounds: Swift.CountableClosedRange<Swift.Int>) -> Swift.String {
+      get
+    }
+    public subscript(bounds: Swift.CountablePartialRangeFrom<Swift.Int>) -> Swift.String {
+      get
+    }
+    public func strip() -> Swift.String
+    public func toDate() -> Foundation.Date?
+    public func fromBase64() -> Swift.String?
+    public func toBase64() -> Swift.String
+    public var convertBase64StringToImage: UIKit.UIImage {
+      get
+    }
+  }
+}
+public enum ServerError : Swift.Error {
+  case InvalidResponse(Swift.String)
+  case UnexpectedError(any Swift.Error)
+}
+extension UdentifyCommons.ServerError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public class FaceDetectionConfig {
+  public init(stopIfHeadAngled: Swift.Bool = false, stopIfFaceAngled: Swift.Bool = false, stopIfMultipleFacesDetected: Swift.Bool = true, refBorder: CoreFoundation.CGRect? = nil)
+  @objc deinit
+}
+extension UIKit.UIImage {
+  public var udtfy: UIKit.UIImage.ImageExtensionNamespace {
+    get
+  }
+  public struct ImageExtensionNamespace {
+    public enum JPEGQuality : CoreFoundation.CGFloat {
+      case lowest
+      case low
+      case medium
+      case high
+      case highest
+      public init?(rawValue: CoreFoundation.CGFloat)
+      @available(iOS 2.0, *)
+      public typealias RawValue = CoreFoundation.CGFloat
+      public var rawValue: CoreFoundation.CGFloat {
+        get
+      }
+    }
+    public func toBase64String(quality: CoreFoundation.CGFloat) -> Swift.String
+    public func jpeg(_ jpegQuality: UIKit.UIImage.ImageExtensionNamespace.JPEGQuality) -> Foundation.Data?
+    public func resizeImage(image: UIKit.UIImage, newHeight: CoreFoundation.CGFloat) -> UIKit.UIImage
+    public var noiseReducted: UIKit.UIImage? {
+      get
+    }
+    public func imageRotatedByDegrees(degrees: CoreFoundation.CGFloat) -> UIKit.UIImage
+    public func fixedOrientation() -> UIKit.UIImage
+    public func toGrayScale() -> UIKit.UIImage
+    public func binarise() -> UIKit.UIImage
+    public func scaleImage() -> UIKit.UIImage
+    public func orientate(img: UIKit.UIImage) -> UIKit.UIImage
+    public func cropAVImage(in avCaptureVideoPreviewLayer: AVFoundation.AVCaptureVideoPreviewLayer, to rect: CoreFoundation.CGRect) -> UIKit.UIImage?
+    public func cropImage(to rect: CoreFoundation.CGRect) -> UIKit.UIImage?
+    public func laplacianVariance() -> Swift.Double?
+  }
+}
+public class DocumentDetectionConfig {
+  public init(usesCPUOnly: Swift.Bool = false, minimumAspectRatio: Swift.Float = 0.5, maximumAspectRatio: Swift.Float = 0.7, minimumSize: Swift.Float = 0.3, maximumObservations: Swift.Int = 1, minimumConfidence: Swift.Float = 0.65, quadratureTolerance: Swift.Float = 30)
+  @objc deinit
+}
+public protocol UdentifyControllerDelegate : AnyObject {
+  func onFailure(error: any Swift.Error)
+  func onCameraControllerStarted()
+}
+public enum UdentifyCameraStopResult {
+  case success
+  case alreadyStopped
+  case alreadyInProgress
+  case invalidState
+  public static func == (a: UdentifyCommons.UdentifyCameraStopResult, b: UdentifyCommons.UdentifyCameraStopResult) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc public class UdentifyCameraController : ObjectiveC.NSObject {
+  weak public var delegate: (any UdentifyCommons.UdentifyControllerDelegate)?
+  public var videoPreviewLayer: AVFoundation.AVCaptureVideoPreviewLayer?
+  public init(on view: UIKit.UIView, focusView: UdentifyCommons.FocusView? = nil, delegate: (any UdentifyCommons.UdentifyCameraControllerDelegate)?, cameraPosition: AVFoundation.AVCaptureDevice.Position = .back, preset: AVFoundation.AVCaptureSession.Preset = .photo, videoGravity: AVFoundation.AVLayerVideoGravity = .resizeAspectFill, continuousMode: Swift.Bool = false)
+  public init(recordVideoOn view: UIKit.UIView, focusView: UdentifyCommons.FocusView? = nil, delegate: (any UdentifyCommons.UdentifyVideoControllerDelegate)?, cameraPosition: AVFoundation.AVCaptureDevice.Position = .back, videoDuration: Swift.Double = 5, enableTorchAfter: Swift.Double = 0, preset: AVFoundation.AVCaptureSession.Preset = .photo, videoGravity: AVFoundation.AVLayerVideoGravity = .resizeAspectFill, fetchFrames: Swift.Bool = false, exportPreset: UdentifyCommons.ExportPreset = .mediumQuality)
+  public init(recordVideoOn view: UIKit.UIView, focusView: UdentifyCommons.FocusView? = nil, delegate: (any UdentifyCommons.UdentifyVideoControllerDelegate)?, cameraPosition: AVFoundation.AVCaptureDevice.Position = .back, videoDuration: Swift.Double = 5, enableTorchAfter: Swift.Double = 0, preset: AVFoundation.AVCaptureSession.Preset = .photo, videoGravity: AVFoundation.AVLayerVideoGravity = .resizeAspectFill, fetchFrames: Swift.Bool = false, exportPreset: UdentifyCommons.ExportPreset = .mediumQuality, firstSegmentDuration: CoreMedia.CMTime? = nil, firstSegmentResolution: UdentifyCommons.ExportPreset? = nil, secondSegmentResolution: UdentifyCommons.ExportPreset? = nil)
+  @objc deinit
+}
+extension UdentifyCommons.UdentifyCameraController {
+  public func stopCamera(completion: ((UdentifyCommons.UdentifyCameraStopResult) -> Swift.Void)? = nil)
+  public func restartCamera(maxRetries: Swift.Int = 1, currentRetry: Swift.Int = 0, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func takePhoto()
+  public func recordVideo(videoFileName: Swift.String? = nil, exportPreset: UdentifyCommons.ExportPreset? = nil, videoDuration: Swift.Double? = nil, enableTorchAfter: Swift.Double? = nil)
+  public func pauseFrameProcessing()
+  public func resumeFrameProcessing()
+  public func isFrameProcessingPaused() -> Swift.Bool
+  public func isCameraRunning() -> Swift.Bool
+  public func didCameraStop() -> Swift.Bool
+  public func didStoppingCamera() -> Swift.Bool
+}
+extension UdentifyCommons.UdentifyCameraController : AVFoundation.AVCaptureVideoDataOutputSampleBufferDelegate {
+  @objc dynamic open func captureOutput(_ output: AVFoundation.AVCaptureOutput, didOutput sampleBuffer: CoreMedia.CMSampleBuffer, from connection: AVFoundation.AVCaptureConnection)
+}
+extension UdentifyCommons.UdentifyCameraController : AVFoundation.AVCaptureFileOutputRecordingDelegate {
+  @objc dynamic public func fileOutput(_ output: AVFoundation.AVCaptureFileOutput, didFinishRecordingTo outputFileURL: Foundation.URL, from connections: [AVFoundation.AVCaptureConnection], error: (any Swift.Error)?)
+}
+public enum UdentifyHorizontalSizing {
+  case fixed(width: CoreFoundation.CGFloat, horizontalPosition: UdentifyCommons.UdentifyHorizontalPosition)
+  case anchors(leading: CoreFoundation.CGFloat, trailing: CoreFoundation.CGFloat)
+}
+public protocol UdentifyCameraControllerDelegate : UdentifyCommons.UdentifyControllerDelegate {
+  func onPhotoTaken(photo: UIKit.UIImage?)
+  func onPhotoTaken(frame: CoreVideo.CVPixelBuffer?)
+}
+extension CoreFoundation.CGFloat {
+  public var udtfy: CoreFoundation.CGFloat.CGFloatExtensionNamespace {
+    get
+  }
+  public struct CGFloatExtensionNamespace {
+    public var dynamicSize: CoreFoundation.CGFloat {
+      get
+    }
+    public var dynamicHeight: CoreFoundation.CGFloat {
+      get
+    }
+    public var dynamicWidth: CoreFoundation.CGFloat {
+      get
+    }
+  }
+}
+public protocol Localizable {
+  func localizedString() -> Swift.String
+}
+public enum Module : Swift.Int, Swift.Codable {
+  case MRZ
+  case NFC
+  case FACE_REGISTRATION
+  case FACE_AUTHENTICATION
+  case FACE_LIVENESS
+  case FACE_IMAGE_UPLOAD
+  case OCR
+  case VIDEO_CALL
+  case OCR_HOLOGRAM
+  case ACTIVE_LIVENESS
+  case FACE_IDENTIFICATION
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct UdentifyTextStyle {
+  public var font: UIKit.UIFont
+  public var textColor: UIKit.UIColor
+  public var textAlignment: UIKit.NSTextAlignment
+  public var lineBreakMode: UIKit.NSLineBreakMode
+  public var numberOfLines: Swift.Int
+  public var lineHeightMultiple: CoreFoundation.CGFloat
+  public var leading: CoreFoundation.CGFloat
+  public var trailing: CoreFoundation.CGFloat
+  public var verticalPosition: UdentifyCommons.UdentifyVerticalPosition?
+  public init(font: UIKit.UIFont, textColor: UIKit.UIColor, textAlignment: UIKit.NSTextAlignment = .center, lineBreakMode: UIKit.NSLineBreakMode = .byWordWrapping, numberOfLines: Swift.Int = 0, lineHeightMultiple: CoreFoundation.CGFloat = 0, leading: CoreFoundation.CGFloat = 20, trailing: CoreFoundation.CGFloat = 20, verticalPosition: UdentifyCommons.UdentifyVerticalPosition? = nil)
+}
+public enum LogType : Swift.Int, Swift.Codable {
+  case info
+  case verbose
+  case warning
+  case error
+  case debug
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum LogPeriod : Swift.Int, Swift.Codable {
+  case preProcess
+  case onProcess
+  case postProcess
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class LogItem : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public protocol UdentifyProgressBarDelegate : AnyObject {
+  func progressFinished()
+}
+public struct UdentifyProgressBarStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var progressColor: UIKit.UIColor
+  public var completionColor: UIKit.UIColor
+  public var textStyle: UdentifyCommons.UdentifyTextStyle
+  public var cornerRadius: CoreFoundation.CGFloat
+  public init(backgroundColor: UIKit.UIColor, progressColor: UIKit.UIColor, completionColor: UIKit.UIColor, textStyle: UdentifyCommons.UdentifyTextStyle, cornerRadius: CoreFoundation.CGFloat = 8)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @IBDesignable @_Concurrency.MainActor @preconcurrency public class UdentifyProgressBar : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any UdentifyCommons.UdentifyProgressBarDelegate)?
+  @_Concurrency.MainActor @preconcurrency public func configure(with style: UdentifyCommons.UdentifyProgressBarStyle? = nil)
+  @_Concurrency.MainActor @preconcurrency public func setViewTitle(_ newTitle: Swift.String)
+  @_Concurrency.MainActor @preconcurrency public var currentPercentage: CoreFoundation.CGFloat {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public func animateProgress(from startAt: CoreFoundation.CGFloat, to endsAt: CoreFoundation.CGFloat, duration: Foundation.TimeInterval)
+  @_Concurrency.MainActor @preconcurrency public func animateProgress(to endsAt: CoreFoundation.CGFloat, duration: Foundation.TimeInterval)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func awakeFromNib()
+  @_Concurrency.MainActor @preconcurrency public func reset()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+public enum DocumentDetectionError : Swift.Error {
+  case NoDetection
+  case AlreadyInProgress
+  case SourceImageMissing
+  case PreviewViewMissing
+  case Unknown((any Swift.Error)?)
+}
+public struct ServerResponse : Swift.Decodable {
+  public var message: Swift.String
+  public var response: UdentifyCommons.TransactionResponse?
+  public var metadata: [Swift.String : UdentifyCommons.UdentifyAny?]?
+  public init(message: Swift.String, response: UdentifyCommons.TransactionResponse? = nil, metadata: [Swift.String : UdentifyCommons.UdentifyAny?]? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol UdentifyVideoControllerDelegate : UdentifyCommons.UdentifyControllerDelegate {
+  func onVideoRecordStarted()
+  func onVideoRecordFinished(videoUrl: Foundation.URL)
+  func onAVCaptureMovieFileOutputAddedToSession()
+}
+public struct UdentifyImageStyle {
+  public var image: UIKit.UIImage
+  public var contentMode: UIKit.UIView.ContentMode
+  public var opacity: CoreFoundation.CGFloat
+  public var borderColor: UIKit.UIColor
+  public var borderWidth: CoreFoundation.CGFloat {
+    get
+  }
+  public var horizontalSizing: UdentifyCommons.UdentifyHorizontalSizing
+  public var verticalSizing: UdentifyCommons.UdentifyVerticalSizing
+  public var cornerRadius: CoreFoundation.CGFloat
+  public init(image: UIKit.UIImage, contentMode: UIKit.UIView.ContentMode = .scaleAspectFit, opacity: CoreFoundation.CGFloat = 1.0, borderColor: UIKit.UIColor = .clear, borderWidth: CoreFoundation.CGFloat = 0, horizontalSizing: UdentifyCommons.UdentifyHorizontalSizing, verticalSizing: UdentifyCommons.UdentifyVerticalSizing, cornerRadius: CoreFoundation.CGFloat = 0)
+}
+public enum Country : Swift.String, Swift.CaseIterable, Swift.Comparable, Swift.Decodable, UdentifyCommons.Localizable {
+  case TUR
+  case GBR
+  case COL
+  case ESP
+  case BRA
+  case USA
+  case PER
+  case ECU
+  public func localizedString() -> Swift.String
+  public static func < (lhs: UdentifyCommons.Country, rhs: UdentifyCommons.Country) -> Swift.Bool
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [UdentifyCommons.Country]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [UdentifyCommons.Country] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum TransactionRequestEnum : Swift.Int {
+  case REGISTER
+  case AUTHENTICATION
+  case LIVENESS
+  case AUTHENTICATION_LIVENESS
+  case REGISTER_LIVENESS
+  case IMAGE_UPLOAD
+  case OCR_PASSPORT_UPLOAD
+  case OCR_ID_UPLOAD
+  case OCR_DRIVER_LICENCE_UPLOAD
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class FocusView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(frame: CoreFoundation.CGRect, color: UIKit.UIColor = .white, strokeWidth: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency public func previewBorders()
+  @objc deinit
+}
+public class FaceDetector {
+  weak public var delegate: (any UdentifyCommons.FaceDetectionDelegate)?
+  public init(delegate: (any UdentifyCommons.FaceDetectionDelegate)? = nil, faceDetectionConfig: UdentifyCommons.FaceDetectionConfig = FaceDetectionConfig())
+  @objc deinit
+}
+@available(iOS 11.0, *)
+extension UdentifyCommons.FaceDetector {
+  public func detectFace(image: UIKit.UIImage)
+}
+public enum ExportPreset {
+  case lowQuality
+  case mediumQuality
+  case highQuality
+  case preset640x480
+  case preset960x540
+  case preset1280x720
+  case preset1920x1080
+  case preset3840x2160
+  public static func == (a: UdentifyCommons.ExportPreset, b: UdentifyCommons.ExportPreset) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol FaceDetectionDelegate : AnyObject {
+  func onError(originalImage: UIKit.UIImage, error: UdentifyCommons.FaceDetectionError)
+  func onFaceDetected(originalImage: UIKit.UIImage, faceImage: UIKit.UIImage, rotation: Swift.Double)
+}
+public struct UdentifyAny : Swift.Codable {
+  public let value: Any
+  public init(value: Any)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum UdentifyVerticalPosition {
+  case center
+  case top(offset: CoreFoundation.CGFloat)
+  case bottom(offset: CoreFoundation.CGFloat)
+  case custom(y: CoreFoundation.CGFloat)
+}
+public enum CameraError : Swift.Error {
+  case CameraNotFound
+  case MinIOSRequirementNotSatisfied
+  case CameraPermissionRequired
+  case FocusViewInvalidSize(Swift.String)
+  case SessionPresetNotAvailable
+  case SessionNotRunning
+  case VideoPathMissing
+  case UnableToGenerateVideoData(Swift.String)
+  case VideoExportingFailed(Swift.String)
+  case VideoExportingCancelled
+  case Unknown
+}
+public enum UdentifyVerticalSizing {
+  case fixed(height: CoreFoundation.CGFloat, verticalPosition: UdentifyCommons.UdentifyVerticalPosition)
+  case anchors(top: CoreFoundation.CGFloat, bottom: CoreFoundation.CGFloat)
+}
+extension UIKit.UIDevice {
+  @_Concurrency.MainActor @preconcurrency public static let udtfy_modelNumber: Swift.String
+}
+public protocol DocumentDetectionDelegate : AnyObject {
+  func onError(sourceImage: UIKit.UIImage, error: UdentifyCommons.DocumentDetectionError)
+  func onDocumentDetected(sourceImage: UIKit.UIImage, documentPosition: CoreFoundation.CGRect)
+}
+public class LogHeader : Swift.Encodable {
+  public enum Module : Swift.Int, Swift.Codable {
+    case NFC
+    case FACE
+    case MRZ
+    case OCR
+    case HOLOGRAM
+    case VIDEO_CALL
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public enum OS : Swift.Int, Swift.Codable {
+    case Android
+    case iOS
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public var txid: Swift.String {
+    get
+  }
+  public var isProcessFailed: Swift.Bool
+  public var result: Swift.String?
+  public var endDate: Foundation.Date? {
+    get
+    set
+  }
+  public var module: UdentifyCommons.LogHeader.Module
+  public init(logLevel: UdentifyCommons.LogLevel = .warning, txid: Swift.String, os: UdentifyCommons.LogHeader.OS, logItemList: [UdentifyCommons.LogItem]? = nil, isProcessFailed: Swift.Bool = false, result: Swift.String? = nil, dateProcessStart: Foundation.Date, dateProcessEnd: Swift.String? = nil, module: UdentifyCommons.LogHeader.Module)
+  public func encode(to encoder: any Swift.Encoder) throws
+  @objc deinit
+}
+extension UdentifyCommons.LogHeader {
+  public func info(logMessage: Swift.String, logPeriod: UdentifyCommons.LogPeriod)
+  public func warning(logMessage: Swift.String, logPeriod: UdentifyCommons.LogPeriod)
+  public func verbose(logMessage: Swift.String, logPeriod: UdentifyCommons.LogPeriod)
+  public func debug(logMessage: Swift.String, logPeriod: UdentifyCommons.LogPeriod)
+  public func error(logMessage: Swift.String, logPeriod: UdentifyCommons.LogPeriod)
+  public func error(error: any Swift.Error, logPeriod: UdentifyCommons.LogPeriod)
+  public func postLogs(serverURL: Swift.String, error: (any Swift.Error)?, webService: UdentifyCommons.WebService)
+}
+extension UdentifyCommons.LocalizationLanguage : Swift.Equatable {}
+extension UdentifyCommons.LocalizationLanguage : Swift.Hashable {}
+extension UdentifyCommons.LocalizationLanguage : Swift.RawRepresentable {}
+extension UdentifyCommons.LogLevel : Swift.Equatable {}
+extension UdentifyCommons.LogLevel : Swift.Hashable {}
+extension UdentifyCommons.LogLevel : Swift.RawRepresentable {}
+extension UdentifyCommons.DeviceInfoFields : Swift.Equatable {}
+extension UdentifyCommons.DeviceInfoFields : Swift.Hashable {}
+extension UIKit.UIImage.ImageExtensionNamespace.JPEGQuality : Swift.Equatable {}
+extension UIKit.UIImage.ImageExtensionNamespace.JPEGQuality : Swift.Hashable {}
+extension UIKit.UIImage.ImageExtensionNamespace.JPEGQuality : Swift.RawRepresentable {}
+extension UdentifyCommons.UdentifyCameraStopResult : Swift.Equatable {}
+extension UdentifyCommons.UdentifyCameraStopResult : Swift.Hashable {}
+extension UdentifyCommons.Module : Swift.Equatable {}
+extension UdentifyCommons.Module : Swift.Hashable {}
+extension UdentifyCommons.Module : Swift.RawRepresentable {}
+extension UdentifyCommons.LogType : Swift.Equatable {}
+extension UdentifyCommons.LogType : Swift.Hashable {}
+extension UdentifyCommons.LogType : Swift.RawRepresentable {}
+extension UdentifyCommons.LogPeriod : Swift.Equatable {}
+extension UdentifyCommons.LogPeriod : Swift.Hashable {}
+extension UdentifyCommons.LogPeriod : Swift.RawRepresentable {}
+extension UdentifyCommons.Country : Swift.Hashable {}
+extension UdentifyCommons.Country : Swift.RawRepresentable {}
+extension UdentifyCommons.TransactionRequestEnum : Swift.Equatable {}
+extension UdentifyCommons.TransactionRequestEnum : Swift.Hashable {}
+extension UdentifyCommons.TransactionRequestEnum : Swift.RawRepresentable {}
+extension UdentifyCommons.ExportPreset : Swift.Equatable {}
+extension UdentifyCommons.ExportPreset : Swift.Hashable {}
+extension UdentifyCommons.LogHeader.Module : Swift.Equatable {}
+extension UdentifyCommons.LogHeader.Module : Swift.Hashable {}
+extension UdentifyCommons.LogHeader.Module : Swift.RawRepresentable {}
+extension UdentifyCommons.LogHeader.OS : Swift.Equatable {}
+extension UdentifyCommons.LogHeader.OS : Swift.Hashable {}
+extension UdentifyCommons.LogHeader.OS : Swift.RawRepresentable {}

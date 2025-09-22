@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+  compileSdkVersion 33
+
+  defaultConfig {
+    minSdkVersion 21
+    targetSdkVersion 33
+    versionCode 1
+    versionName "1.0"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  lintOptions {
+    disable 'GradleCompatible'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  kotlinOptions {
+    jvmTarget = "17"
+  }
+}
+
+repositories {
+  // Required for React Native
+  google()
+  mavenCentral()
+  maven { url 'https://www.jitpack.io' }
+  
+  // GitHub Packages (optional, for hosted dependencies)
+  maven {
+    name = "GitHubPackages"
+    url = uri("https://maven.pkg.github.com/fraud-com/udentify-android-sdk")
+    credentials {
+      username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+      password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+    }
+  }
+}
+
+dependencies {
+  // React Native
+  implementation 'com.facebook.react:react-native:+'
+
+  // MRZ dependencies
+  implementation 'com.github.adaptech-cz:Tesseract4Android:2.1.0'
+  implementation 'org.jmrtd:jmrtd:0.7.17'
+  implementation 'edu.ucar:jj2000:5.2'
+  implementation 'com.github.mhshams:jnbis:1.1.0'
+  
+  // Local AAR files
+  implementation fileTree(dir: 'libs', include: ['*.aar'])
+  
+  // Shared core library
+  implementation project(':udentify-core')
+
+  // Kotlin
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  
+  // AndroidX
+  implementation 'androidx.appcompat:appcompat:1.4.0'
+  implementation 'androidx.fragment:fragment-ktx:1.4.0'
+  implementation 'androidx.core:core-ktx:1.7.0'
+}

@@ -1,0 +1,196 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ---\
+description: Udentify Android SDK NFC ID Verification\
+---\
+\
+# NFC ID Verification\
+\
+This document outlines the necessary steps and methods to implement an Android API NFC Reader for reading and verifying NFC Chips on ID Documents.\
+\
+## Development Environment Setup\
+\
+* Development Environment: Android Studio\
+* Development Language: Java\
+\
+#### Step 1: Add the AAR files\
+\
+**a. Manual Integration**\
+\
+1. ([Download Here](../android-sdk-resources#nfc-sdk)) Copy the following `aar` files and add it to your project's `libs` folder (dependency names might differ)\
+\
+* [<mark style="color:blue;">**commons.aar**</mark>](../android-sdk-resources#nfc-sdk)\
+* [<mark style="color:blue;">**nfc.aar**</mark>](../android-sdk-resources#nfc-sdk)\
+\
+2. Include these `.aar` files by adding the following line to your app-level `build.gradle`:\
+\
+```groovy\
+implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])\
+```\
+\
+**b. Dependency Integration**\
+\
+To gain access to the Udentify library, please contact our support team. If you already have access, include following lines in your app-level `build.gradle` file:\
+\
+```groovy\
+implementation 'com.fraud.udentify.android.sdk:commons:25.2.0'\
+implementation 'com.fraud.udentify.android.sdk:nfc:25.2.0'\
+```\
+\
+Additionally, to configure the integration, add the following block to your project-level `build.gradle` file:\
+\
+```groovy\
+allprojects \{\
+    repositories \{\
+        maven \{\
+            name = "GitHubPackages"\
+            url = uri("https://maven.pkg.github.com/FraudcomMobile/mobile")\
+            credentials \{\
+                username = System.getenv("GITHUB_ACTOR")\
+                password = System.getenv("GITHUB_TOKEN")\
+            \}\
+        \}\
+    \}\
+\}\
+```\
+\
+The `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables are required to access the Udentify libraries:\
+\
+* `GITHUB_ACTOR`: The username of the GitHub account that will access the Udentify libraries.\
+* `GITHUB_TOKEN`: A personal access token (PAT) used to authenticate GitHub API requests. You can generate this token by navigating to `GitHub > Settings > Developer Settings > Personal access tokens` and creating a new token with the appropriate permissions.\
+\
+After obtaining these credentials, set them as environment variables according to your operating system.\
+\
+#### Step 2: Add dependencies\
+\
+Add the following NFC dependencies to your app-level `build.gradle`:\
+\
+```groovy\
+// NFC dependencies\
+implementation 'org.jmrtd:jmrtd:0.7.17'\
+implementation 'net.sf.scuba:scuba-sc-android:0.0.19'\
+implementation 'com.squareup.okhttp3:okhttp:4.12.0'\
+implementation 'com.squareup.okhttp3:okhttp-tls:4.12.0'\
+implementation 'com.google.code.gson:gson:2.8.7'\
+implementation 'edu.ucar:jj2000:5.2'\
+implementation 'com.google.android.material:material:1.4.0'\
+```\
+\
+#### Step 3: Add permissions\
+\
+Add the following permissions to your `AndroidManifest.xml` file:\
+\
+```xml\
+<uses-feature android:name="android.hardware.nfc" android:required="true" />\
+<uses-permission android:name="android.permission.INTERNET" />\
+<uses-permission android:name="android.permission.NFC" />\
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />\
+```\
+\
+**It is essential for the app to have access to the device's phone state in order to fully utilize Udentify. Therefore, requesting the `READ_PHONE_STATE` permission in the Android app is advised:**\
+\
+```groovy\
+requestPermissions(new String[]\{Manifest.permission.READ_PHONE_STATE\}, 1);\
+```\
+\
+Override the `onRequestPermissionsResult()` method to ensure that your app behaves as expected if the permission is granted or denied.\
+\
+Optional permissions:\
+\
+```xml\
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />\
+<uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />\
+```\
+\
+#### Step 4: Add usesCleartextTraffic\
+\
+Add the following entry under the `application` tag in `AndroidManifest.xml`:\
+\
+```xml\
+<uses-android:usesCleartextTraffic="true"/>\
+```\
+\
+\{% hint style="warning" %\}\
+**Warning**: If the credentials are entered incorrectly, the chip on the ID/Passport may be blocked during reading with NFC. We recommend that control of the information be restored by eye.\
+\{% endhint %\}\
+\
+## NFC Reader\
+\
+To read an ID card/passport with NFC, extend the `NFCReaderActivity` or `NFCReaderFragment` class. The following methods need to be overridden:\
+\
+1. <mark style="color:blue;">`getCallerActivity()`</mark><mark style="color:blue;">:</mark> The activity which extends the `NFCReaderActivity` needs to be returned.\
+2. <mark style="color:blue;">`getApiCredentials()`</mark><mark style="color:blue;">:</mark> This method returns the serial number, date of birth, and expiration date received by MRZ. Here, we convert it to an `ApiCredentials` object. Ensure this information is correct as the chip can be blocked if incorrect information is entered repeatedly.\
+\
+```java\
+@Override\
+public ApiCredentials getApiCredentials() \{\
+    ApiCredentials apiCredentials = new ApiCredentials.Builder()\
+        .mrzDocNo("")\
+        .mrzBirthDate("") // Format: "YYMMDD"\
+        .mrzExpireDate("") // Format: "YYMMDD"\
+        .serverUrl("") // Url of the Udentify server\
+        .transactionID("") // TransactionID: From server to API Key, it needs to be taken and set.\
+        .enableAutoTriggering(true)\
+        .isActiveAuthenticationEnabled(true)\
+        .isPassiveAuthenticationEnabled(true)\
+        .build();\
+    return apiCredentials;\
+\}\
+```\
+\
+3. <mark style="color:blue;">`onSuccess(CardData cardData)`</mark><mark style="color:blue;">:</mark> This method is called with card information if card reading occurs successfully.\
+4. <mark style="color:blue;">`onFailure(Throwable throwable)`</mark><mark style="color:blue;">:</mark> This method is called if the card read fails.\
+5. <mark style="color:blue;">`onState(NFCState nfcState)`</mark><mark style="color:blue;">:</mark> This method returns information about whether NFC is turned on.\
+6. <mark style="color:blue;">`onProgress(int i)`</mark><mark style="color:blue;">:</mark> This method returns the percentage of the card reading process.\
+\
+If you are using the <mark style="color:blue;">`NFCReaderActivity`</mark> class and have had to override the `onNewIntent(Intent intent)` method for some reason, make sure that the `super.onNewIntent(intent)` method is called in the first line.\
+\
+If you are using the <mark style="color:blue;">`NFCReaderFragment`</mark> class, override the `onNewIntent(Intent intent)` method in the activity that uses fragment. Then, call the `super.onNewIntent(intent)` method and the `processNFC(Intent intent)` method of the `NFCReaderFragment` class.\
+\
+## NFC Reader Location Finder\
+\
+The NFC Location API is designed to locate the NFC reader tag of an Android device. This is done by extending the <mark style="color:blue;">`NfcLocationListener`</mark> class in the class where the location will be determined. The API is accessed by importing the added SDK's <mark style="color:blue;">`io.udentify.android.nfc.reader`</mark> class.\
+\
+To use the API, you will need to create an instance of the `NFCLocation` class and provide the API URL:\
+\
+```java\
+NFCLocation nfcLocation = new NFCLocation(this, "Enter API URL Here!");\
+nfcLocation.getNfcLocation();\
+```\
+\
+The NFC reader tag is usually located on the back of the Android device in three positions: top, middle, and bottom.\
+\
+<figure><img src="https://4079253175-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FZ7XsLn2oY4auFrbHIEk4%2Fuploads%2Fhnw9ML5Zoor4P1sVOM7f%2FUntitled.jpg?alt=media&#x26;token=609a94f6-620a-4c4d-937d-cde9d97a74f2" alt=""><figcaption></figcaption></figure>\
+\
+**Methods**\
+\
+#### onSuccess(int i)\
+\
+This method is overridden, and the incoming integer indicates the position of the NFC reader tag.\
+\
+```java\
+i = 0; // Phone could not be found in the database\
+i = 4; // Tag in the rear Top part of the phone\
+i = 5; // Tag in the rear Center part of the phone\
+i = 6; // Tag in the rear Bottom of the phone\
+```\
+\
+#### onFailed(String s)\
+\
+This method is overridden, and it shows that an error occurred while asking the server for the location of the NFC tag. The string variable indicates what the error is.\
+\
+#### **Obfuscation** <a href="#obfuscation" id="obfuscation"></a>\
+\
+Add the following rule to your proguard file.\
+\
+```java\
+-keep public class io.udentify.** \{ *; \}\
+-keep public class org.bouncycastle.** \{ *; \}\
+-keep public class net.sf.scuba.** \{ *; \}\
+```\
+}

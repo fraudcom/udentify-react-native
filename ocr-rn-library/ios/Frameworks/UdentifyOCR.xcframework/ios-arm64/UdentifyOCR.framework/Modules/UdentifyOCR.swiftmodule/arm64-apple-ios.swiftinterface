@@ -1,0 +1,409 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name UdentifyOCR
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
+import AVFoundation
+import DeveloperToolsSupport
+import Foundation
+import ImageIO
+import Photos
+import Swift
+import SwiftUI
+import UIKit
+import UdentifyCommons
+@_exported import UdentifyOCR
+import Vision
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+public struct OCRAndDocumentLivenessResponse {
+  public var isFailed: Swift.Bool
+  public var ocrData: (ocrResponse: UdentifyOCR.OCRResponse?, error: (any Swift.Error)?)?
+  public var documentLivenessDataFront: (documentLivenessResponse: UdentifyOCR.DocumentLivenessResponse?, error: (any Swift.Error)?)?
+  public var documentLivenessDataBack: (documentLivenessResponse: UdentifyOCR.DocumentLivenessResponse?, error: (any Swift.Error)?)?
+}
+public struct DocumentLivenessPipelineResult {
+  public var name: Swift.String?
+  public var calibration: Swift.String?
+  public var documentLivenessScore: Swift.String?
+  public var documentLivenessProbability: Swift.String?
+  public var documentStatusCode: Swift.String?
+}
+public struct OCRTemplateResponse : Swift.Decodable {
+  public var message: Swift.String
+  public var response: [UdentifyOCR.OCRTemplate]?
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum OCRAction : Swift.String {
+  case takeFrontSidePhoto
+  case takeBackSidePhoto
+  case waitForResult
+  case onResult
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct DocumentLivenessResponse {
+  public var pipelineResults: [UdentifyOCR.DocumentLivenessPipelineResult]?
+  public var aggregateDocumentLivenessProbability: Swift.String?
+  public var aggregateDocumentImageQualityWarnings: Swift.String?
+}
+public enum OCRError : Swift.Error {
+  case Unknown
+  case api(Swift.String)
+  case other(any Swift.Error)
+  case missingOcrResponse
+  case missingDocumentLivenessResponse
+  case missingRequiredParameters(Swift.String)
+}
+extension UdentifyOCR.OCRError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var causeDescription: Swift.String? {
+    get
+  }
+}
+public protocol MRZFields {
+  var mrzBirthDate: Swift.String? { get set }
+  var mrzBirthDateChecksum: Swift.String? { get set }
+  var mrzCountry: Swift.String? { get set }
+  var mrzDocumentNo: Swift.String? { get set }
+  var mrzDocumentNoChecksum: Swift.String? { get set }
+  var mrzDocumentType: Swift.String? { get set }
+  var mrzExpiryDate: Swift.String? { get set }
+  var mrzExpiryDateChecksum: Swift.String? { get set }
+  var mrzDataIntegrityChecksum: Swift.String? { get set }
+  var mrzName: Swift.String? { get set }
+  var mrzNationality: Swift.String? { get set }
+  var mrzOptionalData: Swift.String? { get set }
+  var mrzGender: Swift.String? { get set }
+  var mrzSurname: Swift.String? { get set }
+  var mrzDigitChecksum: Swift.String? { get set }
+  var mrzDataExists: Swift.Bool? { get set }
+  var mrzDocumentNoChecksumVerified: Swift.Bool? { get set }
+  var mrzBirthDateChecksumVerified: Swift.Bool? { get set }
+  var mrzExpiryDateChecksumVerified: Swift.Bool? { get set }
+  var mrzFinalChecksumVerified: Swift.Bool? { get set }
+}
+@_hasMissingDesignatedInitializers public class OCRTemplateService {
+  public static func getRequiredSides(serverURL: Swift.String, requestTimeout: Swift.Double = 30, completion: @escaping ([UdentifyOCR.OCRTemplate]?, (any Swift.Error)?) -> Swift.Void)
+  public static func getRequiredSides(for documentType: UdentifyOCR.OCRDocumentType, in country: UdentifyCommons.Country, serverURL: Swift.String, requestTimeout: Swift.Double = 30, completion: @escaping (UdentifyOCR.OCRTemplate) -> Swift.Void)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class OCRCameraViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
+  @objc deinit
+  @available(*, deprecated, message: "Please use instantiate(withApiCallDisabled:) instead of the deprecated instantiate(withApiCallEnabled:).")
+  @_Concurrency.MainActor @preconcurrency public static func instantiate(withApiCallEnabled delegate: (any UdentifyOCR.OCRCameraControllerDelegate)?, serverURL: Swift.String, transactionID: Swift.String, documentType: UdentifyOCR.OCRDocumentType, country: UdentifyCommons.Country? = nil, documentSide: UdentifyOCR.OCRDocumentSide = .bothSides, manualCapture: Swift.Bool = false, documentLivenessEnabled: Swift.Bool = false, logLevel: UdentifyCommons.LogLevel = .warning) -> UdentifyOCR.OCRCameraViewController?
+  @_Concurrency.MainActor @preconcurrency public static func instantiate(withApiCallDisabled delegate: (any UdentifyOCR.OCRCameraControllerDelegate)?, serverURL: Swift.String, transactionID: Swift.String, documentType: UdentifyOCR.OCRDocumentType, country: UdentifyCommons.Country? = nil, documentSide: UdentifyOCR.OCRDocumentSide = .bothSides, manualCapture: Swift.Bool = false, logLevel: UdentifyCommons.LogLevel = .warning) -> UdentifyOCR.OCRCameraViewController?
+  @_Concurrency.MainActor @preconcurrency public func dismissOrPopViewController(completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func popController(completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func dismissController(completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+extension UdentifyOCR.OCRCameraViewController {
+  @_Concurrency.MainActor @preconcurrency public func stopCamera()
+  @_Concurrency.MainActor @preconcurrency public func restartCamera()
+  @_Concurrency.MainActor @preconcurrency public func pauseFrameProcessing()
+  @_Concurrency.MainActor @preconcurrency public func resumeFrameProcessing()
+  @_Concurrency.MainActor @preconcurrency public func getCurrentStatus() -> UdentifyOCR.OCRStatus
+  @_Concurrency.MainActor @preconcurrency public func getCurrentAction() -> UdentifyOCR.OCRAction
+}
+extension UdentifyOCR.OCRCameraViewController : UdentifyCommons.FaceDetectionDelegate {
+  @_Concurrency.MainActor @preconcurrency public func onError(originalImage: UIKit.UIImage, error: UdentifyCommons.FaceDetectionError)
+  @_Concurrency.MainActor @preconcurrency public func onFaceDetected(originalImage: UIKit.UIImage, faceImage: UIKit.UIImage, rotation: Swift.Double)
+}
+extension UdentifyOCR.OCRCameraViewController : UdentifyCommons.DocumentDetectionDelegate {
+  @_Concurrency.MainActor @preconcurrency public func onError(sourceImage: UIKit.UIImage, error: UdentifyCommons.DocumentDetectionError)
+  @_Concurrency.MainActor @preconcurrency public func onDocumentDetected(sourceImage: UIKit.UIImage, documentPosition: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLayoutSubviews()
+}
+extension UdentifyOCR.OCRCameraViewController : UdentifyCommons.UdentifyCameraControllerDelegate {
+  @_Concurrency.MainActor @preconcurrency public func onPhotoTaken(frame: CoreVideo.CVPixelBuffer?)
+  @_Concurrency.MainActor @preconcurrency public func onPhotoTaken(photo: UIKit.UIImage?)
+  @_Concurrency.MainActor @preconcurrency public func onFailure(error: any Swift.Error)
+  @_Concurrency.MainActor @preconcurrency public func onCameraControllerStarted()
+}
+extension UdentifyOCR.OCRCameraViewController {
+  @_Concurrency.MainActor @preconcurrency public static func performOCR(serverURL: Swift.String, transactionID: Swift.String, frontSidePhoto: UIKit.UIImage?, backSidePhoto: UIKit.UIImage?, country: UdentifyCommons.Country? = nil, documentType: UdentifyOCR.OCRDocumentType, requestTimeout: Swift.Double = 30, completion: @escaping (UdentifyOCR.OCRResponse?, (any Swift.Error)?) -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency public static func performOCRAndDocumentLiveness(serverURL: Swift.String, transactionID: Swift.String, frontSidePhoto: UIKit.UIImage?, backSidePhoto: UIKit.UIImage?, country: UdentifyCommons.Country? = nil, documentType: UdentifyOCR.OCRDocumentType, requestTimeout: Swift.Double = 30, completion: @escaping (UdentifyOCR.OCRAndDocumentLivenessResponse) -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency public static func performDocumentLiveness(serverURL: Swift.String, transactionID: Swift.String, frontSidePhoto: UIKit.UIImage?, backSidePhoto: UIKit.UIImage?, requestTimeout: Swift.Double = 30, completion: @escaping (UdentifyOCR.OCRAndDocumentLivenessResponse) -> Swift.Void)
+}
+@_hasMissingDesignatedInitializers final public class OCRSettingsProvider {
+  final public var currentSettings: any UdentifyOCR.OCRSettings
+  public static func getInstance() -> UdentifyOCR.OCRSettingsProvider
+  @objc deinit
+}
+public protocol OCRSettings {
+  var configs: UdentifyOCR.OCRConfigs { get }
+}
+public enum OCROrientation {
+  case vertical
+  case horizontal
+  public static func == (a: UdentifyOCR.OCROrientation, b: UdentifyOCR.OCROrientation) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum PlaceholderTemplate {
+  case hidden
+  case defaultStyle
+  case countrySpecificStyle
+  public static func == (a: UdentifyOCR.PlaceholderTemplate, b: UdentifyOCR.PlaceholderTemplate) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct OCRConfigs {
+  public let placeholderContainerStyle: UdentifyCommons.UdentifyViewStyle
+  public let placeholderTemplate: UdentifyOCR.PlaceholderTemplate
+  public let detectionAccuracy: Swift.Int
+  public let buttonBackColor: UIKit.UIColor
+  public let maskLayerColor: UIKit.UIColor
+  public let footerViewStyle: UdentifyCommons.UdentifyButtonStyle
+  public let buttonUseStyle: UdentifyCommons.UdentifyButtonStyle
+  public let buttonRetakeStyle: UdentifyCommons.UdentifyButtonStyle
+  public let bundle: Foundation.Bundle
+  public let tableName: Swift.String?
+  public let orientation: UdentifyOCR.OCROrientation
+  public let blurCoefficient: Swift.Double
+  public let backButtonEnabled: Swift.Bool
+  public let reviewScreenEnabled: Swift.Bool
+  public let footerViewHidden: Swift.Bool
+  public let titleLabelStyle: UdentifyCommons.UdentifyTextStyle
+  public let instructionLabelStyle: UdentifyCommons.UdentifyTextStyle
+  public let reviewTitleLabelStyle: UdentifyCommons.UdentifyTextStyle
+  public let reviewInstructionLabelStyle: UdentifyCommons.UdentifyTextStyle
+  public let progressBarStyle: UdentifyCommons.UdentifyProgressBarStyle?
+  public init(placeholderContainerStyle: UdentifyCommons.UdentifyViewStyle? = nil, placeholderTemplate: UdentifyOCR.PlaceholderTemplate = .defaultStyle, detectionAccuracy: Swift.Int = 10, buttonBackColor: UIKit.UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), maskLayerColor: UIKit.UIColor = .clear, footerViewStyle: UdentifyCommons.UdentifyButtonStyle? = nil, buttonUseStyle: UdentifyCommons.UdentifyButtonStyle? = nil, buttonRetakeStyle: UdentifyCommons.UdentifyButtonStyle? = nil, orientation: UdentifyOCR.OCROrientation = .horizontal, bundle: Foundation.Bundle = .main, tableName: Swift.String? = nil, blurCoefficient: Swift.Double = 0, requestTimeout: Swift.Double = 30, backButtonEnabled: Swift.Bool = true, reviewScreenEnabled: Swift.Bool = true, footerViewHidden: Swift.Bool = false, titleLabelStyle: UdentifyCommons.UdentifyTextStyle? = nil, instructionLabelStyle: UdentifyCommons.UdentifyTextStyle? = nil, reviewTitleLabelStyle: UdentifyCommons.UdentifyTextStyle? = nil, reviewInstructionLabelStyle: UdentifyCommons.UdentifyTextStyle? = nil, progressBarStyle: UdentifyCommons.UdentifyProgressBarStyle? = nil)
+}
+public struct IDCardOCRResponse : UdentifyOCR.CommonOCRFields, UdentifyOCR.MRZFields {
+  public var documentType: Swift.String?
+  public var countryCode: Swift.String?
+  public var documentID: Swift.String?
+  public var isOCRDocumentExpired: Swift.Bool?
+  public var faceImage: UIKit.UIImage?
+  public var firstName: Swift.String?
+  public var lastName: Swift.String?
+  public var isOCRIDValid: Swift.Bool?
+  public var identityNo: Swift.String?
+  public var birthDate: Swift.String?
+  public var expiryDate: Swift.String?
+  public var hasOCRSignature: Swift.Bool?
+  public var ocrFieldValidationMessage: Swift.String?
+  public var documentIssuer: Swift.String?
+  public var motherName: Swift.String?
+  public var fatherName: Swift.String?
+  public var mrzString: Swift.String?
+  public var gender: Swift.String?
+  public var nationality: Swift.String?
+  public var hasOCRPhoto: Swift.Bool?
+  public var hasHiddenPhoto: Swift.Bool?
+  public var isPhotoCheatDetected: Swift.Bool?
+  public var isMrzAndOcrMatch: Swift.Bool?
+  public var chipExists: Swift.Bool?
+  public var barcodeData: Swift.String?
+  public var barcodeDataExists: Swift.Bool?
+  public var mrzBirthDate: Swift.String?
+  public var mrzBirthDateChecksum: Swift.String?
+  public var mrzCountry: Swift.String?
+  public var mrzDocumentNo: Swift.String?
+  public var mrzDocumentNoChecksum: Swift.String?
+  public var mrzDocumentType: Swift.String?
+  public var mrzExpiryDate: Swift.String?
+  public var mrzExpiryDateChecksum: Swift.String?
+  public var mrzDataIntegrityChecksum: Swift.String?
+  public var mrzName: Swift.String?
+  public var mrzNationality: Swift.String?
+  public var mrzOptionalData: Swift.String?
+  public var mrzGender: Swift.String?
+  public var mrzSurname: Swift.String?
+  public var mrzDigitChecksum: Swift.String?
+  public var mrzDataExists: Swift.Bool?
+  public var mrzDocumentNoChecksumVerified: Swift.Bool?
+  public var mrzBirthDateChecksumVerified: Swift.Bool?
+  public var mrzExpiryDateChecksumVerified: Swift.Bool?
+  public var mrzFinalChecksumVerified: Swift.Bool?
+}
+public protocol OCRCameraControllerDelegate : AnyObject {
+  func onSuccess(response: UdentifyOCR.OCRResponse)
+  func onFailure(error: any Swift.Error)
+  func onDocumentScan(for documentSide: UdentifyOCR.OCRDocumentSide, frontSidePhoto: UIKit.UIImage?, backSidePhoto: UIKit.UIImage?)
+  func onBackButtonPressed(at controllerType: UdentifyOCR.ControllerType)
+  func onDestroy(controllerType: UdentifyOCR.ControllerType)
+  func willDismiss(controllerType: UdentifyOCR.ControllerType)
+  func didDismiss(controllerType: UdentifyOCR.ControllerType)
+  func didFinishOcrAndDocumentLivenessCheck(response: UdentifyOCR.OCRAndDocumentLivenessResponse)
+}
+public enum OCRDocumentType : Swift.String, Swift.CaseIterable, Swift.Comparable, Swift.Decodable, UdentifyCommons.Localizable {
+  case ID_CARD
+  case PASSPORT
+  case DRIVE_LICENCE
+  public func localizedString() -> Swift.String
+  public static func < (lhs: UdentifyOCR.OCRDocumentType, rhs: UdentifyOCR.OCRDocumentType) -> Swift.Bool
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [UdentifyOCR.OCRDocumentType]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [UdentifyOCR.OCRDocumentType] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol CommonOCRFields {
+  var documentType: Swift.String? { get set }
+  var countryCode: Swift.String? { get set }
+  var documentID: Swift.String? { get set }
+  var isOCRDocumentExpired: Swift.Bool? { get set }
+  var faceImage: UIKit.UIImage? { get set }
+  var firstName: Swift.String? { get set }
+  var lastName: Swift.String? { get set }
+  var isOCRIDValid: Swift.Bool? { get set }
+  var identityNo: Swift.String? { get set }
+  var birthDate: Swift.String? { get set }
+  var expiryDate: Swift.String? { get set }
+  var hasOCRSignature: Swift.Bool? { get set }
+  var ocrFieldValidationMessage: Swift.String? { get set }
+}
+public struct HologramResponse {
+  public var transactionID: Swift.String?
+  public var idNumber: Swift.String?
+  public var hologramFaceImage: UIKit.UIImage?
+  public var hologramExists: Swift.Bool?
+  public var ocrIdAndHologramIdMatch: Swift.Bool?
+  public var ocrFaceAndHologramFaceMatch: Swift.Bool?
+  public var error: (any Swift.Error)?
+}
+public enum OCRStatus : Swift.String {
+  case onFrontSide
+  case onBackSide
+  case onServerCall
+  case onServerResponse
+  case onResult
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct DriverLicenseOCRResponse : UdentifyOCR.CommonOCRFields {
+  public var documentType: Swift.String?
+  public var countryCode: Swift.String?
+  public var documentID: Swift.String?
+  public var isOCRDocumentExpired: Swift.Bool?
+  public var faceImage: UIKit.UIImage?
+  public var firstName: Swift.String?
+  public var lastName: Swift.String?
+  public var isOCRIDValid: Swift.Bool?
+  public var identityNo: Swift.String?
+  public var birthDate: Swift.String?
+  public var expiryDate: Swift.String?
+  public var hasOCRSignature: Swift.Bool?
+  public var ocrFieldValidationMessage: Swift.String?
+  public var issueDate: Swift.String?
+  public var ocrQRApproved: Swift.Bool?
+  public var ocrQRLicenceID: Swift.String?
+  public var ocrQRIdentityNo: Swift.String?
+  public var ocrQRIdentityNoCheck: Swift.Bool?
+  public var ocrQRLicenceIDCheck: Swift.Bool?
+  public var ocrLicenceType: Swift.String?
+  public var city: Swift.String?
+  public var district: Swift.String?
+}
+public protocol HologramCameraControllerDelegate : AnyObject {
+  func onFailure(error: any Swift.Error)
+  func onVideoRecordFinished(videoUrls: [Foundation.URL])
+  func onBackButtonPressed(at controllerType: UdentifyOCR.ControllerType)
+  func onDestroy(controllerType: UdentifyOCR.ControllerType)
+  func willDismiss(controllerType: UdentifyOCR.ControllerType)
+  func didDismiss(controllerType: UdentifyOCR.ControllerType)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class HologramCameraViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency public static func instantiate(delegate: (any UdentifyOCR.HologramCameraControllerDelegate)?, serverURL: Swift.String, transactionID: Swift.String, country: UdentifyCommons.Country? = nil, logLevel: UdentifyCommons.LogLevel = .warning) -> UdentifyOCR.HologramCameraViewController?
+  @_Concurrency.MainActor @preconcurrency public func dismissOrPopViewController(completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func popController(completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func dismissController(completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+extension UdentifyOCR.HologramCameraViewController {
+  @_Concurrency.MainActor @preconcurrency public func stopCamera()
+  @_Concurrency.MainActor @preconcurrency public func restartCamera()
+  @_Concurrency.MainActor @preconcurrency public func pauseFrameProcessing()
+  @_Concurrency.MainActor @preconcurrency public func resumeFrameProcessing()
+}
+extension UdentifyOCR.HologramCameraViewController : UdentifyCommons.UdentifyVideoControllerDelegate {
+  @_Concurrency.MainActor @preconcurrency public func onAVCaptureMovieFileOutputAddedToSession()
+  @_Concurrency.MainActor @preconcurrency public func onCameraControllerStarted()
+  @_Concurrency.MainActor @preconcurrency public func onVideoRecordStarted()
+  @_Concurrency.MainActor @preconcurrency public func onVideoRecordFinished(videoUrl: Foundation.URL)
+  @_Concurrency.MainActor @preconcurrency public func onFailure(error: any Swift.Error)
+}
+extension UdentifyOCR.HologramCameraViewController {
+  @_Concurrency.MainActor @preconcurrency public static func uploadHologramVideo(serverURL: Swift.String, transactionID: Swift.String, paths: [Foundation.URL], requestTimeout: Swift.Double = 30, completion: @escaping (UdentifyOCR.HologramResponse) -> Swift.Void)
+}
+public enum OCRDocumentSide {
+  case bothSides
+  case frontSide
+  case backSide
+  public static func == (a: UdentifyOCR.OCRDocumentSide, b: UdentifyOCR.OCRDocumentSide) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ControllerType : Swift.String {
+  case OcrViewController
+  case HologramViewController
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum OCRResponse {
+  case idCard(UdentifyOCR.IDCardOCRResponse)
+  case driverLicense(UdentifyOCR.DriverLicenseOCRResponse)
+}
+@_hasMissingDesignatedInitializers public class OCRTemplate : Swift.Decodable {
+  public var countryCode: UdentifyCommons.Country
+  public var documentType: UdentifyOCR.OCRDocumentType
+  public var requiredDocumentSides: UdentifyOCR.OCRDocumentSide
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+extension UdentifyOCR.OCRAction : Swift.Equatable {}
+extension UdentifyOCR.OCRAction : Swift.Hashable {}
+extension UdentifyOCR.OCRAction : Swift.RawRepresentable {}
+extension UdentifyOCR.OCROrientation : Swift.Equatable {}
+extension UdentifyOCR.OCROrientation : Swift.Hashable {}
+extension UdentifyOCR.PlaceholderTemplate : Swift.Equatable {}
+extension UdentifyOCR.PlaceholderTemplate : Swift.Hashable {}
+extension UdentifyOCR.OCRDocumentType : Swift.Hashable {}
+extension UdentifyOCR.OCRDocumentType : Swift.RawRepresentable {}
+extension UdentifyOCR.OCRStatus : Swift.Equatable {}
+extension UdentifyOCR.OCRStatus : Swift.Hashable {}
+extension UdentifyOCR.OCRStatus : Swift.RawRepresentable {}
+extension UdentifyOCR.OCRDocumentSide : Swift.Equatable {}
+extension UdentifyOCR.OCRDocumentSide : Swift.Hashable {}
+extension UdentifyOCR.ControllerType : Swift.Equatable {}
+extension UdentifyOCR.ControllerType : Swift.Hashable {}
+extension UdentifyOCR.ControllerType : Swift.RawRepresentable {}

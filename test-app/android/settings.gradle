@@ -1,0 +1,23 @@
+pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
+plugins { id("com.facebook.react.settings") }
+extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
+rootProject.name = 'test-app'
+include ':app'
+
+// Core shared dependency
+include ':udentify-core'
+project(':udentify-core').projectDir = new File(rootProject.projectDir, '../node_modules/udentify-core/android')
+
+// Individual libraries
+include ':mrz-rn-library'
+project(':mrz-rn-library').projectDir = new File(rootProject.projectDir, '../node_modules/mrz-rn-library/android')
+include ':ocr-rn-library'
+project(':ocr-rn-library').projectDir = new File(rootProject.projectDir, '../node_modules/ocr-rn-library/android')
+include ':nfc-rn-library'
+project(':nfc-rn-library').projectDir = new File(rootProject.projectDir, '../node_modules/nfc-rn-library/android')
+include ':liveness-rn-library'
+project(':liveness-rn-library').projectDir = new File(rootProject.projectDir, '../node_modules/liveness-rn-library/android')
+include ':video-call-rn-library'
+project(':video-call-rn-library').projectDir = new File(rootProject.projectDir, '../node_modules/video-call-rn-library/android')
+
+includeBuild('../node_modules/@react-native/gradle-plugin')

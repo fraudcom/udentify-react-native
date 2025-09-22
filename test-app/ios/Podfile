@@ -1,0 +1,67 @@
+source "https://cdn.cocoapods.org/"
+source "https://github.com/livekit/podspecs.git"
+
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, '15.1'
+prepare_react_native_project!
+
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
+end
+
+target 'FraudReactNativeTest' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # An absolute path to your application root.
+    :app_path => "#{Dir.pwd}/.."
+  )
+
+  # Udentify Core (shared dependency)
+  pod 'udentify-core', :path => '../node_modules/udentify-core'
+  
+  # OCR Library (depends on udentify-core)
+  pod 'ocr-rn-library', :path => '../node_modules/ocr-rn-library'
+  
+  # NFC Library (depends on udentify-core)
+  pod 'nfc-rn-library', :path => '../node_modules/nfc-rn-library'
+  
+  # Liveness Library (depends on udentify-core)
+  pod 'liveness-rn-library', :path => '../node_modules/liveness-rn-library'
+  
+  # Video Call Library (depends on udentify-core)
+  pod 'video-call-rn-library', :path => '../node_modules/video-call-rn-library'
+
+  target 'FraudReactNativeTestTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+  post_install do |installer|
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
+    )
+    
+    # Fix for archive distribution issue - set SKIP_INSTALL for all pods except main target
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        unless target.name == 'FraudReactNativeTest'
+          config.build_settings['SKIP_INSTALL'] = "YES"
+        end
+      end
+    end
+  end
+end

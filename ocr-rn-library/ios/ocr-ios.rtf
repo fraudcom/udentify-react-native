@@ -1,0 +1,1106 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ---\
+description: Udentify iOS SDK OCR ID Verification\
+---\
+\
+# OCR ID Verification\
+\
+## Development Environment Setup\
+\
+**Step 1:** Create a folder named \'93Frameworks\'94 under your project in Xcode\
+\
+To begin integrating the necessary frameworks, create a new folder named "Frameworks" under your project in Xcode. This folder will serve as the location for adding the frameworks in subsequent steps.\
+\
+**Step 2:** ([Download Here](../ios-sdk-resources#ocr-sdk)) In Xcode, drag and drop the following dependencies to your project's `Frameworks` folder.\
+\
+* [<mark style="color:blue;">**UdentifyCommons.xcframework**</mark>](../ios-sdk-resources#ocr-sdk)\
+* [<mark style="color:blue;">**UdentifyOCR.xcframework**</mark>](../ios-sdk-resources#ocr-sdk)\
+\
+```\
+<Project>\
+\uc0\u9492 \u9472 \u9472 \u9472 Frameworks\
+    \uc0\u9500 \u9472 \u9472 \u9472 UdentifyCommons.xcframework\
+    \uc0\u9492 \u9472 \u9472 \u9472 UdentifyOCR.xcframework\
+```\
+\
+\{% hint style="warning" %\}\
+You can use the following link to integrate our SDKs into your iOS project via [Swift Package Manager (SPM)](https://docs.fraud.com/udentify/udentify-api-and-sdk/ios-sdk/ios-sdk-resources#swift-package-manager)\
+\{% endhint %\}\
+\
+Note that the framework extension might differ based on the version you are using. Ensure that you add the correct framework versions to your project.\
+\
+**Step 3:** In Xcode, go to Project -> Targets -> General.\
+\
+After adding the frameworks to your project, navigate to the "General" tab of your project's target settings.\
+\
+**Step 4:** Select \'93Embed & Sign\'94 the option for the added frameworks under Frameworks, Libraries, and Embedded content tab.\
+\
+Under the "Frameworks, Libraries, and Embedded Content" section, select the "Embed & Sign" option for the frameworks you added in step 2. This ensures that the frameworks are included in your app bundle and signed appropriately.\
+\
+**Step 5:** In the Target settings, go to Build Settings part and select \'93No\'94 for options Enable Bitcode and Skip Install.\
+\
+Next, navigate to the "Build Settings" section of your project's target settings. Set the "Enable Bitcode" and "Skip Install" options to "No" to ensure that the frameworks are built correctly and included in your app bundle.\
+\
+**Step 6:** Finally, add the following lines to your project's Info.plist file to request access to the camera and photo library for your app:\
+\
+```swift\
+    <key>NSCameraUsageDescription</key>\
+    <string>For scanning your passport</string>\
+    <key>NSPhotoLibraryAddUsageDescription</key>\
+    <string>Please allow access to save photo in your photo library</string>\
+```\
+\
+With these steps completed, you should now be able to integrate the necessary frameworks into your Xcode project and ensure that your app has the necessary permissions to access the camera and photo library.\
+\
+## OCR\
+\
+It allows you to take photos of documents and returns the photos using a delegate. Then, you can call the backend API by sending those photos for OCR processing.\
+\
+#### Step 1: Import UdentifyOCR and UdentifyCommons frameworks\
+\
+Import the required frameworks in your project:\
+\
+```swift\
+import UdentifyCommons\
+import UdentifyOCR\
+```\
+\
+#### Step 2: Set UIViewController orientation to Portrait mode\
+\
+Make sure to set the orientation of the current `UIViewController` to Portrait mode. Create an instance variable of `OCRCameraViewController`:\
+\
+```swift\
+var cameraController: OCRCameraViewController?\
+```\
+\
+#### Step 3: Conform to OCRCameraControllerDelegate protocol\
+\
+Make your class (suppose it is named `OcrViewController`) conform to the `OCRCameraControllerDelegate` protocol and implement its methods:\
+\
+```swift\
+@available(iOS 11.0, *)\
+extension OcrViewController: OCRCameraControllerDelegate \{\
+    \
+    func willDismiss(controllerType: UdentifyOCR.ControllerType) \{\
+        // If necessary, handle dismissal event\
+    \}\
+    \
+    func didDismiss(controllerType: UdentifyOCR.ControllerType) \{\
+        // If necessary, handle the dismissal of the camera view controller. If the camera view controller is dismissed and get the responses, you can set the camera controller to nil.\
+    \}\
+    \
+    public func onSuccess(response: OCRResponse) \{\
+        // Handle OCR success. This callback is triggered when OCR instantiated withApiCallEnabled.\
+    \}\
+\
+    public func onFailure(error: Error) \{\
+        // Handle OCR failure. This callback triggered when OCR instantiated withApiCallEnabled.\
+    \}\
+\
+    public func onDocumentScan(for documentSide: OCRDocumentSide, frontSidePhoto: UIImage?, backSidePhoto: UIImage?) \{\
+        // Handle document scan\
+    \}\
+\
+    func onBackButtonPressed(at controllerType: UdentifyOCR.ControllerType) \{\
+        // Handle back button press\
+    \}\
+      \
+    func onDestroy(controllerType: UdentifyOCR.ControllerType) \{\
+        // If necessary, handle the destruction of the camera view controller\
+    \}\
+\
+    func didFinishOcrAndDocumentLivenessCheck(response: OCRAndDocumentLivenessResponse)\{\
+        // Handle OCR and Document Liveness check response. This callback triggered when OCR instantiated withApiCallEnabled if documentLivenessEnabled is set to `true`.\
+    \}\
+  \
+\}\
+```\
+\
+#### Step 4: Instantiate OCRCameraViewController and present it\
+\
+Instantiate `OCRCameraViewController` and present it. The view controller takes photos of the document sides and closes the camera view. You can open the camera for each side one by one or take photos of both sides (if needed) at the same time by sending `.bothSides` as a parameter. The result can be obtained from the `onDocumentScan` delegate method:\
+\
+```swift\
+// Instantiate the camera controller\
+guard let vc = OCRCameraViewController.instantiate(withApiCallDisabled: self,\
+                                                    serverURL: serverUrl,\
+                                                    transactionID: txid, \
+                                                    documentType: OcrConfig.documentType!, \
+                                                    country: nil, // OPTIONAL - Country code (ISO 3166-1 alpha-3) of the document\
+                                                    documentSide: docSide,\
+                                                    manualCapture: false) \
+else \{\
+    fatalError("Error: can't instantiate camera viewcontroller")\
+\}\
+self.cameraController = vc\
+\
+// Set options before showing\
+vc.modalPresentationStyle = .fullScreen\
+\
+// Present the view controller\
+self.navigationController?.present(vc, animated: true)\
+```\
+\
+#### Parameters\
+\
+* `serverURL`: A parameter of type `String` representing the URL of the Udentify server. It specifies the location where OCR processing requests will be sent. It should be a valid URL. Ensure that this value is properly configured.\
+* `transactionID`: A parameter of type `String` representing a Udentify transactionID for the OCR transaction. It helps in tracking and managing OCR requests. Make sure that a valid transaction ID is provided.\
+* `documentType`: A parameter of type `OCRDocumentType` representing the type of the document being processed for OCR. It is an enumeration with possible values: `.ID_CARD`, `.PASSPORT`, or `.DRIVE_LICENCE`.\
+* `country`: A parameter of type `Country?` representing the country associated with the document. It is an enumeration with possible values, such as `.TUR`, `.GBR`, `.COL`, `.ESP`, `.BRA`, `.USA`, `.PER`, `.ECU`. This parameter is marked as optional, which means it may or may not be provided. `Default value` is `nil`\
+* `documentSide`: A parameter of type `OCRDocumentSide` representing the side of the document being processed. It is an enumeration with possible values: `.bothSides`, `.frontSide`, or `.backSide`. This parameter specifies whether both sides of the document, the front side, or the back side is being captured. `Default value` is `.bothSides`\
+* `manualCapture`: A boolean parameter that determines whether manual capture mode is enabled. If set to `true`, it indicates that the user will manually capture images. If set to `false`, it suggests that automatic capture mode may be enabled, where the camera automatically captures images. `Default value` is `false`\
+\
+#### Step 5: Call the API to parse the document\
+\
+Within the `onDocumentScan` delegate method, you can check if all the required photos are received. If so, then you can call the API to parse the document:\
+\
+```swift\
+OCRCameraViewController.performOCR(\
+    serverURL: serverUrl,\
+    transactionID: transactionID,\
+    frontSidePhoto: frontImage,\
+    backSidePhoto: backImage,\
+    country: nil,  // OPTIONAL - Country code (ISO 3166-1 alpha-3) of the document\
+    documentType: documentType // Document type\
+) \{ (resp, err) in\
+    // Handle OCR response or error\
+\}\
+```\
+\
+## OCRResponse\
+\
+The `OCRResponse` enum is designed to encapsulate OCR (Optical Character Recognition) responses for different types of documents, such as ID Cards and Driver Licenses.\
+\
+```swift\
+public enum OCRResponse \{\
+    case idCard(IDCardOCRResponse)\
+    case driverLicense(DriverLicenseOCRResponse)\
+\}\
+```\
+\
+### Cases\
+\
+* **idCard(IDCardOCRResponse)**: Represents the OCR response for an ID Card.\
+* **driverLicense(DriverLicenseOCRResponse)**: Represents the OCR response for a Driver License.\
+\
+### Associated Types\
+\
+#### 1. IDCardOCRResponse\
+\
+```swift\
+public struct IDCardOCRResponse: CommonOCRFields \{\
+    \
+    public var documentType: String?\
+    public var countryCode: String?\
+    public var documentID: String?\
+    public var isOCRDocumentExpired: Bool?\
+    public var faceImage: UIImage?\
+    public var firstName: String?\
+    public var lastName: String?\
+    public var isOCRIDValid: Bool?\
+    public var identityNo: String?\
+    public var birthDate: String?\
+    public var expiryDate: String?\
+    public var hasOCRSignature: Bool?\
+    public var ocrFieldValidationMessage: String?\
+    public var documentIssuer: String?\
+    public var motherName: String?\
+    public var fatherName: String?\
+    public var mrzString: String?\
+    public var gender: String?\
+    public var nationality: String?\
+    public var hasOCRPhoto: Bool?\
+    public var hasHiddenPhoto: Bool?\
+    public var isPhotoCheatDetected: Bool?\
+    public var mrzDataExists: Bool?\
+    public var mrzBirthDate: String?\
+    public var mrzBirthDateChecksum: String?\
+    public var mrzCountry: String?\
+    public var mrzDocumentNo: String?\
+    public var mrzDocumentNoChecksum: String?\
+    public var mrzDocumentType: String?\
+    public var mrzExpiryDate: String?\
+    public var mrzExpiryDateChecksum: String?\
+    public var mrzDataIntegrityChecksum: String? // MRZ Final Hash\
+    public var mrzName: String?\
+    public var mrzNationality: String?\
+    public var mrzOptionalData: String?\
+    public var mrzGender: String?\
+    public var mrzSurname: String?\
+    public var barcodeData: String?\
+    public var barcodeDataExists: Bool?\
+    public var mrzDigitChecksum: String?\
+    public var isMrzAndOcrMatch: Bool?\
+    public var chipExists: Bool?    \
+    public var mrzDocumentNoChecksumVerified: Bool?\
+    public var mrzBirthDateChecksumVerified: Bool?\
+    public var mrzExpiryDateChecksumVerified: Bool?\
+    public var mrzFinalChecksumVerified: Bool?\
+    \
+\}\
+```\
+\
+#### 2. DriverLicenseOCRResponse\
+\
+```swift\
+public struct DriverLicenseOCRResponse: CommonOCRFields \{\
+    \
+    public var documentType: String?\
+    public var countryCode: String?\
+    public var documentID: String?\
+    public var isOCRDocumentExpired: Bool?\
+    public var faceImage: UIImage?\
+    public var firstName: String?\
+    public var lastName: String?\
+    public var isOCRIDValid: Bool?\
+    public var identityNo: String?\
+    public var birthDate: String?\
+    public var expiryDate: String?\
+    public var hasOCRSignature: Bool?\
+    public var ocrFieldValidationMessage: String?\
+    public var issueDate: String?\
+    public var ocrQRApproved: Bool?\
+    public var ocrQRLicenceID: String?\
+    public var ocrQRIdentityNo: String?\
+    public var ocrQRIdentityNoCheck: Bool?\
+    public var ocrQRLicenceIDCheck: Bool?\
+    public var ocrLicenceType: String?\
+    public var city: String?\
+    public var district: String?\
+    \
+\}\
+```\
+\
+* `expiryDate: String?`: Expiry date of the document.\
+* `documentID: String?`: Document number of the document.\
+* `documentIssuer: String?`: Issuer of the document.\
+* `motherName: String?`: Mother's name.\
+* `fatherName: String?`: Father's name.\
+* `firstName: String?`: First name of the document holder.\
+* `lastName: String?`: Last name of the document holder.\
+* `identityNo: String?`: Identity number of the document holder.\
+* `birthDate: String?`: Date of birth of the document holder.\
+* `gender: String?`: Gender of the document holder.\
+* `nationality: String?`: Nationality of the document holder.\
+* `mrzName: String?`: Name extracted from MRZ (Machine-Readable Zone) on the document.\
+* `mrzNationality: String?`: Nationality extracted from MRZ.\
+* `mrzOptionalData: String?`: Optional data extracted from MRZ.\
+* `mrzGender: String?`: Gender extracted from MRZ.\
+* `mrzSurname: String?`: Surname extracted from MRZ.\
+* `barcodeDataExists: Bool?`: Flag indicating whether barcode data exists.\
+* `barcodeData: String?`: Data from the document's barcode.\
+* `mrzDigitChecksum: String?`: Checksum calculated from MRZ digits.\
+* `isMrzAndOcrMatch: Bool?`: Flag indicating whether MRZ and OCR data match.\
+* `chipExists: Bool?`: Flag indicating whether a chip exists on the document.\
+* `mrzDataExists: Bool?`: Flag indicating whether MRZ data exists.\
+* `mrzString: String?`: The full MRZ string from the document.\
+* `mrzBirthDate: String?`: Birth date extracted from MRZ.\
+* `mrzBirthDateChecksum: String?`: Checksum for the MRZ birth date.\
+* `mrzCountry: String?`: Country code extracted from MRZ.\
+* `mrzDocumentNo: String?`: Document number extracted from MRZ.\
+* `mrzDocumentNoChecksum: String?`: Checksum for the MRZ document number.\
+* `mrzDocumentType: String?`: Document type extracted from MRZ.\
+* `mrzExpiryDate: String?`: Expiry date extracted from MRZ.\
+* `mrzExpiryDateChecksum: String?`: Checksum for the MRZ expiry date.\
+* `mrzDataIntegrityChecksum: String?`: Final hash checksum for MRZ data.\
+* `faceImage: UIImage?`: An image of the document holder's face.\
+* `hasOCRPhoto: Bool?`: Flag indicating whether an OCR photo is present.\
+* `hasOCRSignature: Bool?`: Flag indicating whether an OCR signature is present.\
+* `hasHiddenPhoto: Bool?`: Flag indicating whether a hidden photo is present.\
+* `isPhotoCheatDetected: Bool?`: Flag indicating whether photo cheating is detected.\
+* `countryCode: String?`: Country code of the document.\
+* `documentType: String?`: Type of the document.\
+* `isOCRDocumentExpired: Bool?`: Indicates whether the document\'92s expiry date has passed.\
+* `isOCRIDValid: Bool?`: Indicates whether the ID No read by OCR is valid.\
+* `ocrFieldValidationMessage: String?`: A message detailing the OCR validation issues.\
+* `issueDate: String?`: Issue date of the driver\'92s license.\
+* `ocrQRApproved: Bool?`: Indicates whether the QR code on the driver\'92s license was successfully validated.\
+* `ocrQRLicenceID: String?`: License ID extracted from the QR code.\
+* `ocrQRIdentityNo: String?`: Identity number extracted from the QR code.\
+* `ocrQRIdentityNoCheck: Bool?`: Indicates whether the QR code\'92s identity number matches the expected value.\
+* `ocrQRLicenceIDCheck: Bool?`: Indicates whether the QR code\'92s license ID matches the expected value.\
+* `ocrLicenceType: String?`: Type of the license.\
+* `city: String?`: City where the driver\'92s license was issued.\
+* `district: String?`: District within the issuing city where the license was processed.\
+* `mrzDocumentNoChecksumVerified: Bool?`: Present only when the OCR-read document number and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+* `mrzBirthDateChecksumVerified: Bool?`: Present only when the OCR-read birthdate and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+* `mrzExpiryDateChecksumVerified: Bool?`: Present only when the OCR-read expiry date and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+* `mrzFinalChecksumVerified: Bool?`: Present only when the OCR-read final checksum and its calculated checksum do not match. Indicates that a checksum mismatch has occurred.\
+\
+#### Usage\
+\
+The properties of the `OCRResponse` object can be accessed based on the document type:\
+\
+```swift\
+switch ocrResponse \{\
+        case .idCard(let idCardResponse):\
+            // Handle ID Card specific logic\
+            let image = idCardResponse.faceImage\
+            let firstName = idCardResponse.firstName\
+            let lastName = idCardResponse.lastName\
+            let fatherName = idCardResponse.fatherName\
+            let motherName = idCardResponse.motherName\
+            // Access other properties as needed\
+            \
+        case .driverLicense(let driverLicenseResponse):\
+            // Handle Driver License specific logic\
+            let ocrDocumentType = driverLicenseResponse.documentType\
+            let ocrCountryCode = driverLicenseResponse.countryCode\
+            let documentNumber = driverLicenseResponse.documentID\
+            // Access other properties as needed\
+            \
+\}\
+```\
+\
+You can dismiss/pop the camera view controller by calling the following method:\
+\
+```swift\
+\
+self.cameraController?.dismissOrPopViewController()\
+\
+```\
+\
+## Hologram Check\
+\
+#### Step 1: Import <mark style="color:blue;">UdentifyOCR</mark> and <mark style="color:blue;">UdentifyCommons</mark> framework\
+\
+Import the necessary frameworks to access the HologramCameraViewController class and related features.\
+\
+#### Step 2: Set <mark style="color:blue;">UIViewController</mark> Orientation and Create Instance Variable\
+\
+Ensure the orientation of the current UIViewController is set to Portrait mode. Then, create an instance variable of the HologramCameraViewController class:\
+\
+```swift\
+var cameraController: HologramCameraViewController?\
+```\
+\
+#### Step 3: Conform to <mark style="color:blue;">HologramCameraControllerDelegate</mark> Protocol\
+\
+Make your class (e.g., HologramViewController) conform to the <mark style="color:blue;">HologramCameraControllerDelegate</mark> protocol and implement the delegate methods:\
+\
+```swift\
+@available(iOS 11.0, *)\
+extension HologramViewController: HologramCameraControllerDelegate \{\
+\
+    func willDismiss(controllerType: UdentifyOCR.ControllerType) \{\
+        // If necessary, handle dismissal event\
+    \}\
+    \
+    func didDismiss(controllerType: UdentifyOCR.ControllerType) \{\
+        // If necessary, handle the dismissal of the camera view controller. If the camera view controller is dismissed and get the responses, you can set the camera controller to nil.\
+    \}\
+    \
+    public func onFailure(error: Error) \{\
+        // Handle error occurrence\
+    \}\
+\
+    public func onVideoRecordFinished(videoUrls: [URL]) \{\
+        // Handle successful hologram video recording\
+    \}\
+\
+    func onBackButtonPressed(at controllerType: UdentifyOCR.ControllerType) \{\
+        // Handle back button press event\
+    \}\
+\
+    func onDestroy(controllerType: UdentifyOCR.ControllerType) \{\
+        // If necessary, handle the destruction of the camera view controller\
+    \}\
+\}\
+```\
+\
+#### Step 4: Instantiate <mark style="color:blue;">HologramCameraViewController</mark> and Present It\
+\
+Create an instance of the HologramCameraViewController class and present it. The view controller will record the hologram video and return its URL path:\
+\
+```swift\
+guard let vc = HologramCameraViewController.instantiate(delegate: self, serverURL: serverUrl, transactionID: txid) else \{\
+    fatalError("Error: can't instantiate camera viewcontroller")\
+\}\
+\
+self.cameraController = vc\
+\
+// set options before showing\
+vc.modalPresentationStyle = .fullScreen\
+\
+self.navigationController?.present(vc, animated: true)\
+```\
+\
+#### Step 5: Handle Hologram Check Results\
+\
+The hologram check results will be returned either through the `onVideoRecordFinished` or the `onFailure` delegate methods. Implement the required functionality within these methods to handle the hologram check results as needed.\
+\
+```swift\
+public func onVideoRecordFinished(videoUrls: [URL]) \{\
+    // Handle hologram check success\
+\}\
+\
+public func onFailure(error: Error) \{\
+    // Handle hologram check failure\
+\}\
+```\
+\
+#### Step 6: Perform API Call\
+\
+If the `onVideoRecordFinished (videoUrls: [URL])` method is invoked, then you can call the backend API within the method in order to perform Hologram Check:\
+\
+```swift\
+public func onVideoRecordFinished (videoUrls: [URL]) \{\
+    // Upload hologram video for hologram check\
+    HologramCameraViewController.uploadHologramVideo(serverURL: serverUrl, transactionID: transactionID, paths: videoUrls)\
+    \{ \
+       (response) in\
+    \
+        guard let err = response.error else \{\
+              \
+          self.addMessage(message: "Hologram check is succeeded!")\
+              \
+          self.addMessage(message: String(describing: response))\
+      \
+          return\
+    \
+          \}\
+          \
+      self.addMessage(message: "Hologram check is failed. Error occured: \\(err)")\
+    \
+    \}\
+\}\
+```\
+\
+\{% hint style="info" %\}\
+Hologram captures videos for hologram verification purposes, and these videos are stored in the application's temporary directory. When the uploadHologramVideo method is invoked, the videos will be deleted. However, if the application is terminated before calling the uploadHologramVideo method, the videos will not be automatically removed immediately. In such cases, you have the option to manually delete the videos by using their respective URLs.\
+\{% endhint %\}\
+\
+## HologramResponse\
+\
+The `HologramResponse` struct represents a response object that contains information about a hologram transaction.\
+\
+* `transactionID: String?`: Udentify transactionID.\
+* `idNumber: String?`: The identification number associated with the hologram.\
+* `hologramFaceImage: UIImage?`: An image of the hologram face.\
+* `hologramExists: Bool?`: A flag indicating whether the hologram exists.\
+* `ocrIdAndHologramIdMatch: Bool?`: A flag indicating whether the OCR (Optical Character Recognition) identification and hologram identification match.\
+* `ocrFaceAndHologramFaceMatch: Bool?`: A flag indicating whether the OCR face recognition and hologram face recognition match.\
+* `error: Error?`: An error object containing information about any encountered errors during the hologram transaction.\
+\
+You can dismiss the camera view controller by calling the following method:\
+\
+```swift\
+\
+self.cameraController?.dismissController()\
+\
+```\
+\
+## Document Liveness\
+\
+When verifying users remotely, they may need to provide government-issued IDs for identification. However, if the authenticity of these images isn't confirmed, malicious actors could use photos of documents they don't actually have, create fake document images, or alter genuine documents. Such "presentation attacks" undermine trust in digital identities, increase fraud-related losses, and attract more regulatory attention. To address these issues, a solution has been created to detect and prevent such presentation attacks efficiently.\
+\
+Document Liveness check can be performed by two methods:\
+\
+1. **OCR and Document Liveness Verification:** This approach integrates Optical Character Recognition (OCR) with Document Liveness verification to ensure the document's authenticity and extract its information. It requires running both OCR and Document Liveness checks on the submitted document images.\
+2. **Document Liveness Verification:** This method focuses on conducting a Document Liveness check on the submitted document images to confirm their authenticity.\
+\
+\{% hint style="info" %\}\
+The document images can be captured using the same steps as those used for performing OCR. The images can be retrieved from the \\`onDocumentScan\\` delegate method. The only difference is the API call that will be made within the \\`onDocumentScan\\` method.\
+\{% endhint %\}\
+\
+#### Step 1: Import UdentifyOCR and UdentifyCommons frameworks\
+\
+Import the required frameworks in your project:\
+\
+```swift\
+import UdentifyCommons\
+import UdentifyOCR\
+```\
+\
+#### Step 2: Perform API Call\
+\
+**a. OCR and Document Liveness Verification**\
+\
+```swift\
+public static func performOCRAndDocumentLiveness(\
+    serverURL: String, \
+    transactionID: String, \
+    frontSidePhoto: UIImage?, \
+    backSidePhoto: UIImage?, \
+    country: Country? = nil, \
+    documentType: OCRDocumentType, \
+    requestTimeout: Double = 30, \
+    completion: @escaping (OCRAndDocumentLivenessResponse) -> Void\
+)\
+```\
+\
+**Parameters**\
+\
+* `serverURL`: A parameter of type `String` representing the URL of the Udentify server. It specifies the location where OCR processing requests will be sent. It should be a valid URL. Ensure that this value is properly configured.\
+* `transactionID`: A parameter of type `String` representing a Udentify transactionID for the OCR transaction. It helps in tracking and managing OCR requests. Make sure that a valid transaction ID is provided.\
+* `frontSidePhoto: UIImage?`: The front side photo of the document.\
+* `backSidePhoto: UIImage?`: The back side photo of the document.\
+* `country`: A parameter of type `Country?` representing the country associated with the document. It is an enumeration with possible values, such as `.TUR`, `.GBR`, `.COL`, `.ESP`, `.BRA`, `.USA`, `.PER`, `.ECU`. This parameter is marked as optional, which means it may or may not be provided. `Default value` is `nil`\
+* `documentType`: A parameter of type `OCRDocumentType` representing the type of the document being processed for OCR. It is an enumeration with possible values: `.ID_CARD`, `.PASSPORT`, or `.DRIVE_LICENCE`.\
+* `requestTimeout: Double`: The timeout for the request, default is 30 seconds.\
+* `completion: @escaping (OCRAndDocumentLivenessResponse) -> Void`: A completion handler that is called when the request is complete.\
+\
+**Description**\
+\
+The `performOCRAndDocumentLiveness` method performs both OCR (Optical Character Recognition) and document liveness checks on the provided document images. This method requires a server URL, a unique transaction ID, the front and the back side photos of the document (at least one side of the document's photo must be provided), the type of document, and an optional country parameter. It sends the request to the specified server and handles the response through the provided completion handler.\
+\
+**Example Usage**\
+\
+```swift\
+import UdentifyCommons\
+import UdentifyOCR\
+\
+// Assuming serverURL, transactionID, frontSidePhoto, backSidePhoto, and documentType are defined\
+\
+OCRCameraViewController.performOCRAndDocumentLiveness(\
+    serverURL: serverURL,\
+    transactionID: transactionID,\
+    frontSidePhoto: frontSidePhoto,\
+    backSidePhoto: backSidePhoto,\
+    country: .TUR,  // Optional parameter\
+    documentType: .ID_CARD,\
+    requestTimeout: 30\
+) \{ response in\
+    if response.isFailed \{\
+        // Handle failure\
+        print("Request failed")\
+    \} else \{\
+        // Process OCR data\
+        if let ocrData = response.ocrData \{\
+            if let ocrResponse = ocrData.ocrResponse \{\
+                // Handle OCR response\
+            \}\
+        \}\
+        \
+        // Process front side liveness data\
+        if let frontData = response.documentLivenessDataFront \{\
+            if let frontResponse = frontData.documentLivenessResponse \{\
+                print("Document's front side liveness probability: \\(frontResponse.aggregateDocumentLivenessProbability)")\
+            \}\
+        \}\
+        \
+        // Process back side liveness data\
+        if let backData = response.documentLivenessDataBack \{\
+            if let backResponse = backData.documentLivenessResponse \{\
+                print("Document's back side liveness probability: \\(backResponse.aggregateDocumentLivenessProbability)")\
+            \}\
+        \}\
+    \}\
+\}\
+```\
+\
+**b. Document Liveness Verification**\
+\
+```swift\
+public static func performDocumentLiveness(\
+    serverURL: String, \
+    transactionID: String, \
+    frontSidePhoto: UIImage?, \
+    backSidePhoto: UIImage?, \
+    requestTimeout: Double = 30, \
+    completion: @escaping (OCRAndDocumentLivenessResponse) -> Void\
+)\
+```\
+\
+**Parameters**\
+\
+* `serverURL`: A parameter of type `String` representing the URL of the Udentify server. It specifies the location where requests will be sent. It should be a valid URL. Ensure that this value is properly configured.\
+* `transactionID`: A parameter of type `String` representing a Udentify transactionID for the transaction. It helps in tracking and managing requests. Make sure that a valid transaction ID is provided.\
+* `frontSidePhoto: UIImage?`: The front side photo of the document.\
+* `backSidePhoto: UIImage?`: The back side photo of the document.\
+* `requestTimeout: Double`: The timeout for the request, default is 30 seconds.\
+* `completion: @escaping (OCRAndDocumentLivenessResponse) -> Void`: A completion handler that is called when the request is complete.\
+\
+**Example Usage**\
+\
+```swift\
+import UdentifyCommons\
+import UdentifyOCR\
+\
+// Assuming serverURL, transactionID, frontSidePhoto, and backSidePhoto are defined\
+\
+OCRCameraViewController.performDocumentLiveness(\
+    serverURL: serverURL,\
+    transactionID: transactionID,\
+    frontSidePhoto: frontSidePhoto,\
+    backSidePhoto: backSidePhoto\
+) \{ response in\
+\
+    if response.isFailed \{\
+        // Handle failure\
+        print("Request failed")\
+    \} else \{\
+    \
+        // Process front side liveness data\
+        if let frontData = response.documentLivenessDataFront \{\
+            if let frontResponse = frontData.documentLivenessResponse \{\
+                print("Document's front side liveness probability: \\(frontResponse.aggregateDocumentLivenessProbability)")\
+            \}\
+        \}\
+        \
+        // Process back side liveness data\
+        if let backData = response.documentLivenessDataBack \{\
+            if let backResponse = backData.documentLivenessResponse \{\
+                print("Document's back side liveness probability: \\(backResponse.aggregateDocumentLivenessProbability)")\
+            \}\
+        \}\
+        \
+    \}\
+    \
+\}\
+```\
+\
+### Response\
+\
+#### OCRAndDocumentLivenessResponse\
+\
+The completion handler provides an `OCRAndDocumentLivenessResponse` object. This struct contains the following properties:\
+\
+* `isFailed: Bool`: Indicates if the request has failed.\
+* `ocrData: (ocrResponse: OCRResponse?, error: Error?)?`: Contains the OCR response.\
+* `documentLivenessDataFront: (documentLivenessResponse: DocumentLivenessResponse?, error: Error?)?`: Contains the document liveness response for the front side, if a front side photo was provided.\
+* `documentLivenessDataBack: (documentLivenessResponse: DocumentLivenessResponse?, error: Error?)?`: Contains the document liveness response for the back side, if a back side photo was provided.\
+\
+#### OCRResponse\
+\
+This enum represents the OCR response.\
+\
+#### DocumentLivenessResponse\
+\
+This struct contains the results of the document liveness check:\
+\
+* `pipelineResults: [DocumentLivenessPipelineResult]?`: A list of pipeline results.\
+* `aggregateDocumentLivenessProbability: String?`: The aggregate document liveness probability, ranging from 0 to 1.\
+* `aggregateDocumentImageQualityWarnings: String?`: Aggregate image quality warnings.\
+\
+#### DocumentLivenessPipelineResult\
+\
+This struct represents the results from each pipeline in the document liveness check:\
+\
+* `name: String?`: The name of the pipeline.\
+* `calibration: String?`: The calibration used for checking liveness (REGULAR, SOFT, or HARD).\
+* `documentLivenessScore: String?`: Raw liveness checking score, can be used for calibration\
+* `documentLivenessProbability: String?`: The document liveness probability, ranging from 0 to 1.\
+* `documentStatusCode: String?`: Image validation status code (image validation is performed beforehand each liveness check)\
+\
+### Making a Liveness Check Decision\
+\
+Use the `aggregateDocumentLivenessProbability` from `DocumentLivenessResponse` to make a liveness check decision. A document is considered "live" if the probability is greater than 0.5.\
+\
+> **Important**: To ensure proper resource cleanup, make sure to set Ocr, Hologram `cameraController` to `nil` once you\'92re done using them. Also, make sure that any relevant delegate methods are invoked before setting these controllers to nil.\
+\
+## Error Messages\
+\
+#### UdentifyCommons Error Messages\
+\
+#### ServerError\
+\
+The `ServerError` enum represents errors that can occur while interacting with the server.\
+\
+```swift\
+public enum ServerError: Error \{\
+    case InvalidResponse(String)\
+    case UnexpectedError(Error)\
+\}\
+```\
+\
+Possible cases:\
+\
+* `InvalidResponse`: The server has returned an invalid response. The associated value contains a description of the error.\
+* `UnexpectedError`: An unexpected error occurred while processing the server response. The associated value contains the original error.\
+\
+#### CameraError\
+\
+The `CameraError` enum represents errors that can occur while using the camera.\
+\
+```swift\
+public enum CameraError: Error \{\
+    case CameraNotFound\
+    case MinIOSRequirementNotSatisfied\
+    case CameraPermissionRequired\
+    case FocusViewInvalidSize(String)\
+    case SessionPresetNotAvailable\
+    case SessionNotRunning\
+    case VideoPathMissing\
+    case UnableToGenerateVideoData(String)\
+    case VideoExportingFailed(String)\
+    case VideoExportingCancelled\
+    case Unknown\
+\}\
+```\
+\
+Possible cases:\
+\
+* `CameraNotFound`: The camera is not available on the device.\
+* `MinIOSRequirementNotSatisfied`: The minimum iOS requirement is not satisfied.\
+* `CameraPermissionRequired`: The camera permission has not been granted.\
+* `FocusViewInvalidSize`: The focus view has an invalid size. The associated value contains a description of the error.\
+* `SessionPresetNotAvailable`: The session preset is not available.\
+* `SessionNotRunning`: The session is not running.\
+* `VideoPathMissing`: The video path is missing.\
+* `UnableToGenerateVideoData`: Unable to generate video data. The associated value contains a description of the error.\
+* `VideoExportingFailed`: Video exporting failed. The associated value contains a description of the error.\
+* `VideoExportingCancelled`: Video exporting was cancelled.\
+* `Unknown`: An unknown error occurred.\
+\
+#### UdentifyOCR Error Messages\
+\
+#### OCRError\
+\
+The `OCRError` enum represents errors that can occur during OCR processing.\
+\
+```swift\
+public enum OCRError: Error \{\
+    case Unknown\
+    case api(String)\
+    case other(Error)\
+    case missingOcrResponse\
+    case missingDocumentLivenessResponse\
+    case missingRequiredParameters(String)\
+\}\
+```\
+\
+Possible cases:\
+\
+* `Unknown`: An unknown error occurred during OCR processing.\
+* `api(String)`: This error occurs when there is an issue with the API call.\
+* `other(Error)`: This error occurs when an error is encountered that does not fall under any of the other categories.\
+* `missingOcrResponse`: The OCR response is missing.\
+* `missingDocumentLivenessResponse`: The document liveness response is missing.\
+* `missingRequiredParameters(String)`: Required parameters are missing. The associated value contains a description of the missing parameters.\
+\
+#### Troubleshooting\
+\
+If the frameworks cannot be found, place them under a folder named "Frameworks" and perform the following steps in the Target Settings:\
+\
+* In Runpath Search Paths, add `@executable_path/Frameworks`.\
+* In Framework Search Paths, add `$(PROJECT_DIR)/Frameworks`.\
+\
+## OCR Config Parameters\
+\
+<table><thead><tr><th width="216">Parameter Name</th><th width="510.3333333333333">Definition</th></tr></thead><tbody><tr><td><mark style="color:blue;"><strong>blurCoefficient</strong></mark></td><td>The blurCoefficient is a threshold value ranging from -1 to 1 that determines the level of blurriness in the captured image. If the blurriness ratio of the image is above this threshold, the image is considered non-blurry and processed. Conversely, if the blurriness ratio is below this value, the image is deemed blurry and not processed. The default value is 0.0, where approaching -1 makes the system less selective, and approaching 1 makes it more selective by only accepting sharper images. A value of -1 disables blurriness detection.</td></tr><tr><td><mark style="color:blue;"><strong>requestTimeout</strong></mark></td><td>The requestTimeout specifies the timeout duration in seconds for server calls. The default value is 30 seconds. It allows you to set a different timeout value, such as 15 seconds, to adjust the duration for processing server requests.</td></tr><tr><td><mark style="color:blue;"><strong>detectionAccuracy</strong></mark></td><td>The detectionAccuracy determines the level of focus accuracy in the OCR process. It accepts a value from 0 to 100, where 0 represents lower accuracy and 100 represents higher accuracy. The default value is 10 . You can adjust this value to tailor the focus accuracy according to your specific requirements.</td></tr></tbody></table>\
+\
+## UI Customisation\
+\
+To customise the user interface, create a struct that implements `OCRSettings` and modify the properties as needed.\
+\
+`OCRConfigs` is a customizable struct in the **UdentifyOCR** framework that provides developers with a comprehensive set of options for configuring Optical Character Recognition (OCR) functionality. This guide explains the available parameters and their default values to help you tailor the OCR behavior and UI to your application needs.\
+\
+### Properties\
+\
+* **`placeholderContainerStyle`** (`UdentifyViewStyle`):\\\
+  Defines the visual styling for the placeholder container, including background color, corner radius, border color, and border width.\\\
+  **Default**: a semi-transparent purple background with a white border.\
+* **`placeholderTemplate`** (`PlaceholderTemplate`):\\\
+  Specifies the design style of the placeholder container. Options include `.hidden`, `.defaultStyle`, and `.countrySpecificStyle`.**Default**: `.defaultStyle`.\
+* **`detectionAccuracy`** (`Int`):\\\
+  The accuracy level for OCR detection. This value is clamped between `0` and `200` to ensure it remains within valid bounds.\\\
+  **Default**: `10`.\
+* **`buttonBackColor`** (`UIColor`):\\\
+  The background color for back button.\\\
+  **Default**: `.white`.\
+* **`maskLayerColor`** (`UIColor`):\\\
+  The color of the mask layer that overlays the OCR interface.\\\
+  **Default**: `.clear`.\
+* **`footerViewStyle`** (`UdentifyButtonStyle`):\\\
+  The style applied to the footer view button, specifying its visual and textual properties.**Default**: a semi-transparent purple button style with bold white text.\
+* **`buttonUseStyle`** (`UdentifyButtonStyle`):\\\
+  The style applied to the "Use" button, specifying its visual and textual properties.**Default**: a semi-transparent purple button style with bold white text.\
+* **`buttonRetakeStyle`** (`UdentifyButtonStyle`):\\\
+  The style applied to the "Retake" button, specifying its visual and textual properties.**Default**: a semi-transparent purple button style with bold white text.\
+* **`bundle`** (`Bundle`):\\\
+  Specifies the resource bundle used for localization within the OCR interface.\\\
+  **Default**: `.main`.\
+* **`tableName`** (`String?`):\\\
+  The name of the localization table to use for translating text within the OCR interface.\\\
+  **Default**: `nil`.\
+* **`orientation`** (`OCROrientation`):\\\
+  The orientation of the placeholder to indicate the document's position during OCR. Options: `.vertical` or `.horizontal`.**Default**: `.horizontal`.\
+* **`blurCoefficient`** (`Double`):\\\
+  \\[OPTIONAL] The blurCoefficient is a threshold value ranging from -1 to 1. If the captured image's blurriness ratio is above this threshold value, the image is considered non-blurry. If the blurriness ratio of the image is below this value, it is considered blurry and not processed. With 0 being the default value, as it approaches -1, the system becomes less selective in accepting images. As it approaches 1, it becomes more selective and only accepts sharper images. When it is -1, blurriness detection is turned off.\\\
+  **Default**: `0`.\
+* **`backButtonEnabled`** (`Bool`):\\\
+  Determines whether the back button is enabled and visible within the OCR interface.\\\
+  **Default**: `true`.\
+* **`reviewScreenEnabled`** (`Bool`):\\\
+  Determines whether the review screen is enabled, allowing users to review captured OCR photos.\\\
+  **Default**: `true`.\
+* **`footerViewHidden`** (`Bool`):\\\
+  Controls the visibility of the footer view within the OCR interface.\\\
+  **Default**: `false`.\
+* **`titleLabelStyle`** (`UdentifyTextStyle`):\\\
+  The style applied to the title label, defining its font, color, alignment, and padding. Visible when `footerViewHidden` is `true`.\\\
+  **Default**: bold white text, size 24, with padding.\
+* **`instructionLabelStyle`** (`UdentifyTextStyle`):\\\
+  The style applied to the instruction label, specifying its font, color, alignment, and padding. Visible when `footerViewHidden` is `true`.\\\
+  **Default**: bold white text, size 16, with padding.\
+* **`reviewTitleLabelStyle`** (`UdentifyTextStyle`):\\\
+  The style applied to the review title label, including its font, color, alignment, and padding.\\\
+  **Default**: bold black text, size 24, aligned left, with padding.\
+* **`reviewInstructionLabelStyle`** (`UdentifyTextStyle`):\\\
+  The style applied to the review instruction label, defining its font, color, alignment, and padding.\\\
+  **Default**: bold black text, size 16, aligned left, with padding.\
+* **`progressBarStyle`** (`UdentifyProgressBarStyle`):\\\
+  The style applied to the progress bar during hologram, including colors and corner radius.\\\
+  **Default**: semi-transparent purple background color, green progress color, bold white text, size 24, center-aligned label and a corner radius of 8.\
+\
+### `UdentifyButtonStyle`\
+\
+A struct for customizing the appearance and layout of button-based UI elements.\
+\
+#### Properties\
+\
+| **Property**         | **Type**                               | **Description**                                                                                                        | **Default**         |\
+| -------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------- |\
+| **backgroundColor**  | `UIColor`                              | The background color of the button.                                                                                    | N/A (required)      |\
+| **borderColor**      | `UIColor`                              | The border color of the button.                                                                                        | `.clear`            |\
+| **cornerRadius**     | `CGFloat`                              | The corner radius for the button\'92s layer.                                                                              | `8`                 |\
+| **borderWidth**      | `CGFloat` (read-only publicly)         | The thickness of the button\'92s border (clamped between `0` and `15`).                                                   | `0`                 |\
+| **contentAlignment** | `UIControl.ContentHorizontalAlignment` | Sets the content alignment within the button (e.g., `.center`, `.left`, `.right`).                                     | `.center`           |\
+| **height**           | `CGFloat`                              | The overall height of the button.                                                                                      | `70`                |\
+| **leading**          | `CGFloat`                              | Leading (left) margin or horizontal inset for the button (useful if you\'92re placing the button in a horizontal layout). | `20`                |\
+| **trailing**         | `CGFloat`                              | Trailing (right) margin or horizontal inset for the button.                                                            | `20`                |\
+| **font**             | `UIFont`                               | The font used for the button\'92s title text.                                                                             | N/A (required)      |\
+| **textColor**        | `UIColor`                              | The text color for the button\'92s title.                                                                                 | N/A (required)      |\
+| **textAlignment**    | `NSTextAlignment`                      | Alignment for the text within the button.                                                                              | `.center`           |\
+| **lineBreakMode**    | `NSLineBreakMode`                      | How text wraps or truncates if it exceeds the button\'92s width.                                                          | `.byTruncatingTail` |\
+| **numberOfLines**    | `Int`                                  | Maximum number of lines for the text.                                                                                  | `1`                 |\
+\
+> **Note:** `borderWidth` is publicly read-only, but you can set it via the initializer. Its value will be clamped between `0` and `15`.\
+\
+### Usage Example\
+\
+```swift\
+// Create a custom style for a "Retake" button\
+let retakeButtonStyle = UdentifyButtonStyle(\
+    backgroundColor: .purple,\
+    borderColor: .white,\
+    cornerRadius: 8,\
+    borderWidth: 2,\
+    contentAlignment: .center,\
+    height: 60,\
+    leading: 16,\
+    trailing: 16,\
+    font: UIFont.boldSystemFont(ofSize: 18),\
+    textColor: .white,\
+    textAlignment: .center,\
+    lineBreakMode: .byTruncatingTail,\
+    numberOfLines: 1\
+)\
+```\
+\
+### `UdentifyTextStyle`\
+\
+A struct that defines the text formatting style for use within the Udentify framework.\
+\
+#### Properties\
+\
+| **Property**      | **Type**          | **Description**                                                                                                                                                                  | **Default**       |\
+| ----------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |\
+| **font**          | `UIFont`          | The font used for the text. Must be an instance of `UIFont`.                                                                                                                     | Required          |\
+| **textColor**     | `UIColor`         | The color of the text. Must be an instance of `UIColor`.                                                                                                                         | Required          |\
+| **textAlignment** | `NSTextAlignment` | The alignment of the text within its container. Can be `.left`, `.right`, `.center`, `.justified`, or `.natural`.                                                                | `.center`         |\
+| **lineBreakMode** | `NSLineBreakMode` | Determines how the text is truncated when it exceeds its container's size. Options include `.byWordWrapping`, `.byTruncatingTail`, `.byTruncatingHead`, `.byClipping`, and more. | `.byWordWrapping` |\
+| **numberOfLines** | `Int`             | The maximum number of lines for the text. Set to `0` for no limit.                                                                                                               | `0`               |\
+| **leading**       | `CGFloat`         | The leading padding of the text.                                                                                                                                                 | `20`              |\
+| **trailing**      | `CGFloat`         | The trailing padding of the text.                                                                                                                                                | `20`              |\
+\
+***\
+\
+### Usage Example\
+\
+```swift\
+// Define a reusable text style\
+let textStyle = UdentifyTextStyle(\
+    font: UIFont.systemFont(ofSize: 16),\
+    textColor: .black,\
+    textAlignment: .left,\
+    lineBreakMode: .byTruncatingTail,\
+    numberOfLines: 2,\
+    leading: 10,\
+    trailing: 10\
+)\
+```\
+\
+### `UdentifyViewStyle`\
+\
+A struct for customizing the appearance of view-based UI elements within the Udentify framework.\
+\
+#### Properties\
+\
+| **Property**        | **Type**              | **Description**                                                                 | **Default**    |\
+| ------------------- | --------------------- | ------------------------------------------------------------------------------- | -------------- |\
+| **backgroundColor** | `UIColor`             | The background color of the view.                                               | N/A (required) |\
+| **borderColor**     | `UIColor`             | The border color of the view.                                                   | `.clear`       |\
+| **cornerRadius**    | `CGFloat`             | The corner radius for the view\'92s layer.                                         | `8`            |\
+| **borderWidth**     | `CGFloat` (read-only) | The thickness of the view\'92s border. This value is clamped between `0` and `15`. | `0`            |\
+\
+> **Note:** `borderWidth` is publicly read-only, but you can set it via the initializer. Its value will be clamped between `0` and `15`.\
+\
+#### Usage Example\
+\
+```swift\
+// Create a custom style for a container view\
+let containerViewStyle = UdentifyViewStyle(\
+    backgroundColor: .purple,\
+    borderColor: .white,\
+    cornerRadius: 12,\
+    borderWidth: 2\
+)\
+```\
+\
+### `UdentifyProgressBarStyle`\
+\
+`UdentifyProgressBarStyle` is a configuration struct used to customize the appearance of a progress bar in the Udentify SDK.\
+\
+#### Properties\
+\
+| **Property**      | **Type**            | **Description**                                               | **Default**                                |\
+| ----------------- | ------------------- | ------------------------------------------------------------- | ------------------------------------------ |\
+| `backgroundColor` | `UIColor`           | The background color of the progress bar.                     | `.purple.withAlphaComponent(0.7)`          |\
+| `progressColor`   | `UIColor`           | The color indicating the current progress level.              | `.green`                                   |\
+| `completionColor` | `UIColor`           | The color displayed when progress reaches 100%.               | `.green`                                   |\
+| `textStyle`       | `UdentifyTextStyle` | The style of the text shown on the progress bar.              | `bold white text, size 24, center-aligned` |\
+| `cornerRadius`    | `CGFloat`           | The corner radius for rounding the edges of the progress bar. | `8`                                        |\
+\
+#### Usage Example\
+\
+```swift\
+let progressBarStyle: UdentifyProgressBarStyle(\
+                backgroundColor: .lightGray.withAlphaComponent(0.5),\
+                progressColor: .lightGray,\
+                completionColor: .green,\
+                textStyle: UdentifyTextStyle(\
+                    font: .boldSystemFont(ofSize: 19),\
+                    textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),\
+                    textAlignment: .center\
+                ),\
+                cornerRadius: 24\
+            )\
+```\
+\
+***\
+\
+### Custom Configuration\
+\
+```swift\
+struct OcrCameraSettings: OCRSettings \{\
+  \
+    public var configs = OCRConfigs(\
+            placeholderContainerStyle: UdentifyViewStyle(\
+                backgroundColor: .purple.withAlphaComponent(0.6),\
+                borderColor: .white,\
+                cornerRadius: 15,\
+                borderWidth: 2),\
+            placeholderTemplate: .defaultStyle,\
+            detectionAccuracy: 10,\
+            buttonBackColor: .purple,\
+            maskLayerColor: .black.withAlphaComponent(0.7),\
+            footerViewStyle: UdentifyButtonStyle(\
+                backgroundColor: .purple.withAlphaComponent(0.6),\
+                font: UIFont.boldSystemFont(ofSize: 20),\
+                textColor: .white),\
+            buttonUseStyle: UdentifyButtonStyle(\
+                backgroundColor: .purple,\
+                font: UIFont.boldSystemFont(ofSize: 20),\
+                textColor: .white),\
+            buttonRetakeStyle: UdentifyButtonStyle(\
+                backgroundColor: .purple,\
+                font: UIFont.boldSystemFont(ofSize: 20),\
+                textColor: .white),\
+            orientation: orientation,\
+            bundle: .main,\
+            tableName: "OcrLocalization",\
+            blurCoefficient: 0,\
+            requestTimeout: 100,\
+            backButtonEnabled: true,\
+            reviewScreenEnabled: true,\
+            footerViewHidden: false,\
+            titleLabelStyle: nil,\
+            instructionLabelStyle: nil,\
+            reviewTitleLabelStyle: UdentifyTextStyle(\
+                font: UIFont.boldSystemFont(ofSize: 20),\
+                textColor: .label,\
+                textAlignment: .left),\
+            reviewInstructionLabelStyle: UdentifyTextStyle(\
+                font: UIFont.systemFont(ofSize: 16),\
+                textColor: .label,\
+                textAlignment: .left)\
+  \
+\}\
+```\
+\
+Use this struct before presenting `OCRCameraViewController` as follows:\
+\
+```swift\
+OCRSettingsProvider.getInstance().currentSettings = OcrCameraSettings()\
+```\
+\
+#### Additional Notes\
+\
+* Add your custom fonts to your `Info.pList` of your project as "Fonts provided by application".\
+* If you encounter an error such as "There must be a window file" or when targeting iOS versions older than iOS 13, follow these steps:\
+  1. Remove "Application Scene Manifest" entry from `Info.plist`.\
+  2. Remove the `SceneDelegate` class if it exists.\
+  3. Delete methods related to "scene" in the `AppDelegate` class.\
+  4. Add `var window: UIWindow?` to the `AppDelegate` class if it is missing.\
+\
+## Localisation\
+\
+You can customize the localization of the OCR ID Verification API by appending the following keys to your `Localizable.strings` file.\
+\
+#### Localisation strings for OCR camera screen\
+\
+```swift\
+"udentify_ocr_status_view_title_default" = "Scan OCR";\
+"udentify_ocr_status_view_title_front_side" = "Scan Front Side";\
+"udentify_ocr_status_view_title_back_side" = "Scan Back Side";\
+"udentify_ocr_status_view_title_wait" = "Please wait...";\
+"udentify_ocr_button_retake_title" = "Retake";\
+"udentify_ocr_button_use_title" = "Use";\
+"udentify_ocr_button_capture_title" = "Capture";\
+"udentify_ocr_instruction_text_front_side" = "Align your ID\'92s front within the on-screen frame.";\
+"udentify_ocr_instruction_text_back_side" = "Align your ID\'92s back within the on-screen frame.";\
+"udentify_ocr_review_title_front_side" = "Front side Captured";\
+"udentify_ocr_review_title_back_side" = "Back side Captured";\
+"udentify_ocr_review_instruction_text_front_side" = "Make sure the photo is not blurred.";\
+"udentify_ocr_review_instruction_text_back_side" = "Make sure the photo is not blurred.";\
+```\
+\
+#### Localisation strings for OCR document types\
+\
+```swift\
+"udentify_ocr_document_type_id_card"="ID";\
+"udentify_ocr_document_type_passport"="Passport";\
+"udentify_ocr_document_type_drive_licence"="Driver Licence";\
+```\
+\
+#### Localisation strings for countries\
+\
+```swift\
+"udentify_commons_country_usa"="USA";\
+"udentify_commons_country_gbr"="United Kingdom";\
+"udentify_commons_country_col"="Colombia";\
+"udentify_commons_country_tur"="Turkey";\
+"udentify_commons_country_esp"="Spain";\
+"udentify_commons_country_bra"="Brazil";\
+"udentify_commons_country_per"="Peru";\
+"udentify_commons_country_ecu"="Ecuador";\
+```\
+\
+#### Localisation strings for hologram check\
+\
+```swift\
+"udentify_hologram_status_view_title_default"="Check hologram";\
+"udentifyocr_hologram_recording" = "Recording...";\
+```\
+\
+By adding the above keys and their corresponding values to your `Localizable.strings` file, you can customise the text displayed within the OCR ID Verification API for different languages and regions.\
+\
+}

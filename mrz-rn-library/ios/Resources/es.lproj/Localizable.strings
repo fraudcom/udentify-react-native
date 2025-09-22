@@ -1,0 +1,28 @@
+/* 
+   MRZ Scanner Localization
+   Spanish (Español)
+*/
+
+/* Camera Instructions */
+"mrz_scan_instruction" = "Coloque el MRZ del documento dentro del marco";
+"mrz_scanning_title" = "Escáner MRZ";
+"mrz_camera_error" = "Error de cámara ocurrido";
+"mrz_permission_required" = "Se requiere permiso de cámara para escanear MRZ";
+
+/* Button Labels */
+"cancel" = "Cancelar";
+"retry" = "Reintentar";
+"use_photo" = "Usar Foto";
+
+/* Error Messages */
+"mrz_not_found" = "MRZ no encontrado en el documento";
+"invalid_document" = "Formato de documento inválido";
+"processing_error" = "Error al procesar el documento";
+"sdk_not_available" = "SDK de MRZ no disponible";
+
+/* Progress Messages */
+"initializing_camera" = "Inicializando cámara...";
+"scanning_document" = "Escaneando documento...";
+"processing_mrz" = "Procesando datos MRZ...";
+"validating_data" = "Validando datos extraídos...";
+"finalizing" = "Finalizando...";

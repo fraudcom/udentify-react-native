@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <!-- MRZ preview area (overlay) -->
+    <View
+        android:id="@+id/mrz_preview"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/mrz_preview_border"
+        android:layout_gravity="center" />
+
+    <!-- Bottom info panel -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="5dp"
+        android:background="@color/mrz_footer_bg"
+        android:useDefaultMargins="true"
+        android:rowCount="2"
+        android:columnCount="6"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="Doc no:"
+            android:textColor="@color/mrz_white"
+            android:textStyle="bold"
+            android:textSize="11sp"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/txtDocNo"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1.1"
+            android:textColor="@color/mrz_white"
+            android:textSize="9sp"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:hint="#########"
+            android:textColorHint="@color/mrz_white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="1.2"
+            android:layout_height="wrap_content"
+            android:text="Birth date:"
+            android:textColor="@color/mrz_white"
+            android:textStyle="bold"
+            android:textSize="11sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtBirthDate"
+            android:layout_width="0dp"
+            android:layout_columnWeight=".8"
+            android:textColor="@color/mrz_white"
+            android:textSize="9sp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="######"
+            android:textColorHint="@color/mrz_white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="1.4"
+            android:layout_height="wrap_content"
+            android:text="Expires on:"
+            android:textColor="@color/mrz_white"
+            android:textStyle="bold"
+            android:textSize="11sp"
+            android:textAlignment="textEnd" />
+
+        <TextView
+            android:id="@+id/txtExpirationDate"
+            android:layout_width="0dp"
+            android:layout_columnWeight=".8"
+            android:layout_height="wrap_content"
+            android:textSize="9sp"
+            android:textColor="@color/mrz_white"
+            android:textAlignment="textEnd"
+            android:hint="######"
+            android:textColorHint="@color/mrz_white" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Next"
+            android:background="@drawable/mrz_button_state"
+            android:textColor="@color/mrz_white"
+            android:layout_columnSpan="6"
+            android:visibility="gone"/>
+
+    </GridLayout>
+
+</FrameLayout>
