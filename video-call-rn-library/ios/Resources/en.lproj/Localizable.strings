@@ -1,0 +1,74 @@
+/* 
+   Localizable.strings
+   Video Call Library
+   
+   Created for Udentify Video Call SDK localization
+*/
+
+// Video call notification strings
+"udentify_vc_notification_label_default" = "Waiting for agent...";
+"udentify_vc_notification_label_countdown" = "Call starting in %d seconds";
+"udentify_vc_notification_label_token_fetch" = "Connecting to server...";
+
+// Video call status strings
+"udentify_vc_status_idle" = "Ready";
+"udentify_vc_status_initiating" = "Initiating call...";
+"udentify_vc_status_token_fetching" = "Fetching token...";
+"udentify_vc_status_token_fetched" = "Token received";
+"udentify_vc_status_connecting" = "Connecting...";
+"udentify_vc_status_connected" = "Connected";
+"udentify_vc_status_disconnected" = "Disconnected";
+"udentify_vc_status_reconnecting" = "Reconnecting...";
+"udentify_vc_status_error" = "Connection error";
+
+// Video call control strings
+"udentify_vc_button_mute" = "Mute";
+"udentify_vc_button_unmute" = "Unmute";
+"udentify_vc_button_camera_on" = "Camera On";
+"udentify_vc_button_camera_off" = "Camera Off";
+"udentify_vc_button_switch_camera" = "Switch Camera";
+"udentify_vc_button_end_call" = "End Call";
+
+// Video call participant strings
+"udentify_vc_participant_agent" = "Agent";
+"udentify_vc_participant_supervisor" = "Supervisor";
+"udentify_vc_participant_user" = "You";
+
+// Video call error messages
+"udentify_vc_error_no_camera_permission" = "Camera permission is required for video calls";
+"udentify_vc_error_no_microphone_permission" = "Microphone permission is required for video calls";
+"udentify_vc_error_connection_failed" = "Failed to connect to video call";
+"udentify_vc_error_call_ended" = "Call has ended";
+"udentify_vc_error_network_unavailable" = "Network connection unavailable";
+"udentify_vc_error_server_unreachable" = "Unable to reach server";
+"udentify_vc_error_token_expired" = "Authentication token expired";
+"udentify_vc_error_invalid_credentials" = "Invalid credentials provided";
+
+// Video call instruction strings
+"udentify_vc_instruction_wait_agent" = "Please wait while we connect you to an agent";
+"udentify_vc_instruction_position_face" = "Position your face in the center of the screen";
+"udentify_vc_instruction_good_lighting" = "Make sure you have good lighting";
+"udentify_vc_instruction_stable_connection" = "Ensure you have a stable internet connection";
+"udentify_vc_instruction_speak_clearly" = "Speak clearly into the microphone";
+
+// Video call quality strings
+"udentify_vc_quality_excellent" = "Excellent";
+"udentify_vc_quality_good" = "Good";
+"udentify_vc_quality_fair" = "Fair";
+"udentify_vc_quality_poor" = "Poor";
+
+// Video call session strings
+"udentify_vc_session_starting" = "Starting session...";
+"udentify_vc_session_in_progress" = "Session in progress";
+"udentify_vc_session_ending" = "Ending session...";
+"udentify_vc_session_completed" = "Session completed successfully";
+"udentify_vc_session_failed" = "Session failed";
+
+// Video call permissions strings
+"udentify_vc_permission_camera_title" = "Camera Access Required";
+"udentify_vc_permission_camera_message" = "This app needs camera access to enable video calling";
+"udentify_vc_permission_microphone_title" = "Microphone Access Required";
+"udentify_vc_permission_microphone_message" = "This app needs microphone access to enable audio during video calls";
+"udentify_vc_permission_allow" = "Allow";
+"udentify_vc_permission_deny" = "Deny";
+"udentify_vc_permission_settings" = "Go to Settings";

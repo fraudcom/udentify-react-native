@@ -1,0 +1,3108 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "UdentifyMRZ",
+    "printedName": "UdentifyMRZ",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MRZField",
+        "printedName": "MRZField",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "DocumentType",
+            "printedName": "DocumentType",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO12DocumentTypeyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO12DocumentTypeyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "DocumentSubType",
+            "printedName": "DocumentSubType",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO15DocumentSubTypeyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO15DocumentSubTypeyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "CountryCode",
+            "printedName": "CountryCode",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO11CountryCodeyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO11CountryCodeyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "DocumentNumber",
+            "printedName": "DocumentNumber",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO14DocumentNumberyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO14DocumentNumberyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "DateOfBirth",
+            "printedName": "DateOfBirth",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO11DateOfBirthyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO11DateOfBirthyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "Sex",
+            "printedName": "Sex",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO3SexyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO3SexyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "ExpirationDate",
+            "printedName": "ExpirationDate",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO14ExpirationDateyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO14ExpirationDateyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "Nationality",
+            "printedName": "Nationality",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO11NationalityyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO11NationalityyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "LastName",
+            "printedName": "LastName",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO8LastNameyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO8LastNameyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "FirstName",
+            "printedName": "FirstName",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO9FirstNameyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO9FirstNameyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "IdentityNumber",
+            "printedName": "IdentityNumber",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO14IdentityNumberyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO14IdentityNumberyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Var",
+            "name": "PersonalNumber",
+            "printedName": "PersonalNumber",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZField.Type) -> UdentifyMRZ.MRZField",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZField.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:11UdentifyMRZ8MRZFieldO14PersonalNumberyA2CmF",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO14PersonalNumberyA2CmF",
+            "moduleName": "UdentifyMRZ"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UdentifyMRZ.MRZField?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:11UdentifyMRZ8MRZFieldO8rawValueACSgSS_tcfc",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO8rawValueACSgSS_tcfc",
+            "moduleName": "UdentifyMRZ",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11UdentifyMRZ8MRZFieldO8rawValueSSvp",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO8rawValueSSvp",
+            "moduleName": "UdentifyMRZ",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11UdentifyMRZ8MRZFieldO8rawValueSSvg",
+                "mangledName": "$s11UdentifyMRZ8MRZFieldO8rawValueSSvg",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "allCases",
+            "printedName": "allCases",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[UdentifyMRZ.MRZField]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11UdentifyMRZ8MRZFieldO8allCasesSayACGvpZ",
+            "mangledName": "$s11UdentifyMRZ8MRZFieldO8allCasesSayACGvpZ",
+            "moduleName": "UdentifyMRZ",
+            "static": true,
+            "implicit": true,
+            "declAttributes": [
+              "Nonisolated"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[UdentifyMRZ.MRZField]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11UdentifyMRZ8MRZFieldO8allCasesSayACGvgZ",
+                "mangledName": "$s11UdentifyMRZ8MRZFieldO8allCasesSayACGvgZ",
+                "moduleName": "UdentifyMRZ",
+                "static": true,
+                "implicit": true,
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:11UdentifyMRZ8MRZFieldO",
+        "mangledName": "$s11UdentifyMRZ8MRZFieldO",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "enumRawTypeName": "String",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CaseIterable",
+            "printedName": "CaseIterable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "AllCases",
+                "printedName": "AllCases",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[UdentifyMRZ.MRZField]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZField",
+                        "printedName": "UdentifyMRZ.MRZField",
+                        "usr": "s:11UdentifyMRZ8MRZFieldO"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s12CaseIterableP",
+            "mangledName": "$ss12CaseIterableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MRZParser",
+        "printedName": "MRZParser",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "parsedMRZ",
+            "printedName": "parsedMRZ",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser(py)parsedMRZ",
+            "mangledName": "$s11UdentifyMRZ9MRZParserC06parsedB0SSvp",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser(im)parsedMRZ",
+                "mangledName": "$s11UdentifyMRZ9MRZParserC06parsedB0SSvg",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser(im)setParsedMRZ:",
+                "mangledName": "$s11UdentifyMRZ9MRZParserC06parsedB0SSvs",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11UdentifyMRZ9MRZParserC06parsedB0SSvM",
+                "mangledName": "$s11UdentifyMRZ9MRZParserC06parsedB0SSvM",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(mrzLines:completed:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MRZParser",
+                "printedName": "UdentifyMRZ.MRZParser",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZParser?, Swift.Float) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(UdentifyMRZ.MRZParser?, Swift.Float)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UdentifyMRZ.MRZParser?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MRZParser",
+                            "printedName": "UdentifyMRZ.MRZParser",
+                            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Float",
+                        "printedName": "Swift.Float",
+                        "usr": "s:Sf"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser(im)initWithMrzLines:completed:",
+            "mangledName": "$s11UdentifyMRZ9MRZParserC8mrzLines9completedACSaySSG_yACSg_Sftctcfc",
+            "moduleName": "UdentifyMRZ",
+            "objc_name": "initWithMrzLines:completed:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "data",
+            "printedName": "data()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[UdentifyMRZ.MRZField : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZField",
+                    "printedName": "UdentifyMRZ.MRZField",
+                    "usr": "s:11UdentifyMRZ8MRZFieldO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ9MRZParserC4dataSDyAA8MRZFieldOypGyF",
+            "mangledName": "$s11UdentifyMRZ9MRZParserC4dataSDyAA8MRZFieldOypGyF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MRZParser",
+                "printedName": "UdentifyMRZ.MRZParser",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser(im)init",
+            "mangledName": "$s11UdentifyMRZ9MRZParserCACycfc",
+            "moduleName": "UdentifyMRZ",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser",
+        "mangledName": "$s11UdentifyMRZ9MRZParserC",
+        "moduleName": "UdentifyMRZ",
+        "isOpen": true,
+        "objc_name": "MRZParser",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "os.log",
+        "printedName": "os.log",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "TesseractOCRSDKiOS",
+        "printedName": "TesseractOCRSDKiOS",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "GPUImage",
+        "printedName": "GPUImage",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "AVFoundation",
+        "printedName": "AVFoundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UdentifyCommons",
+        "printedName": "UdentifyCommons",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MRZType",
+        "printedName": "MRZType",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "auto",
+            "printedName": "auto",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZType.Type) -> UdentifyMRZ.MRZType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZType",
+                    "printedName": "UdentifyMRZ.MRZType",
+                    "usr": "c:@M@UdentifyMRZ@E@MRZType"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZType.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZType",
+                        "printedName": "UdentifyMRZ.MRZType",
+                        "usr": "c:@M@UdentifyMRZ@E@MRZType"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@UdentifyMRZ@E@MRZType@MRZTypeAuto",
+            "mangledName": "$s11UdentifyMRZ7MRZTypeO4autoyA2CmF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 0
+          },
+          {
+            "kind": "Var",
+            "name": "td1",
+            "printedName": "td1",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZType.Type) -> UdentifyMRZ.MRZType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZType",
+                    "printedName": "UdentifyMRZ.MRZType",
+                    "usr": "c:@M@UdentifyMRZ@E@MRZType"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZType.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZType",
+                        "printedName": "UdentifyMRZ.MRZType",
+                        "usr": "c:@M@UdentifyMRZ@E@MRZType"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@UdentifyMRZ@E@MRZType@MRZTypeTd1",
+            "mangledName": "$s11UdentifyMRZ7MRZTypeO3td1yA2CmF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 1
+          },
+          {
+            "kind": "Var",
+            "name": "td3",
+            "printedName": "td3",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZType.Type) -> UdentifyMRZ.MRZType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZType",
+                    "printedName": "UdentifyMRZ.MRZType",
+                    "usr": "c:@M@UdentifyMRZ@E@MRZType"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "UdentifyMRZ.MRZType.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MRZType",
+                        "printedName": "UdentifyMRZ.MRZType",
+                        "usr": "c:@M@UdentifyMRZ@E@MRZType"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@UdentifyMRZ@E@MRZType@MRZTypeTd3",
+            "mangledName": "$s11UdentifyMRZ7MRZTypeO3td3yA2CmF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "RawDocComment",
+              "ObjC"
+            ],
+            "fixedbinaryorder": 2
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UdentifyMRZ.MRZType?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZType",
+                    "printedName": "UdentifyMRZ.MRZType",
+                    "usr": "c:@M@UdentifyMRZ@E@MRZType"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:11UdentifyMRZ7MRZTypeO8rawValueACSgSi_tcfc",
+            "mangledName": "$s11UdentifyMRZ7MRZTypeO8rawValueACSgSi_tcfc",
+            "moduleName": "UdentifyMRZ",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11UdentifyMRZ7MRZTypeO8rawValueSivp",
+            "mangledName": "$s11UdentifyMRZ7MRZTypeO8rawValueSivp",
+            "moduleName": "UdentifyMRZ",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11UdentifyMRZ7MRZTypeO8rawValueSivg",
+                "mangledName": "$s11UdentifyMRZ7MRZTypeO8rawValueSivg",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "c:@M@UdentifyMRZ@E@MRZType",
+        "mangledName": "$s11UdentifyMRZ7MRZTypeO",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MRZReader",
+        "printedName": "MRZReader",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "accuracy",
+            "printedName": "accuracy",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader(py)accuracy",
+            "mangledName": "$s11UdentifyMRZ9MRZReaderC8accuracySfvp",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Float",
+                    "printedName": "Swift.Float",
+                    "usr": "s:Sf"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader(im)accuracy",
+                "mangledName": "$s11UdentifyMRZ9MRZReaderC8accuracySfvg",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Float",
+                    "printedName": "Swift.Float",
+                    "usr": "s:Sf"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader(im)setAccuracy:",
+                "mangledName": "$s11UdentifyMRZ9MRZReaderC8accuracySfvs",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11UdentifyMRZ9MRZReaderC8accuracySfvM",
+                "mangledName": "$s11UdentifyMRZ9MRZReaderC8accuracySfvM",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "scannerDidCompleteWith",
+            "printedName": "scannerDidCompleteWith",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((UdentifyMRZ.MRZParser?) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(UdentifyMRZ.MRZParser?) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UdentifyMRZ.MRZParser?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MRZParser",
+                            "printedName": "UdentifyMRZ.MRZParser",
+                            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader(py)scannerDidCompleteWith",
+            "mangledName": "$s11UdentifyMRZ9MRZReaderC22scannerDidCompleteWithyAA9MRZParserCSgcSgvp",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((UdentifyMRZ.MRZParser?) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(UdentifyMRZ.MRZParser?) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Optional",
+                            "printedName": "UdentifyMRZ.MRZParser?",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "MRZParser",
+                                "printedName": "UdentifyMRZ.MRZParser",
+                                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser"
+                              }
+                            ],
+                            "usr": "s:Sq"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader(im)scannerDidCompleteWith",
+                "mangledName": "$s11UdentifyMRZ9MRZReaderC22scannerDidCompleteWithyAA9MRZParserCSgcSgvg",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((UdentifyMRZ.MRZParser?) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(UdentifyMRZ.MRZParser?) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Optional",
+                            "printedName": "UdentifyMRZ.MRZParser?",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "MRZParser",
+                                "printedName": "UdentifyMRZ.MRZParser",
+                                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser"
+                              }
+                            ],
+                            "usr": "s:Sq"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader(im)setScannerDidCompleteWith:",
+                "mangledName": "$s11UdentifyMRZ9MRZReaderC22scannerDidCompleteWithyAA9MRZParserCSgcSgvs",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11UdentifyMRZ9MRZReaderC22scannerDidCompleteWithyAA9MRZParserCSgcSgvM",
+                "mangledName": "$s11UdentifyMRZ9MRZReaderC22scannerDidCompleteWithyAA9MRZParserCSgcSgvM",
+                "moduleName": "UdentifyMRZ",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MRZReader",
+                "printedName": "UdentifyMRZ.MRZReader",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader(im)init",
+            "mangledName": "$s11UdentifyMRZ9MRZReaderCACycfc",
+            "moduleName": "UdentifyMRZ",
+            "overriding": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "processImage",
+            "printedName": "processImage(sourceImage:completed:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIImage",
+                "printedName": "UIKit.UIImage",
+                "paramValueOwnership": "InOut",
+                "usr": "c:objc(cs)UIImage"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(UdentifyMRZ.MRZParser?, Swift.Float) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(UdentifyMRZ.MRZParser?, Swift.Float)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UdentifyMRZ.MRZParser?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MRZParser",
+                            "printedName": "UdentifyMRZ.MRZParser",
+                            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZParser"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Float",
+                        "printedName": "Swift.Float",
+                        "usr": "s:Sf"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ9MRZReaderC12processImage06sourceE09completedySo7UIImageCz_yAA9MRZParserCSg_SftctF",
+            "mangledName": "$s11UdentifyMRZ9MRZReaderC12processImage06sourceE09completedySo7UIImageCz_yAA9MRZParserCSg_SftctF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@UdentifyMRZ@objc(cs)MRZReader",
+        "mangledName": "$s11UdentifyMRZ9MRZReaderC",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MRZCameraControllerDelegate",
+        "printedName": "MRZCameraControllerDelegate",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "onStart",
+            "printedName": "onStart()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP7onStartyyF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP7onStartyyF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onStop",
+            "printedName": "onStop()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP6onStopyyF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP6onStopyyF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onPause",
+            "printedName": "onPause()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP7onPauseyyF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP7onPauseyyF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onResume",
+            "printedName": "onResume()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP8onResumeyyF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP8onResumeyyF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onSuccess",
+            "printedName": "onSuccess(documentNumber:dateOfBirth:dateOfExpiration:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP9onSuccess14documentNumber11dateOfBirth0jK10ExpirationySSSg_A2HtF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP9onSuccess14documentNumber11dateOfBirth0jK10ExpirationySSSg_A2HtF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onFailure",
+            "printedName": "onFailure(error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Error",
+                "printedName": "any Swift.Error",
+                "usr": "s:s5ErrorP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP9onFailure5errorys5Error_p_tF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP9onFailure5errorys5Error_p_tF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onProgress",
+            "printedName": "onProgress(progress:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP10onProgress8progressySf_tF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP10onProgress8progressySf_tF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onDestroy",
+            "printedName": "onDestroy()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP9onDestroyyyF",
+            "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP9onDestroyyyF",
+            "moduleName": "UdentifyMRZ",
+            "genericSig": "<τ_0_0 where τ_0_0 : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : UdentifyMRZ.MRZCameraControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP",
+        "mangledName": "$s11UdentifyMRZ27MRZCameraControllerDelegateP",
+        "moduleName": "UdentifyMRZ",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "AVFoundation",
+        "printedName": "AVFoundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "Vision",
+        "printedName": "Vision",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "AudioToolbox",
+        "printedName": "AudioToolbox",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "Import",
+        "name": "UdentifyCommons",
+        "printedName": "UdentifyCommons",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MRZCameraController",
+        "printedName": "MRZCameraController",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(on:focusViewHeight:focusViewWidth:focusViewBorderColor:focusViewStrokeWidth:delegate:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MRZCameraController",
+                "printedName": "UdentifyMRZ.MRZCameraController",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZCameraController"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIView",
+                "printedName": "UIKit.UIView",
+                "usr": "c:objc(cs)UIView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "hasDefaultArg": true,
+                "usr": "c:objc(cs)UIColor"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any UdentifyMRZ.MRZCameraControllerDelegate)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZCameraControllerDelegate",
+                    "printedName": "any UdentifyMRZ.MRZCameraControllerDelegate",
+                    "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC2on15focusViewHeight0fG5Width0fG11BorderColor0fg6StrokeI08delegateACSo6UIViewC_14CoreFoundation7CGFloatVANSo7UIColorCAnA0cD8Delegate_pSgtcfc",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC2on15focusViewHeight0fG5Width0fG11BorderColor0fg6StrokeI08delegateACSo6UIViewC_12CoreGraphics7CGFloatVANSo7UIColorCAnA0cD8Delegate_pSgtcfc",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "Convenience",
+              "AccessControl"
+            ],
+            "init_kind": "Convenience"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(on:horizontalMargin:height:focusViewBorderColor:focusViewStrokeWidth:delegate:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MRZCameraController",
+                "printedName": "UdentifyMRZ.MRZCameraController",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZCameraController"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIView",
+                "printedName": "UIKit.UIView",
+                "usr": "c:objc(cs)UIView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "hasDefaultArg": true,
+                "usr": "c:objc(cs)UIColor"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any UdentifyMRZ.MRZCameraControllerDelegate)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZCameraControllerDelegate",
+                    "printedName": "any UdentifyMRZ.MRZCameraControllerDelegate",
+                    "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC2on16horizontalMargin6height20focusViewBorderColor0iJ11StrokeWidth8delegateACSo6UIViewC_14CoreFoundation7CGFloatVANSo7UIColorCAnA0cD8Delegate_pSgtcfc",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC2on16horizontalMargin6height20focusViewBorderColor0iJ11StrokeWidth8delegateACSo6UIViewC_12CoreGraphics7CGFloatVANSo7UIColorCAnA0cD8Delegate_pSgtcfc",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "Convenience",
+              "AccessControl"
+            ],
+            "init_kind": "Convenience"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(on:mrzPreviewView:focusViewBorderColor:focusViewStrokeWidth:delegate:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MRZCameraController",
+                "printedName": "UdentifyMRZ.MRZCameraController",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZCameraController"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIView",
+                "printedName": "UIKit.UIView",
+                "usr": "c:objc(cs)UIView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIView",
+                "printedName": "UIKit.UIView",
+                "usr": "c:objc(cs)UIView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "hasDefaultArg": true,
+                "usr": "c:objc(cs)UIColor"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any UdentifyMRZ.MRZCameraControllerDelegate)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MRZCameraControllerDelegate",
+                    "printedName": "any UdentifyMRZ.MRZCameraControllerDelegate",
+                    "usr": "s:11UdentifyMRZ27MRZCameraControllerDelegateP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC2on14mrzPreviewView05focusH11BorderColor0iH11StrokeWidth8delegateACSo6UIViewC_AJSo7UIColorC14CoreFoundation7CGFloatVAA0cD8Delegate_pSgtcfc",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC2on14mrzPreviewView05focusH11BorderColor0iH11StrokeWidth8delegateACSo6UIViewC_AJSo7UIColorC12CoreGraphics7CGFloatVAA0cD8Delegate_pSgtcfc",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "Convenience",
+              "AccessControl"
+            ],
+            "init_kind": "Convenience"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MRZCameraController",
+                "printedName": "UdentifyMRZ.MRZCameraController",
+                "usr": "c:@M@UdentifyMRZ@objc(cs)MRZCameraController"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@UdentifyMRZ@objc(cs)MRZCameraController(im)init",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerCACycfc",
+            "moduleName": "UdentifyMRZ",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "resumeMRZ",
+            "printedName": "resumeMRZ()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC06resumeB0yyF",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC06resumeB0yyF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "pauseMRZ",
+            "printedName": "pauseMRZ()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC05pauseB0yyF",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC05pauseB0yyF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isMRZPaused",
+            "printedName": "isMRZPaused()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC11isMRZPausedSbyF",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC11isMRZPausedSbyF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onFailure",
+            "printedName": "onFailure(error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Error",
+                "printedName": "any Swift.Error",
+                "usr": "s:s5ErrorP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC9onFailure5errorys5Error_p_tF",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC9onFailure5errorys5Error_p_tF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onPhotoTaken",
+            "printedName": "onPhotoTaken(photo:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIImage?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImage",
+                    "printedName": "UIKit.UIImage",
+                    "usr": "c:objc(cs)UIImage"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC12onPhotoTaken5photoySo7UIImageCSg_tF",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC12onPhotoTaken5photoySo7UIImageCSg_tF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onPhotoTaken",
+            "printedName": "onPhotoTaken(frame:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreVideo.CVBuffer?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CVBuffer",
+                    "printedName": "CoreVideo.CVBuffer",
+                    "usr": "c:@T@CVBufferRef"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC12onPhotoTaken5frameySo11CVBufferRefaSg_tF",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC12onPhotoTaken5frameySo11CVBufferRefaSg_tF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onCameraControllerStarted",
+            "printedName": "onCameraControllerStarted()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11UdentifyMRZ19MRZCameraControllerC08onCameraD7StartedyyF",
+            "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC08onCameraD7StartedyyF",
+            "moduleName": "UdentifyMRZ",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@UdentifyMRZ@objc(cs)MRZCameraController",
+        "mangledName": "$s11UdentifyMRZ19MRZCameraControllerC",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UdentifyCameraControllerDelegate",
+            "printedName": "UdentifyCameraControllerDelegate",
+            "usr": "s:15UdentifyCommons0A24CameraControllerDelegateP",
+            "mangledName": "$s15UdentifyCommons0A24CameraControllerDelegateP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UdentifyControllerDelegate",
+            "printedName": "UdentifyControllerDelegate",
+            "usr": "s:15UdentifyCommons0A18ControllerDelegateP",
+            "mangledName": "$s15UdentifyCommons0A18ControllerDelegateP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "UdentifyMRZ",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2.swift",
+      "kind": "IntegerLiteral",
+      "offset": 419,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2.swift",
+      "kind": "StringLiteral",
+      "offset": 1187,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2.swift",
+      "kind": "StringLiteral",
+      "offset": 1311,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1410,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1741,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2068,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2421,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 239,
+      "length": 14,
+      "value": "\"documentType\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 273,
+      "length": 17,
+      "value": "\"documentSubType\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 306,
+      "length": 13,
+      "value": "\"countryCode\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 338,
+      "length": 16,
+      "value": "\"documentNumber\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 370,
+      "length": 13,
+      "value": "\"dateOfBirth\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 391,
+      "length": 5,
+      "value": "\"sex\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 415,
+      "length": 16,
+      "value": "\"expirationDate\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 447,
+      "length": 13,
+      "value": "\"nationality\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 473,
+      "length": 10,
+      "value": "\"lastName\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 497,
+      "length": 11,
+      "value": "\"firstName\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 527,
+      "length": 16,
+      "value": "\"identityNumber\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 570,
+      "length": 16,
+      "value": "\"personalNumber\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "StringLiteral",
+      "offset": 722,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZParser.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1447,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/Log.swift",
+      "kind": "IntegerLiteral",
+      "offset": 237,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/Log.swift",
+      "kind": "IntegerLiteral",
+      "offset": 256,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/Log.swift",
+      "kind": "IntegerLiteral",
+      "offset": 274,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/Log.swift",
+      "kind": "IntegerLiteral",
+      "offset": 295,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/Log.swift",
+      "kind": "IntegerLiteral",
+      "offset": 314,
+      "length": 1,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD1.swift",
+      "kind": "IntegerLiteral",
+      "offset": 424,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD1.swift",
+      "kind": "IntegerLiteral",
+      "offset": 462,
+      "length": 2,
+      "value": "30"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD1.swift",
+      "kind": "StringLiteral",
+      "offset": 998,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD1.swift",
+      "kind": "StringLiteral",
+      "offset": 1122,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD1.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1365,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD1.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1584,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD1.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1913,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 475,
+      "length": 3,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 555,
+      "length": 3,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "StringLiteral",
+      "offset": 703,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "StringLiteral",
+      "offset": 746,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "StringLiteral",
+      "offset": 789,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 834,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 968,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZReader.swift",
+      "kind": "StringLiteral",
+      "offset": 1187,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2B.swift",
+      "kind": "IntegerLiteral",
+      "offset": 421,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2B.swift",
+      "kind": "StringLiteral",
+      "offset": 1189,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2B.swift",
+      "kind": "StringLiteral",
+      "offset": 1313,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2B.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1412,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2B.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1743,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2B.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2070,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD2B.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2423,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZCameraController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 372,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZCameraController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 651,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZCameraController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 695,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZCameraController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 734,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZCameraController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1372,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZCameraController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2036,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZCameraController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2740,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD3.swift",
+      "kind": "IntegerLiteral",
+      "offset": 415,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD3.swift",
+      "kind": "StringLiteral",
+      "offset": 1183,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD3.swift",
+      "kind": "StringLiteral",
+      "offset": 1307,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD3.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1406,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD3.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1737,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD3.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2064,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sercancobanoglu\/Desktop\/Development\/Workspace\/UdentifyFiles\/udentify\/UdentifyiOSSDK\/UdentifyMRZ\/UdentifyMRZ\/MRZTD3.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2417,
+      "length": 5,
+      "value": "false"
+    }
+  ]
+}

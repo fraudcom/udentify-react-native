@@ -1,0 +1,229 @@
+# Udentify v25.4.0
+
+{% hint style="success" %}
+&#x20;**Release date : 19/01/2026**
+{% endhint %}
+
+### 1. Breaking Changes
+
+* **UdentifyRest**
+  * IQA v2 includes non-compatible updates to previous REST IQA behavior.
+* **Android OCR SDK**
+  * Updated ML Kit dependencies: Replaced `face-detection` and `object-detection` with `play-services-mlkit-face-detection` and updated versions.
+  * Added new signature: `void onOCRDirectiveChanged(OCRDirective directive);`.
+  * Added cropped review screen photos with `cardScanFinished` callback.
+  * Updated `onIqaResult` method signature.
+  * Updated `CardRecognizerObject` constructor to require `Activity`.
+  * Added new signature: `void onHologramDirectiveChanged(HologramDirective directive);`.
+* **Android FACE SDK**
+  * Updated dependency: Removed `mlkit:face-detection` and added `play-services-mlkit-face-detection`.
+* **React Native liveness-rn-library**
+  * Android ecosystem dependencies (`tensorflow-lite`, `tensorflow-lite-gpu`, `tensorflow-lite-support`, `play-services-mlkit-face-detection`, `okhttp`, `okhttp-tls`, `cameraview`, `material`, `gson`, `lottie`, and AndroidX) are now `compileOnly`. The host application must provide them as `implementation` in its own `android/app/build.gradle`. This prevents dependency version conflicts and silent "highest wins" overrides when the host app uses other ML or networking libraries.
+  * Migration: copy the dependency block from `liveness-rn-library/README.md` → "Required Host App Dependencies" into your `android/app/build.gradle`. No JavaScript API changes.
+* **iOS OCR SDK**
+  * `OCRCameraControllerDelegate` and `HologramCameraControllerDelegate` now require implementing `onOCRDirectiveChanged(_: )` and `onHologramDirectiveChanged(_:)`.
+  * `onDocumentScan` method signature changed to include `croppedImages: (front: UIImage?, back: UIImage?)` parameter.
+  * `OCRCameraControllerDelegate.onIqaResult` now includes an extra parameter: `func onIqaResult(for: OCRDocumentSide, iqaFeedback: IQAFeedback, iqaResponse: IQAResponse?)`.
+* **IQA Service**
+  * New request/response structure to support passive mode and unified module tautology.
+
+### 2. New Features
+
+#### Breaking Changes
+
+* **UdentifyRest:** Introduced IQA v2 with major breaking changes.
+* **Android OCR SDK:** Multiple updates including new directives, IQA improvements, UI adjustments, and placeholders.
+* **Android FACE SDK:** Improved liveness UI, added feedback and sound effects.
+* **iOS OCR SDK:**
+  * Expose OCR & hologram directives for client-side TTS;
+  * Add cropped images to document scan callback;
+  * Add non-UI IQA API and extend delegate with detailed IQA response.
+* **IQA Service:** Added new detection modules, passive mode, and improved processing capabilities for v25.4.0.
+
+#### Server & Backend
+
+* **UdentifyRest**
+  * Simplified environment configuration by moving static configs into the Dockerfile and removing default values from properties.
+  * Implemented parallel processing for OCR ID operations.
+  * Added document number as TCKN to the event list response.
+  * Included child transaction activities in parent transaction event detail reports.
+  * Implemented to add and configure SessionDirective.
+  * Updated the user refresh token service response and added TCKN support to advanced search.
+  * Added creation date to the getVideoCallScreenShot response.
+  * Implemented the **contains** operator for advanced search.
+  * Added a delete-user endpoint and filtered out deleted users from list queries.
+  * Added expected answer support to checklist options.
+  * Implemented an unsecured video call file fetch service using API keys.
+  * Added a parameter to disable binary media data in getTransactionData responses.
+  * Implemented concurrent login prevention and active session management.
+  * Enabled lazy loading of media in event detail responses.
+  * Separated OCR similarity thresholds for improved accuracy.
+  * Added audit logging for failed login attempts.
+  * Introduced an IQA Audit Log table and persisted IQA media for every attempt.
+  * Implemented CRUD operations for session directives and sorted checklist options.
+  * Added GetTransactionMediaVideoCallVideo functionality.
+  * Added Document Liveness data to transaction details service response.
+  * Added NFC passive and active authentication statuses to transaction detail service responses.
+* **OCR Service**
+  * Added issued\_by field for TRID cards and fix upside-down cropping issue for v25.4.0.
+* **FACE Service**
+  * Adjust detection thresholds for improved face detection accuracy for v25.4.0.
+* **IQA Service**
+  * **Detection Modules:** Added chip detector, signature & hidden-photo detector modules.
+  * **Error Handling:** Returns error after card classifier when photo is not visible on front-side; returns error when multiple documents detected.
+  * **Glare Module:** Added new glare module with optimized thresholding and improved accuracy.
+  * **Passive Mode:** Introduced passive modes for modules 2–7, allowing continued processing even when previous modules fail; added new 1001 response code for faulty images in passive mode.
+  * **Rotated Images:** Enabled successful processing of slightly rotated images.
+* **Liveness Service**
+  * Upgrade runtime, integrate APM, and add hand-near-face detection module for v25.4.0.
+
+#### Android
+
+* **OCR SDK**
+  * **Directives & IQA:**
+    * Added `android.permission.VIBRATE` permission.
+    * Updated IQA response format.
+    * Added standalone `performIQA` method for IQA without UI.
+    * Added more `IQAFeedback` fields.
+    * Adjusted hologram response handling and parsing.
+  * **UI & UX:**
+    * Adjusted mask preview area based on device size.
+    * Improved card recognition ratio.
+    * Updated Turkish ID card placeholders for better UI alignment.
+    * Updated and downsized placeholder area for clearer identity card capture.
+    * Updated `ReviewScreenLayoutStyle` and `IQALayoutStyle` to support drawable or solid color backgrounds.
+  * **Performance:**
+    * Fixed issue where card detection would freeze if face detection errored on first request.
+    * Reduced package size.
+* **FACE SDK**
+  * **Liveness UI & Feedback:**
+    * Added `android.permission.VIBRATE` permission.
+    * Unified active liveness background with `UdentifyBackground` styles.
+    * Added camera-permission-denied feedback.
+    * Added quick haptic feedback on capture.
+    * Added shutter click sound.
+    * Adjusted `VerificationLabelStyle`.
+    * Added `VerificationAnimationStyle` with support for custom Lottie animations.
+* **App Demo**
+  * **Improvements:**
+    * Improved support for devices with notches.
+    * Adjusted video call client naming (`firstName_lastName`).
+    * Updated settings menu and API/URL configurability.
+
+#### iOS
+
+* **OCR SDK**
+  * **Directives:** Expose OCR & Hologram directives for client-side TTS.
+  * **Scanning:** Add cropped images to document scan callback.
+  * **IQA:** Add non-UI IQA API and extend delegate with detailed IQA response.
+  * **UI:** Align Hologram placeholder templates with real TR ID card silhouette.
+  * **Styling:** Add review background color & style support in OCRConfigs.
+  * **Error Handling:** Add hidden photo IQA error key.
+* **FACE SDK**
+  * **Active Liveness:** Add ability to change the lottie file in Active Liveness via ActiveLivenessConfigs.
+* **NFC SDK**
+  * **Session Management:** Introduce NFCSessionState and improve timeout & cancellation handling.
+
+#### Dashboard
+
+* Hover zoom on images.
+* New advanced search component.
+* New checklist structure.
+* New transaction activity component.
+* VideoCall screen has been redesigned.
+* Video records can be played directly in the dashboard.
+* Session directive structure has been implemented.
+* Lazy load integration.
+* Buttons added to the right side for the video call panel.
+* Add resolution notice, meeting video area, and session timer.
+
+### 3. Improvements
+
+#### Server & Backend
+
+* **UdentifyRest**
+  * Moved job logs to debug level for videocallassign and trigger-related update job errors.
+  * Implemented OCR service logging for remote services.
+  * Returned a null parent transaction ID when a transaction has no parent.
+  * Exposed headers added into corsConfig.
+  * Migrated active session cleanup to Quartz and updated the schedule to run every minute.
+  * Changed the HTTP status for concurrent login from 422 (Unprocessable Entity) to 409 (Conflict).
+  * Added a message field to ServiceResponse.
+  * Added configuration for ActiveSessionCleanupJob.
+  * Updated the service implementation.
+  * Implemented IQA messages for the Remote Language Pack.
+  * Addressed dependency vulnerabilities.
+* **Hologram Service**
+  * Upgrade hologram model and improve face detection performance for v25.4.0.
+
+#### Android
+
+* **FACE SDK**
+  * Upgrade gradle version.
+
+#### iOS
+
+* **OCR SDK**
+  * Add tts and update delegates for OCR.
+* **App Demo**
+  * Set subpath for device info.
+
+### 4. Bug Fixes
+
+#### Server & Backend
+
+* **UdentifyRest**
+  * Adjusted standalone IQA unique cases.
+  * Fixed a bug where document liveness photos were not returned by the activitymedia service.
+  * Fixed an issue where advanced search filters for identityNumber and faceUserId affected each other.
+  * Reworked the VideoCall agent status update method using the active session implementation.
+  * Fixed the netty-codec-http dependency vulnerability (CVE-2025-67735).
+  * Fixed an advanced search bug where identityNo was not found.
+  * Fixed issues with creating, updating, and renewing users with empty passwords.
+  * Fixed case-sensitivity issues in advanced search and re-handled failed responses for the searchListWithImage service.
+  * Changed the SessionDirectives–Checklists relationship from One-to-One to Many-to-One, and fixed encrypted VideoCall screenshot save/read issues.
+  * Fixed an issue where supervisors could not fetch customer checklists.
+  * Fixed new checklist option data handling for getTransactionDetail and getTransactionData services.
+  * Fixed checklist question limiting and enhanced the session directive response by adding step index and channels.
+  * Fixed Dockerfile issues.
+  * Fixed QR size vulnerability.
+  * Ensured active sessions are deleted when resetting passwords.
+  * Stabilized active session handling and the user signup flow.
+  * Fixed a bug where getTransactionData returned null OCR raw photos.
+  * Fixed an issue where non-required success failed response bug.
+  * Fixed the VideoCallClose service returning a 400 response code.
+  * Updated the VideoCall list service response to remove transaction details.
+  * Corrected the OCR security flow to ensure the similarity check is executed.
+  * Fixed customerId cross-checking in admin token requests.
+
+#### Android
+
+* **OCR SDK**
+  * Adjust standalone requests.
+  * Adjust apiCallEnabled property to work as intended.
+* **FACE SDK**
+  * Implement face and active liveness process timeout.
+
+#### iOS
+
+* **FACE SDK**
+  * Handle invalid server response.
+
+#### Dashboard
+
+* General bug fixes.
+* Localizations.
+* Style fixes.
+* Load and replay video for video call activity.
+* Advanced search identityNo parameter.
+* Session directives component fixes.
+* Video call fixes and upgrades.
+* Logout button fixed.
+* Login conflict fix.
+* Password renewal bug fix.
+* Transaction onload image fixes.
+* Flag tooltip fix.
+* Clear dummy data.
+* The edits made to the face liveness control card have been aligned with the changes made regarding video calling.
+* Video-call design fixes.
+* If there's an error in the Facial Liveness control card, only the photo, score, and threshold information will be displayed.

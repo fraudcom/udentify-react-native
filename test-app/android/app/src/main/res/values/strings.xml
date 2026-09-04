@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">FraudReactNativeTest</string>
+    
+    <!--    UdentifyFACE Strings    -->
+    <string name="udentifyface_footer_button_text_default">Take Selfie</string>
+    <string name="udentifyface_footer_button_text_progressing">Liveness Check</string>
+    <string name="udentifyface_footer_button_text_result">Liveness</string>
+    <string name="udentifyface_message_face_too_big">Move Back</string>
+    <string name="udentifyface_message_face_too_small">Move Closer</string>
+    <string name="udentifyface_message_face_not_found">Face not found</string>
+    <string name="udentifyface_message_too_many_faces">Too many faces</string>
+    <string name="udentifyface_message_face_angled">Face to Camera</string>
+    <string name="udentifyface_message_head_angled">Face to Camera</string>
+    <string name="udentifyface_message_face_off_center">Center your face</string>
+    <string name="udentifyface_message_eyes_closed">Open your eyes</string>
+    <string name="udentifyface_message_mask_detected">Remove Mask</string>
+
+    <!--    UdentifyFACE - Active Liveness Strings    -->
+    <string name="udentifyface_gesture_text_move_head_to_left">Turn Left</string>
+    <string name="udentifyface_gesture_text_move_head_to_right">Turn Right</string>
+    <string name="udentifyface_gesture_text_move_head_to_up">Tilt Up</string>
+    <string name="udentifyface_gesture_text_move_head_to_down">Tilt Down</string>
+    <string name="udentifyface_gesture_text_blink_once">Blink once</string>
+    <string name="udentifyface_gesture_text_blink_twice">Blink twice</string>
+    <string name="udentifyface_gesture_text_blink_thrice">Blink 3 times</string>
+    <string name="udentifyface_gesture_text_smile">Smile</string>
+
+    <string name="udentifyface_active_liveness_footer_button_text_recording">Recording...</string>
+    <string name="udentifyface_active_liveness_footer_button_text_processing">Processing...</string>
+    <string name="udentifyface_active_liveness_footer_button_text_default">Center your face</string>
+    <string name="udentifyface_active_liveness_footer_button_text_result">Next step</string>
+    <string name="udentifyface_active_liveness_footer_label_text_processing">Performing active liveness.\nPlease wait...</string>
+</resources>

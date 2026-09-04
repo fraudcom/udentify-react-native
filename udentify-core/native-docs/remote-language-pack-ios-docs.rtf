@@ -1,0 +1,124 @@
+# Remote Language Pack
+
+The Remote Language Pack feature allows product owners to update localization values in real-time without needing to update the Mobile App itself. This feature enables you to modify localization values through a convenient Dashboard. This document provides a step-by-step guide on how to enable the Remote Language Pack functionality for the Udentify iOS SDK, empowering you to deliver seamless multilingual experiences to users without the need for app updates.
+
+It is crucial to adhere to the best practice of retaining the default localization key-values in your localization strings file. Doing so provides a safeguard in case of any unforeseen errors while retrieving the remote language pack.
+
+When your app attempts to fetch the remote language pack for localization, there could be instances where the operation encounters errors or fails to retrieve the desired data. In such scenarios, having the default localization strings intact in your app ensures a seamless fallback mechanism.
+
+By keeping the default localization key-values in your localization strings file, your app will gracefully fall back to using these default values in case the remote language pack cannot be retrieved. This approach guarantees that your app maintains a consistent user experience, even when facing difficulties with fetching the latest translations.
+
+Thus, it is highly recommended to include default localization key-values to mitigate potential issues and enhance the overall usability of your app.
+
+### 1. Instantiate Server Based Localization
+
+```swift
+public static func instantiateServerBasedLocalization(for language: LocalizationLanguage, serverUrl: String, transactionId: String, requestTimeout: Double = 30, completion: @escaping (Error?) -> Void)
+```
+
+Instantiates server-based localization by downloading the localization file from the server and saving it locally. The localization file is downloaded using the specified server URL, language, and transaction ID. Once the file is downloaded and saved locally, the localization map in the current settings is updated. The `completion` closure is used to handle the completion of the instantiation process.
+
+#### 1.1. Parameters:
+
+* `language`: The `LocalizationLanguage` enum representing the language for which the localization content should be downloaded and instantiated.
+* `serverUrl`: The URL of the Udentify API Server(UAS) where the localization file is hosted.
+* `transactionId`: The transaction id received from Udentify API Server(UAS)
+* `requestTimeout` (Double): Timeout duration for the network request. Default value is 30 seconds.
+* `completion` (closure): A closure that gets called when the localization content has been downloaded or an error has occurred. The closure takes an optional `Error` parameter.
+
+#### 1.2. Usage:
+
+In order to use this method, you need to provide the required parameters and handle the completion of the localization process.
+
+Here's an example of how you can use this method:
+
+```swift
+let currentSystemLanguage = UdentifySettingsProvider.mapSystemLanguageToEnum()
+        
+LocalizationManager.instantiateServerBasedLocalization(for: currentSystemLanguage ?? .EN, serverUrl: AppCredentials.serverURL, transactionId: AppCredentials.transactionID)
+{ error in
+        if let error = error {
+            // Handle the error
+        } else {
+            // Localization content has been downloaded and SDK localization instantiated successfully
+        }
+}
+```
+
+In this example, we're instantiating the server-based localization for the current system language. We provide the server URL where the localization file is hosted, a transaction ID. The completion closure is called when the download is complete or if an error occurs.
+
+#### 1.3. Error Messages:
+
+#### 1.3.1. ServerError
+
+The `ServerError` enum represents errors that can occur while interacting with the server.
+
+```swift
+public enum ServerError: Error {
+    case InvalidResponse(String)
+    case UnexpectedError(Error)
+}
+```
+
+Possible cases:
+
+* `InvalidResponse`: The server has returned an invalid response. The associated value contains a description of the error.
+* `UnexpectedError`: An unexpected error occurred while processing the server response. The associated value contains the original error.
+
+#### 1.3.2. GeneralError
+
+The `GeneralError` enum represents various error cases that may occur during the execution of our application.
+
+```swift
+public enum GeneralError: Error {
+    case InvalidURL
+}
+```
+
+Possible cases:
+
+* `InvalidURL`: This error indicates an invalid URL. It is raised when attempting to use an improperly formatted or non-existent URL.
+
+### 2. Getting Localized Strings
+
+```swift
+public static var localizationMap: [String: String]? 
+```
+
+Returns the localization map downloaded from the server. This map contains the localization content for the current language. If the localization content has not been downloaded yet, this method will return nil.
+
+{% hint style="info" %}
+The `localizationMap` is a helpful tool for debugging purposes in our development environment. However, it is essential to note that no direct intervention is required from developers when using this map. The system utilizes this map automatically in the background to ensure seamless localization functionality. As a result, developers can rely on it to facilitate the localization process without needing to make any explicit changes or adjustments.
+{% endhint %}
+
+#### 2.1. Usage:
+
+To access the `localizationMap` property, you can use the `localizationMap` static variable provided by the `UdentifySettingsProvider` class. Here's how you can retrieve the `localizationMap`:
+
+```swift
+if let localizationMap = UdentifySettingsProvider.localizationMap {
+    // Use the localizationMap
+    print("Localization map: \(localizationMap)")
+} else {
+    // Localization map is not available
+    print("Localization map is not available")
+}
+```
+
+### 3. Clearing the localization cache for a specific language
+
+```swift
+public static func clearLocalizationCache(for language: LocalizationLanguage)
+```
+
+Clears the localization cache for the specified language. This method removes the localization content saved locally and updates the localization map in the current settings to nil.
+
+#### 3.1. Usage:
+
+To clear the localization cache for a specific language, you can call the `clearLocalizationCache()` method. It takes the `language` parameter, which specifies the language for which the localization cache should be cleared.
+
+```swift
+let language = LocalizationLanguage.EN
+
+UdentifySettingsProvider.clearLocalizationCache(for: language)
+```

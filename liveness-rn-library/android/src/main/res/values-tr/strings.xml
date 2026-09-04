@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="udentifyface_header_text">Selfie Çek</string>
+    <string name="udentifyface_footer_button_text_default">Selfie Çek</string>
+    <string name="udentifyface_footer_button_text_progressing">Canlılık Kontrolü</string>
+    <string name="udentifyface_footer_button_text_result">Canlılık</string>
+
+    <string name="udentifyface_message_face_too_big">Geri Çekilin</string>
+    <string name="udentifyface_message_face_too_small">Yaklaşın</string>
+    <string name="udentifyface_message_face_not_found">Yüz bulunamadı</string>
+    <string name="udentifyface_message_too_many_faces">Birden fazla yüz bulundu</string>
+    <string name="udentifyface_message_face_angled">Yüzünüzü kameraya çevirin</string>
+    <string name="udentifyface_message_head_angled">Yüzünüzü kameraya çevirin</string>
+    <string name="udentifyface_message_face_off_center">Yüzünüzü ortalayın</string>
+    <string name="udentifyface_message_eyes_closed">Gözlerinizi açın</string>
+    <string name="udentifyface_message_mask_detected">Maskenizi çıkarın</string>
+
+    <string name="udentifyface_active_liveness_footer_button_text_recording">Kaydediliyor…</string>
+    <string name="udentifyface_active_liveness_footer_button_text_processing">İşleniyor…</string>
+    <string name="udentifyface_active_liveness_footer_button_text_default">Yüzünüzü ortalayın</string>
+    <string name="udentifyface_active_liveness_footer_button_text_result">Sonraki Adım</string>
+    <string name="udentifyface_active_liveness_footer_label_text_processing">Aktif canlılık kontrolü yapılıyor.\nLütfen bekleyin…</string>
+
+    <string name="udentifyface_gesture_text_move_head_to_left">Sola Dönün</string>
+    <string name="udentifyface_gesture_text_move_head_to_right">Sağa Dönün</string>
+    <string name="udentifyface_gesture_text_move_head_to_up">Yukarı Kaldırın</string>
+    <string name="udentifyface_gesture_text_move_head_to_down">Aşağı Eğin</string>
+    <string name="udentifyface_gesture_text_blink_once">Bir kez göz kırpın</string>
+    <string name="udentifyface_gesture_text_blink_twice">İki kez göz kırpın</string>
+    <string name="udentifyface_gesture_text_blink_thrice">Üç kez göz kırpın</string>
+    <string name="udentifyface_gesture_text_smile">Gülümseyin</string>
+
+    <string name="liveness_permissions_not_granted">Gerekli izinler verilmedi</string>
+    <string name="liveness_sdk_not_available">Udentify Face SDK kullanılamıyor. Lütfen SDK bağımlılıklarının doğru şekilde eklendiğinden emin olun.</string>
+    <string name="liveness_face_recognition_started">Yüz tanıma başarıyla başlatıldı</string>
+    <string name="liveness_active_liveness_started">Aktif canlılık kontrolü başarıyla başlatıldı</string>
+    <string name="liveness_hybrid_liveness_started">Hibrit canlılık kontrolü başarıyla başlatıldı</string>
+    <string name="liveness_selfie_capture_started">Selfie çekimi başarıyla başlatıldı</string>
+    <string name="liveness_face_recognition_selfie_started">Selfie ile yüz tanıma başarıyla başlatıldı</string>
+    <string name="liveness_registration_started">Kullanıcı kaydı başarıyla başlatıldı</string>
+    <string name="liveness_authentication_started">Kullanıcı doğrulaması başarıyla başlatıldı</string>
+    <string name="liveness_user_deleted_from_list">Kullanıcı listeden başarıyla silindi</string>
+    <string name="liveness_error_unknown">Bilinmeyen hata</string>
+    <string name="liveness_error_active_liveness_failed">Aktif canlılık kontrolü başarısız oldu</string>
+    <string name="liveness_error_hybrid_liveness_failed">Hibrit canlılık kontrolü başarısız oldu</string>
+    <string name="liveness_photo_registration_completed">Fotoğraf kaydı başarıyla tamamlandı</string>
+    <string name="liveness_error_photo_registration_failed">Fotoğraf kaydı başarısız oldu</string>
+    <string name="liveness_error_selfie_capture_failed">Selfie çekimi başarısız oldu</string>
+    <string name="liveness_error_no_activity_context">Selfie işleme için activity bağlamı bulunamadı</string>
+    <string name="liveness_error_face_recognition_selfie_failed">Selfie ile yüz tanıma başarısız oldu</string>
+    <string name="liveness_photo_authentication_completed">Fotoğraf doğrulaması başarıyla tamamlandı</string>
+    <string name="liveness_error_photo_authentication_failed">Fotoğraf doğrulaması başarısız oldu</string>
+</resources>

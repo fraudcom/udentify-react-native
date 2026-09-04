@@ -1,0 +1,11 @@
+framework module UdentifyNFC {
+  umbrella header "UdentifyNFC.h"
+  export *
+
+  module * { export * }
+}
+
+module UdentifyNFC.Swift {
+  header "UdentifyNFC-Swift.h"
+  requires objc
+}

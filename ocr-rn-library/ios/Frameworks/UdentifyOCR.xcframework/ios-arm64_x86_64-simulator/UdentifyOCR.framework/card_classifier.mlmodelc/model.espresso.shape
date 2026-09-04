@@ -1,0 +1,1061 @@
+{
+  "layer_shapes" : {
+    "StatefulPartitionedCall\/model_13\/tf.math.add_3\/Add" : {
+      "k" : 16,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_77\/Mul" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_81\/Mul" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_1\/Add" : {
+      "k" : 64,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_87\/Mul" : {
+      "k" : 128,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_91\/Mul" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split\/split_0" : {
+      "k" : 32,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_1\/Sigmoid" : {
+      "k" : 64,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_4\/split_1" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_44\/Add" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_34\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_24\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_14\/Add" : {
+      "k" : 256,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_2\/Sigmoid" : {
+      "k" : 64,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_139\/Mul" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_131\/Mul" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_121\/Mul" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_111\/Mul" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_103\/Mul" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_3\/Sigmoid" : {
+      "k" : 16,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_125\/Mul" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_135\/Mul" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_115\/Mul" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_107\/Mul" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_5\/split_0" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 32
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_142\/Mul" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 49
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_150\/Mul" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_54\/Add" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_156\/Mul" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_160\/Mul" : {
+      "k" : 1280,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_2\/split_1" : {
+      "k" : 128,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_7\/Mul" : {
+      "k" : 64,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.concat_4\/concat" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_18\/Sigmoid" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_15\/Mul" : {
+      "k" : 16,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_28\/Sigmoid" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_25\/Mul" : {
+      "k" : 128,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_43\/Add" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_29\/Add" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_23\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split\/split_1" : {
+      "k" : 32,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_19\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_13\/Add" : {
+      "k" : 64,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_3\/split_1" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_4\/split_0" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_33\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_13\/Sigmoid" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "transpose_79" : {
+      "k" : 3,
+      "w" : 224,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 224
+    },
+    "StatefulPartitionedCall\/model_13\/tf.concat_1\/concat" : {
+      "k" : 192,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_23\/Sigmoid" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_33\/Sigmoid" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_55\/Mul" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_16\/Sigmoid" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_26\/Sigmoid" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.reduce_mean\/Mean" : {
+      "k" : 1280,
+      "w" : 1,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 1
+    },
+    "images" : {
+      "k" : 224,
+      "w" : 3,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 224
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_95\/Mul" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_1\/split_1" : {
+      "k" : 64,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_2\/split_0" : {
+      "k" : 128,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.reshape_5\/Reshape" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_11\/Sigmoid" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_21\/Sigmoid" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_48\/Add" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_42\/Add" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_28\/Add" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_22\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.concat_5\/concat" : {
+      "k" : 768,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_18\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_31\/Sigmoid" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_38\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_32\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_52\/Add" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_3\/split_0" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.concat_2\/concat" : {
+      "k" : 128,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_6\/Add" : {
+      "k" : 32,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_4\/Add" : {
+      "k" : 32,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_2\/Add" : {
+      "k" : 64,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_8\/Add" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.linalg.matmul_1\/MatMul" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 49
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_19\/Mul" : {
+      "k" : 32,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_47\/Add" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_41\/Add" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_27\/Add" : {
+      "k" : 128,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_29\/Mul" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_33\/Mul" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_17\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_11\/Add" : {
+      "k" : 64,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.concat\/concat" : {
+      "k" : 96,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_1\/split_0" : {
+      "k" : 64,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_37\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_31\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.nn.softmax_1\/wa\/model.9\/m\/m.0\/attn\/Softmax" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 49
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_51\/Add" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "Identity" : {
+      "k" : 1,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 2,
+      "h" : 1
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add\/Add" : {
+      "k" : 32,
+      "w" : 112,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 112
+    },
+    "StatefulPartitionedCall\/model_13\/tf.reshape_9\/Reshape" : {
+      "k" : 1,
+      "w" : 1280,
+      "n" : 1,
+      "_rank" : 2,
+      "h" : 1
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_59\/Mul" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_63\/Mul" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_19\/Sigmoid" : {
+      "k" : 128,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_29\/Sigmoid" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_5\/split_2" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 64
+    },
+    "StatefulPartitionedCall\/model_13\/tf.reshape_8\/Reshape" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_3\/Mul" : {
+      "k" : 32,
+      "w" : 112,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 112
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_14\/Sigmoid" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_99\/Mul" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_24\/Sigmoid" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_56\/Add" : {
+      "k" : 1280,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_50\/Add" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_40\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_26\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_20\/Add" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_16\/Add" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_10\/Add" : {
+      "k" : 32,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_36\/Add" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_30\/Add" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_17\/Sigmoid" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_34\/Sigmoid" : {
+      "k" : 1280,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_27\/Sigmoid" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.reshape_2\/Reshape" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 128
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_12\/Sigmoid" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_22\/Sigmoid" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.linalg.matmul_3\/MatMul" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 64
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_32\/Sigmoid" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_4\/Sigmoid" : {
+      "k" : 32,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.__operators__.add\/AddV2" : {
+      "k" : 1,
+      "w" : 5,
+      "n" : 1,
+      "_rank" : 2,
+      "h" : 1
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_11\/Mul" : {
+      "k" : 64,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.split_5\/split_1" : {
+      "k" : 4,
+      "w" : 49,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 32
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_15\/Sigmoid" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_5\/Sigmoid" : {
+      "k" : 128,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_25\/Sigmoid" : {
+      "k" : 128,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_55\/Add" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_45\/Add" : {
+      "k" : 256,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_6\/Sigmoid" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.concat_6\/concat" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_15\/Add" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_37\/Mul" : {
+      "k" : 32,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_7\/Sigmoid" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_41\/Mul" : {
+      "k" : 64,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid\/Sigmoid" : {
+      "k" : 32,
+      "w" : 112,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 112
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_47\/Mul" : {
+      "k" : 256,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_51\/Mul" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_8\/Sigmoid" : {
+      "k" : 32,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_20\/Sigmoid" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_30\/Sigmoid" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 7
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_10\/Sigmoid" : {
+      "k" : 256,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.sigmoid_9\/Sigmoid" : {
+      "k" : 64,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_67\/Mul" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.multiply_71\/Mul" : {
+      "k" : 64,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_9\/Add" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 28
+    },
+    "StatefulPartitionedCall\/model_13\/tf.math.add_7\/Add" : {
+      "k" : 128,
+      "w" : 56,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 56
+    },
+    "StatefulPartitionedCall\/model_13\/tf.concat_3\/concat" : {
+      "k" : 384,
+      "w" : 14,
+      "n" : 1,
+      "_rank" : 4,
+      "h" : 14
+    }
+  }
+}

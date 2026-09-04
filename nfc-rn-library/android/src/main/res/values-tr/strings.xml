@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nfc_error_nfc_disabled_message">Bu cihazda NFC devre dışı</string>
+    <string name="nfc_error_unknown_message">Bilinmeyen NFC hatası</string>
+    <string name="nfc_error_invalid_activity_message">NFC okuma için mevcut activity bir AppCompatActivity olmalıdır</string>
+    <string name="nfc_error_missing_credentials_message">Gerekli kimlik bilgileri eksik: documentNumber, dateOfBirth, expiryDate, serverURL, transactionID</string>
+    <string name="nfc_reading_cancelled_message">NFC okuma iptal edildi</string>
+</resources>

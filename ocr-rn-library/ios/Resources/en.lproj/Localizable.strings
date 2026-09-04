@@ -1,0 +1,92 @@
+/* 
+   Localizable.strings
+   OCR Library
+   
+   Created for Udentify OCR SDK localization
+*/
+
+/* OCR Camera Screen */
+"udentify_ocr_status_view_title_default" = "Scan OCR";
+"udentify_ocr_status_view_title_front_side" = "Scan Front Side";
+"udentify_ocr_status_view_title_back_side" = "Scan Back Side";
+"udentify_ocr_status_view_title_wait" = "Please wait...";
+"udentify_ocr_button_retake_title" = "Retake";
+"udentify_ocr_button_use_title" = "Use";
+"udentify_ocr_button_capture_title" = "Capture";
+"udentify_ocr_instruction_text_front_side" = "Align your ID's front within the on-screen frame.";
+"udentify_ocr_instruction_text_back_side" = "Align your ID's back within the on-screen frame.";
+"udentify_ocr_review_title_front_side" = "Front side Captured";
+"udentify_ocr_review_title_back_side" = "Back side Captured";
+"udentify_ocr_review_instruction_text_front_side" = "Make sure the photo is not blurred.";
+"udentify_ocr_review_instruction_text_back_side" = "Make sure the photo is not blurred.";
+"udentify_ocr_error_unknown" = "An unexpected error occurred.";
+
+/* OCR Document Types */
+"udentify_ocr_document_type_id_card" = "ID";
+"udentify_ocr_document_type_passport" = "Passport";
+"udentify_ocr_document_type_drive_licence" = "Driver Licence";
+
+/* Countries */
+"udentify_commons_country_usa" = "USA";
+"udentify_commons_country_gbr" = "United Kingdom";
+"udentify_commons_country_col" = "Colombia";
+"udentify_commons_country_tur" = "Turkey";
+"udentify_commons_country_esp" = "Spain";
+"udentify_commons_country_bra" = "Brazil";
+"udentify_commons_country_per" = "Peru";
+"udentify_commons_country_ecu" = "Ecuador";
+
+/* Hologram Check */
+"udentify_hologram_status_view_title_default" = "Check hologram";
+"udentifyocr_hologram_recording" = "Recording...";
+
+/* Card Classification */
+"udentifyocr_classification_card_generic" = "card";
+"udentifyocr_classification_id_card" = "T.C. ID";
+"udentifyocr_classification_drivers_license" = "T.C. Driver's License";
+"udentifyocr_classification_instruction_success" = "Document detected. Please hold still for a moment while we capture the image.";
+"udentifyocr_classification_instruction_unidentified" = "Document not detected. Please scan valid %@ within the frame and try again.";
+"udentifyocr_classification_instruction_mismatch" = "Document mismatched. Please scan valid %@ within the frame and try again.";
+"udentifyocr_classification_instruction_mismatch_front" = "Document mismatched. Please align front side of your %@ properly within the frame and try again.";
+"udentifyocr_classification_instruction_mismatch_back" = "Document mismatched. Please align back side of your %@ properly within the frame and try again.";
+"udentifyocr_classification_footer_success" = "Scanning...";
+"udentifyocr_classification_footer_unidentified" = "Card unidentified";
+"udentifyocr_classification_footer_mismatch" = "Card mismatch";
+"udentifyocr_classification_footer_mismatch_front" = "Flip to the front side";
+"udentifyocr_classification_footer_mismatch_back" = "Flip to the back side";
+
+/* IQA Service */
+"udentify_iqa_screen_title" = "Checking image quality";
+"udentify_iqa_button_next_title" = "Next";
+"udentify_iqa_button_retake_title" = "Retake";
+"udentify_iqa_progress_title" = "Please wait...";
+
+/* IQA Capture Quality Results */
+"udentify_iqa_front_capture_quality_failed_title" = "Front side quality check failed";
+"udentify_iqa_front_capture_invalid_message" = "Front side invalid. Please retake.";
+"udentify_iqa_back_capture_quality_failed_title" = "Back side quality check failed";
+"udentify_iqa_back_capture_invalid_message" = "Back side invalid. Please retake.";
+"udentify_iqa_front_capture_quality_success_title" = "Front side passed";
+"udentify_iqa_front_capture_success_message" = "Tap Next to continue.";
+"udentify_iqa_back_capture_quality_success_title" = "Back side passed";
+"udentify_iqa_back_capture_success_message" = "Tap Next to continue.";
+"udentify_iqa_reason_title" = "Reason";
+
+/* IQA Server Side Error Responses */
+"err_iqa_card_not_detected" = "Card not detected";
+"err_iqa_card_not_classified" = "Wrong document type. An error occurred during the API call.";
+"err_iqa_card_forgery_detected" = "Forgery detected";
+"err_iqa_blur_detected" = "Image is blurry";
+"err_iqa_glare_detected" = "Glare detected";
+"err_iqa_holo_quality_error" = "Hologram obstructs the data";
+"err_iqa_image_not_saved" = "Image not saved";
+"err_iqa_invalid_params" = "Invalid IQA parameters";
+
+/* Error Messages */
+"ERR_OCR_API_ERROR" = "An error occurred during the API call.";
+"ERR_OCR_OTHER_ERROR" = "An unknown error occurred.";
+"ERR_UNKNOWN" = "An unknown error occurred.";
+"ERR_OCR_MISSING_RESPONSE" = "OCR API response is missing.";
+"ERR_OCR_MISSING_DOCUMENT_LIVENESS_RESPONSE" = "Document Liveness API response is missing.";
+"ERR_OCR_MISSING_PARAMETERS" = "Required OCR parameters are missing.";
+

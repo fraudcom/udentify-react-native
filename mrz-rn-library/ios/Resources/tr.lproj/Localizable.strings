@@ -1,0 +1,28 @@
+/* 
+   MRZ Scanner Localization
+   Turkish (Türkçe)
+*/
+
+/* Camera Instructions */
+"mrz_scan_instruction" = "Belge MRZ alanını çerçeve içine yerleştirin";
+"mrz_scanning_title" = "MRZ Tarayıcı";
+"mrz_camera_error" = "Kamera hatası oluştu";
+"mrz_permission_required" = "MRZ tarama için kamera izni gereklidir";
+
+/* Button Labels */
+"cancel" = "İptal";
+"retry" = "Tekrar Dene";
+"use_photo" = "Fotoğrafı Kullan";
+
+/* Error Messages */
+"mrz_not_found" = "Belgede MRZ bulunamadı";
+"invalid_document" = "Geçersiz belge formatı";
+"processing_error" = "Belge işlenirken hata oluştu";
+"sdk_not_available" = "MRZ SDK kullanılamıyor";
+
+/* Progress Messages */
+"initializing_camera" = "Kamera başlatılıyor...";
+"scanning_document" = "Belge taranıyor...";
+"processing_mrz" = "MRZ verileri işleniyor...";
+"validating_data" = "Çıkarılan veriler doğrulanıyor...";
+"finalizing" = "Tamamlanıyor...";

@@ -1,0 +1,72 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "storagePrecision" : "Int8",
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32)",
+        "shortDescription" : "",
+        "shape" : "[]",
+        "name" : "Identity",
+        "type" : "MultiArray"
+      }
+    ],
+    "modelParameters" : [
+
+    ],
+    "specificationVersion" : 4,
+    "computePrecision" : "Float16",
+    "isUpdatable" : "0",
+    "stateSchema" : [
+
+    ],
+    "availability" : {
+      "macOS" : "10.15",
+      "tvOS" : "13.0",
+      "visionOS" : "1.0",
+      "watchOS" : "6.0",
+      "iOS" : "13.0",
+      "macCatalyst" : "13.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_neuralNetwork"
+    },
+    "userDefinedMetadata" : {
+      "com.github.apple.coremltools.version" : "9.0",
+      "com.github.apple.coremltools.conversion_date" : "2026-07-01",
+      "com.github.apple.coremltools.source" : "tensorflow==2.19.1"
+    },
+    "inputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32 1 × 224 × 224 × 3)",
+        "shortDescription" : "",
+        "shape" : "[1, 224, 224, 3]",
+        "name" : "images",
+        "type" : "MultiArray"
+      }
+    ],
+    "generatedClassName" : "card_classifier",
+    "neuralNetworkLayerTypeHistogram" : {
+      "BatchedMatmul" : 2,
+      "Concat" : 7,
+      "InnerProduct" : 1,
+      "Convolution" : 39,
+      "Transpose" : 1,
+      "ReshapeStatic" : 4,
+      "ActivationSigmoid" : 35,
+      "PaddingConstant" : 5,
+      "SplitND" : 6,
+      "SoftmaxND" : 2,
+      "Multiply" : 36,
+      "Add" : 9,
+      "PoolingAverage" : 1
+    },
+    "method" : "predict"
+  }
+]

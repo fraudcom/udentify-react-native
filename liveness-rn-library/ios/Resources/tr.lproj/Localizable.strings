@@ -1,0 +1,40 @@
+/*
+   Localizable.strings
+   liveness-rn-library
+
+   Turkish localization for UdentifyFACE SDK strings
+*/
+
+// General strings
+"udentifyface_header_text" = "Selfie Çek";
+"udentifyface_footer_button_text_default" = "Selfie Çek";
+"udentifyface_footer_button_text_progressing" = "Canlılık Kontrolü";
+"udentifyface_footer_button_text_result" = "Canlılık";
+
+// Face detection messages
+"udentifyface_message_face_too_big" = "Geri Çekilin";
+"udentifyface_message_face_too_small" = "Yaklaşın";
+"udentifyface_message_face_not_found" = "Yüz bulunamadı";
+"udentifyface_message_too_many_faces" = "Birden fazla yüz bulundu";
+"udentifyface_message_face_angled" = "Yüzünüzü kameraya çevirin";
+"udentifyface_message_head_angled" = "Yüzünüzü kameraya çevirin";
+"udentifyface_message_face_off_center" = "Yüzünüzü ortalayın";
+"udentifyface_message_eyes_closed" = "Gözlerinizi açın";
+"udentifyface_message_mask_detected" = "Maskenizi çıkarın";
+
+// Active/Hybrid Liveness specific strings
+"udentifyface_active_liveness_footer_button_text_recording" = "Kaydediliyor...";
+"udentifyface_active_liveness_footer_button_text_processing" = "İşleniyor...";
+"udentifyface_active_liveness_footer_button_text_default" = "Yüzünüzü ortalayın";
+"udentifyface_active_liveness_footer_button_text_result" = "Sonraki Adım";
+"udentifyface_active_liveness_footer_label_text_processing" = "Aktif canlılık kontrolü yapılıyor.\nLütfen bekleyin...";
+
+// Gesture instructions
+"udentifyface_gesture_text_move_head_to_left" = "Sola Dönün";
+"udentifyface_gesture_text_move_head_to_right" = "Sağa Dönün";
+"udentifyface_gesture_text_move_head_to_up" = "Yukarı Kaldırın";
+"udentifyface_gesture_text_move_head_to_down" = "Aşağı Eğin";
+"udentifyface_gesture_text_blink_once" = "Bir kez göz kırpın";
+"udentifyface_gesture_text_blink_twice" = "İki kez göz kırpın";
+"udentifyface_gesture_text_blink_thrice" = "Üç kez göz kırpın";
+"udentifyface_gesture_text_smile" = "Gülümseyin";

@@ -1,0 +1,91 @@
+/*
+   Localizable.strings
+   OCR Library
+
+   Turkish localization for Udentify OCR SDK strings
+*/
+
+/* OCR Camera Screen */
+"udentify_ocr_status_view_title_default" = "OCR Tara";
+"udentify_ocr_status_view_title_front_side" = "Ön Yüzü Tara";
+"udentify_ocr_status_view_title_back_side" = "Arka Yüzü Tara";
+"udentify_ocr_status_view_title_wait" = "Lütfen bekleyin...";
+"udentify_ocr_button_retake_title" = "Tekrar Çek";
+"udentify_ocr_button_use_title" = "Kullan";
+"udentify_ocr_button_capture_title" = "Çek";
+"udentify_ocr_instruction_text_front_side" = "Kimliğinizin ön yüzünü ekrandaki çerçeve içine hizalayın.";
+"udentify_ocr_instruction_text_back_side" = "Kimliğinizin arka yüzünü ekrandaki çerçeve içine hizalayın.";
+"udentify_ocr_review_title_front_side" = "Ön yüz çekildi";
+"udentify_ocr_review_title_back_side" = "Arka yüz çekildi";
+"udentify_ocr_review_instruction_text_front_side" = "Fotoğrafın bulanık olmadığından emin olun.";
+"udentify_ocr_review_instruction_text_back_side" = "Fotoğrafın bulanık olmadığından emin olun.";
+"udentify_ocr_error_unknown" = "Beklenmeyen bir hata oluştu.";
+
+/* OCR Document Types */
+"udentify_ocr_document_type_id_card" = "Kimlik";
+"udentify_ocr_document_type_passport" = "Pasaport";
+"udentify_ocr_document_type_drive_licence" = "Sürücü Belgesi";
+
+/* Countries */
+"udentify_commons_country_usa" = "ABD";
+"udentify_commons_country_gbr" = "Birleşik Krallık";
+"udentify_commons_country_col" = "Kolombiya";
+"udentify_commons_country_tur" = "Türkiye";
+"udentify_commons_country_esp" = "İspanya";
+"udentify_commons_country_bra" = "Brezilya";
+"udentify_commons_country_per" = "Peru";
+"udentify_commons_country_ecu" = "Ekvador";
+
+/* Hologram Check */
+"udentify_hologram_status_view_title_default" = "Hologramı kontrol et";
+"udentifyocr_hologram_recording" = "Kaydediliyor...";
+
+/* Card Classification */
+"udentifyocr_classification_card_generic" = "kart";
+"udentifyocr_classification_id_card" = "T.C. Kimlik";
+"udentifyocr_classification_drivers_license" = "T.C. Sürücü Belgesi";
+"udentifyocr_classification_instruction_success" = "Belge algılandı. Görüntü yakalanırken lütfen sabit tutun.";
+"udentifyocr_classification_instruction_unidentified" = "Belge algılanamadı. Lütfen geçerli bir %@ belgesini çerçeve içinde tarayıp tekrar deneyin.";
+"udentifyocr_classification_instruction_mismatch" = "Belge uyuşmuyor. Lütfen geçerli bir %@ belgesini çerçeve içinde tarayıp tekrar deneyin.";
+"udentifyocr_classification_instruction_mismatch_front" = "Belge uyuşmuyor. Lütfen %@ belgenizin ön yüzünü çerçeve içine doğru hizalayıp tekrar deneyin.";
+"udentifyocr_classification_instruction_mismatch_back" = "Belge uyuşmuyor. Lütfen %@ belgenizin arka yüzünü çerçeve içine doğru hizalayıp tekrar deneyin.";
+"udentifyocr_classification_footer_success" = "Taranıyor...";
+"udentifyocr_classification_footer_unidentified" = "Kart tanımlanamadı";
+"udentifyocr_classification_footer_mismatch" = "Kart uyuşmuyor";
+"udentifyocr_classification_footer_mismatch_front" = "Ön yüze çevirin";
+"udentifyocr_classification_footer_mismatch_back" = "Arka yüze çevirin";
+
+/* IQA Service */
+"udentify_iqa_screen_title" = "Görüntü kalitesi kontrol ediliyor";
+"udentify_iqa_button_next_title" = "İleri";
+"udentify_iqa_button_retake_title" = "Tekrar Çek";
+"udentify_iqa_progress_title" = "Lütfen bekleyin...";
+
+/* IQA Capture Quality Results */
+"udentify_iqa_front_capture_quality_failed_title" = "Ön yüz kalite kontrolü başarısız";
+"udentify_iqa_front_capture_invalid_message" = "Ön yüz geçersiz. Lütfen tekrar çekin.";
+"udentify_iqa_back_capture_quality_failed_title" = "Arka yüz kalite kontrolü başarısız";
+"udentify_iqa_back_capture_invalid_message" = "Arka yüz geçersiz. Lütfen tekrar çekin.";
+"udentify_iqa_front_capture_quality_success_title" = "Ön yüz onaylandı";
+"udentify_iqa_front_capture_success_message" = "Devam etmek için İleri'ye dokunun.";
+"udentify_iqa_back_capture_quality_success_title" = "Arka yüz onaylandı";
+"udentify_iqa_back_capture_success_message" = "Devam etmek için İleri'ye dokunun.";
+"udentify_iqa_reason_title" = "Sebep";
+
+/* IQA Server Side Error Responses */
+"err_iqa_card_not_detected" = "Kart algılanamadı";
+"err_iqa_card_not_classified" = "Yanlış belge türü. API çağrısı sırasında bir hata oluştu.";
+"err_iqa_card_forgery_detected" = "Sahtecilik tespit edildi";
+"err_iqa_blur_detected" = "Görüntü bulanık";
+"err_iqa_glare_detected" = "Parlama tespit edildi";
+"err_iqa_holo_quality_error" = "Hologram veriyi engelliyor";
+"err_iqa_image_not_saved" = "Görüntü kaydedilemedi";
+"err_iqa_invalid_params" = "Geçersiz IQA parametreleri";
+
+/* Error Messages */
+"ERR_OCR_API_ERROR" = "API çağrısı sırasında bir hata oluştu.";
+"ERR_OCR_OTHER_ERROR" = "Bilinmeyen bir hata oluştu.";
+"ERR_UNKNOWN" = "Bilinmeyen bir hata oluştu.";
+"ERR_OCR_MISSING_RESPONSE" = "OCR API yanıtı eksik.";
+"ERR_OCR_MISSING_DOCUMENT_LIVENESS_RESPONSE" = "Belge Canlılık API yanıtı eksik.";
+"ERR_OCR_MISSING_PARAMETERS" = "Gerekli OCR parametreleri eksik.";

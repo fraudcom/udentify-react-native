@@ -1,0 +1,307 @@
+# Udentify Video Call iOS Integration
+
+## Overview
+This document explains how to integrate the Udentify Video Call SDK with React Native for iOS applications, including comprehensive localization support.
+
+## Prerequisites
+- iOS 11.0 or higher
+- React Native 0.68 or higher
+- Swift 5.0 support
+- Xcode 12.0 or higher
+- Required permissions in Info.plist
+
+## Integration Steps
+
+### 1. Framework Setup
+The video-call-rn-library includes the UdentifyVC.xcframework which contains the Udentify Video Call SDK for iOS.
+
+**Framework Location:**
+```
+video-call-rn-library/
+  ios/
+    Frameworks/
+      UdentifyVC/
+        Controllers/
+          VCCameraController.swift
+        Models/
+          VCSettings.swift
+          LocalizationConfiguration.swift
+        Enums/
+          Localization.swift
+```
+
+### 2. Podspec Configuration
+The podspec is configured to automatically include the framework and localization resources:
+
+```ruby
+s.source_files = "ios/**/*.{h,m,mm,swift}"
+s.resource_bundles = {
+  'VideoCallLibraryResources' => ['ios/Localizable.strings']
+}
+s.dependency "udentify-core"
+s.dependency "LiveKitClient", "~> 2.3.0"
+```
+
+### 3. Required Permissions
+Add these permissions to your main app's Info.plist:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>This app needs camera access for video calling</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access for video calling</string>
+```
+
+### 4. SDK Classes and Interfaces
+
+#### Main Classes:
+- `VideoCallManager` - Main manager class for video call operations
+- `VCCameraController` - Video call camera controller from UdentifyVC SDK
+- `VideoCallOperatorImpl` - Implements VCCameraControllerDelegate
+- `VideoCallBundleHelper` - Manages localization bundles
+- `CustomVideoCallSettings` - Custom UI and localization settings
+
+#### VCSettings Configuration:
+```swift
+let settings = VCSettings(
+    backgroundColor: .black,
+    backgroundStyle: nil,
+    overlayImageStyle: nil,
+    muteButtonStyle: VCMuteButtonStyle(),
+    cameraSwitchButtonStyle: VCCameraSwitchButtonStyle(),
+    pipViewStyle: UdentifyViewStyle(...),
+    instructionLabelStyle: UdentifyTextStyle(...),
+    requestTimeout: 30
+)
+```
+
+### 5. Localization Implementation
+
+#### Automatic Localization Setup
+The library automatically sets up localization when initialized:
+
+```swift
+private func setupLocalizationBundle() {
+    let libraryBundle = Bundle(for: VideoCallManager.self)
+    
+    if let resourceBundlePath = libraryBundle.path(forResource: "VideoCallLibraryResources", ofType: "bundle"),
+       let resourceBundle = Bundle(path: resourceBundlePath) {
+        
+        VideoCallBundleHelper.setupLocalizationBundle(resourceBundle)
+        LocalizationConfiguration.bundle = resourceBundle
+    }
+}
+```
+
+#### Available Localization Keys
+The library includes comprehensive localization strings:
+
+```swift
+// Notification strings
+"udentify_vc_notification_label_default" = "Waiting for agent...";
+"udentify_vc_notification_label_countdown" = "Call starting in %d seconds";
+"udentify_vc_notification_label_token_fetch" = "Connecting to server...";
+
+// Status strings
+"udentify_vc_status_connecting" = "Connecting...";
+"udentify_vc_status_connected" = "Connected";
+"udentify_vc_status_disconnected" = "Disconnected";
+
+// Control strings
+"udentify_vc_button_mute" = "Mute";
+"udentify_vc_button_camera_on" = "Camera On";
+"udentify_vc_button_switch_camera" = "Switch Camera";
+
+// Error messages
+"udentify_vc_error_no_camera_permission" = "Camera permission is required";
+"udentify_vc_error_connection_failed" = "Failed to connect to video call";
+```
+
+#### Custom Localization
+To provide custom localizations:
+
+1. **Create custom strings file** in your app bundle
+2. **Configure UI settings** with custom table name:
+
+```swift
+// From React Native
+await VideoCall.configureUISettings({
+  tableName: 'CustomVideoCallStrings',
+  notificationLabelDefault: 'Custom waiting message...',
+  backgroundColor: '#000000',
+  textColor: '#FFFFFF'
+});
+```
+
+3. **Runtime localization update**:
+```swift
+LocalizationConfiguration.bundle = customBundle
+LocalizationConfiguration.tableName = "CustomVideoCall"
+```
+
+### 6. Implementation Details
+
+#### VideoCallManager Integration
+```swift
+@objc(VideoCallManager)
+public class VideoCallManager: NSObject {
+    
+    // Localization setup
+    private func setupLocalizationBundle() { ... }
+    
+    // UI Configuration
+    @objc public func configureUISettings(
+        _ uiConfig: [String: Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+    ) { ... }
+    
+    // Video call lifecycle
+    @objc public func startVideoCall(...) { ... }
+}
+```
+
+#### VCCameraControllerDelegate Implementation
+```swift
+extension VideoCallManager: VCCameraControllerDelegate {
+    
+    public func cameraController(_ controller: VCCameraController, didChangeUserState state: UserState) {
+        // Handle user state changes with localized messages
+    }
+    
+    public func cameraController(_ controller: VCCameraController, didFailWithError error: Error) {
+        // Handle errors with localized error messages
+    }
+}
+```
+
+### 7. Configuration Options
+
+#### UI Customization:
+- Background color and styling
+- Text colors and fonts
+- PiP view border and positioning
+- Button styles and colors
+- Notification label customization
+
+#### Localization Options:
+- Custom string table names
+- Runtime language switching
+- Fallback to default strings
+- Multi-language support
+
+#### Control Methods:
+- `toggleCamera()` - Enable/disable camera
+- `switchCamera()` - Switch between front/back camera
+- `toggleMicrophone()` - Enable/disable microphone
+- `dismissVideoCall()` - Dismiss video call UI
+
+### 8. Event Handling
+The SDK emits various events that can be handled in React Native:
+
+- `VideoCall_onUserStateChanged` - User state changes
+- `VideoCall_onParticipantStateChanged` - Participant state changes
+- `VideoCall_onError` - Error events with localized messages
+- `VideoCall_onVideoCallEnded` - Call completion events
+- `VideoCall_onVideoCallDismissed` - UI dismissal events
+
+### 9. Multi-Language Support
+
+#### Language Detection:
+```swift
+let deviceLanguage = Locale.current.languageCode ?? "en"
+```
+
+#### Language-Specific Configuration:
+```swift
+var config: [String: Any] = [:]
+
+switch deviceLanguage {
+case "es":
+    config = [
+        "notificationLabelDefault": "Esperando al agente...",
+        "notificationLabelCountdown": "Llamada comenzando en %d segundos"
+    ]
+case "fr":
+    config = [
+        "notificationLabelDefault": "En attente d'un agent...",
+        "notificationLabelCountdown": "Appel commençant dans %d secondes"
+    ]
+default:
+    config = [
+        "notificationLabelDefault": "Waiting for agent...",
+        "notificationLabelCountdown": "Call starting in %d seconds"
+    ]
+}
+```
+
+### 10. Error Handling
+Common error types with localized messages:
+
+- `ERR_NO_CAMERA_PERMISSION` - Camera permission denied
+- `ERR_NO_MICROPHONE_PERMISSION` - Microphone permission denied
+- `ERR_CONNECTION_FAILED` - Network connection issues
+- `ERR_TOKEN_EXPIRED` - Authentication token expired
+- `ERR_SERVER_UNREACHABLE` - Server connectivity issues
+
+### 11. Troubleshooting
+
+#### Common Issues:
+1. **Framework not found**: Ensure UdentifyVC.xcframework is properly linked
+2. **Permission denied**: Check Info.plist permissions and runtime permission requests
+3. **Localization not working**: Verify VideoCallLibraryResources.bundle is included
+4. **Custom strings not loading**: Check tableName parameter and bundle configuration
+
+#### Debug Logging:
+Enable debug logging to troubleshoot issues:
+```swift
+print("VideoCallManager - Localization bundle: \(VideoCallBundleHelper.localizationBundle?.bundlePath ?? "nil")")
+```
+
+### 12. Dependencies
+Required dependencies are automatically handled by the podspec:
+- React Native bridge
+- UdentifyCommons framework
+- LiveKitClient for WebRTC functionality
+- UdentifyVC framework for video call UI
+
+### 13. Best Practices
+
+1. **Configure Early**: Call `configureUISettings` before starting video calls
+2. **Test Localization**: Verify strings appear correctly in different languages
+3. **Handle Permissions**: Request permissions before starting video calls
+4. **Error Handling**: Implement proper error handling with localized messages
+5. **Resource Management**: Ensure proper cleanup of video call resources
+
+### 14. Performance Considerations
+
+- Localization bundles are loaded once and cached
+- UI configuration is applied at video call start time
+- String lookups use efficient bundle caching
+- Memory management handled automatically by ARC
+
+### 15. Testing
+Test the integration using the provided test app:
+1. Build the video-call-rn-library
+2. Run the test app with video call functionality
+3. Verify permissions are requested correctly
+4. Test video call initiation and termination
+5. Verify localized strings appear correctly
+6. Test multi-language support
+
+### 16. Migration from Other Libraries
+If migrating from other video call libraries:
+1. **Similar Architecture**: Follows React Native bridge patterns
+2. **Localization Integration**: Built-in localization support
+3. **Event System**: Comprehensive event handling
+4. **Permission Management**: Automatic permission handling
+
+## Support
+For additional support or issues, refer to the native SDK documentation or contact the Udentify support team.
+
+## Version Compatibility
+- iOS 11.0+
+- React Native 0.68+
+- Swift 5.0+
+- UdentifyVC SDK 25.2.1+
+- LiveKitClient 2.3.0+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="vc_error_no_activity">Activity kullanılamıyor</string>
+    <string name="vc_error_no_fragment_activity">FragmentActivity kullanılamıyor</string>
+    <string name="vc_error_missing_parameters">Gerekli parametreler eksik</string>
+    <string name="vc_error_no_active_call">İptal edilecek aktif bir görüntülü görüşme yok</string>
+    <string name="udentify_vc_error_sdk_not_available">Udentify SDK kullanılamıyor. Lütfen AAR dosyalarının doğru şekilde eklendiğinden emin olun.</string>
+</resources>

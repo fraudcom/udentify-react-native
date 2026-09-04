@@ -1,0 +1,20 @@
+/* 
+   Localizable.strings
+   NFC Library - English
+   
+   English localization for UdentifyNFC SDK strings
+*/
+
+// NFC Error Messages
+"nfc_error_bac_failed_message" = "BAC failed.";
+"nfc_error_connection_failed_message" = "NFC connection failed.";
+"nfc_error_multiple_tags_message" = "More than 1 tags was found. Please present only 1 tag.";
+"nfc_error_reading_failed_message" = "Sorry, there was a problem reading the eID or ePassport. Please try again.";
+"nfc_error_tag_invalid_message" = "Tag couldn't be failed.";
+"nfc_error_tag_not_found_message" = "No NFC tag was detected.";
+
+// NFC Reading Messages
+"nfc_reading_authentication_message" = "Authenticating with chip...";
+"nfc_reading_directive" = "Hold your iPhone near an NFC enabled passport.";
+"nfc_reading_message" = "Reading passport data...";
+"nfc_reading_progress_message" = "Reading passport data";
