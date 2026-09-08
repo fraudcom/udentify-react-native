@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mrz_scan_instruction">Coloque el MRZ del documento dentro del marco</string>
+    <string name="mrz_scanning_title">Escáner MRZ</string>
+    <string name="mrz_camera_error">Se produjo un error de cámara</string>
+    <string name="mrz_permission_required">Se requiere permiso de cámara para escanear el MRZ</string>
+
+    <string name="cancel">Cancelar</string>
+    <string name="retry">Reintentar</string>
+    <string name="use_photo">Usar Foto</string>
+    <string name="mrz_use_for_nfc">Usar para NFC</string>
+    <string name="mrz_button_next">Siguiente</string>
+
+    <string name="mrz_label_doc_no">N.º de documento:</string>
+    <string name="mrz_label_birth_date">Fecha de nacimiento:</string>
+    <string name="mrz_label_expires_on">Fecha de expiración:</string>
+
+    <string name="mrz_not_found">No se encontró el MRZ en el documento</string>
+    <string name="invalid_document">Formato de documento no válido</string>
+    <string name="processing_error">Error al procesar el documento</string>
+    <string name="sdk_not_available">El SDK de MRZ no está disponible</string>
+    <string name="mrz_camera2_not_supported">Camera2 no es compatible</string>
+    <string name="mrz_activity_unavailable">La actividad no está disponible</string>
+    <string name="mrz_scanning_cancelled">El escaneo del MRZ fue cancelado</string>
+    <string name="mrz_fragment_manager_unavailable">La actividad anfitriona no es una FragmentActivity</string>
+    <string name="mrz_fragment_add_failed">No se pudo añadir el fragmento de la cámara MRZ</string>
+
+    <string name="initializing_camera">Inicializando cámara…</string>
+    <string name="scanning_document">Escaneando documento…</string>
+    <string name="processing_mrz">Procesando datos del MRZ…</string>
+    <string name="validating_data">Validando datos extraídos…</string>
+    <string name="finalizing">Finalizando…</string>
+</resources>

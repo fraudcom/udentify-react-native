@@ -1,0 +1,74 @@
+/*
+   Localizable.strings
+   Video Call Library
+
+   Turkish localization for Udentify Video Call SDK strings
+*/
+
+// Video call notification strings
+"udentify_vc_notification_label_default" = "Görüntülü arama bekleniyor...";
+"udentify_vc_notification_label_countdown" = "Arama %d saniye içinde başlıyor";
+"udentify_vc_notification_label_token_fetch" = "Sunucuya bağlanılıyor...";
+
+// Video call status strings
+"udentify_vc_status_idle" = "Hazır";
+"udentify_vc_status_initiating" = "Arama başlatılıyor...";
+"udentify_vc_status_token_fetching" = "Belirteç alınıyor...";
+"udentify_vc_status_token_fetched" = "Belirteç alındı";
+"udentify_vc_status_connecting" = "Bağlanılıyor...";
+"udentify_vc_status_connected" = "Bağlandı";
+"udentify_vc_status_disconnected" = "Bağlantı kesildi";
+"udentify_vc_status_reconnecting" = "Yeniden bağlanılıyor...";
+"udentify_vc_status_error" = "Bağlantı hatası";
+
+// Video call control strings
+"udentify_vc_button_mute" = "Sessize Al";
+"udentify_vc_button_unmute" = "Sesi Aç";
+"udentify_vc_button_camera_on" = "Kamerayı Aç";
+"udentify_vc_button_camera_off" = "Kamerayı Kapat";
+"udentify_vc_button_switch_camera" = "Kamerayı Değiştir";
+"udentify_vc_button_end_call" = "Aramayı Sonlandır";
+
+// Video call participant strings
+"udentify_vc_participant_agent" = "Temsilci";
+"udentify_vc_participant_supervisor" = "Süpervizör";
+"udentify_vc_participant_user" = "Siz";
+
+// Video call error messages
+"udentify_vc_error_no_camera_permission" = "Görüntülü aramalar için kamera izni gereklidir";
+"udentify_vc_error_no_microphone_permission" = "Görüntülü aramalar için mikrofon izni gereklidir";
+"udentify_vc_error_connection_failed" = "Görüntülü aramaya bağlanılamadı";
+"udentify_vc_error_call_ended" = "Arama sona erdi";
+"udentify_vc_error_network_unavailable" = "Ağ bağlantısı yok";
+"udentify_vc_error_server_unreachable" = "Sunucuya ulaşılamıyor";
+"udentify_vc_error_token_expired" = "Kimlik doğrulama belirtecinin süresi doldu";
+"udentify_vc_error_invalid_credentials" = "Geçersiz kimlik bilgileri";
+
+// Video call instruction strings
+"udentify_vc_instruction_wait_agent" = "Sizi bir temsilciye bağlarken lütfen bekleyin";
+"udentify_vc_instruction_position_face" = "Yüzünüzü ekranın ortasına yerleştirin";
+"udentify_vc_instruction_good_lighting" = "Yeterli ışık olduğundan emin olun";
+"udentify_vc_instruction_stable_connection" = "Kararlı bir internet bağlantınız olduğundan emin olun";
+"udentify_vc_instruction_speak_clearly" = "Mikrofona net bir şekilde konuşun";
+
+// Video call quality strings
+"udentify_vc_quality_excellent" = "Mükemmel";
+"udentify_vc_quality_good" = "İyi";
+"udentify_vc_quality_fair" = "Orta";
+"udentify_vc_quality_poor" = "Zayıf";
+
+// Video call session strings
+"udentify_vc_session_starting" = "Oturum başlatılıyor...";
+"udentify_vc_session_in_progress" = "Oturum devam ediyor";
+"udentify_vc_session_ending" = "Oturum sonlandırılıyor...";
+"udentify_vc_session_completed" = "Oturum başarıyla tamamlandı";
+"udentify_vc_session_failed" = "Oturum başarısız oldu";
+
+// Video call permissions strings
+"udentify_vc_permission_camera_title" = "Kamera Erişimi Gerekli";
+"udentify_vc_permission_camera_message" = "Görüntülü aramayı etkinleştirmek için bu uygulamanın kameraya erişmesi gerekir";
+"udentify_vc_permission_microphone_title" = "Mikrofon Erişimi Gerekli";
+"udentify_vc_permission_microphone_message" = "Görüntülü aramalar sırasında sesi etkinleştirmek için bu uygulamanın mikrofona erişmesi gerekir";
+"udentify_vc_permission_allow" = "İzin Ver";
+"udentify_vc_permission_deny" = "Reddet";
+"udentify_vc_permission_settings" = "Ayarlara Git";

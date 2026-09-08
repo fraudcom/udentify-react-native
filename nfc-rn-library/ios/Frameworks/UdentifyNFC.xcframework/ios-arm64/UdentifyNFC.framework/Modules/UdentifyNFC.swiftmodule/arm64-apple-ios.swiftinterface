@@ -1,0 +1,264 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.8 clang-1700.4.4.1)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name UdentifyNFC
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+import CommonCrypto
+import CoreNFC
+import CryptoKit
+import Foundation
+import Security
+import Swift
+import UIKit
+import UdentifyCommons
+@_exported import UdentifyNFC
+import _Concurrency
+import _CoreNFC_UIKit
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+public enum AccessControlProtocol : Swift.String, Swift.CaseIterable, Swift.Identifiable {
+  case none
+  case bac
+  case pace
+  public var id: Swift.String {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias AllCases = [UdentifyNFC.AccessControlProtocol]
+  public typealias ID = Swift.String
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [UdentifyNFC.AccessControlProtocol] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum NFCLocation : Swift.Int {
+  case unknown
+  case frontTop
+  case frontCenter
+  case frontBottom
+  case rearTop
+  case rearCenter
+  case rearBottom
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.Int)
+  #endif
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum NFCLocationError : Swift.Error {
+  case ServerError(Swift.String)
+}
+extension UdentifyNFC.NFCLocationError : Foundation.LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var errorDescription: Swift.String? {
+    get
+  }
+  #endif
+}
+public class NFCLocator {
+  public init(serverURL: Swift.String, requestTimeout: Swift.Double = 15)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func locateNFC(completed: @escaping (UdentifyNFC.NFCLocation?, (any Swift.Error)?) -> ())
+  #endif
+  @objc deinit
+}
+public enum DGResponse : Swift.String {
+  case False
+  case True
+  case Disabled
+  case NotSupported
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum DocTypeEnum : Swift.String {
+  case TD1
+  case TD2
+  case OTHER
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@available(iOS 13.0, *)
+public struct ChipDiagnostics : Swift.Encodable {
+  public var availableDataGroups: [Swift.String]
+  public var paceOID: Swift.String?
+  public var paceCurve: Swift.String?
+  public var paceStdParamId: Swift.Int?
+  public var paceMapping: Swift.String?
+  public var paceCipher: Swift.String?
+  public var paceCandidates: [Swift.String]
+  public var paceFailureReason: Swift.String?
+  public var paceFailureCode: Swift.String?
+  public var dg14CAEntries: [Swift.String]
+  public var chipAuthOID: Swift.String?
+  public var chipAuthCurve: Swift.String?
+  public var chipAuthCipher: Swift.String?
+  public var chipAuthKeyId: Swift.String?
+  public var chipAuthPostSMCipher: Swift.String?
+  public var chipAuthPathUsed: Swift.String?
+  public var dg14ExplicitParamsComplete: Swift.Bool?
+  public var chipAuthFailureReason: Swift.String?
+  public var chipAuthFailureCode: Swift.String?
+  public var cardAccessRawHex: Swift.String?
+  public var dg14RawHex: Swift.String?
+  public var chipAuthTerminalEphemeralPublicKey: Swift.String?
+  public var mrtdAppletSelectFCI: Swift.String?
+  public var chipAuthAPDUTrace: [Swift.String]
+  public var paceAPDUTrace: [Swift.String]
+  public var paceFailedStep: Swift.String?
+  public var paceFailedSW: Swift.String?
+  public var accessControlUsed: Swift.String?
+  public var bacFailureReason: Swift.String?
+  public var bacFailureCode: Swift.String?
+  public var sessionFailureStep: Swift.String?
+  public var sessionFailureCode: Swift.String?
+  public var sessionAPDUCount: Swift.Int?
+  public var sessionAPDUTrace: [Swift.String]
+  public var totalDurationMs: Swift.Int?
+  public var readDurationMs: Swift.Int?
+  public var serverValidationMs: Swift.Int?
+  public var errorApduCount: Swift.Int?
+  public static let maxDiagnosticAPDUBytes: Swift.Int
+  public static let maxDiagnosticAPDUTraceEntries: Swift.Int
+  public static let maxSessionAPDUTraceEntries: Swift.Int
+  public init()
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(iOS 13.0, *)
+public protocol NFCReaderSessionDelegate : AnyObject {
+  func nfcReaderSessionDidBegin()
+  #if compiler(>=5.3) && $NonescapableTypes
+  func nfcReaderSessionDidEnd(with message: Swift.String?)
+  #endif
+}
+@objc @available(iOS 13.0, *)
+public class NFCReader : ObjectiveC.NSObject {
+  weak public var sessionDelegate: (any UdentifyNFC.NFCReaderSessionDelegate)?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(documentNumber: Swift.String, dateOfBirth: Swift.String, expiryDate: Swift.String, transactionID: Swift.String, serverURL: Swift.String, requestTimeout: Swift.Double = 15, chipAnticloneMode: UdentifyNFC.ChipAnticloneMode = .auto, isPassiveAuthenticationEnabled: Swift.Bool = false, bundle: Foundation.Bundle = .main, tableName: Swift.String? = nil, isFastModeEnabled: Swift.Bool = true, logLevel: UdentifyCommons.LogLevel = .info)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  convenience public init(can: Swift.String, transactionID: Swift.String, serverURL: Swift.String, requestTimeout: Swift.Double = 15, chipAnticloneMode: UdentifyNFC.ChipAnticloneMode = .auto, isPassiveAuthenticationEnabled: Swift.Bool = false, bundle: Foundation.Bundle = .main, tableName: Swift.String? = nil, isFastModeEnabled: Swift.Bool = true, logLevel: UdentifyCommons.LogLevel = .warning)
+  #endif
+  @objc deinit
+  public func cleanUp()
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func read(completed: @escaping (UdentifyNFC.Passport?, (any Swift.Error)?, Swift.Int?) -> ())
+  #endif
+  public func cancelReading(completed: @escaping () -> Swift.Void)
+}
+public enum TagError : Swift.Error {
+  case ResponseError(Swift.String)
+  case InvalidResponse
+  case UnexpectedError(any Swift.Error)
+  case NFCNotSupported
+  case NoConnectedTag
+  case D087Malformed
+  case InvalidResponseChecksum
+  case MissingMandatoryFields(Swift.String)
+  case CannotDecodeASN1Length
+  case InvalidASN1Value
+  case UnableToProtectAPDU
+  case UnableToUnprotectAPDU
+  case UnsupportedDataGroup
+  case DataGroupNotRead
+  case UnknownTag
+  case UnknownImageFormat
+  case NotImplemented
+  case PassiveAuthError(Swift.String)
+  case ActiveAuthenticationFailed(any Swift.Error)
+  case UserCancelledNFCSession
+  case AppCancelledNFCSession
+  case NFCDataNotAvailable
+  case NFCSessionTimeout
+}
+extension UdentifyNFC.TagError : Foundation.LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var errorDescription: Swift.String? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var causeDescription: Swift.String? {
+    get
+  }
+  #endif
+}
+@available(iOS 13.0, *)
+public struct Passport {
+  public var documentType: Swift.String?
+  public var personalNumber: Swift.String?
+  public var documentNumber: Swift.String?
+  public var documentCode: Swift.String?
+  public var documentExpiryDate: Swift.String?
+  public var firstName: Swift.String?
+  public var lastName: Swift.String?
+  public var dateOfBirth: Swift.String?
+  public var gender: Swift.String?
+  public var state: Swift.String?
+  public var nationality: Swift.String?
+  public var address: Swift.String
+  public var phoneNumber: Swift.String
+  public var birthPlace: Swift.String
+  public var image: UIKit.UIImage?
+  public var userID: Swift.String
+  public var passedAA: UdentifyNFC.DGResponse
+  public var passedPA: UdentifyNFC.DGResponse
+  public var passedCA: UdentifyNFC.DGResponse
+  public var accessControlProtocol: UdentifyNFC.AccessControlProtocol
+  public var issuingAuthority: Swift.String?
+  public var dateOfIssue: Swift.String?
+}
+@objc public enum ChipAnticloneMode : Swift.Int, Swift.CaseIterable, Swift.Identifiable {
+  case none = 0
+  case auto = 1
+  case requireCA = 2
+  case requireAA = 3
+  public var id: Swift.Int {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.Int)
+  #endif
+  public typealias AllCases = [UdentifyNFC.ChipAnticloneMode]
+  public typealias ID = Swift.Int
+  public typealias RawValue = Swift.Int
+  nonisolated public static var allCases: [UdentifyNFC.ChipAnticloneMode] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension UdentifyNFC.AccessControlProtocol : Swift.Equatable {}
+extension UdentifyNFC.AccessControlProtocol : Swift.Hashable {}
+extension UdentifyNFC.AccessControlProtocol : Swift.RawRepresentable {}
+extension UdentifyNFC.NFCLocation : Swift.Equatable {}
+extension UdentifyNFC.NFCLocation : Swift.Hashable {}
+extension UdentifyNFC.NFCLocation : Swift.RawRepresentable {}
+extension UdentifyNFC.DGResponse : Swift.Equatable {}
+extension UdentifyNFC.DGResponse : Swift.Hashable {}
+extension UdentifyNFC.DGResponse : Swift.RawRepresentable {}
+extension UdentifyNFC.DocTypeEnum : Swift.Equatable {}
+extension UdentifyNFC.DocTypeEnum : Swift.Hashable {}
+extension UdentifyNFC.DocTypeEnum : Swift.RawRepresentable {}
+extension UdentifyNFC.ChipAnticloneMode : Swift.Equatable {}
+extension UdentifyNFC.ChipAnticloneMode : Swift.Hashable {}
+extension UdentifyNFC.ChipAnticloneMode : Swift.RawRepresentable {}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="udentify_ocr_status_view_title_default">OCR Tara</string>
+    <string name="udentify_ocr_status_view_title_front_side">Ön Yüzü Tara</string>
+    <string name="udentify_ocr_status_view_title_back_side">Arka Yüzü Tara</string>
+    <string name="udentify_ocr_status_view_title_wait">Lütfen bekleyin…</string>
+    <string name="udentify_ocr_button_retake_title">Tekrar Çek</string>
+    <string name="udentify_ocr_button_use_title">Kullan</string>
+    <string name="udentify_ocr_button_capture_title">Çek</string>
+    <string name="udentify_ocr_instruction_text_front_side">Kimliğinizin ön yüzünü ekrandaki çerçeve içine hizalayın.</string>
+    <string name="udentify_ocr_instruction_text_back_side">Kimliğinizin arka yüzünü ekrandaki çerçeve içine hizalayın.</string>
+    <string name="udentify_ocr_review_title_front_side">Ön yüz çekildi</string>
+    <string name="udentify_ocr_review_title_back_side">Arka yüz çekildi</string>
+    <string name="udentify_ocr_review_instruction_text_front_side">Fotoğrafın bulanık olmadığından emin olun.</string>
+    <string name="udentify_ocr_review_instruction_text_back_side">Fotoğrafın bulanık olmadığından emin olun.</string>
+    <string name="udentify_ocr_error_unknown">Beklenmeyen bir hata oluştu.</string>
+
+    <string name="udentify_ocr_document_type_id_card">Kimlik</string>
+    <string name="udentify_ocr_document_type_passport">Pasaport</string>
+    <string name="udentify_ocr_document_type_drive_licence">Sürücü Belgesi</string>
+
+    <string name="udentify_hologram_status_view_title_default">Hologramı kontrol et</string>
+    <string name="udentifyocr_hologram_recording">Kaydediliyor…</string>
+
+    <string name="udentifyocr_classification_card_generic">kart</string>
+    <string name="udentifyocr_classification_id_card">T.C. Kimlik</string>
+    <string name="udentifyocr_classification_drivers_license">T.C. Sürücü Belgesi</string>
+    <string name="udentifyocr_classification_instruction_success">Belge algılandı. Görüntü yakalanırken lütfen sabit tutun.</string>
+    <string name="udentifyocr_classification_instruction_unidentified">Belge algılanamadı. Lütfen geçerli bir %1$s belgesini çerçeve içinde tarayıp tekrar deneyin.</string>
+    <string name="udentifyocr_classification_instruction_mismatch">Belge uyuşmuyor. Lütfen geçerli bir %1$s belgesini çerçeve içinde tarayıp tekrar deneyin.</string>
+    <string name="udentifyocr_classification_instruction_mismatch_front">Belge uyuşmuyor. Lütfen %1$s belgenizin ön yüzünü çerçeve içine doğru hizalayıp tekrar deneyin.</string>
+    <string name="udentifyocr_classification_instruction_mismatch_back">Belge uyuşmuyor. Lütfen %1$s belgenizin arka yüzünü çerçeve içine doğru hizalayıp tekrar deneyin.</string>
+    <string name="udentifyocr_classification_footer_success">Taranıyor…</string>
+    <string name="udentifyocr_classification_footer_unidentified">Kart tanımlanamadı</string>
+    <string name="udentifyocr_classification_footer_mismatch">Kart uyuşmuyor</string>
+    <string name="udentifyocr_classification_footer_mismatch_front">Ön yüze çevirin</string>
+    <string name="udentifyocr_classification_footer_mismatch_back">Arka yüze çevirin</string>
+
+    <string name="udentify_iqa_screen_title">Görüntü kalitesi kontrol ediliyor</string>
+    <string name="udentify_iqa_button_next_title">İleri</string>
+    <string name="udentify_iqa_button_retake_title">Tekrar Çek</string>
+    <string name="udentify_iqa_progress_title">Lütfen bekleyin…</string>
+
+    <string name="udentify_iqa_front_capture_quality_failed_title">Ön yüz kalite kontrolü başarısız</string>
+    <string name="udentify_iqa_front_capture_invalid_message">Ön yüz geçersiz. Lütfen tekrar çekin.</string>
+    <string name="udentify_iqa_back_capture_quality_failed_title">Arka yüz kalite kontrolü başarısız</string>
+    <string name="udentify_iqa_back_capture_invalid_message">Arka yüz geçersiz. Lütfen tekrar çekin.</string>
+    <string name="udentify_iqa_front_capture_quality_success_title">Ön yüz onaylandı</string>
+    <string name="udentify_iqa_front_capture_success_message">Devam etmek için İleri\'ye dokunun.</string>
+    <string name="udentify_iqa_back_capture_quality_success_title">Arka yüz onaylandı</string>
+    <string name="udentify_iqa_back_capture_success_message">Devam etmek için İleri\'ye dokunun.</string>
+    <string name="udentify_iqa_reason_title">Sebep</string>
+
+    <string name="err_iqa_card_not_detected">Kart algılanamadı</string>
+    <string name="err_iqa_card_not_classified">Yanlış belge türü. API çağrısı sırasında bir hata oluştu.</string>
+    <string name="err_iqa_card_forgery_detected">Sahtecilik tespit edildi</string>
+    <string name="err_iqa_blur_detected">Görüntü bulanık</string>
+    <string name="err_iqa_glare_detected">Parlama tespit edildi</string>
+    <string name="err_iqa_holo_quality_error">Hologram veriyi engelliyor</string>
+    <string name="err_iqa_image_not_saved">Görüntü kaydedilemedi</string>
+    <string name="err_iqa_invalid_params">Geçersiz IQA parametreleri</string>
+
+    <string name="ERR_OCR_API_ERROR">API çağrısı sırasında bir hata oluştu.</string>
+    <string name="ERR_OCR_OTHER_ERROR">Bilinmeyen bir hata oluştu.</string>
+    <string name="ERR_UNKNOWN">Bilinmeyen bir hata oluştu.</string>
+    <string name="ERR_OCR_MISSING_RESPONSE">OCR API yanıtı eksik.</string>
+    <string name="ERR_OCR_MISSING_DOCUMENT_LIVENESS_RESPONSE">Belge Canlılık API yanıtı eksik.</string>
+    <string name="ERR_OCR_MISSING_PARAMETERS">Gerekli OCR parametreleri eksik.</string>
+
+    <string name="ocr_permission_camera_required">OCR tarama için kamera izni gereklidir</string>
+    <string name="ocr_permission_phone_state_required">Udentify SDK için telefon durumu izni gereklidir</string>
+    <string name="ocr_hologram_permission_camera_required">Hologram tarama için kamera izni gereklidir</string>
+    <string name="ocr_error_no_activity">OCR kamerasını göstermek için activity bulunamadı</string>
+    <string name="ocr_hologram_error_no_activity">Hologram kamerasını göstermek için activity bulunamadı</string>
+    <string name="ocr_error_no_images">OCR işlemesi için kullanılabilir görüntü yok</string>
+    <string name="ocr_error_no_liveness_response">Belge canlılık yanıtı alınamadı</string>
+    <string name="ocr_error_liveness_check_failed">Belge canlılık kontrolü başarısız oldu</string>
+    <string name="ocr_error_camera_unavailable">Bu cihazda kamera kullanılamıyor</string>
+    <string name="ocr_error_photo_capture_cancelled">Fotoğraf çekimi iptal edildi</string>
+    <string name="ocr_error_capture_failed">Görüntü yakalanamadı</string>
+    <string name="ocr_hologram_error_scanning_failed">Hologram tarama başarısız oldu</string>
+    <string name="ocr_hologram_error_no_result">Hologram sonucu alınamadı</string>
+    <string name="ocr_hologram_error_verification_failed">Hologram doğrulaması başarısız oldu</string>
+</resources>

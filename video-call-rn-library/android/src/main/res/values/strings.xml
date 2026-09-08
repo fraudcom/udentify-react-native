@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      video-call-rn-library wrapper's own status/error messages (RN bridge →
+      JS events). The udentify_vc_notification_label_*/status_*/button_*
+      strings from the iOS Localizable.strings aren't implemented as Android
+      literals — on Android those are passed through from JS config instead
+      (see VideoCallModule.kt setConfig), so there's nothing to override here
+      beyond this wrapper's own literals plus the one vendor SDK message below.
+    -->
+    <string name="vc_error_no_activity">Activity not available</string>
+    <string name="vc_error_no_fragment_activity">FragmentActivity not available</string>
+    <string name="vc_error_missing_parameters">Missing required parameters</string>
+    <string name="vc_error_no_active_call">No active video call to cancel</string>
+    <string name="udentify_vc_error_sdk_not_available">Udentify SDK is not available. Please ensure AAR files are properly integrated.</string>
+</resources>
