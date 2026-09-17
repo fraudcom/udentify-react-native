@@ -1,0 +1,11 @@
+framework module UdentifyCommons {
+  umbrella header "UdentifyCommons.h"
+  export *
+
+  module * { export * }
+}
+
+module UdentifyCommons.Swift {
+  header "UdentifyCommons-Swift.h"
+  requires objc
+}
