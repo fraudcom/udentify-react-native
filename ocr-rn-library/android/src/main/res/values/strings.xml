@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Overrides of the UdentifyOCR SDK's own customizable strings (see the
+      "UI Customisation" / Strings section of the OCR & Document Verification
+      docs). These key names must exactly match the vendor SDK's resource
+      names for the override to take effect.
+    -->
+    <string name="udentify_ocr_status_view_title_default">Scan OCR</string>
+    <string name="udentify_ocr_status_view_title_front_side">Scan Front Side</string>
+    <string name="udentify_ocr_status_view_title_back_side">Scan Back Side</string>
+    <string name="udentify_ocr_status_view_title_wait">Please wait…</string>
+    <string name="udentify_ocr_button_retake_title">Retake</string>
+    <string name="udentify_ocr_button_use_title">Use</string>
+    <string name="udentify_ocr_button_capture_title">Capture</string>
+    <string name="udentify_ocr_instruction_text_front_side">Align your ID\'s front within the on-screen frame.</string>
+    <string name="udentify_ocr_instruction_text_back_side">Align your ID\'s back within the on-screen frame.</string>
+    <string name="udentify_ocr_review_title_front_side">Front side captured</string>
+    <string name="udentify_ocr_review_title_back_side">Back side captured</string>
+    <string name="udentify_ocr_review_instruction_text_front_side">Make sure the photo is not blurred.</string>
+    <string name="udentify_ocr_review_instruction_text_back_side">Make sure the photo is not blurred.</string>
+    <string name="udentify_ocr_error_unknown">An unexpected error occurred.</string>
+
+    <string name="udentify_ocr_document_type_id_card">ID</string>
+    <string name="udentify_ocr_document_type_passport">Passport</string>
+    <string name="udentify_ocr_document_type_drive_licence">Driver Licence</string>
+
+    <string name="udentify_hologram_status_view_title_default">Check hologram</string>
+    <string name="udentifyocr_hologram_recording">Recording…</string>
+
+    <string name="udentifyocr_classification_card_generic">card</string>
+    <string name="udentifyocr_classification_id_card">T.C. ID</string>
+    <string name="udentifyocr_classification_drivers_license">T.C. Driver\'s License</string>
+    <string name="udentifyocr_classification_instruction_success">Document detected. Please hold still for a moment while we capture the image.</string>
+    <string name="udentifyocr_classification_instruction_unidentified">Document not detected. Please scan valid %1$s within the frame and try again.</string>
+    <string name="udentifyocr_classification_instruction_mismatch">Document mismatched. Please scan valid %1$s within the frame and try again.</string>
+    <string name="udentifyocr_classification_instruction_mismatch_front">Document mismatched. Please align front side of your %1$s properly within the frame and try again.</string>
+    <string name="udentifyocr_classification_instruction_mismatch_back">Document mismatched. Please align back side of your %1$s properly within the frame and try again.</string>
+    <string name="udentifyocr_classification_footer_success">Scanning…</string>
+    <string name="udentifyocr_classification_footer_unidentified">Card unidentified</string>
+    <string name="udentifyocr_classification_footer_mismatch">Card mismatch</string>
+    <string name="udentifyocr_classification_footer_mismatch_front">Flip to the front side</string>
+    <string name="udentifyocr_classification_footer_mismatch_back">Flip to the back side</string>
+
+    <string name="udentify_iqa_screen_title">Checking image quality</string>
+    <string name="udentify_iqa_button_next_title">Next</string>
+    <string name="udentify_iqa_button_retake_title">Retake</string>
+    <string name="udentify_iqa_progress_title">Please wait…</string>
+
+    <string name="udentify_iqa_front_capture_quality_failed_title">Front side quality check failed</string>
+    <string name="udentify_iqa_front_capture_invalid_message">Front side invalid. Please retake.</string>
+    <string name="udentify_iqa_back_capture_quality_failed_title">Back side quality check failed</string>
+    <string name="udentify_iqa_back_capture_invalid_message">Back side invalid. Please retake.</string>
+    <string name="udentify_iqa_front_capture_quality_success_title">Front side passed</string>
+    <string name="udentify_iqa_front_capture_success_message">Tap Next to continue.</string>
+    <string name="udentify_iqa_back_capture_quality_success_title">Back side passed</string>
+    <string name="udentify_iqa_back_capture_success_message">Tap Next to continue.</string>
+    <string name="udentify_iqa_reason_title">Reason</string>
+
+    <string name="err_iqa_card_not_detected">Card not detected</string>
+    <string name="err_iqa_card_not_classified">Wrong document type. An error occurred during the API call.</string>
+    <string name="err_iqa_card_forgery_detected">Forgery detected</string>
+    <string name="err_iqa_blur_detected">Image is blurry</string>
+    <string name="err_iqa_glare_detected">Glare detected</string>
+    <string name="err_iqa_holo_quality_error">Hologram obstructs the data</string>
+    <string name="err_iqa_image_not_saved">Image not saved</string>
+    <string name="err_iqa_invalid_params">Invalid IQA parameters</string>
+
+    <string name="ERR_OCR_API_ERROR">An error occurred during the API call.</string>
+    <string name="ERR_OCR_OTHER_ERROR">An unknown error occurred.</string>
+    <string name="ERR_UNKNOWN">An unknown error occurred.</string>
+    <string name="ERR_OCR_MISSING_RESPONSE">OCR API response is missing.</string>
+    <string name="ERR_OCR_MISSING_DOCUMENT_LIVENESS_RESPONSE">Document Liveness API response is missing.</string>
+    <string name="ERR_OCR_MISSING_PARAMETERS">Required OCR parameters are missing.</string>
+
+    <!-- ocr-rn-library wrapper's own status/error messages (RN bridge → JS events) -->
+    <string name="ocr_permission_camera_required">Camera permission is required for OCR scanning</string>
+    <string name="ocr_permission_phone_state_required">Phone state permission is required for Udentify SDK</string>
+    <string name="ocr_hologram_permission_camera_required">Camera permission is required for hologram scanning</string>
+    <string name="ocr_error_no_activity">Unable to find activity to present OCR camera</string>
+    <string name="ocr_hologram_error_no_activity">Unable to find activity to present Hologram camera</string>
+    <string name="ocr_error_no_images">No images available for OCR processing</string>
+    <string name="ocr_error_no_liveness_response">No document liveness response received</string>
+    <string name="ocr_error_liveness_check_failed">Document liveness check failed</string>
+    <string name="ocr_error_camera_unavailable">Camera is not available on this device</string>
+    <string name="ocr_error_photo_capture_cancelled">Photo capture cancelled</string>
+    <string name="ocr_error_capture_failed">Failed to capture image</string>
+    <string name="ocr_hologram_error_scanning_failed">Hologram scanning failed</string>
+    <string name="ocr_hologram_error_no_result">No hologram result received</string>
+    <string name="ocr_hologram_error_verification_failed">Hologram verification failed</string>
+</resources>
