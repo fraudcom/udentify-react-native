@@ -1,0 +1,11 @@
+framework module UdentifyOCR {
+  umbrella header "UdentifyOCR.h"
+  export *
+
+  module * { export * }
+}
+
+module UdentifyOCR.Swift {
+  header "UdentifyOCR-Swift.h"
+  requires objc
+}
