@@ -1,0 +1,82 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "storagePrecision" : "Float32",
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32)",
+        "shortDescription" : "",
+        "shape" : "[]",
+        "name" : "output_scores",
+        "type" : "MultiArray"
+      },
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32)",
+        "shortDescription" : "",
+        "shape" : "[]",
+        "name" : "output_bounds",
+        "type" : "MultiArray"
+      }
+    ],
+    "modelParameters" : [
+
+    ],
+    "specificationVersion" : 4,
+    "computePrecision" : "Float16",
+    "isUpdatable" : "0",
+    "stateSchema" : [
+
+    ],
+    "availability" : {
+      "macOS" : "10.15",
+      "tvOS" : "13.0",
+      "visionOS" : "1.0",
+      "watchOS" : "6.0",
+      "iOS" : "13.0",
+      "macCatalyst" : "13.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_neuralNetwork"
+    },
+    "userDefinedMetadata" : {
+      "com.github.apple.coremltools.version" : "4.0b2",
+      "com.github.apple.coremltools.source" : "tensorflow==2.3.0"
+    },
+    "inputSchema" : [
+      {
+        "formattedType" : "Image (Color 260 × 260)",
+        "hasSizeFlexibility" : "1",
+        "shortDescription" : "",
+        "sizeRange" : "[[260, 260], [260, 260]]",
+        "width" : "260",
+        "type" : "Image",
+        "isColor" : "1",
+        "height" : "260",
+        "sizeFlexibility" : "260 × 260",
+        "colorspace" : "RGB",
+        "name" : "data",
+        "isOptional" : "0"
+      }
+    ],
+    "generatedClassName" : "MaskModel",
+    "neuralNetworkLayerTypeHistogram" : {
+      "ConcatND" : 2,
+      "ActivationReLU" : 18,
+      "ReshapeStatic" : 10,
+      "Transpose" : 10,
+      "PoolingINVALID" : 6,
+      "LoadConstantND" : 10,
+      "BatchNorm" : 18,
+      "Convolution" : 28,
+      "AddBroadcastable" : 10,
+      "ActivationSigmoid" : 5
+    },
+    "method" : "predict"
+  }
+]
