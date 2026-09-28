@@ -1,0 +1,4 @@
+framework module UdentifyVC {
+  header "UdentifyVC-Swift.h"
+  requires objc
+}

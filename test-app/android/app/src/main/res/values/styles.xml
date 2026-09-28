@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- MaterialComponents is this app's own choice, not an SDK requirement:
+         the Udentify SDKs theme their own layouts. An integration can keep
+         React Native's default AppCompat theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+    </style>
+
+</resources>

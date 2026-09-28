@@ -1,0 +1,23 @@
+/* 
+   Localizable.strings
+   NFC Library - Turkish
+   
+   Turkish localization for UdentifyNFC SDK strings
+*/
+
+// NFC Error Messages
+"nfc_error_bac_failed_message" = "BAC başarısız oldu.";
+"nfc_error_connection_failed_message" = "NFC bağlantısı kurulamadı.";
+"nfc_error_multiple_tags_message" = "Birden fazla çip algılandı. Lütfen sadece 1 tane çipli kartı yaklaştırın.";
+"nfc_error_reading_failed_message" = "Üzgünüz, kart okurken hata oluştu. Lütfen tekrar deneyin.";
+"nfc_error_tag_invalid_message" = "Kart bulunamadı.";
+"nfc_error_tag_not_found_message" = "NFC etiketi bulunamadı.";
+
+// NFC Reading Messages
+"nfc_reading_authentication_message" = "Çip ile kimlik doğrulanıyor...";
+"nfc_reading_directive" = "Çipli kartınızı iPhone'a yaklaştırın.";
+"nfc_reading_message" = "Veriler okunuyor...";
+"nfc_reading_progress_message" = "Veriler okunuyor";
+
+// NFC Session Messages
+"nfc_session_cancelled_by_customer" = "Okuma işlemi iptal edildi";

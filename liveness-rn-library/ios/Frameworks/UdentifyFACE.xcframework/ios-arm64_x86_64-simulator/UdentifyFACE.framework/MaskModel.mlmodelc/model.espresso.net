@@ -1,0 +1,1707 @@
+{
+  "layers" : [
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_0\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_0_activation\/Relu",
+      "blob_weights" : 3,
+      "K" : 3,
+      "blob_biases" : 1,
+      "name" : "model_2\/conv2d_0\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 32,
+      "bottom" : "data",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "debug_info" : "max_pool_0",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "size_x" : 2,
+      "top" : "max_pool_0",
+      "top_shape_style" : 0,
+      "stride_x" : 2,
+      "avg_or_max" : 1,
+      "average_count_exclude_padding" : 1,
+      "type" : "pool",
+      "name" : "max_pool_0",
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "bottom" : "model_2\/conv2d_0_activation\/Relu",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "size_y" : 2,
+      "pad_value" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_1\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_1_activation\/Relu",
+      "blob_weights" : 7,
+      "K" : 32,
+      "blob_biases" : 5,
+      "name" : "model_2\/conv2d_1\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "max_pool_0",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "debug_info" : "max_pool_1",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "size_x" : 2,
+      "top" : "max_pool_1",
+      "top_shape_style" : 0,
+      "stride_x" : 2,
+      "avg_or_max" : 1,
+      "average_count_exclude_padding" : 1,
+      "type" : "pool",
+      "name" : "max_pool_1",
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "bottom" : "model_2\/conv2d_1_activation\/Relu",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "size_y" : 2,
+      "pad_value" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_2\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_2_activation\/Relu",
+      "blob_weights" : 11,
+      "K" : 64,
+      "blob_biases" : 9,
+      "name" : "model_2\/conv2d_2\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "max_pool_1",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "debug_info" : "max_pool_2",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "size_x" : 2,
+      "top" : "max_pool_2",
+      "top_shape_style" : 0,
+      "stride_x" : 2,
+      "avg_or_max" : 1,
+      "average_count_exclude_padding" : 1,
+      "type" : "pool",
+      "name" : "max_pool_2",
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "bottom" : "model_2\/conv2d_2_activation\/Relu",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "size_y" : 2,
+      "pad_value" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_3\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_3_activation\/Relu",
+      "blob_weights" : 15,
+      "K" : 64,
+      "blob_biases" : 13,
+      "name" : "model_2\/conv2d_3\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "max_pool_2",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_0_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_0_insert_conv2d_activation\/Relu",
+      "blob_weights" : 19,
+      "K" : 64,
+      "blob_biases" : 17,
+      "name" : "model_2\/cls_0_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_3_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "debug_info" : "max_pool_3",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "size_x" : 2,
+      "top" : "max_pool_3",
+      "top_shape_style" : 0,
+      "stride_x" : 2,
+      "avg_or_max" : 1,
+      "average_count_exclude_padding" : 1,
+      "type" : "pool",
+      "name" : "max_pool_3",
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "bottom" : "model_2\/conv2d_3_activation\/Relu",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "size_y" : 2,
+      "pad_value" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_0_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_0_insert_conv2d_activation\/Relu",
+      "blob_weights" : 23,
+      "K" : 64,
+      "blob_biases" : 21,
+      "name" : "model_2\/loc_0_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_3_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_4\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_4_activation\/Relu",
+      "blob_weights" : 27,
+      "K" : 64,
+      "blob_biases" : 25,
+      "name" : "model_2\/conv2d_4\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 128,
+      "bottom" : "max_pool_3",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_0_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_0_conv\/Conv2Dx",
+      "blob_weights" : 29,
+      "K" : 64,
+      "name" : "model_2\/cls_0_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 8,
+      "bottom" : "model_2\/cls_0_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/cls_0_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/cls_0_conv\/Conv2D",
+      "top" : "model_2\/cls_0_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/cls_0_conv\/Conv2D"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_0_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_0_conv\/Conv2Dx",
+      "blob_weights" : 31,
+      "K" : 64,
+      "name" : "model_2\/loc_0_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 16,
+      "bottom" : "model_2\/loc_0_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/loc_0_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/loc_0_conv\/Conv2D",
+      "top" : "model_2\/loc_0_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/loc_0_conv\/Conv2D"
+    },
+    {
+      "top" : "model_2\/cls_0_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 8,
+      "h" : 1,
+      "name" : "model_2\/cls_0_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/cls_0_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 33
+    },
+    {
+      "bottom" : "model_2\/cls_0_conv\/Conv2D,model_2\/cls_0_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/cls_0_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/cls_0_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/cls_0_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_1_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_1_insert_conv2d_activation\/Relu",
+      "blob_weights" : 37,
+      "K" : 128,
+      "blob_biases" : 35,
+      "name" : "model_2\/cls_1_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_4_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "debug_info" : "max_pool_4",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "size_x" : 2,
+      "top" : "max_pool_4",
+      "top_shape_style" : 0,
+      "stride_x" : 2,
+      "avg_or_max" : 1,
+      "average_count_exclude_padding" : 1,
+      "type" : "pool",
+      "name" : "max_pool_4",
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "bottom" : "model_2\/conv2d_4_activation\/Relu",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "size_y" : 2,
+      "pad_value" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_1_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_1_insert_conv2d_activation\/Relu",
+      "blob_weights" : 41,
+      "K" : 128,
+      "blob_biases" : 39,
+      "name" : "model_2\/loc_1_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_4_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "top" : "model_2\/loc_0_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 16,
+      "h" : 1,
+      "name" : "model_2\/loc_0_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/loc_0_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 43
+    },
+    {
+      "bottom" : "model_2\/loc_0_conv\/Conv2D,model_2\/loc_0_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/loc_0_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/loc_0_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/loc_0_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_5\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_5_activation\/Relu",
+      "blob_weights" : 47,
+      "K" : 128,
+      "blob_biases" : 45,
+      "name" : "model_2\/conv2d_5\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 128,
+      "bottom" : "max_pool_4",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_1_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_1_conv\/Conv2Dx",
+      "blob_weights" : 49,
+      "K" : 64,
+      "name" : "model_2\/cls_1_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 8,
+      "bottom" : "model_2\/cls_1_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/cls_1_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/cls_1_conv\/Conv2D",
+      "top" : "model_2\/cls_1_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/cls_1_conv\/Conv2D"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_1_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_1_conv\/Conv2Dx",
+      "blob_weights" : 51,
+      "K" : 64,
+      "name" : "model_2\/loc_1_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 16,
+      "bottom" : "model_2\/loc_1_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/loc_1_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/loc_1_conv\/Conv2D",
+      "top" : "model_2\/loc_1_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/loc_1_conv\/Conv2D"
+    },
+    {
+      "name" : "model_2\/cls_0_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 2,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 4356,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/cls_0_conv\/BiasAdd",
+      "debug_info" : "model_2\/cls_0_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/cls_0_reshape\/Reshape"
+    },
+    {
+      "top" : "model_2\/cls_1_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 8,
+      "h" : 1,
+      "name" : "model_2\/cls_1_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/cls_1_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 53
+    },
+    {
+      "bottom" : "model_2\/cls_1_conv\/Conv2D,model_2\/cls_1_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/cls_1_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/cls_1_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/cls_1_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_2_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_2_insert_conv2d_activation\/Relu",
+      "blob_weights" : 57,
+      "K" : 128,
+      "blob_biases" : 55,
+      "name" : "model_2\/cls_2_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_5_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "debug_info" : "max_pool_5",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "size_x" : 2,
+      "top" : "max_pool_5",
+      "top_shape_style" : 0,
+      "stride_x" : 2,
+      "avg_or_max" : 1,
+      "average_count_exclude_padding" : 1,
+      "type" : "pool",
+      "name" : "max_pool_5",
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "bottom" : "model_2\/conv2d_5_activation\/Relu",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "size_y" : 2,
+      "pad_value" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_2_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_2_insert_conv2d_activation\/Relu",
+      "blob_weights" : 61,
+      "K" : 128,
+      "blob_biases" : 59,
+      "name" : "model_2\/loc_2_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_5_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "top" : "model_2\/loc_1_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 16,
+      "h" : 1,
+      "name" : "model_2\/loc_1_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/loc_1_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 63
+    },
+    {
+      "bottom" : "model_2\/loc_1_conv\/Conv2D,model_2\/loc_1_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/loc_1_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/loc_1_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/loc_1_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "name" : "model_2\/loc_0_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 4,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 4356,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/loc_0_conv\/BiasAdd",
+      "debug_info" : "model_2\/loc_0_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/loc_0_reshape\/Reshape"
+    },
+    {
+      "bottom" : "model_2\/cls_0_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "mode" : 3,
+      "debug_info" : "model_2\/cls_0_activation\/Sigmoid",
+      "top" : "model_2\/cls_0_activation\/Sigmoid",
+      "type" : "activation",
+      "name" : "model_2\/cls_0_activation\/Sigmoid"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_6\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_6_activation\/Relu",
+      "blob_weights" : 67,
+      "K" : 128,
+      "blob_biases" : 65,
+      "name" : "model_2\/conv2d_6\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "max_pool_5",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_2_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_2_conv\/Conv2Dx",
+      "blob_weights" : 69,
+      "K" : 64,
+      "name" : "model_2\/cls_2_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 8,
+      "bottom" : "model_2\/cls_2_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/cls_2_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/cls_2_conv\/Conv2D",
+      "top" : "model_2\/cls_2_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/cls_2_conv\/Conv2D"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_2_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_2_conv\/Conv2Dx",
+      "blob_weights" : 71,
+      "K" : 64,
+      "name" : "model_2\/loc_2_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 16,
+      "bottom" : "model_2\/loc_2_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/loc_2_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/loc_2_conv\/Conv2D",
+      "top" : "model_2\/loc_2_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/loc_2_conv\/Conv2D"
+    },
+    {
+      "name" : "model_2\/cls_1_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 2,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1156,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/cls_1_conv\/BiasAdd",
+      "debug_info" : "model_2\/cls_1_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/cls_1_reshape\/Reshape"
+    },
+    {
+      "top" : "model_2\/cls_2_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 8,
+      "h" : 1,
+      "name" : "model_2\/cls_2_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/cls_2_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 73
+    },
+    {
+      "bottom" : "model_2\/cls_2_conv\/Conv2D,model_2\/cls_2_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/cls_2_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/cls_2_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/cls_2_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_3_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_3_insert_conv2d_activation\/Relu",
+      "blob_weights" : 77,
+      "K" : 64,
+      "blob_biases" : 75,
+      "name" : "model_2\/cls_3_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_6_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/conv2d_7\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/conv2d_7_activation\/Relu",
+      "blob_weights" : 81,
+      "K" : 64,
+      "blob_biases" : 79,
+      "name" : "model_2\/conv2d_7\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_6_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 0,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_3_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_3_insert_conv2d_activation\/Relu",
+      "blob_weights" : 85,
+      "K" : 64,
+      "blob_biases" : 83,
+      "name" : "model_2\/loc_3_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_6_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "top" : "model_2\/loc_2_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 16,
+      "h" : 1,
+      "name" : "model_2\/loc_2_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/loc_2_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 87
+    },
+    {
+      "bottom" : "model_2\/loc_2_conv\/Conv2D,model_2\/loc_2_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/loc_2_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/loc_2_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/loc_2_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "name" : "model_2\/loc_1_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 4,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1156,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/loc_1_conv\/BiasAdd",
+      "debug_info" : "model_2\/loc_1_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/loc_1_reshape\/Reshape"
+    },
+    {
+      "bottom" : "model_2\/cls_1_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "mode" : 3,
+      "debug_info" : "model_2\/cls_1_activation\/Sigmoid",
+      "top" : "model_2\/cls_1_activation\/Sigmoid",
+      "type" : "activation",
+      "name" : "model_2\/cls_1_activation\/Sigmoid"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_3_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_3_conv\/Conv2Dx",
+      "blob_weights" : 89,
+      "K" : 64,
+      "name" : "model_2\/cls_3_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 8,
+      "bottom" : "model_2\/cls_3_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/cls_3_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/cls_3_conv\/Conv2D",
+      "top" : "model_2\/cls_3_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/cls_3_conv\/Conv2D"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_4_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_4_insert_conv2d_activation\/Relu",
+      "blob_weights" : 93,
+      "K" : 64,
+      "blob_biases" : 91,
+      "name" : "model_2\/cls_4_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_7_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_4_insert_conv2d\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_4_insert_conv2d_activation\/Relu",
+      "blob_weights" : 97,
+      "K" : 64,
+      "blob_biases" : 95,
+      "name" : "model_2\/loc_4_insert_conv2d\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 64,
+      "bottom" : "model_2\/conv2d_7_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_3_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_3_conv\/Conv2Dx",
+      "blob_weights" : 99,
+      "K" : 64,
+      "name" : "model_2\/loc_3_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 16,
+      "bottom" : "model_2\/loc_3_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/loc_3_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/loc_3_conv\/Conv2D",
+      "top" : "model_2\/loc_3_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/loc_3_conv\/Conv2D"
+    },
+    {
+      "name" : "model_2\/cls_2_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 2,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 324,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/cls_2_conv\/BiasAdd",
+      "debug_info" : "model_2\/cls_2_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/cls_2_reshape\/Reshape"
+    },
+    {
+      "top" : "model_2\/cls_3_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 8,
+      "h" : 1,
+      "name" : "model_2\/cls_3_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/cls_3_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 101
+    },
+    {
+      "bottom" : "model_2\/cls_3_conv\/Conv2D,model_2\/cls_3_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/cls_3_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/cls_3_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/cls_3_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "top" : "model_2\/loc_3_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 16,
+      "h" : 1,
+      "name" : "model_2\/loc_3_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/loc_3_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 103
+    },
+    {
+      "bottom" : "model_2\/loc_3_conv\/Conv2D,model_2\/loc_3_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/loc_3_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/loc_3_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/loc_3_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "name" : "model_2\/loc_2_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 4,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 324,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/loc_2_conv\/BiasAdd",
+      "debug_info" : "model_2\/loc_2_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/loc_2_reshape\/Reshape"
+    },
+    {
+      "bottom" : "model_2\/cls_2_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "mode" : 3,
+      "debug_info" : "model_2\/cls_2_activation\/Sigmoid",
+      "top" : "model_2\/cls_2_activation\/Sigmoid",
+      "type" : "activation",
+      "name" : "model_2\/cls_2_activation\/Sigmoid"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/cls_4_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/cls_4_conv\/Conv2Dx",
+      "blob_weights" : 105,
+      "K" : 64,
+      "name" : "model_2\/cls_4_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 8,
+      "bottom" : "model_2\/cls_4_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/cls_4_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/cls_4_conv\/Conv2D",
+      "top" : "model_2\/cls_4_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/cls_4_conv\/Conv2D"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "model_2\/loc_4_conv\/Conv2Dx",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "model_2\/loc_4_conv\/Conv2Dx",
+      "blob_weights" : 107,
+      "K" : 64,
+      "name" : "model_2\/loc_4_conv\/Conv2Dx",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 16,
+      "bottom" : "model_2\/loc_4_insert_conv2d_activation\/Relu",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "model_2\/loc_4_conv\/Conv2Dx",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "model_2\/loc_4_conv\/Conv2D",
+      "top" : "model_2\/loc_4_conv\/Conv2D",
+      "type" : "transpose",
+      "name" : "model_2\/loc_4_conv\/Conv2D"
+    },
+    {
+      "top" : "model_2\/cls_4_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 8,
+      "h" : 1,
+      "name" : "model_2\/cls_4_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/cls_4_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 109
+    },
+    {
+      "bottom" : "model_2\/cls_4_conv\/Conv2D,model_2\/cls_4_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/cls_4_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/cls_4_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/cls_4_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "top" : "model_2\/loc_4_conv\/BiasAdd\/ReadVariableOp",
+      "w" : 16,
+      "h" : 1,
+      "name" : "model_2\/loc_4_conv\/BiasAdd\/ReadVariableOp",
+      "nd_rank" : 1,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "model_2\/loc_4_conv\/BiasAdd\/ReadVariableOp",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 111
+    },
+    {
+      "bottom" : "model_2\/loc_4_conv\/Conv2D,model_2\/loc_4_conv\/BiasAdd\/ReadVariableOp",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "model_2\/loc_4_conv\/BiasAdd",
+      "nd_mode" : true,
+      "top" : "model_2\/loc_4_conv\/BiasAdd",
+      "type" : "elementwise",
+      "name" : "model_2\/loc_4_conv\/BiasAdd",
+      "beta" : 0
+    },
+    {
+      "name" : "model_2\/cls_3_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 2,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 100,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/cls_3_conv\/BiasAdd",
+      "debug_info" : "model_2\/cls_3_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/cls_3_reshape\/Reshape"
+    },
+    {
+      "name" : "model_2\/loc_3_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 4,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 100,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/loc_3_conv\/BiasAdd",
+      "debug_info" : "model_2\/loc_3_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/loc_3_reshape\/Reshape"
+    },
+    {
+      "bottom" : "model_2\/cls_3_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "mode" : 3,
+      "debug_info" : "model_2\/cls_3_activation\/Sigmoid",
+      "top" : "model_2\/cls_3_activation\/Sigmoid",
+      "type" : "activation",
+      "name" : "model_2\/cls_3_activation\/Sigmoid"
+    },
+    {
+      "name" : "model_2\/cls_4_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 2,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 36,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/cls_4_conv\/BiasAdd",
+      "debug_info" : "model_2\/cls_4_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/cls_4_reshape\/Reshape"
+    },
+    {
+      "name" : "model_2\/loc_4_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 4,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 36,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "model_2\/loc_4_conv\/BiasAdd",
+      "debug_info" : "model_2\/loc_4_reshape\/Reshape",
+      "dst_seq" : 1,
+      "dst_k" : -1,
+      "top" : "model_2\/loc_4_reshape\/Reshape"
+    },
+    {
+      "bottom" : "model_2\/cls_4_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "mode" : 3,
+      "debug_info" : "model_2\/cls_4_activation\/Sigmoid",
+      "top" : "model_2\/cls_4_activation\/Sigmoid",
+      "type" : "activation",
+      "name" : "model_2\/cls_4_activation\/Sigmoid"
+    },
+    {
+      "bottom" : "model_2\/loc_0_reshape\/Reshape,model_2\/loc_1_reshape\/Reshape,model_2\/loc_2_reshape\/Reshape,model_2\/loc_3_reshape\/Reshape,model_2\/loc_4_reshape\/Reshape",
+      "weights" : {
+
+      },
+      "nd_mode" : true,
+      "debug_info" : "model_2\/loc_branch_concat\/concat",
+      "axis" : 1,
+      "top" : "output_bounds",
+      "type" : "general_concat",
+      "name" : "model_2\/loc_branch_concat\/concat",
+      "attributes" : {
+        "is_output" : 1
+      }
+    },
+    {
+      "bottom" : "model_2\/cls_0_activation\/Sigmoid,model_2\/cls_1_activation\/Sigmoid,model_2\/cls_2_activation\/Sigmoid,model_2\/cls_3_activation\/Sigmoid,model_2\/cls_4_activation\/Sigmoid",
+      "weights" : {
+
+      },
+      "nd_mode" : true,
+      "debug_info" : "model_2\/cls_branch_concat\/concat",
+      "axis" : 1,
+      "top" : "output_scores",
+      "type" : "general_concat",
+      "name" : "model_2\/cls_branch_concat\/concat",
+      "attributes" : {
+        "is_output" : 1
+      }
+    }
+  ],
+  "transform_params" : {
+    "data" : {
+      "bias_a" : 0,
+      "bias_g" : 0,
+      "bias_r" : 0,
+      "bias_b" : 0,
+      "center_mean" : 0,
+      "is_network_bgr" : 0,
+      "scale" : 0.0039215688593685627
+    }
+  },
+  "storage" : "model.espresso.weights",
+  "metadata_in_weights" : [
+
+  ],
+  "properties" : {
+
+  },
+  "analyses" : {
+
+  },
+  "format_version" : 200
+}

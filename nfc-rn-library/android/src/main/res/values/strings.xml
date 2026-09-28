@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      nfc-rn-library wrapper's own status/error messages (RN bridge → JS events).
+      Note: unlike OCR/Liveness, the Udentify Android NFC SDK docs don't document
+      a host-app string-override surface for its own native reader screens, so
+      those (equivalent to the iOS wrapper's nfc_reading_*/nfc_error_bac_* keys,
+      which come from the vendor UdentifyNFC.xcframework's own bundled strings on
+      iOS) aren't overridden here — only this wrapper's own literals are.
+    -->
+    <string name="nfc_error_nfc_disabled_message">NFC is disabled on this device</string>
+    <string name="nfc_error_unknown_message">Unknown NFC error</string>
+    <string name="nfc_error_invalid_activity_message">Current activity must be an AppCompatActivity for NFC reading</string>
+    <string name="nfc_error_missing_credentials_message">Missing required credentials: documentNumber, dateOfBirth, expiryDate, serverURL, transactionID</string>
+    <string name="nfc_reading_cancelled_message">NFC reading was cancelled</string>
+</resources>

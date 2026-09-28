@@ -1,0 +1,377 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.8 clang-1700.4.4.1)
+// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name UdentifyLiveKYC
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+import CoreMedia
+import Foundation
+import Swift
+import UIKit
+import UdentifyCommons
+@_exported import UdentifyLiveKYC
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum LiveKYCModule : String, CaseIterable, Equatable, Hashable, RawRepresentable {
+  case nfc
+  case ocr
+  case face
+  case hologram
+  public typealias AllCases = [LiveKYCModule]
+  public static var allCases: [LiveKYCModule] {
+    get
+  }
+  public var wireName: String {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LiveKYCError : Error, LocalizedError {
+  case moduleNotAvailable(LiveKYCModule)
+  case initiationFailed(module: LiveKYCModule, reason: String)
+  case invalidParameter(parameter: String, reason: String)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var errorDescription: String? {
+    get
+  }
+  #endif
+}
+@_hasMissingDesignatedInitializers final public class UdentifyLiveKYC {
+  public static func availableModules() -> [LiveKYCModule]
+  public static func isAvailable(_ module: LiveKYCModule) -> Bool
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func initiateNFCReader(documentNumber: String, dateOfBirth: String, expiryDate: String, transactionID: String, serverURL: String, requestTimeout: Double = 15, chipAnticloneMode: LiveKYCChipAnticloneMode = .auto, isPassiveAuthenticationEnabled: Bool = false, bundle: Bundle = .main, tableName: String? = nil, isFastModeEnabled: Bool = true, logLevel: LogLevel = .info) throws -> NSObject
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func initiateOCRController(serverURL: String, transactionID: String, documentType: LiveKYCDocumentType = .ID_CARD, country: Country? = LiveKYCConfiguration.defaultOCRCountry, documentSide: LiveKYCDocumentSide = .bothSides, manualCapture: Bool = false, logLevel: LogLevel = .warning) throws -> UIViewController
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func initiateHologramController(serverURL: String, transactionID: String, country: Country? = LiveKYCConfiguration.defaultOCRCountry, noFlashDuration: Double = 2, flashDuration: Double = 3, totalDuration: Double = 5, bitrate: Double? = nil, logLevel: LogLevel = .warning) throws -> UIViewController
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func startHologramFlow(presenter: UIViewController, serverURL: String, transactionID: String, country: Country? = LiveKYCConfiguration.defaultOCRCountry, noFlashDuration: Double = 2, flashDuration: Double = 3, totalDuration: Double = 5, bitrate: Double? = nil, requestTimeout: Double = 30, logLevel: LogLevel = .warning, progress: ((String) -> Void)? = nil, completion: @escaping (Result<LiveKYCHologramResult, LiveKYCError>) -> Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func performDocumentLiveness(frontImage: UIImage?, backImage: UIImage?, serverURL: String, transactionID: String, requestTimeout: Double = 30, completion: @escaping (Result<LiveKYCDocumentLivenessResult, LiveKYCError>) -> Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func startSelfieFlow(presenter: UIViewController, serverURL: String, transactionID: String, operation: LiveKYCMethodType = .registration, userID: String? = nil, listName: String? = nil, progress: ((String) -> Void)? = nil, completion: @escaping (Result<LiveKYCFaceResult, LiveKYCError>) -> Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func captureSelfie(presenter: UIViewController, serverURL: String, transactionID: String, userID: String? = nil, progress: ((String) -> Void)? = nil, completion: @escaping (Result<UIImage, LiveKYCError>) -> Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func performFaceIDAndLiveness(image: UIImage, serverURL: String, transactionID: String, operation: LiveKYCMethodType = .registration, userID: String? = nil, listName: String? = nil, completion: @escaping (Result<LiveKYCFaceResult, LiveKYCError>) -> Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func initiateFaceController(serverURL: String, transactionID: String, userID: String? = nil, listName: String? = nil, method: LiveKYCMethodType = .registration, completion: @escaping (Result<UIViewController, LiveKYCError>) -> Void)
+  #endif
+  @objc deinit
+}
+public enum LiveKYCSignals {
+  public static let ocrCompleted: Swift.String
+  public static let nfcCompleted: Swift.String
+  public static let faceCompleted: Swift.String
+  public static let hologramCompleted: Swift.String
+  public static let livekycError: Swift.String
+  public static let livekycProgress: Swift.String
+  public static let performOCR: Swift.String
+  public static let performNFC: Swift.String
+  public static let performFace: Swift.String
+  public static let performHologram: Swift.String
+  public static let returnToCall: Swift.String
+}
+public protocol LiveKYCSignalTransport : AnyObject {
+  #if compiler(>=5.3) && $NonescapableTypes
+  var onSignal: ((_ type: String, _ payload: [String : String]?) -> Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  func send(type: String, payload: [String : String]?)
+  #endif
+}
+final public class LiveKYCClosureTransport : LiveKYCSignalTransport {
+  final public var onSignal: ((String, [String : String]?) -> Void)?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(sendHandler: @escaping (String, [String : String]?) -> Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func send(type: String, payload: [String : String]?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func receive(type: String, payload: [String : String]? = nil)
+  #endif
+  @objc deinit
+}
+public enum LiveKYCObservationMode : String, CaseIterable, Equatable, Hashable, RawRepresentable {
+  case progressOnly
+  case screenShare
+  case cameraFeed
+  public typealias AllCases = [LiveKYCObservationMode]
+  public static var allCases: [LiveKYCObservationMode] {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LiveKYCChipAnticloneMode : String, CaseIterable, Equatable, Hashable, RawRepresentable {
+  case none
+  case auto
+  case requireCA
+  case requireAA
+  public typealias AllCases = [LiveKYCChipAnticloneMode]
+  public static var allCases: [LiveKYCChipAnticloneMode] {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LiveKYCDocumentType : String, CaseIterable, Equatable, Hashable, RawRepresentable {
+  case ID_CARD
+  case PASSPORT
+  case DRIVE_LICENCE
+  public typealias AllCases = [LiveKYCDocumentType]
+  public static var allCases: [LiveKYCDocumentType] {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func fromWire(_ value: String) -> LiveKYCDocumentType?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LiveKYCDocumentSide : String, CaseIterable, Equatable, Hashable, RawRepresentable {
+  case bothSides
+  case frontSide
+  case backSide
+  public typealias AllCases = [LiveKYCDocumentSide]
+  public static var allCases: [LiveKYCDocumentSide] {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func fromWire(_ value: String) -> LiveKYCDocumentSide?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LiveKYCMethodType : String, CaseIterable, Equatable, Hashable, RawRepresentable {
+  case registration
+  case authentication
+  case imageUpload
+  case selfie
+  case identification
+  public typealias AllCases = [LiveKYCMethodType]
+  public static var allCases: [LiveKYCMethodType] {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func fromWire(_ value: String) -> LiveKYCMethodType?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LiveKYCLivenessMode : String, CaseIterable, Equatable, Hashable, RawRepresentable {
+  case passive
+  case active
+  case hybrid
+  public typealias AllCases = [LiveKYCLivenessMode]
+  public static var allCases: [LiveKYCLivenessMode] {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func fromWire(_ value: String) -> LiveKYCLivenessMode?
+  #endif
+  public var usesActiveController: Bool {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct LiveKYCCameraBridge {
+  public let prepare: (LiveKYCModule) async -> Bool
+  public let capture: (CMSampleBuffer) -> Void
+  public init(prepare: @escaping (LiveKYCModule) async -> Bool, capture: @escaping (CMSampleBuffer) -> Void)
+}
+public struct LiveKYCConfiguration {
+  public static let defaultOCRCountry: Country
+  public let serverURL: String
+  public let transactionID: String
+  public let ocrDocumentType: LiveKYCDocumentType
+  public let ocrCountry: Country?
+  public let ocrDocumentSide: LiveKYCDocumentSide
+  public let faceMethod: LiveKYCMethodType
+  public let selfieOperation: LiveKYCMethodType
+  public let faceLivenessMode: LiveKYCLivenessMode
+  public let userID: String?
+  public let listName: String?
+  public let observationMode: LiveKYCObservationMode
+  public let cameraBridge: LiveKYCCameraBridge?
+  public let nfcChipAnticloneMode: LiveKYCChipAnticloneMode
+  public let nfcIsPassiveAuthenticationEnabled: Bool
+  public let nfcRequestTimeout: Double
+  public let nfcIsFastModeEnabled: Bool
+  public let ocrManualCapture: Bool
+  public let ocrDocumentLivenessEnabled: Bool
+  public let hologramNoFlashDuration: Double
+  public let hologramFlashDuration: Double
+  public let hologramTotalDuration: Double
+  public let hologramBitrate: Double?
+  public let hologramRequestTimeout: Double
+  public let hologramLogLevel: LogLevel
+  public let nfcBundle: Bundle
+  public let nfcTableName: String?
+  public let nfcLogLevel: LogLevel
+  public let ocrLogLevel: LogLevel
+  public let faceLogLevel: LogLevel
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(serverURL: String, transactionID: String, ocrDocumentType: LiveKYCDocumentType = .ID_CARD, ocrCountry: Country? = LiveKYCConfiguration.defaultOCRCountry, ocrDocumentSide: LiveKYCDocumentSide = .bothSides, ocrManualCapture: Bool = false, ocrDocumentLivenessEnabled: Bool = false, ocrLogLevel: LogLevel = .warning, hologramNoFlashDuration: Double = 2, hologramFlashDuration: Double = 3, hologramTotalDuration: Double = 5, hologramBitrate: Double? = nil, hologramRequestTimeout: Double = 30, hologramLogLevel: LogLevel = .warning, faceMethod: LiveKYCMethodType = .registration, selfieOperation: LiveKYCMethodType = .registration, faceLivenessMode: LiveKYCLivenessMode = .passive, faceLogLevel: LogLevel = .warning, userID: String? = nil, listName: String? = nil, nfcChipAnticloneMode: LiveKYCChipAnticloneMode = .auto, nfcIsPassiveAuthenticationEnabled: Bool = false, nfcRequestTimeout: Double = 15, nfcIsFastModeEnabled: Bool = true, nfcBundle: Bundle = .main, nfcTableName: String? = nil, nfcLogLevel: LogLevel = .info, observationMode: LiveKYCObservationMode = .cameraFeed, cameraBridge: LiveKYCCameraBridge? = nil)
+  #endif
+}
+public struct LiveKYCMRZData {
+  public let documentNumber: String
+  public let dateOfBirth: String
+  public let expiryDate: String
+  public init(documentNumber: String, dateOfBirth: String, expiryDate: String)
+}
+public enum LiveKYCEvent {
+  case signalReceived(type: String)
+  case moduleStarted(LiveKYCModule)
+  case moduleProgress(LiveKYCModule, String)
+  case nfcProgress(percent: Int)
+  case moduleUIFinished(LiveKYCModule)
+  case moduleCompleted(LiveKYCModule)
+  case moduleFailed(LiveKYCModule, LiveKYCError)
+  case busyRejected(String)
+  case activeModuleCancelled(LiveKYCModule)
+}
+final public class LiveKYCOrchestrator {
+  final public let configuration: LiveKYCConfiguration
+  final public var eventHandler: ((LiveKYCEvent) -> Void)?
+  final public var resultHandler: ((LiveKYCModuleResult) -> Void)?
+  final public var capturedMRZ: LiveKYCMRZData? {
+    get
+  }
+  final public var lastDocumentLivenessResult: LiveKYCDocumentLivenessResult? {
+    get
+  }
+  public init(configuration: LiveKYCConfiguration)
+  @objc deinit
+  final public func attach(transport: LiveKYCSignalTransport, presenter: UIViewController)
+  final public func detach()
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func handleSignal(type: String, payload: [String : String]?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func performOCR(payload: [String : String]? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func performNFC(payload: [String : String]? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func performFace(payload: [String : String]? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func performHologram(payload: [String : String]? = nil)
+  #endif
+  final public func clearCapturedMRZ()
+  final public func cancelActiveModule()
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public var runningModule: LiveKYCModule? {
+    get
+  }
+  #endif
+}
+public enum LiveKYCSettings {
+  public static var ocr: (() -> Void)?
+  public static var face: (() -> Void)?
+  public static var nfc: (() -> Void)?
+}
+public struct LiveKYCFaceResult {
+  public let isVerified: Bool
+  public let matchScore: Double
+  public let livenessProbability: Double?
+  public let livenessQuality: Double?
+  public let livenessScore: Double?
+  public let assessmentDescription: String?
+  public let assessmentValue: Double?
+  public let failureReason: String?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(isVerified: Bool, matchScore: Double, livenessProbability: Double?, livenessQuality: Double?, livenessScore: Double?, assessmentDescription: String?, assessmentValue: Double?, failureReason: String?)
+  #endif
+}
+public struct LiveKYCHologramResult {
+  public let transactionID: String?
+  public let idNumber: String?
+  public let hologramFaceImage: UIImage?
+  public let hologramExists: Bool?
+  public let ocrIdAndHologramIdMatch: Bool?
+  public let ocrFaceAndHologramFaceMatch: Bool?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(transactionID: String?, idNumber: String?, hologramFaceImage: UIImage?, hologramExists: Bool?, ocrIdAndHologramIdMatch: Bool?, ocrFaceAndHologramFaceMatch: Bool?)
+  #endif
+}
+public struct LiveKYCModuleResult {
+  public let module: LiveKYCModule
+  public let transactionID: String
+  public let sdkResult: Any
+}
+public struct LiveKYCDocumentLivenessPipeline {
+  public let name: String?
+  public let calibration: String?
+  public let score: String?
+  public let probability: String?
+  public let statusCode: String?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(name: String?, calibration: String?, score: String?, probability: String?, statusCode: String?)
+  #endif
+}
+public struct LiveKYCDocumentLivenessSide {
+  public let aggregateProbability: String?
+  public let imageQualityWarnings: String?
+  public let pipelines: [LiveKYCDocumentLivenessPipeline]
+  public let failureReason: String?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(aggregateProbability: String?, imageQualityWarnings: String?, pipelines: [LiveKYCDocumentLivenessPipeline], failureReason: String?)
+  #endif
+}
+public struct LiveKYCDocumentLivenessResult {
+  public let front: LiveKYCDocumentLivenessSide?
+  public let back: LiveKYCDocumentLivenessSide?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(front: LiveKYCDocumentLivenessSide?, back: LiveKYCDocumentLivenessSide?)
+  #endif
+}

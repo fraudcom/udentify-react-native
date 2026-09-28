@@ -1,0 +1,272 @@
+# Video Call
+
+This document outlines the necessary steps and methods to implement an Android Video Call service.
+
+## Development Environment Setup
+
+* Development Environment: Android Studio
+* Development Language: Java
+
+#### Step 1: Add the AAR files
+
+**a. Manual Integration**
+
+1. ([Download Here](https://docs.fraud.com/udentify/udentify-api-and-sdk/android-sdk-resources#vc-sdk)) Copy the following `aar` files and add it to your project's `libs` folder (dependency names might differ)
+
+* [<mark style="color:blue;">**commons.aar**</mark>](https://docs.fraud.com/udentify/udentify-api-and-sdk/android-sdk-resources#vc-sdk)
+* [<mark style="color:blue;">**vc.aar**</mark>](https://docs.fraud.com/udentify/udentify-api-and-sdk/android-sdk-resources#vc-sdk)
+
+2. Include these `.aar` files by adding the following line to your app-level `build.gradle`:
+
+```groovy
+implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+```
+
+**b. Dependency Integration**
+
+To gain access to the Udentify library, please contact our support team. If you already have access, include following lines in your app-level `build.gradle` file:
+
+```groovy
+implementation 'com.fraud.udentify.android.sdk:commons:25.4.0'
+implementation 'com.fraud.udentify.android.sdk:vc:25.4.0'
+```
+
+Additionally, to configure the integration, add the following block to your project-level `build.gradle` file:
+
+```groovy
+allprojects {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/FraudcomMobile/mobile")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+```
+
+The `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables are required to access the Udentify libraries:
+
+* `GITHUB_ACTOR`: The username of the GitHub account that will access the Udentify libraries.
+* `GITHUB_TOKEN`: A personal access token (PAT) used to authenticate GitHub API requests. You can generate this token by navigating to `GitHub > Settings > Developer Settings > Personal access tokens` and creating a new token with the appropriate permissions.
+
+After obtaining these credentials, set them as environment variables according to your operating system.
+
+#### Step 2: Add dependencies
+
+Add the following VC dependencies to your app-level `build.gradle` file:
+
+```groovy
+// VC dependencies
+implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+implementation 'com.squareup.okhttp3:okhttp-tls:4.12.0'
+implementation 'com.otaliastudios:cameraview:2.7.2'
+implementation 'com.google.android.material:material:1.4.0'
+implementation 'androidx.activity:activity:1.7.2'
+implementation 'androidx.navigation:navigation-fragment:2.8.3'
+implementation 'com.google.code.gson:gson:2.8.7'
+implementation 'io.livekit:livekit-android:2.12.1'
+```
+
+#### Step 3: Set aaptOptions
+
+Add the following config to your app-level `build.gradle` file:
+
+```groovy
+aaptOptions {
+    noCompress "tflite"
+}
+```
+
+#### Step 4: Add permissions
+
+Add the following permissions to your `AndroidManifest.xml` file:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.CAMERA"/>
+<uses-feature android:name="android.hardware.camera" android:required="false" />
+```
+
+**It is essential for the app to have access to the device's phone state in order to fully utilize Udentify. Therefore, requesting the `READ_PHONE_STATE` permission in the Android app is advised:**
+
+```groovy
+requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
+```
+
+Override the `onRequestPermissionsResult()` method to ensure that your app behaves as expected if the permission is granted or denied.
+
+Optional permissions:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+```
+
+#### Step 5: Configure Activity
+
+Add the following entries to the `Activity` that will use `VideoCallFragment` (only supports Portrait mode) in `AndroidManifest.xml`:
+
+```xml
+<activity
+        ...
+        android:screenOrientation="portrait"
+        android:configChanges="orientation|keyboardHidden">
+```
+
+With these configurations in place, your development environment is now set up to use the Video Call API for Android.
+
+## Video Call
+
+UdentifyVC is a package that provides video call functionality. It is designed for seamless integration into Android applications, offering a simple API to manage video calls.
+
+#### Step 1: Create a Fragment and Implement <mark style="color:blue;">VideoCallOperator</mark>
+
+Create a new fragment in your project and implement the `VideoCallOperator` interface.
+
+#### Step 2: Add Unimplemented Methods
+
+Add the unimplemented methods for <mark style="color:blue;">`VideoCallOperator`</mark> and <mark style="color:blue;">`Parcelable`</mark> since `VideoCallOperator` extends from `Parcelable`.
+
+#### Step 3: Create a <mark style="color:blue;">VideoCallCredentials</mark> Object
+
+Ideally, create a <mark style="color:blue;">`VideoCallCredentials`</mark> object in the `onResume()` method and make it global. Then, return it from the `getCredentials()` method:
+
+```java
+@Override
+public VideoCallCredentials getCredentials() {
+    // Create a new VideoCallCredentials builder
+    VideoCallCredentials credentials;
+    credentials = new VideoCallCredentials.Builder()
+            .serverURL("https://...") // Enter server URL
+            .wssURL("wss://...") // Enter wss URL
+            .userID(new Date().getTime() + "") // Enter a user ID to define your customer
+            .transactionID("TRX...") // Enter transaction ID received from the server
+            .clientName("Client") // Enter client name
+            .idleTimeout("60") // Enter idle timeout. Default value is 30 seconds.
+            .build();
+
+    return credentials;
+}
+```
+
+#### Step 4: Initiate Video Call
+
+To initiate a video call, create a new instance of the `VideoCallFragment` class:
+
+```java
+    VideoCallFragment videoCallFragment = VCFragment.newInstance(MainFragment.this);
+```
+
+Required parameter is the `VideoCallOperator` interface, which you have already implemented in your current fragment/activity.
+
+#### **Obfuscation** <a href="#obfuscation" id="obfuscation"></a>
+
+Add the following rule to your proguard file.
+
+```java
+-keep public class io.udentify.** { *; }
+```
+
+## UI Customization
+
+This section provides guidelines on how to customise various elements of the user interface
+
+#### Language Pack
+
+To change the default language, add the following strings to your `strings.xml` file:
+
+```xml
+<!--    VC Strings     -->
+<string name="udentify_vc_notification_label_default">Video Call will be starting, please wait...</string>
+<string name="udentify_vc_notification_label_countdown">Video Call will be started in %d sec/s.</string>
+<string name="udentify_vc_notification_label_token_fetch">Authorizing the user...</string>
+```
+
+#### Colors
+
+To customise colors, add the following values to your `colors.xml` file:
+
+```xml
+<!--    VC Background Colors     -->
+<color name="udentify_vc_background_color">#FF000000</color>
+
+<!--    VC Text Colors     -->
+<color name="udentify_vc_text_color">#FFFFFFFF</color>
+
+<!--    VC Pip View Color     -->
+<color name="udentify_vc_pip_view_border_color">#FFFFFFFF</color>
+
+<!--    VC Buttons Color     -->
+<color name="udentify_vc_buttons_color">#FFFFFFFF</color>
+```
+
+#### Dimensions
+
+To customise dimensions, add the following values to your `dimens.xml` file:
+
+```xml
+<!--    Button Dimensions    -->
+<dimen name="udentify_vc_buttons_distance">50dp</dimen>
+```
+
+#### Styles
+
+To customise styles, add the following values to your `styles.xml` file:
+
+```xml
+<!--    VC Styles     -->
+<style name="VCPipViewStyle">
+    <item name="android:layout_gravity">bottom|end</item>
+    <item name="android:layout_margin">25dp</item>
+    <item name="strokeColor">@color/udentify_vc_pip_view_border_color</item>
+    <item name="strokeWidth">2dp</item>
+</style>
+
+<style name="VCButtonsLayoutStyle">
+    <item name="android:layout_gravity">bottom|start</item>
+    <item name="android:layout_margin">25dp</item>
+</style>
+
+
+<style name="VCOverlayLayoutStyle">
+    <item name="android:background">@color/udentify_vc_background_color</item>
+</style>
+
+<style name="VCOverlayTitleLabelStyle">
+    <item name="android:fontFamily">@font/gilroy_bold</item>
+    <item name="android:textColor">@color/udentify_vc_text_color</item>
+    <item name="android:textSize">26sp</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:breakStrategy">balanced</item>
+    <item name="android:gravity">center</item>
+    <item name="android:lines">3</item>
+    <item name="android:paddingLeft">20dp</item>
+    <item name="android:paddingRight">20dp</item>
+    <item name="layout_constraintVertical_bias">0.15</item>
+</style>
+
+<style name="VCOverlayImagePreviewStyle">
+    <item name="android:background">@color/udentify_vc_background_color</item>
+    <item name="layout_constraintVertical_bias">0.5</item>
+    <item name="android:gravity">center</item>
+</style>
+```
+
+## Error Messages
+
+**General Errors**
+
+| **Message**                          | **Type** | **Description**                                                                                     |
+| ------------------------------------ | -------- | --------------------------------------------------------------------------------------------------- |
+| ERR\_UNKNOWN                         | Error    | <p>Calls didFailWithError() method.</p><p>Check logs for details.</p>                               |
+| ERR\_CREDENTIALS\_MISSING            | Error    | <p>Calls didFailWithError() method.</p><p>Required parameters for Video Call missing.</p>           |
+| ERR\_SERVER\_TIMEOUT\_EXCEPTION      | Error    | Calls didFailWithError() method. You can increase the timeout value within getCredentials() method. |
+| ERR\_TRANSACTION\_NOT\_FOUND         | Error    | The transaction with the given transactionId was not found.                                         |
+| ERR\_TRANSACTION\_FAILED             | Error    | Transaction status was set to “FAILED” and thus cannot continue with this transaction.              |
+| ERR\_TRANSACTION\_EXPIRED            | Error    | The transaction is expired thus cannot continue with this transaction.                              |
+| ERR\_TRANSACTION\_ALREADY\_COMPLETED | Error    | The transaction has already been completed thus cannot continue with this transaction.              |

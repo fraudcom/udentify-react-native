@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mrz_scan_instruction">Belgenin MRZ alanını çerçeve içine yerleştirin</string>
+    <string name="mrz_scanning_title">MRZ Tarayıcı</string>
+    <string name="mrz_camera_error">Kamera hatası oluştu</string>
+    <string name="mrz_permission_required">MRZ taraması için kamera izni gereklidir</string>
+
+    <string name="cancel">İptal</string>
+    <string name="retry">Tekrar Dene</string>
+    <string name="use_photo">Fotoğrafı Kullan</string>
+    <string name="mrz_use_for_nfc">NFC için Kullan</string>
+    <string name="mrz_button_next">İleri</string>
+
+    <string name="mrz_label_doc_no">Belge no:</string>
+    <string name="mrz_label_birth_date">Doğum tarihi:</string>
+    <string name="mrz_label_expires_on">Son geçerlilik:</string>
+
+    <string name="mrz_not_found">Belgede MRZ bulunamadı</string>
+    <string name="invalid_document">Geçersiz belge biçimi</string>
+    <string name="processing_error">Belge işlenirken hata oluştu</string>
+    <string name="sdk_not_available">MRZ SDK kullanılamıyor</string>
+    <string name="mrz_camera2_not_supported">Camera2 desteklenmiyor</string>
+    <string name="mrz_activity_unavailable">Activity kullanılamıyor</string>
+    <string name="mrz_scanning_cancelled">MRZ taraması iptal edildi</string>
+    <string name="mrz_fragment_manager_unavailable">Ana activity bir FragmentActivity değil</string>
+    <string name="mrz_fragment_add_failed">MRZ kamera fragment\'ı eklenemedi</string>
+
+    <string name="initializing_camera">Kamera başlatılıyor…</string>
+    <string name="scanning_document">Belge taranıyor…</string>
+    <string name="processing_mrz">MRZ verisi işleniyor…</string>
+    <string name="validating_data">Çıkarılan veriler doğrulanıyor…</string>
+    <string name="finalizing">Tamamlanıyor…</string>
+</resources>
