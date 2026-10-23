@@ -1,0 +1,444 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2.1 effective-5.10 (swiftlang-6.2.1.4.8 clang-1700.4.4.1)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name UdentifyVC
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.1
+import AVFoundation
+import CallKit
+import CoreMedia
+import Foundation
+import Swift
+import UIKit
+import UdentifyCommons
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum VCVideoCaptureMode : String {
+  case liveKitCamera
+  case cameraFeedBuffer
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol VCCameraControllerDelegate : AnyObject {
+  func cameraController(_ controller: VCCameraController, didChangeUserState state: UserState)
+  func cameraController(_ controller: VCCameraController, participantType: ParticipantType, didChangeState state: ParticipantState)
+  func cameraController(_ controller: VCCameraController, didFailWithError error: Error)
+  func cameraControllerDidDismiss(_ controller: VCCameraController)
+  func cameraControllerDidEndSessionSuccessfully(_ controller: VCCameraController)
+  func cameraController(_ controller: VCCameraController, didChangePhoneCallState state: PhoneCallState)
+  func cameraController(_ controller: VCCameraController, didChangeConnectionQuality quality: VCConnectionQuality, isLocal: Bool)
+  func cameraController(_ controller: VCCameraController, didRelaySignal signalType: String)
+  func onScreenLocked()
+  func onScreenUnlocked()
+}
+extension VCCameraControllerDelegate {
+  public func cameraController(_ controller: VCCameraController, didChangePhoneCallState state: PhoneCallState)
+  public func cameraController(_ controller: VCCameraController, didChangeConnectionQuality quality: VCConnectionQuality, isLocal: Bool)
+  public func cameraController(_ controller: VCCameraController, didRelaySignal signalType: String)
+  public func onScreenLocked()
+  public func onScreenUnlocked()
+}
+public enum UserState {
+  case initiating
+  case tokenFetching
+  case tokenFetched
+  case connecting
+  case connected
+  case disconnected
+  case reconnecting
+  public static func == (a: UdentifyVC.UserState, b: UdentifyVC.UserState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ParticipantState {
+  case connected
+  case videoTrackActivated
+  case videoTrackPaused
+  case disconnected
+  public static func == (a: UdentifyVC.ParticipantState, b: UdentifyVC.ParticipantState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ParticipantType {
+  case agent
+  case supervisor
+  public static func == (a: UdentifyVC.ParticipantType, b: UdentifyVC.ParticipantType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum PhoneCallState {
+  case incoming
+  case outgoing
+  case connected
+  case ended
+  public static func == (a: UdentifyVC.PhoneCallState, b: UdentifyVC.PhoneCallState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum VCConnectionQuality {
+  case excellent
+  case good
+  case poor
+  case lost
+  case unknown
+  public static func == (a: UdentifyVC.VCConnectionQuality, b: UdentifyVC.VCConnectionQuality) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_Concurrency.MainActor @preconcurrency public class VCCameraController : UIViewController {
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: VCCameraControllerDelegate?
+  @_Concurrency.MainActor @preconcurrency public static var onMicrophoneStateChanged: ((Bool) -> Void)?
+  @_Concurrency.MainActor @preconcurrency public var roomName: String?
+  @_Concurrency.MainActor @preconcurrency final public let cameraFeedFrameRate: Int
+  @_Concurrency.MainActor @preconcurrency public var customSignalHandler: ((_ type: String, _ payload: [String : String]?) -> Bool)?
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency public init(delegate: VCCameraControllerDelegate?, serverURL: String, wsURL: String, transactionID: String, username: String, idleTimeout: Int = 100, settings: VCSettings, videoCaptureMode: VCVideoCaptureMode = .liveKitCamera, cameraFeedFrameRate: Int = 15, liveKYCOptions: VCLiveKYCOptions? = nil, keepAudioActiveInBackground: Bool = false, logLevel: UdentifyCommons.LogLevel = .info)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: NSCoder)
+  #endif
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func loadView()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillAppear(_ animated: Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidAppear(_ animated: Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Bool)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency public func dismissController()
+}
+extension VCCameraController {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency public static func cancelVideoCall(serverUrl: String, transactionId: String, completion: @escaping (Result<Bool, Error>) -> Void)
+  #endif
+}
+extension VCCameraController {
+  @discardableResult
+  @_Concurrency.MainActor @preconcurrency public static func setMicrophoneEnabled(_ enabled: Bool) -> Bool
+  @_Concurrency.MainActor @preconcurrency public static func isMicrophoneEnabled() -> Bool
+}
+extension VCCameraController {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency public func sendCustomSignal(type: String, payload: [String : String]? = nil, success: Bool? = nil)
+  #endif
+  @_Concurrency.MainActor @preconcurrency public func setCameraEnabled(_ enabled: Bool) async throws
+  @_Concurrency.MainActor @preconcurrency public func setScreenShareEnabled(_ enabled: Bool) async throws
+}
+extension VCCameraController {
+  @_Concurrency.MainActor @preconcurrency public func prepareForCameraFeed() async
+  @_Concurrency.MainActor @preconcurrency public func captureCameraFeedFrame(_ sampleBuffer: CMSampleBuffer)
+  @_Concurrency.MainActor @preconcurrency public func restoreBufferedCallCamera() async throws
+}
+extension VCCameraController : CXCallObserverDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall)
+}
+public struct LocalizationConfiguration {
+  public static var tableName: String?
+  public static var bundle: Bundle
+}
+public struct VCCameraSwitchButtonStyle {
+  public var color: UIColor
+  public var size: CGFloat
+  public var horizontalPosition: UdentifyHorizontalPosition
+  public var verticalPosition: UdentifyVerticalPosition
+  public init(color: UIColor = .white, size: CGFloat = 50, horizontalPosition: UdentifyHorizontalPosition = .left(offset: 16), verticalPosition: UdentifyVerticalPosition = .bottom(offset: 20))
+}
+public enum VCError : Error {
+  case transactionIDMissing
+  case serverURLMissing
+  case cameraPermissionRequired
+  case api(String)
+  case other(Error)
+  case cameraPermissionDenied
+  case microphonePermissionRequired
+  case microphonePermissionDenied
+  case screenRecordingPermissionDenied
+}
+extension VCError : LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var errorDescription: String? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var causeDescription: String? {
+    get
+  }
+  #endif
+}
+public struct VCMuteButtonStyle {
+  public var mutedColor: UIColor
+  public var unmutedColor: UIColor
+  public var size: CGFloat
+  public var horizontalPosition: UdentifyHorizontalPosition
+  public var verticalPosition: UdentifyVerticalPosition
+  public init(mutedColor: UIColor = .red, unmutedColor: UIColor = .white, size: CGFloat = 50, horizontalPosition: UdentifyHorizontalPosition = .center, verticalPosition: UdentifyVerticalPosition = .bottom(offset: 20))
+}
+public struct VCSettings {
+  public let bundle: Bundle
+  public let tableName: String?
+  public let backgroundColor: UIColor
+  public let backgroundStyle: UdentifyImageStyle?
+  public let overlayImageStyle: UdentifyImageStyle?
+  public let muteButtonStyle: VCMuteButtonStyle
+  public let cameraSwitchButtonStyle: VCCameraSwitchButtonStyle
+  public let pipViewStyle: UdentifyViewStyle
+  public let instructionLabelStyle: UdentifyTextStyle
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(bundle: Bundle = .main, tableName: String? = nil, backgroundColor: UIColor? = nil, backgroundStyle: UdentifyImageStyle? = nil, overlayImageStyle: UdentifyImageStyle? = nil, muteButtonStyle: VCMuteButtonStyle? = nil, cameraSwitchButtonStyle: VCCameraSwitchButtonStyle? = nil, pipViewStyle: UdentifyViewStyle? = nil, instructionLabelStyle: UdentifyTextStyle? = nil, requestTimeout: Double = 30)
+  #endif
+}
+public class TokenService {
+  public init(baseURL: String)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func getAccessToken(transactionId: String, params: [String : String], completion: @escaping (Result<String, Error>) -> Void)
+  #endif
+  @objc deinit
+}
+public class VideoCallService {
+  public init(baseURL: String)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func cancelVideoCall(transactionId: String, params: [String : String], completion: @escaping (Result<Bool, Error>) -> Void)
+  #endif
+  @objc deinit
+}
+public enum VCLiveKYCObservationMode : String {
+  case progressOnly
+  case screenShare
+  case cameraFeed
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCChipAnticloneMode : String {
+  case none
+  case auto
+  case requireCA
+  case requireAA
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCDocumentType : String {
+  case ID_CARD
+  case PASSPORT
+  case DRIVE_LICENCE
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCDocumentSide : String {
+  case bothSides
+  case frontSide
+  case backSide
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCMethodType : String {
+  case registration
+  case authentication
+  case imageUpload
+  case selfie
+  case identification
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCLivenessMode : String {
+  case passive
+  case active
+  case hybrid
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct VCLiveKYCOptions {
+  public static let defaultOCRCountry: Country
+  public let ocrDocumentType: VCLiveKYCDocumentType
+  public let ocrCountry: Country?
+  public let ocrDocumentSide: VCLiveKYCDocumentSide
+  public let faceMethod: VCLiveKYCMethodType
+  public let selfieOperation: VCLiveKYCMethodType
+  public let faceLivenessMode: VCLiveKYCLivenessMode
+  public let userID: String?
+  public let listName: String?
+  public let observationMode: VCLiveKYCObservationMode
+  public let onEvent: ((_ event: VCLiveKYCEvent) -> Void)?
+  public var resultHandler: ((_ result: VCLiveKYCResult) -> Void)? {
+    get
+  }
+  public let nfcChipAnticloneMode: VCLiveKYCChipAnticloneMode
+  public let nfcIsPassiveAuthenticationEnabled: Bool
+  public let nfcRequestTimeout: Double
+  public let nfcIsFastModeEnabled: Bool
+  public let ocrManualCapture: Bool
+  public let ocrDocumentLivenessEnabled: Bool
+  public let hologramNoFlashDuration: Double
+  public let hologramFlashDuration: Double
+  public let hologramTotalDuration: Double
+  public let hologramBitrate: Double?
+  public let hologramRequestTimeout: Double
+  public let hologramLogLevel: LogLevel
+  public let nfcBundle: Bundle
+  public let nfcTableName: String?
+  public let nfcLogLevel: LogLevel
+  public let ocrLogLevel: LogLevel
+  public let faceLogLevel: LogLevel
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(ocrDocumentType: VCLiveKYCDocumentType = .ID_CARD, ocrCountry: Country? = VCLiveKYCOptions.defaultOCRCountry, ocrDocumentSide: VCLiveKYCDocumentSide = .bothSides, ocrManualCapture: Bool = false, ocrDocumentLivenessEnabled: Bool = false, ocrLogLevel: LogLevel = .warning, hologramNoFlashDuration: Double = 2, hologramFlashDuration: Double = 3, hologramTotalDuration: Double = 5, hologramBitrate: Double? = nil, hologramRequestTimeout: Double = 30, hologramLogLevel: LogLevel = .warning, faceMethod: VCLiveKYCMethodType = .registration, selfieOperation: VCLiveKYCMethodType = .registration, faceLivenessMode: VCLiveKYCLivenessMode = .passive, faceLogLevel: LogLevel = .warning, userID: String? = nil, listName: String? = nil, nfcChipAnticloneMode: VCLiveKYCChipAnticloneMode = .auto, nfcIsPassiveAuthenticationEnabled: Bool = false, nfcRequestTimeout: Double = 15, nfcIsFastModeEnabled: Bool = true, nfcBundle: Bundle = .main, nfcTableName: String? = nil, nfcLogLevel: LogLevel = .info, observationMode: VCLiveKYCObservationMode = .cameraFeed, onEvent: ((_ event: VCLiveKYCEvent) -> Void)? = nil)
+  #endif
+  public func withResultHandler(_ handler: @escaping (_ result: VCLiveKYCResult) -> Void) -> VCLiveKYCOptions
+}
+public enum VCLiveKYCModule : String {
+  case ocr
+  case nfc
+  case face
+  case hologram
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCErrorCode : String {
+  case busy
+  case moduleNotAvailable
+  case missingPresenter
+  case missingMRZParameters
+  case missingUserID
+  case missingListName
+  case cancelledByUser
+  case cancelledByAgent
+  case cancelledByHost
+  case ocrScreenClosed
+  case ocrServerTimeout
+  case hologramScreenClosed
+  case hologramServerTimeout
+  case hologramNoVideo
+  case faceControllerReleased
+  case invalidParameters
+  case moduleAlreadySucceeded
+  case ocrFailed
+  case faceFailed
+  case nfcFailed
+  case hologramFailed
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCScreenShareFailure : String {
+  case permissionDenied
+  case failed
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VCLiveKYCEvent {
+  case liveKYCStarted(observationMode: VCLiveKYCObservationMode)
+  case signalSent(type: String, payload: [String : String])
+  case signalReceived(type: String, payload: [String : String])
+  case moduleStarted(VCLiveKYCModule)
+  case moduleProgress(VCLiveKYCModule, step: String)
+  case nfcProgress(percent: Int)
+  case moduleUIFinished(VCLiveKYCModule)
+  case moduleCompleted(VCLiveKYCModule)
+  case moduleFailed(VCLiveKYCModule, code: VCLiveKYCErrorCode, description: String)
+  case moduleCancelled(VCLiveKYCModule)
+  case busyRejected(requested: VCLiveKYCModule)
+  case screenShareStarted
+  case screenShareFailed(reason: VCLiveKYCScreenShareFailure, description: String)
+  case liveKYCEnded
+  case diagnostic(name: String, info: [String : String])
+}
+public struct VCLiveKYCResult {
+  public let module: VCLiveKYCModule
+  public let transactionID: String
+  public let sdkResult: Any
+}
+extension UdentifyVC.VCVideoCaptureMode : Swift.Equatable {}
+extension UdentifyVC.VCVideoCaptureMode : Swift.Hashable {}
+extension UdentifyVC.VCVideoCaptureMode : Swift.RawRepresentable {}
+extension UdentifyVC.UserState : Swift.Equatable {}
+extension UdentifyVC.UserState : Swift.Hashable {}
+extension UdentifyVC.ParticipantState : Swift.Equatable {}
+extension UdentifyVC.ParticipantState : Swift.Hashable {}
+extension UdentifyVC.ParticipantType : Swift.Equatable {}
+extension UdentifyVC.ParticipantType : Swift.Hashable {}
+extension UdentifyVC.PhoneCallState : Swift.Equatable {}
+extension UdentifyVC.PhoneCallState : Swift.Hashable {}
+extension UdentifyVC.VCConnectionQuality : Swift.Equatable {}
+extension UdentifyVC.VCConnectionQuality : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCObservationMode : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCObservationMode : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCObservationMode : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCChipAnticloneMode : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCChipAnticloneMode : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCChipAnticloneMode : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCDocumentType : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCDocumentType : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCDocumentType : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCDocumentSide : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCDocumentSide : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCDocumentSide : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCMethodType : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCMethodType : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCMethodType : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCLivenessMode : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCLivenessMode : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCLivenessMode : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCModule : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCModule : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCModule : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCErrorCode : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCErrorCode : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCErrorCode : Swift.RawRepresentable {}
+extension UdentifyVC.VCLiveKYCScreenShareFailure : Swift.Equatable {}
+extension UdentifyVC.VCLiveKYCScreenShareFailure : Swift.Hashable {}
+extension UdentifyVC.VCLiveKYCScreenShareFailure : Swift.RawRepresentable {}

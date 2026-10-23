@@ -1,0 +1,11 @@
+framework module UdentifyMRZ {
+  umbrella header "UdentifyMRZ.h"
+  export *
+
+  module * { export * }
+}
+
+module UdentifyMRZ.Swift {
+  header "UdentifyMRZ-Swift.h"
+  requires objc
+}

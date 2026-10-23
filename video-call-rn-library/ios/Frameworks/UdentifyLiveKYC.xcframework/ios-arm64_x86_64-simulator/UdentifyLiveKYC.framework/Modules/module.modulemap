@@ -1,0 +1,11 @@
+framework module UdentifyLiveKYC {
+  umbrella header "UdentifyLiveKYC.h"
+  export *
+
+  module * { export * }
+}
+
+module UdentifyLiveKYC.Swift {
+  header "UdentifyLiveKYC-Swift.h"
+  requires objc
+}

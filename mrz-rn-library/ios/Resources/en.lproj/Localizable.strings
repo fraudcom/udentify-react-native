@@ -1,0 +1,28 @@
+/* 
+   MRZ Scanner Localization
+   English
+*/
+
+/* Camera Instructions */
+"mrz_scan_instruction" = "Place document MRZ within the frame";
+"mrz_scanning_title" = "MRZ Scanner";
+"mrz_camera_error" = "Camera error occurred";
+"mrz_permission_required" = "Camera permission is required for MRZ scanning";
+
+/* Button Labels */
+"cancel" = "Cancel";
+"retry" = "Retry";
+"use_photo" = "Use Photo";
+
+/* Error Messages */
+"mrz_not_found" = "MRZ not found in document";
+"invalid_document" = "Invalid document format";
+"processing_error" = "Error processing document";
+"sdk_not_available" = "MRZ SDK not available";
+
+/* Progress Messages */
+"initializing_camera" = "Initializing camera...";
+"scanning_document" = "Scanning document...";
+"processing_mrz" = "Processing MRZ data...";
+"validating_data" = "Validating extracted data...";
+"finalizing" = "Finalizing...";

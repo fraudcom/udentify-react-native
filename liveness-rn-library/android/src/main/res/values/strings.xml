@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Overrides of the UdentifyFACE SDK's own customizable strings (see the
+      "UI Customisation" / Strings section of the Face Recognition & Liveness
+      docs). These key names must exactly match the vendor SDK's resource
+      names for the override to take effect.
+    -->
+    <string name="udentifyface_header_text">Take Selfie</string>
+    <string name="udentifyface_footer_button_text_default">Take Selfie</string>
+    <string name="udentifyface_footer_button_text_progressing">Liveness Check</string>
+    <string name="udentifyface_footer_button_text_result">Liveness</string>
+
+    <string name="udentifyface_message_face_too_big">Move Back</string>
+    <string name="udentifyface_message_face_too_small">Move Closer</string>
+    <string name="udentifyface_message_face_not_found">Face not found</string>
+    <string name="udentifyface_message_too_many_faces">Too many faces</string>
+    <string name="udentifyface_message_face_angled">Face to Camera</string>
+    <string name="udentifyface_message_head_angled">Face to Camera</string>
+    <string name="udentifyface_message_face_off_center">Center your face</string>
+    <string name="udentifyface_message_eyes_closed">Open your eyes</string>
+    <string name="udentifyface_message_mask_detected">Remove Mask</string>
+
+    <string name="udentifyface_active_liveness_footer_button_text_recording">Recording…</string>
+    <string name="udentifyface_active_liveness_footer_button_text_processing">Processing…</string>
+    <string name="udentifyface_active_liveness_footer_button_text_default">Center your face</string>
+    <string name="udentifyface_active_liveness_footer_button_text_result">Next step</string>
+    <string name="udentifyface_active_liveness_footer_label_text_processing">Performing active liveness.\nPlease wait…</string>
+
+    <string name="udentifyface_gesture_text_move_head_to_left">Turn Left</string>
+    <string name="udentifyface_gesture_text_move_head_to_right">Turn Right</string>
+    <string name="udentifyface_gesture_text_move_head_to_up">Tilt Up</string>
+    <string name="udentifyface_gesture_text_move_head_to_down">Tilt Down</string>
+    <string name="udentifyface_gesture_text_blink_once">Blink once</string>
+    <string name="udentifyface_gesture_text_blink_twice">Blink twice</string>
+    <string name="udentifyface_gesture_text_blink_thrice">Blink 3 times</string>
+    <string name="udentifyface_gesture_text_smile">Smile</string>
+
+    <!-- liveness-rn-library wrapper's own status/error messages (RN bridge → JS events) -->
+    <string name="liveness_permissions_not_granted">Required permissions not granted</string>
+    <string name="liveness_sdk_not_available">Udentify Face SDK is not available. Please ensure the SDK dependencies are properly included.</string>
+    <string name="liveness_face_recognition_started">Face recognition started successfully</string>
+    <string name="liveness_active_liveness_started">Active liveness started successfully</string>
+    <string name="liveness_hybrid_liveness_started">Hybrid liveness started successfully</string>
+    <string name="liveness_selfie_capture_started">Selfie capture started successfully</string>
+    <string name="liveness_face_recognition_selfie_started">Face recognition with selfie started successfully</string>
+    <string name="liveness_registration_started">User registration started successfully</string>
+    <string name="liveness_authentication_started">User authentication started successfully</string>
+    <string name="liveness_user_deleted_from_list">User deleted from list successfully</string>
+    <string name="liveness_error_unknown">Unknown error</string>
+    <string name="liveness_error_active_liveness_failed">Active Liveness failed</string>
+    <string name="liveness_error_hybrid_liveness_failed">Hybrid liveness failed</string>
+    <string name="liveness_photo_registration_completed">Photo registration completed successfully</string>
+    <string name="liveness_error_photo_registration_failed">Photo registration failed</string>
+    <string name="liveness_error_selfie_capture_failed">Selfie capture failed</string>
+    <string name="liveness_error_no_activity_context">No activity context available for selfie processing</string>
+    <string name="liveness_error_face_recognition_selfie_failed">Face recognition with selfie failed</string>
+    <string name="liveness_photo_authentication_completed">Photo authentication completed successfully</string>
+    <string name="liveness_error_photo_authentication_failed">Photo authentication failed</string>
+</resources>

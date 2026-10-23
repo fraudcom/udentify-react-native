@@ -1,0 +1,25 @@
+/* Texts of the example custom screens. Wording the SDKs already have is read from their own strings. */
+"example_ocr_title" = "ÖRNEK OCR KALİTE EKRANI";
+"example_opening_camera" = "Kamera açılıyor...";
+"example_opening_camera_back" = "Arka yüz için kamera açılıyor...";
+"example_sending_ocr" = "OCR isteği gönderiliyor...";
+"example_quality_failed" = "Kalite kontrolü başarısız: %@";
+"example_cancel" = "İptal";
+"example_close" = "Kapat";
+
+"example_face_title" = "ÖRNEK YÜZ SONUCU";
+"example_face_overlay" = "ÖRNEK YÜZ KATMANI: %@";
+"example_face_submitted" = "Gönderildi. Sonuç bekleniyor...";
+"example_face_passed" = "Sonuç: başarılı";
+"example_face_failed" = "Sonuç: başarısız";
+"example_face_check_failed" = "Yüz kontrolü başarısız: %@";
+"example_gesture_ok" = "tamam";
+"example_gesture_failed" = "başarısız";
+"example_gesture_turn_left" = "Başınızı sola çevirin";
+"example_gesture_turn_right" = "Başınızı sağa çevirin";
+"example_gesture_turn_up" = "Yukarı bakın";
+"example_gesture_turn_down" = "Aşağı bakın";
+"example_gesture_blink" = "Göz kırpın";
+"example_gesture_smile" = "Gülümseyin";
+
+"example_nfc_status" = "ÖRNEK NFC DURUMU: %@";

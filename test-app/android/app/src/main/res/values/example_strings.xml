@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Texts of the example custom screens. Wording the SDKs already have is read from their own strings. -->
+<resources>
+    <string name="example_ocr_flow">EXAMPLE OCR FLOW</string>
+    <string name="example_ocr_title">EXAMPLE OCR QUALITY SCREEN</string>
+    <string name="example_sending_ocr">Sending the OCR request...</string>
+    <string name="example_quality_failed">Quality check failed: %1$s</string>
+    <string name="example_cancel">Cancel</string>
+    <string name="example_close">Close</string>
+
+    <string name="example_nfc_title">EXAMPLE NFC SCREEN</string>
+    <string name="example_nfc_turn_on">Please turn NFC on</string>
+    <string name="example_nfc_reading">Reading chip: %1$d%%</string>
+    <string name="example_nfc_done">Chip read</string>
+    <string name="example_nfc_failed">Could not read the chip. Please try again.</string>
+
+    <string name="example_face_title">EXAMPLE FACE RESULT</string>
+    <string name="example_face_overlay">EXAMPLE FACE OVERLAY: %1$s</string>
+    <string name="example_face_submitted">Submitted. Waiting for the verdict...</string>
+    <string name="example_face_passed">Verdict: passed</string>
+    <string name="example_face_failed">Verdict: failed</string>
+    <string name="example_face_check_failed">Face check failed: %1$s</string>
+    <string name="example_gesture_turn_left">Turn your head left</string>
+    <string name="example_gesture_turn_right">Turn your head right</string>
+    <string name="example_gesture_turn_up">Look up</string>
+    <string name="example_gesture_turn_down">Look down</string>
+    <string name="example_gesture_blink">Blink</string>
+    <string name="example_gesture_smile">Smile</string>
+</resources>

@@ -1,0 +1,25 @@
+/* Texts of the example custom screens. Wording the SDKs already have is read from their own strings. */
+"example_ocr_title" = "EXAMPLE OCR QUALITY SCREEN";
+"example_opening_camera" = "Opening the camera...";
+"example_opening_camera_back" = "Opening the camera for the back side...";
+"example_sending_ocr" = "Sending the OCR request...";
+"example_quality_failed" = "Quality check failed: %@";
+"example_cancel" = "Cancel";
+"example_close" = "Close";
+
+"example_face_title" = "EXAMPLE FACE RESULT";
+"example_face_overlay" = "EXAMPLE FACE OVERLAY: %@";
+"example_face_submitted" = "Submitted. Waiting for the verdict...";
+"example_face_passed" = "Verdict: passed";
+"example_face_failed" = "Verdict: failed";
+"example_face_check_failed" = "Face check failed: %@";
+"example_gesture_ok" = "ok";
+"example_gesture_failed" = "failed";
+"example_gesture_turn_left" = "Turn your head left";
+"example_gesture_turn_right" = "Turn your head right";
+"example_gesture_turn_up" = "Look up";
+"example_gesture_turn_down" = "Look down";
+"example_gesture_blink" = "Blink";
+"example_gesture_smile" = "Smile";
+
+"example_nfc_status" = "EXAMPLE NFC STATUS: %@";

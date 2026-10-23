@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Camera attributes for Udentify SDK -->
+    <declare-styleable name="CameraView">
+        <attr name="cameraAutoFocusResetDelay" format="integer" />
+        <attr name="cameraGestureScrollHorizontal" format="string" />
+        <attr name="cameraFlash" format="string" />
+        <attr name="cameraUseDeviceOrientation" format="boolean" />
+        <attr name="cameraPictureSizeBiggest" format="boolean" />
+        <attr name="cameraFacing" format="enum">
+            <enum name="back" value="0" />
+            <enum name="front" value="1" />
+        </attr>
+        <attr name="cameraAudio" format="string" />
+    </declare-styleable>
+</resources>

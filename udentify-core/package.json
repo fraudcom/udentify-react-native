@@ -1,0 +1,31 @@
+{
+  "name": "udentify-core",
+  "version": "26.4.1023",
+  "description": "Core shared components for Udentify libraries including SSL pinning",
+  "main": "index.js",
+  "types": "src/index.ts",
+  "react-native": "src/index.ts",
+  "keywords": [
+    "react-native",
+    "udentify",
+    "core",
+    "identity",
+    "ssl-pinning"
+  ],
+  "author": "Udentify",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-native": ">=0.60.0"
+  },
+  "files": [
+    "*.md",
+    "src",
+    "index.js",
+    "ios/",
+    "android/",
+    "udentify-core.podspec",
+    "!ios/build",
+    "!android/build"
+  ]
+}

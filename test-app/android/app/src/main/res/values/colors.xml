@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    UdentifyFACE Button Background Colors    -->
+    <color name="udentifyface_btn_color">#844EE3</color>
+    <color name="udentifyface_btn_color_success">#4CD964</color>
+    <color name="udentifyface_btn_color_error">#FFC107</color>
+    <color name="udentifyface_progress_background_color">#808080</color>
+
+    <!--    UdentifyFACE Button Text Colors    -->
+    <color name="udentifyface_btn_text_color">#FFFFFF</color>
+    <color name="udentifyface_btn_text_color_success">#FFFFFF</color>
+    <color name="udentifyface_btn_text_color_error">#FFFFFF</color>
+
+    <!--    UdentifyFACE Background Colors     -->
+    <color name="udentifyface_bg_color">#FF844EE3</color>
+    <color name="udentifyface_gesture_text_bg_color">#66808080</color>
+
+    <!--    UdentifyOCR Card Mask Colors (static override — Android has no dynamic
+             color-override path for OCRUIConfig; see OCRModule.applyAndroidUIConfiguration) -->
+    <color name="udentify_ocr_card_mask_view_background_color">#00FFFFFF</color>
+    <color name="udentify_ocr_card_mask_view_stroke_color">#844EE3</color>
+
+    <!--    UdentifyVC Background Colors     -->
+    <color name="udentify_vc_background_color">#FF000000</color>
+
+    <!--    UdentifyVC Text Colors     -->
+    <color name="udentify_vc_text_color">#FFFFFFFF</color>
+
+    <!--    UdentifyVC Pip View Color     -->
+    <color name="udentify_vc_pip_view_border_color">#FFFFFFFF</color>
+
+    <!--    UdentifyVC Buttons Color     -->
+    <color name="udentify_vc_buttons_color">#FFFFFF</color> <!--Deprecated-->
+
+    <color name="udentify_vc_button_camera_color">#FFFFFF</color>
+    <color name="udentify_vc_button_mic_on_color">#FFFFFF</color>
+    <color name="udentify_vc_button_mic_off_color">#FF0000</color>
+</resources>

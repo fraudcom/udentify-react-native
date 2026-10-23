@@ -1,0 +1,79 @@
+# SSL Pinning
+
+SSL pinning is a security technique that allows an application to verify if the server certificate is the one it expects. By "pinning" a certificate or public key, the app can reject all but the pinned certificate/public key, thus mitigating the risk of man-in-the-middle attacks. This document guides you through implementing SSL pinning in your application using the `UdentifySettingsProvider` class.
+
+## Overview of UdentifySettingsProvider
+
+The `UdentifySettingsProvider` class is designed to manage SSL certificates for your application. It provides static methods to set, remove, and retrieve SSL certificates, enabling SSL pinning functionality.
+
+{% hint style="info" %}
+It is crucial to call these methods before starting the use of Udentify modules to ensure the configurations are applied correctly from the start of the application's lifecycle.
+{% endhint %}
+
+### 1. Loading Certificate Data
+
+Load the SSL certificate data from the specified bundle. The certificate needs to be in DER format, typically with the extension of .cer or .der. This format ensures the certificate can be properly read and utilized for pinning purposes.
+
+```java
+public static X509Certificate loadDERCertificateData(Context context, String certificateName, String certificateExtension);
+```
+
+* Parameters:
+  * `context`: The `Context` from which to load the certificate.
+  * `certificateName`: The name of the certificate file. Exclude the file extension.
+  * `certificateExtension`: The file extension of the certificate.
+* Returns:
+  * A `X509Certificate` object containing the certificate data. Returns `null` if the certificate file couldn't be located or an error occurred while loading its data.
+
+#### Usage:
+
+```java
+    X509Certificate certificate = UdentifySettingsProvider.loadDERCertificateData(activity, "MyServerCertificate", "cer");
+```
+
+### 2. Setting SSL Certificates
+
+To enable SSL pinning, set the SSL certificate. The certificate typically has an extension of .cer or .der. This format ensures the certificate can be properly read and utilized for pinning purposes.
+
+If the SSL Certificate is not set, then Udentify SDK will not perform SSL pinning.
+
+```java
+UdentifySettingsProvider.setSSLCertificate(X509Certificate sslCertificate);
+```
+
+* Parameter:
+  * `sslCertificate`: The certificate data
+
+#### Usage:
+
+```java
+    X509Certificate certificate = UdentifySettingsProvider.loadDERCertificateData(activity, "MyServerCertificate", "cer");
+    UdentifySettingsProvider.setSSLCertificate(certificate);
+```
+
+### 3. Removing SSL Certificate
+
+To disable SSL pinning, remove the SSL certificate.
+
+```java
+UdentifySettingsProvider.removeSSLCertificate();
+```
+
+### 4. Retrieving current SSL Certificate - Optional
+
+To get the currently set SSL certificate, if any:
+
+```java
+UdentifySettingsProvider.getSSLCertificate();
+```
+
+* Returns:
+  * A `X509Certificate` object containing the certificate data. Returns `null` if no certificate is currently set.
+
+### 5. SSL Pinning Status - Optional
+
+To check if SSL pinning is enabled:
+
+```java
+boolean isSSLPinningEnabled = UdentifySettingsProvider.isSSLPinningEnabled();
+```

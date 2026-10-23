@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Texts of the example custom screens. Wording the SDKs already have is read from their own strings. -->
+<resources>
+    <string name="example_ocr_flow">ÖRNEK OCR AKIŞI</string>
+    <string name="example_ocr_title">ÖRNEK OCR KALİTE EKRANI</string>
+    <string name="example_sending_ocr">OCR isteği gönderiliyor...</string>
+    <string name="example_quality_failed">Kalite kontrolü başarısız: %1$s</string>
+    <string name="example_cancel">İptal</string>
+    <string name="example_close">Kapat</string>
+
+    <string name="example_nfc_title">ÖRNEK NFC EKRANI</string>
+    <string name="example_nfc_turn_on">Lütfen NFC özelliğini açın</string>
+    <string name="example_nfc_reading">Çip okunuyor: %1$d%%</string>
+    <string name="example_nfc_done">Çip okundu</string>
+    <string name="example_nfc_failed">Çip okunamadı. Lütfen tekrar deneyin.</string>
+
+    <string name="example_face_title">ÖRNEK YÜZ SONUCU</string>
+    <string name="example_face_overlay">ÖRNEK YÜZ KATMANI: %1$s</string>
+    <string name="example_face_submitted">Gönderildi. Sonuç bekleniyor...</string>
+    <string name="example_face_passed">Sonuç: başarılı</string>
+    <string name="example_face_failed">Sonuç: başarısız</string>
+    <string name="example_face_check_failed">Yüz kontrolü başarısız: %1$s</string>
+    <string name="example_gesture_turn_left">Başınızı sola çevirin</string>
+    <string name="example_gesture_turn_right">Başınızı sağa çevirin</string>
+    <string name="example_gesture_turn_up">Yukarı bakın</string>
+    <string name="example_gesture_turn_down">Aşağı bakın</string>
+    <string name="example_gesture_blink">Göz kırpın</string>
+    <string name="example_gesture_smile">Gülümseyin</string>
+</resources>
